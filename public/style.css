@@ -9,10 +9,15 @@
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  font-smooth: always;
+  -webkit-font-smoothing: auto;
+  
+  font-size: 14px;
 }
 
 body {
   margin: 0;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 main {
