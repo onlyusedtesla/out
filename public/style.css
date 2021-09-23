@@ -214,6 +214,8 @@ textarea {
   background-color: var(--light-blue);
   
   padding: 10px 16px;
+  
+  border-radius: 16px;
 }
 
 .searchbox-input,
@@ -231,6 +233,10 @@ textarea {
   color: var(--blue);
 }
 
+.searchbox-submit {
+  padding: 0;
+}
+
 /* Header */
 
 header {
@@ -240,11 +246,14 @@ header {
 .logo {
   display: block;
   margin: 0 auto;
+  margin-top: 32px;
 }
 
 .navigation {
   display: flex;
+  align-items: center;
   margin-left: -8px;
+  margin-top: 8px;
 }
 
 .navigation > * {
@@ -262,8 +271,6 @@ footer {
   font-size: 12px;
   line-height: 1.2;
 }
-
-
 
 /* Media Queries */
 @media only screen and (min-width: 1152px) {
