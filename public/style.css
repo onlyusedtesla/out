@@ -196,6 +196,27 @@ textarea {
   border-radius: 3px;
 }
 
+/* Search Box */
+
+.searchbox {
+  flex: 1;
+  display: fle
+}
+
+.searchbox > form {
+  width: 100%;
+}
+
+.searchbox-input {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.searchbox-submit {
+  
+}
+
 /* Header */
 
 header {
@@ -205,6 +226,15 @@ header {
 .logo {
   display: block;
   margin: 0 auto;
+}
+
+.navigation {
+  display: flex;
+  margin-left: -8px;
+}
+
+.navigation > * {
+  margin-left: 8px;
 }
 
 /* Footer */
@@ -218,6 +248,8 @@ footer {
   font-size: 12px;
   line-height: 1.2;
 }
+
+
 
 /* Media Queries */
 @media only screen and (min-width: 1152px) {
