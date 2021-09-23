@@ -4,6 +4,11 @@
   --dark-grey: #444444;
   --almost-black: #111111;
   --light-mustard: #FAE7D1;
+  --light-blue: #E9F1F7;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -200,21 +205,30 @@ textarea {
 
 .searchbox {
   flex: 1;
-  display: fle
 }
 
 .searchbox > form {
   width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--light-blue);
+  
+  padding: 10px 16px;
+}
+
+.searchbox-input,
+.searchbox-submit {
+  border: none;
+  outline: none;
+  background: none;
 }
 
 .searchbox-input {
   width: 100%;
-  border: none;
-  outline: none;
 }
 
-.searchbox-submit {
-  
+.searchbox-input::placeholder {
+  color: var(--blue);
 }
 
 /* Header */
