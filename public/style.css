@@ -196,6 +196,18 @@ textarea {
   border-radius: 3px;
 }
 
+/* Footer */
+
+footer {
+  margin-top: 88px;
+  margin-bottom: 72px;
+}
+
+.footer-text {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
 /* Media Queries */
 @media only screen and (min-width: 1152px) {
   .container {
