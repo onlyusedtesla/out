@@ -119,10 +119,14 @@ textarea {
 .article-title {
   font-size: 20px;
   font-weight: 500;
+  color: var(--almost-black);
+  
+  margin-top: 8px;
 }
 
 .article-description {
   color: var(--dark-grey);
+  margin-top: 8px;
 }
 
 .article-tags {
@@ -145,7 +149,8 @@ textarea {
   align-items: center;
 }
 
-.article-websitename {
+.article-websitename,
+.article-tags {
   margin-left: 8px;
 }
 
@@ -156,6 +161,12 @@ textarea {
 .article-details {
   display: flex;
   justify-content: space-between;
+}
+
+.article-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
 }
 
 /* Media Queries */
