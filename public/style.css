@@ -121,6 +121,13 @@ textarea {
   padding-right: 1rem;
 }
 
+/* Links */
+
+.submit-link {
+  color: var(--almost-black);
+  font-weight: bolder;
+}
+
 /* Article */
 
 .articles {
@@ -240,20 +247,20 @@ textarea {
 /* Header */
 
 header {
+  margin-top: 32px;
   display: block;
 }
 
 .logo {
   display: block;
   margin: 0 auto;
-  margin-top: 32px;
 }
 
 .navigation {
   display: flex;
   align-items: center;
   margin-left: -8px;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .navigation > * {
@@ -280,9 +287,19 @@ footer {
   }
 }
 
-@media only screen and (min-width: 500px) {
-  .header {
+@media only screen and (min-width: 600px) {
+  header {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
+  
+  .logo {
+    margin-left: 0;
+  }
+  
+  .navigation {
+    margin-top: 0;
+  }
+  
 }
