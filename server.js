@@ -15,6 +15,9 @@ app.use(bodyParser.json());
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
 // init sqlite db
 const dbFile = "./.data/sqlite.db";
 const exists = fs.existsSync(dbFile);
@@ -51,7 +54,7 @@ db.serialize(() => {
 // });
 
 app.get("/", (request, response) => {
-  res
+  response.render(__dirname + "/views/index");
 });
 
 // endpoint to get all the dreams in the database
