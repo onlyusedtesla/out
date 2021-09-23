@@ -108,6 +108,13 @@ textarea {
   -webkit-appearance: none;
 }
 
+/* Container */
+.container {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 /* Article */
 .article-title {
   font-size: 20px;
@@ -135,4 +142,12 @@ textarea {
 
 .footer-text {
   color: var(--blue-grey);
+}
+
+/* Media Queries */
+@media only screen and (min-width: 1152px) {
+  .container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }
