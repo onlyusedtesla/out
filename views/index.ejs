@@ -36,7 +36,6 @@
         <a href="#" class="submit-link">Submit A Link</a>
         <div class="searchbox js-searchbox"> <!-- The Search Bar -->
           <form method="get" action="">
-            
             <% if (typeof searchQuery !== "undefined") { %>
               <input name="search" type="text" maxlength="50" placeholder="Search" class="searchbox-input js-searchbox-input" value="<%= searchQuery %>">
             <% } else { %>
@@ -62,10 +61,10 @@
       <% if (typeof searchQuery !== "undefined") { %>
         <div class="searchcontainer">
           <p class="searchcontainer-term">
-            <%= searchQuery %>
+            Search: <span class="searchcontainer-searchtext"><%= searchQuery %></span>
           </p>
           <p class="searchcontainer-description">
-            You're viewing all recent articles relating to <em><%= searchQuery %></em>
+            You're viewing all recent articles related to <em><%= searchQuery %></em>
           </p>
         </div>
       <% } %>

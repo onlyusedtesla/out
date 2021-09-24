@@ -266,6 +266,10 @@ textarea {
   color: var(--almost-black);
 }
 
+.searchcontainer-searchtext {
+  font-weight: 500;
+}
+
 .searchcontainer-description {
   margin-top: 8px;
   color: var(--blue-grey);
