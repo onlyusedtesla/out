@@ -6,6 +6,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const fs = require("fs");
+const { auth } = require('express-openid-connect');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -17,6 +19,18 @@ app.use(express.static("public"));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: 'a long, randomly-generated string stored in env',
+  baseURL: 'https://staging-teslatracker.derick.work',
+  clientID: 'CxTp7nuERHTjccfYiPLkT5BFMyUNljIy',
+  issuerBaseURL: 'https://onlyusedtesla.us.auth0.com'
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
 
 // init sqlite db
 const dbFile = "./.data/sqlite.db";
@@ -47,11 +61,6 @@ db.serialize(() => {
     });
   }
 });
-
-// http://expressjs.com/en/starter/basic-routing.html
-// app.get("/", (request, response) => {
-//   response.sendFile(`${__dirname}/views/index.html`);
-// });
 
 app.get("/", (request, response) => {
   if (typeof request.query.search !== "undefined" && request.query.search.length >= 1) {
