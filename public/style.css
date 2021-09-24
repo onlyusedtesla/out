@@ -225,6 +225,8 @@ textarea {
   padding: 10px 16px;
 
   border-radius: 16px;
+  
+  border: 2px solid transparent;
 }
 
 .searchbox-input,
@@ -244,6 +246,10 @@ textarea {
 
 .searchbox-submit {
   padding: 0;
+}
+
+.searchbox.searchbox--focused > form {
+  border: 2px solid var(--blue-grey);
 }
 
 /* Header */
