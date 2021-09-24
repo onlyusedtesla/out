@@ -25,8 +25,8 @@ const config = {
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
   baseURL: 'https://staging-teslatracker.derick.work',
-  clientID: 'CxTp7nuERHTjccfYiPLkT5BFMyUNljIy',
-  issuerBaseURL: 'https://onlyusedtesla.us.auth0.com'
+  clientID: 'nNRceuJ1eDslyoi1dJdGuxElPOx1oU2W',
+  issuerBaseURL: 'https://teslatracker.us.auth0.com'
 };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
