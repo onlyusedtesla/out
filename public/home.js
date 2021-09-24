@@ -1,8 +1,11 @@
 (function () {
   
   const searchInput = document.querySelector(".js-searchbox-input");
-  const searchBox = document.querySeletor(".js-searchbox");
+  const searchBox = document.querySelector(".js-searchbox");
   
+  // console.log("searchInput?", searchInput);
+  // console.log("searchBox?", searchBox);
+
   searchInput.addEventListener('focus', function (event) {
     searchBox.classList.add("searchbox--focused");
   });
