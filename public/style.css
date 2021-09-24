@@ -145,8 +145,6 @@ textarea {
   font-size: 20px;
   font-weight: 500;
   color: var(--almost-black);
-
-  margin-top: 8px;
 }
 
 .article-description {
@@ -283,6 +281,7 @@ textarea {
 
 .searchcontainer {
   margin-bottom: 72px;
+  margin-top: 72px;
 }
 
 .searchcontainer-term {
