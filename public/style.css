@@ -299,6 +299,8 @@ header {
   margin-left: 8px;
 }
 
+/* More Button */
+
 .more-button {
   background-color: var(--blue);
   color: #FFF;
@@ -312,6 +314,12 @@ header {
 
 .more-button:hover {
   background-color: #233973;
+}
+
+/* Layout Utilities */
+
+.flex {
+  display: flex;
 }
 
 /* Footer */
