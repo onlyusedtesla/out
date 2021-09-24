@@ -226,7 +226,7 @@ textarea {
 
   border-radius: 16px;
   
-  border: 2px solid transparent;
+  border: 2px solid transparent;  
 }
 
 .searchbox-input,
@@ -249,7 +249,9 @@ textarea {
 }
 
 .searchbox.searchbox--focused > form {
-  border: 2px solid var(--blue-grey);
+  border-color: rgb(19 46 125 / 52%);
+  -webkit-box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+  box-shadow: 0 0 0 4px rgb(192 192 192 / 10%);
 }
 
 /* Header */

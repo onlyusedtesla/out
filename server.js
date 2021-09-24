@@ -54,18 +54,12 @@ db.serialize(() => {
 // });
 
 app.get("/", (request, response) => {
-  response.render(__dirname + "/views/index");
-  
   if (typeof request.query.search !== "undefined" && request.query.search.length >= 1) {
-    
-    console.log("What's the search?", request.query.search);
-    
-    let dataObj = {
+    response.render(__dirname + "/views/index", {
       searchQuery: request.query.search
-    };
-    
-    response.render(__dirname + "/views/index", dataObj);
-    
+    });
+  } else {
+    response.render(__dirname + "/views/index");
   }
 });
 
