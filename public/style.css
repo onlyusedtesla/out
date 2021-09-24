@@ -254,6 +254,24 @@ textarea {
   box-shadow: 0 0 0 4px rgb(192 192 192 / 10%);
 }
 
+/* Search Container */
+
+.searchcontainer {
+  margin-bottom: 72px;
+}
+
+.searchcontainer-term {
+  text-align: center;
+  font-size: 40px;
+  color: var(--almost-black);
+}
+
+.searchcontainer-description {
+  margin-top: 8px;
+  color: var(--blue-grey);
+  text-align: center;
+}
+
 /* Header */
 
 header {

@@ -36,12 +36,19 @@
         <a href="#" class="submit-link">Submit A Link</a>
         <div class="searchbox js-searchbox"> <!-- The Search Bar -->
           <form method="get" action="">
-            <input name="search" type="text" maxlength="100" placeholder="Search" class="searchbox-input js-searchbox-input">
+            
+            <% if (typeof searchQuery !== "undefined") { %>
+              <input name="search" type="text" maxlength="50" placeholder="Search" class="searchbox-input js-searchbox-input" value="<%= searchQuery %>">
+            <% } else { %>
+              <input name="search" type="text" maxlength="50" placeholder="Search" class="searchbox-input js-searchbox-input">
+            <% } %>
+            
             <button type="submit" class="searchbox-submit">
               <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.7927 14.3302L12.6654 11.2083C12.509 11.0834 12.3214 10.9898 12.1338 10.9898H11.6334C12.4778 9.89707 13.0094 8.52341 13.0094 6.99366C13.0094 3.43463 10.0698 0.5 6.5047 0.5C2.90835 0.5 0 3.43463 0 6.99366C0 10.5839 2.90835 13.4873 6.5047 13.4873C8.00579 13.4873 9.38178 12.9878 10.5076 12.1137V12.6444C10.5076 12.8317 10.5701 13.019 10.7265 13.1751L13.8225 16.2659C14.1352 16.578 14.6043 16.578 14.8858 16.2659L15.7614 15.3917C16.0741 15.1107 16.0741 14.6424 15.7927 14.3302ZM6.5047 10.9898C4.28435 10.9898 2.50181 9.21024 2.50181 6.99366C2.50181 4.80829 4.28435 2.99756 6.5047 2.99756C8.69378 2.99756 10.5076 4.80829 10.5076 6.99366C10.5076 9.21024 8.69378 10.9898 6.5047 10.9898Z" fill="#3F67CE"/>
               </svg>
             </button>
+            
           </form>
         </div>
         <p class="username">
@@ -52,11 +59,17 @@
 
     <main>
       
-        
-        <% if (typeof searchQuery !== "undefined") { %>
-          <p>This is the searchQuery: <%= searchQuery %></p>
-        <% } %>
-        
+      <% if (typeof searchQuery !== "undefined") { %>
+        <div class="searchcontainer">
+          <p class="searchcontainer-term">
+            <%= searchQuery %>
+          </p>
+          <p class="searchcontainer-description">
+            You're viewing all recent articles relating to <em><%= searchQuery %></em>
+          </p>
+        </div>
+      <% } %>
+      
         <section class="articles">
           <article class="article">
             
