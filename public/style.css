@@ -223,6 +223,16 @@ textarea {
   margin-top: 4px;
 }
 
+.article-icon {
+  background-color: var(--almost-black);
+  border-radius: 3px;
+  padding: 1px 7px;
+  display: inline-block;
+}
+
+.article-icon > svg {
+  vertical-align: middle;
+}
 /* Alert */
 
 .alert {
