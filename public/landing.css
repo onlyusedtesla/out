@@ -6,6 +6,7 @@
   --light-mustard: #FAE7D1;
   --light-blue: #E9F1F7;
   --light-grey: #EDF0F2;
+  --medium-blue: #8EC8F2;
 }
 
 * {
@@ -156,12 +157,16 @@ textarea {
 .logo {
   width: 200px;
   height: auto;
+  
+  margin: 0 auto;
+  display: block;
 }
 
 h1 {
   font-weight: 500;
   font-size: 36px;
   line-height: 1.2;
+  text-align: center;
 }
 
 .subheadline {
@@ -169,6 +174,7 @@ h1 {
   font-size: 20px;
   line-height: 1.2;
   color: var(--blue-grey);
+  text-align: center;
 }
 
 .form-input {
@@ -178,24 +184,35 @@ h1 {
   background-color: var(--light-blue);
   padding: 10px 16px;
   border-radius: 3px;
+  font-size: 14px;
 }
 
-.searchbox > form {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background-color: var(--light-blue);
-
-  padding: 10px 16px;
-
-  border-radius: 16px;
-  
-  border: 2px solid transparent;  
+.form-input::placeholder {
+  color: var(--medium-blue);
 }
 
-.searchbox-input,
-.searchbox-submit {
-  border: none;
-  outline: none;
-  background: none;
+.form-label {
+  font-size: 12px;
+  color: #000;
+}
+
+.form-element + .form-element {
+  margin-top: 16px;
+}
+
+.form-label {
+  margin-bottom: 8px;
+}
+
+.container {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+.footer-text {
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--blue-grey);
 }
