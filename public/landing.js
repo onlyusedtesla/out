@@ -1,4 +1,5 @@
-window.onload = function() {
+(function () {
+  
   
   var placeholder = document.querySelector('.js-tesla-image'),
       small = placeholder.querySelector('.js-tesla-image-small');
@@ -19,4 +20,19 @@ window.onload = function() {
   
   placeholder.appendChild(imgLarge);
   
-}
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCsZEWKLqDecBRpHFjHdStiHc3fFu-p-yM",
+    authDomain: "teslatracker-landing-page.firebaseapp.com",
+    databaseURL: "https://teslatracker-landing-page-default-rtdb.firebaseio.com",
+    projectId: "teslatracker-landing-page",
+    storageBucket: "teslatracker-landing-page.appspot.com",
+    messagingSenderId: "482735613070",
+    appId: "1:482735613070:web:3f211eeaea5cbc0d7415df"
+  };
+
+  // Initialize Firebase
+  var app = firebase.initializeApp(firebaseConfig);
+  var database = firebase.database();
+  
+})();
