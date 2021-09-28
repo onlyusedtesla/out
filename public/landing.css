@@ -157,3 +157,45 @@ textarea {
   width: 200px;
   height: auto;
 }
+
+h1 {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.subheadline {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--blue-grey);
+}
+
+.form-input {
+  background: none;
+  border: none;
+  width: 100%;
+  background-color: var(--light-blue);
+  padding: 10px 16px;
+  border-radius: 3px;
+}
+
+.searchbox > form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--light-blue);
+
+  padding: 10px 16px;
+
+  border-radius: 16px;
+  
+  border: 2px solid transparent;  
+}
+
+.searchbox-input,
+.searchbox-submit {
+  border: none;
+  outline: none;
+  background: none;
+}
