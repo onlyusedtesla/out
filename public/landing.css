@@ -177,6 +177,10 @@ h1 {
   text-align: center;
 }
 
+.form {
+  margin-top: 40px;
+}
+
 .form-input {
   background: none;
   border: none;
@@ -215,4 +219,12 @@ h1 {
   font-size: 12px;
   line-height: 1.2;
   color: var(--blue-grey);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-.flex--space {
+  margin-left: -8px;
 }
