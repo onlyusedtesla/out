@@ -50,30 +50,30 @@
           
           <form class="form">
             <div class="form-element">
-              <label class="form-label">Full Name</label>
-              <input required name="name" type="text" maxlength="50" placeholder="Enter full name" class="form-input">
+              <label class="form-label" for="fullname">Full Name</label>
+              <input required id="fullname" name="fullname" type="text" maxlength="50" placeholder="Enter full name" class="form-input">
             </div>
             
             <div class="form-element">
-              <label class="form-label">Email</label>
-              <input required name="email" type="email" maxlength="50" placeholder="mail@example.com" class="form-input">
+              <label class="form-label" for="email">Email</label>
+              <input required id="email" name="email" type="email" maxlength="50" placeholder="mail@example.com" class="form-input">
             </div>
             
             <div class="form-element">
-              <label class="form-label">Phone</label>
-              <input required name="tel" type="number" maxlength="50" placeholder="Enter phone number" class="form-input">
+              <label class="form-label" for="phone">Phone</label>
+              <input required name="phone" id="phone" type="tel" maxlength="50" placeholder="Enter phone number" class="form-input">
             </div>
             
             <div class="form-element">
               <label class="form-label">How do you want us to notify you?</label>
               <div class="flex flex--space">
                 <div class="flex-item">
-                  <input type="checkbox" required />
-                  <label>Email me</label>
+                  <input type="radio" required id="contact_preference" name="contact_preference"/>
+                  <label for="contact_preference">Email me</label>
                 </div>
                 <div class="flex-item">
-                  <input type="checkbox" required />
-                  <label>Text me</label>
+                  <input type="radio" required id="contact_preference_2" name="contact_preference" />
+                  <label for="contact_preference_2">Text me</label>
                 </div>
               </div>
             </div>

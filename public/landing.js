@@ -32,7 +32,9 @@
   };
 
   // Initialize Firebase
-  var app = firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
   var database = firebase.database();
+  
+  console.log("database", database);
   
 })();
