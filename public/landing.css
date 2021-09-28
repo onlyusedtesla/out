@@ -254,3 +254,19 @@ h1 {
 .flex.flex--space > .flex-item {
   margin-left: 16px;
 }
+
+footer {
+  margin-top: 80px;
+}
+
+@media only screen and (min-height: 750px) {
+  .container {
+    height: 100%;
+    position: relative;
+  }
+  
+  footer {
+    position: absolute;
+    bottom: 40px;
+  }
+}
