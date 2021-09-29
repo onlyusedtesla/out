@@ -226,12 +226,18 @@ textarea {
 .article-icon {
   background-color: var(--almost-black);
   border-radius: 3px;
-  padding: 1px 7px;
+  width: 18px;
+  height: 18px;
   display: inline-block;
+  
+  position: relative;
 }
 
 .article-icon > svg {
-  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
 /* Desktop-focused elements that are hidden for mobile. */
