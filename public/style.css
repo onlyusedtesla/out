@@ -402,6 +402,10 @@ header {
   align-items: center;
 }
 
+.flex.flex--spaceBetween {
+  justify-content: space-between;
+}
+
 .mt-onedown {
   margin-top: 8px;
 }
