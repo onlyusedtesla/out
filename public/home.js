@@ -23,7 +23,7 @@
     
     if (searchTerms && searchTerms.length >= 1) {
       var url = new URL(window.location.href);
-      url.searchParams.set("s", encodeURIComponent(searchTerms));
+      url.searchParams.set("search", encodeURIComponent(searchTerms));
       window.location.href = url.href;
     }
   });
