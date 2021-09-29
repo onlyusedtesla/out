@@ -188,6 +188,10 @@ textarea {
   color: var(--blue-grey);
 }
 
+.footer-contactlink {
+  color: var(--blue);
+}
+
 .article-details {
   display: flex;
   justify-content: space-between;
