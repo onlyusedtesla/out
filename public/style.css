@@ -198,9 +198,9 @@ textarea {
 }
 
 .article-footer {
-  display: flex;
   align-items: center;
   margin-top: 8px;
+  display: none;
 }
 
 .article-share {
@@ -246,9 +246,23 @@ textarea {
   transform: translateX(-50%) translateY(-50%);
 }
 
+.article-icon.desktop {
+  display: none;
+}
+
 /* Desktop-focused elements that are hidden for mobile. */
 .article-sharecontainer {
   display: none;
+}
+
+/* Article Details Mobile */
+
+.article-detailsMobile {
+  margin-top: 8px;
+}
+
+.article-detailsMobileShareText {
+  font-size: 10px;
 }
 
 /* Alert */
@@ -482,6 +496,13 @@ footer {
     margin-bottom: 77px;
   }
   
+  .article-detailsMobile {
+    display: none;
+  }
+  
+  .article-icon.desktop {
+    display: inline-block;
+  }
 }
 
 @media only screen and (min-width: 775px) {
