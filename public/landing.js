@@ -50,17 +50,33 @@
   
   var database = firebase.database();
   var form = document.querySelector(".js-form");
-  
+  var formButton = document.querySelector(".js-form-button");
   var fullName = document.querySelector(".js-fullname");
   var phoneNumber = document.querySelector(".js-phonenumber");
-  var 
-    firebase.database().ref('users/' + userId).set({
-    username: name,
-    email: email,
-    profile_picture : imageUrl
-  });
+  var email = document.querySelector(".js-email");
+  
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     
+    formButton.value = "Submitting...";
+    formButton.setAttribute("disabled", "disabled");
+    
+    if (fullName.value.length >= 1 && phoneNumber.value.length >= 1 && email.value.length >= 1) {
+      firebase.database().ref('users').push().set({
+        fullname: fullName.value,
+        email: email.value,
+        phoneNumber: phoneNumber.value
+      }, function (error) {
+        if (error) {
+          console.log("There's been some kind of error", error);
+          formButton.removeAttribute("disabled", "disabled");
+          formButton.setAttribute("value", formButton.getAttribute("data-original-value"));
+        } else {
+          console.log("It looks like everything was submitted successfully!");
+        }
+      });
+    } else {
+      showErrorMessage();
+    }
   });
 })();
