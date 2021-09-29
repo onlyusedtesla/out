@@ -255,6 +255,10 @@ h1 {
   color: var(--blue-grey);
 }
 
+.footer-contactlink {
+  color: var(--blue);
+}
+
 .flex {
   display: flex;
 }
