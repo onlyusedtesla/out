@@ -265,6 +265,7 @@ textarea {
 
 .searchbox {
   flex: 1;
+  display: none;
 }
 
 .searchbox > form {
@@ -328,14 +329,18 @@ textarea {
   text-align: center;
 }
 
+.searchbox-submit.mobile {
+  display: block;
+}
+
 /* Header */
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 72px;
-  margin-top: 32px;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
 
 .logo {
@@ -347,12 +352,11 @@ header {
 .navigation {
   display: flex;
   align-items: center;
-  margin-left: -8px;
-  margin-top: 12px;
+  margin-left: -16px;
 }
 
 .navigation > * {
-  margin-left: 8px;
+  margin-left: 16px;
 }
 
 /* More Button */
@@ -444,11 +448,15 @@ footer {
     margin-left: 0;
     width: 200px;
   }
-
+  
   .navigation {
-    margin-top: 0;
+    margin-left: -24px;
   }
-
+  
+  .navigation > * {
+    margin-left: 24px;
+  }
+  
   .searchbox {
     width: 124px;
   }
@@ -456,6 +464,20 @@ footer {
   .article-sharecontainer {
     display: block;
   }
+  
+  .searchbox-submit.mobile {
+    display: none;
+  }
+  
+  .searchbox {
+    display: block;
+  }
+  
+  header {
+    margin-top: 44px;
+    margin-bottom: 77px;
+  }
+  
 }
 
 @media only screen and (min-width: 775px) {
