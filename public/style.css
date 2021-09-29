@@ -231,6 +231,8 @@ textarea {
   display: inline-block;
   
   position: relative;
+  
+  vertical-align: middle;
 }
 
 .article-icon > svg {
@@ -242,10 +244,6 @@ textarea {
 
 /* Desktop-focused elements that are hidden for mobile. */
 .article-sharecontainer {
-  display: none;
-}
-
-.article-icon {
   display: none;
 }
 
@@ -372,6 +370,26 @@ header {
   display: flex;
 }
 
+.flex.flex--space {
+  margin-left: -16px;
+}
+
+.flex.flex--space > .flex-item {
+  margin-left: 16px;
+}
+
+.flex.flex--spaceOneDown {
+  margin-left: -8px;
+}
+
+.flex.flex--spaceOneDown > .flex-item {
+  margin-left: 8px;
+}
+
+.flex.flex--alignItemsCenter {
+  align-items: center;
+}
+
 .mt-onedown {
   margin-top: 8px;
 }
@@ -436,10 +454,6 @@ footer {
   
   .article-sharecontainer {
     display: block;
-  }
-  
-  .article-icon {
-    display: inline;
   }
 }
 
