@@ -1,6 +1,5 @@
 (function () {
   
-  
   var placeholder = document.querySelector('.js-tesla-image'),
       small = placeholder.querySelector('.js-tesla-image-small');
   
@@ -20,6 +19,21 @@
   
   placeholder.appendChild(imgLarge);
   
+  function showSuccessMessage() {
+    var form = document.querySelector(".js-form"),
+        successMessage = document.querySelector(".js-success-message"),
+        errorMessage = document.querySelector(".js-error-message");
+
+    form.classList.add('hidden');
+    errorMessage.classList.add('hidden');
+    successMessage.classList.remove('hidden');
+  }
+
+  function showErrorMessage() {
+    var errorMessage = document.querySelector(".js-error-message");
+    errorMessage.classList.remove('hidden');
+  }
+  
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyCsZEWKLqDecBRpHFjHdStiHc3fFu-p-yM",
@@ -33,15 +47,20 @@
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  
   var database = firebase.database();
+  var form = document.querySelector(".js-form");
   
-  console.log("database", database);
+  var fullName = document.querySelector(".js-fullname");
+  var phoneNumber = document.querySelector(".js-phonenumber");
+  var 
+    firebase.database().ref('users/' + userId).set({
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  });
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+  });
 })();
-
-function showSuccessMessage() {
-  let form = document.querySelector(".js-form");
-  let successMessage = document.querySelector(".js-success-message");
-  
-  form.classList.add('hidden');
-  successMessage.classList.remove('hidden');
-}

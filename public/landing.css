@@ -231,6 +231,11 @@ h1 {
   
   padding: 10px 16px;
   
+  cursor:pointer;
+}
+
+.form-button:hover {
+  background-color: #1b2c58;
 }
 
 .container {
@@ -274,6 +279,12 @@ footer {
 .success-message-text {
   margin-bottom: 8px;
   color: #5c5ec8;
+  text-align: center;
+}
+
+.error-message-text {
+  color: #c44040;
+  font-style: italic;
 }
 
 /* Hidden Styles */
