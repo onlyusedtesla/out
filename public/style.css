@@ -134,7 +134,7 @@ textarea {
 /* Article */
 
 .articles {
-  margin-top: 40px;
+  margin-top: 32px;
 }
 
 .article + .article {
@@ -437,8 +437,8 @@ header {
 /* Footer */
 
 footer {
-  margin-top: 88px;
-  margin-bottom: 72px;
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 .footer-text {
@@ -521,6 +521,15 @@ footer {
   .article {
     padding-bottom: 0px;
     border-bottom: none;
+  }
+  
+  .articles {
+    margin-top: 40px;
+  }
+  
+  footer {
+    margin-top: 88px;
+    margin-bottom: 72px;
   }
   
 }
