@@ -331,13 +331,17 @@ textarea {
 /* Header */
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 72px;
   margin-top: 32px;
-  display: block;
 }
 
 .logo {
   display: block;
-  margin: 0 auto;
+  width: 132px;
+  height: auto;
 }
 
 .navigation {
@@ -436,13 +440,6 @@ footer {
 }
 
 @media only screen and (min-width: 600px) {
-  header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 72px;
-  }
-
   .logo {
     margin-left: 0;
     width: 200px;
