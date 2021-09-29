@@ -68,16 +68,13 @@
       var obj = {
         fullname: fullName.value,
         email: email.value,
-        phone: +phoneNumber.value,
+        phone: phoneNumber.value,
         contactpreference: contactPreference.getAttribute('data-preference')
       };
-      
-      console.log("obj", obj);
+
       
       firebase.database().ref('users').push().set(obj, function (error) {
         if (error) {
-          console.log("error", error);
-          console.log("There's been some kind of error", error);
           formButton.removeAttribute("disabled", "disabled");
           formButton.setAttribute("value", formButton.getAttribute("data-original-value"));
           showErrorMessage();
