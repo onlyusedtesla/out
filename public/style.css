@@ -138,7 +138,12 @@ textarea {
 }
 
 .article + .article {
-  margin-top: 40px;
+  margin-top: 16px;
+}
+
+.article {
+  padding-bottom: 14px;
+  border-bottom: 1px solid #EDF0F2;
 }
 
 .article-title {
@@ -263,6 +268,7 @@ textarea {
 
 .article-detailsMobileShareText {
   font-size: 10px;
+  color: var(--blue-grey);
 }
 
 /* Alert */
@@ -503,6 +509,20 @@ footer {
   .article-icon.desktop {
     display: inline-block;
   }
+  
+  .article-footer {
+    display: flex;
+  }
+  
+  .article + .article {
+    margin-top: 40px;
+  }
+  
+  .article {
+    padding-bottom: 0px;
+    border-bottom: none;
+  }
+  
 }
 
 @media only screen and (min-width: 775px) {
