@@ -36,5 +36,12 @@
   var database = firebase.database();
   
   console.log("database", database);
-  
 })();
+
+function showSuccessMessage() {
+  let form = document.querySelector(".js-form");
+  let successMessage = document.querySelector(".js-success-message");
+  
+  form.classList.add('hidden');
+  successMessage.classList.remove('hidden');
+}

@@ -266,6 +266,23 @@ footer {
   margin-top: 80px;
 }
 
+.success-message,
+.error-message {
+  margin-top: 40px;
+}
+
+.success-message-text {
+  margin-bottom: 8px;
+  color: #5c5ec8;
+}
+
+/* Hidden Styles */
+.form.hidden,
+.success-message.hidden,
+.error-message.hidden {
+  display: none;
+}
+
 @media only screen and (min-height: 750px) {
   .container {
     height: 100%;
