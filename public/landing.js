@@ -68,7 +68,7 @@
         fullname: fullName.value,
         email: email.value,
         phone: phoneNumber.value,
-        contact_preference: contactPreference.value
+        contact_preference: contactPreference.getAttribute('data-preference');
       }, function (error) {
         if (error) {
           console.log("There's been some kind of error", error);
