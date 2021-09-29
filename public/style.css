@@ -386,7 +386,20 @@ footer {
   line-height: 1.2;
 }
 
+.success-message {
+  <div class="success-message" style="
+    margin-top: 40px;
+    font-size: 14px;
+    text-align: center;
+"><p style="
+    margin-bottom: 8px;
+    color: #5c5ec8;
+    "><strong>Thanks for being part of the Tesla Tracker community.</strong></p><p>STOP WASTING TIME ON SOCIAL MEDIA! All of your Tesla news in 1 spot. No Ads. No tracking. No selling your personal info.</p>
+          </div>
+}
+
 /* Media Queries */
+
 @media only screen and (min-width: 1170px) {
   .container {
     padding-left: 0px;
