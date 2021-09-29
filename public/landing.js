@@ -68,9 +68,11 @@
       var obj = {
         fullname: fullName.value,
         email: email.value,
-        phone: phoneNumber.value,
-        contact_preference: contactPreference.getAttribute('data-preference')
+        phone: +phoneNumber.value,
+        contactpreference: contactPreference.getAttribute('data-preference')
       };
+      
+      console.log("obj", obj);
       
       firebase.database().ref('users').push().set(obj, function (error) {
         if (error) {
@@ -81,6 +83,7 @@
           showErrorMessage();
         } else {
           console.log("It looks like everything was submitted successfully!");
+          showSuccessMessage();
         }
       });
     } else {
