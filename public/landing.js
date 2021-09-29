@@ -64,13 +64,17 @@
     formButton.setAttribute("disabled", "disabled");
     
     if (fullName.value.length >= 1 && phoneNumber.value.length >= 1 && email.value.length >= 1) {
-      firebase.database().ref('users').push().set({
+      
+      var obj = {
         fullname: fullName.value,
         email: email.value,
         phone: phoneNumber.value,
-        contact_preference: contactPreference.getAttribute('data-preference');
-      }, function (error) {
+        contact_preference: contactPreference.getAttribute('data-preference')
+      };
+      
+      firebase.database().ref('users').push().set(obj, function (error) {
         if (error) {
+          console.log("error", error);
           console.log("There's been some kind of error", error);
           formButton.removeAttribute("disabled", "disabled");
           formButton.setAttribute("value", formButton.getAttribute("data-original-value"));
