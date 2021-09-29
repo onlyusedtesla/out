@@ -51,12 +51,14 @@
   var database = firebase.database();
   var form = document.querySelector(".js-form");
   var formButton = document.querySelector(".js-form-button");
-  var fullName = document.querySelector(".js-fullname");
-  var phoneNumber = document.querySelector(".js-phonenumber");
-  var email = document.querySelector(".js-email");
   
   form.addEventListener('submit', function (event) {
     event.preventDefault();
+    
+    var fullName = document.querySelector(".js-fullname");
+    var phoneNumber = document.querySelector(".js-phonenumber");
+    var email = document.querySelector(".js-email");
+    var contactPreference = document.querySelector(".js-contact-preference:checked");
     
     formButton.value = "Submitting...";
     formButton.setAttribute("disabled", "disabled");
@@ -65,12 +67,14 @@
       firebase.database().ref('users').push().set({
         fullname: fullName.value,
         email: email.value,
-        phoneNumber: phoneNumber.value
+        phone: phoneNumber.value,
+        contact_preference: contactPreference.value
       }, function (error) {
         if (error) {
           console.log("There's been some kind of error", error);
           formButton.removeAttribute("disabled", "disabled");
           formButton.setAttribute("value", formButton.getAttribute("data-original-value"));
+          showErrorMessage();
         } else {
           console.log("It looks like everything was submitted successfully!");
         }
