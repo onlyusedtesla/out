@@ -294,6 +294,10 @@ footer {
   display: none;
 }
 
+.nonbreakingspace {
+  display: none;
+}
+
 @media only screen and (min-height: 750px) {
   .container {
     height: 100%;
@@ -328,6 +332,10 @@ footer {
   
   .linesplitter {
     display: none;
+  }
+  
+  .nonbreakingspace {
+    display: inline;
   }
   
   .logo {
