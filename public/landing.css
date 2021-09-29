@@ -238,6 +238,10 @@ h1 {
   padding-right: 40px;
   padding-top: 80px;
   padding-bottom: 40px;
+  
+  max-width: 675px;
+  
+  margin: 0 auto;
 }
 
 .footer-text {
@@ -293,4 +297,25 @@ footer {
     margin-top: 16px;
     margin-bottom: 16px;
   }
+  
+  .linesplitter {
+    display: none;
+  }
+  
+  .logo {
+    width: 140px;
+    height: auto;
+  }
+  
+  .container {
+    padding-top: 32px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  footer {
+    margin-top: 40px;
+  }
+  
 }
