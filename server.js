@@ -76,9 +76,9 @@ app.get("/landing", function (request, response) {
   response.render(__dirname + "/views/landing");
 });
 
-// app.get("/login", function (request, response) {
-//   response.render(__dirname + "/views/login");
-// });
+app.get("/submit", function (request, response) {
+  response.render(__dirname + "/views/submit");
+});
 
 // endpoint to get all the dreams in the database
 app.get("/getDreams", (request, response) => {

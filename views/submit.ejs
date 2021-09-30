@@ -69,7 +69,50 @@
     </header>
 
     <main>
-      
+      <form class="form js-form">
+        <div class="form-element">
+          <label class="form-label" for="fullname">Full Name</label>
+          <input required id="fullname" name="fullname" type="text" maxlength="50" placeholder="Enter full name" class="js-fullname form-input">
+        </div>
+
+        <div class="form-element">
+          <label class="form-label" for="email">Email</label>
+          <input required id="email" name="email" type="email" maxlength="50" placeholder="mail@example.com" class="js-email form-input">
+        </div>
+
+        <div class="form-element">
+          <label class="form-label" for="phone">Phone</label>
+          <input required name="phone" id="phone" type="text" maxlength="50" placeholder="Enter phone number" class="js-phonenumber form-input">
+        </div>
+
+        <div class="form-element">
+          <label class="form-label">How do you want us to notify you?</label>
+          <div class="flex flex--space">
+            <div class="flex-item">
+              <input type="radio" required id="contact_preference" name="contact_preference" class="js-contact-preference" data-preference="email" />
+              <label for="contact_preference">Email me</label>
+            </div>
+            <div class="flex-item">
+              <input type="radio" required id="contact_preference_2" name="contact_preference" class="js-contact-preference" data-preference="text" />
+              <label for="contact_preference_2">Text me</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-element error-message js-error-message hidden">
+          <p class="error-message-text">There was an error while saving your information. Please make sure you properly fill out all the required fields.</p>
+        </div>
+
+        <div class="form-element">
+          <input type="submit" value="Notify Me When You Launch" data-original-value="Notify Me When You Launch" class="form-button js-form-button" />
+        </div>
+
+      </form>
+
+      <div class="success-message js-success-message hidden">
+        <p class="success-message-text"><strong>Thanks for being part of the Tesla Tracker community.</strong></p>
+        <p>STOP WASTING TIME ON SOCIAL MEDIA! All of your Tesla news in 1 spot. No Ads. No tracking. No selling your personal info.</p>
+      </div>
     </main>
 
     <footer>
