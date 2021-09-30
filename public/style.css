@@ -379,6 +379,68 @@ header {
   margin-left: 16px;
 }
 
+/* Form */
+
+.form {
+  
+  max-width: 420px;
+  margin: 0 auto;
+  
+  margin-top: 40px;
+}
+
+.form-input {
+  background: none;
+  border: none;
+  width: 100%;
+  background-color: var(--light-blue);
+  padding: 10px 16px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.form-input::placeholder {
+  color: var(--medium-blue);
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  color: #000;
+}
+
+.form-element + .form-element {
+  margin-top: 16px;
+}
+
+.form-label {
+  margin-bottom: 8px;
+}
+
+.form-button {
+  color: #FFF;
+  background-color: var(--blue);
+  
+  display: block;
+  width: 100%;
+  
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+  
+  border: none;
+  border-radius: 3px;
+  
+  padding: 10px 16px;
+  
+  cursor:pointer;
+}
+
+.form-button:hover {
+  background-color: #1b2c58;
+}
+
 /* More Button */
 
 .more-button {
