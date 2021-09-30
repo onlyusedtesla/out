@@ -441,6 +441,21 @@ header {
   background-color: #1b2c58;
 }
 
+.form-message {
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--blue-grey);
+}
+
+.form-textarea {
+  resize: vertical;
+  max-height: 120px;
+  min-height: 68px;
+}
+
+.success-message {
+  
+}
 /* More Button */
 
 .more-button {
