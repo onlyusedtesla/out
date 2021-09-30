@@ -189,14 +189,6 @@ textarea {
   margin-left: 8px;
 }
 
-.footer-text {
-  color: var(--blue-grey);
-}
-
-.footer-contactlink {
-  color: var(--blue);
-}
-
 .article-details {
   display: flex;
   justify-content: space-between;
@@ -524,9 +516,20 @@ footer {
   margin-bottom: 32px;
 }
 
-.footer-text {
+.footer-text,
+.footer-info {
   font-size: 12px;
   line-height: 1.2;
+  color: var(--blue-grey);
+}
+
+.footer-info {
+  text-align: center;
+}
+
+.footer-contactlink {
+  text-decoration: none;
+  color: var(--blue-grey);
 }
 
 /* Media Queries */
