@@ -23,10 +23,10 @@ app.set('view engine', 'ejs');
 const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: 'a long, randomly-generated string stored in env',
+  secret: '}~:^q6ZJ$k,pPmkJ^mbc848GE`St)r%*>FxGb\(}',
   baseURL: 'https://staging-teslatracker.derick.work',
   clientID: 'nNRceuJ1eDslyoi1dJdGuxElPOx1oU2W',
-  issuerBaseURL: 'https://teslatracker.us.auth0.com'
+  issuerBaseURL: 'https://auth.teslatracker.com'
 };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
