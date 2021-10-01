@@ -265,6 +265,15 @@ h1 {
   color: var(--blue-grey);
 }
 
+.success-message {
+  background-color: var(--light-blue);
+  border-radius: 3px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
 .flex {
   display: flex;
 }
