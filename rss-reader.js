@@ -1,5 +1,6 @@
 const https = require('https');
 const fs = require('fs');
+const parser = require("fast-xml-parser");
 
 const options = {
   hostname: 'feedbin.com',
@@ -28,10 +29,7 @@ const req = https.request(options, res => {
       process.stdout.write(d);
     });
     
-    fs.writeFileSync('student-2.json', data);
-    fs.writeFileSync();
-        data.etag = res.headers.etag;
-    
+    fs.writeFileSync(__dirname + '/data.json', JSON.stringify(data));
     
   } else {
     console.log("The etag is the same, so the data is the same don't read this file.");
