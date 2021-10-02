@@ -19,22 +19,31 @@ const req = https.request(options, res => {
   
   console.log('res.headers', res.headers);
   
-  // Only read the data if it's been modified
-  if (res.headers.etag !== data.etag) {
-    
-    data.etag = res.headers.etag;
-    
     res.on('data', d => {
-      console.log("What's the data?", d);
-      process.stdout.write(d);
+      const feed = parser.parse(d.toString());
+      console.log("What's the feed?", feed);
     });
+  
+//   // Only read the data if it's been modified
+//   if (res.headers.etag !== data.etag) {
     
-    fs.writeFileSync(__dirname + '/data.json', JSON.stringify(data));
+//     data.etag = res.headers.etag;
     
-  } else {
-    console.log("The etag is the same, so the data is the same don't read this file.");
-    console.log("etag", data.etag);
-  }
+//     res.on('data', d => {
+//       console.log("What's the data?", d);
+//       process.stdout.write(d);
+      
+//       const feed = parser.parse(d);
+//       console.log("What's the feed?", feed);
+      
+//     });
+    
+//     fs.writeFileSync(__dirname + '/data.json', JSON.stringify(data));
+    
+//   } else {
+//     console.log("The etag is the same, so the data is the same don't read this file.");
+//     console.log("etag", data.etag);
+//   }
   
 })
 
