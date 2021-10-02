@@ -20,8 +20,9 @@ const req = https.request(options, res => {
   console.log('res.headers', res.headers);
   
     res.on('data', d => {
-      const feed = parser.parse(d.toString());
-      console.log("What's the feed?", feed);
+      // const feed = parser.parse(d.toString());
+      console.log("toString", d.toString());
+      // console.log("What's the feed?", feed);
     });
   
 //   // Only read the data if it's been modified
