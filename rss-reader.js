@@ -1,4 +1,6 @@
 const https = require('https');
+const fs = require('fs');
+
 const options = {
   hostname: 'feedbin.com',
   port: 443,
@@ -6,7 +8,10 @@ const options = {
   method: 'GET'
 }
 
-let etag = undefined;
+const rawData = fs.readFileSync(__dirname + '/data.json');
+const data = JSON.parse(rawData);
+
+console.log("What's the data?", data);
 
 const req = https.request(options, res => {
   console.log(`statusCode: ${res.statusCode}`);
@@ -14,15 +19,23 @@ const req = https.request(options, res => {
   console.log('res.headers', res.headers);
   
   // Only read the data if it's been modified
-  if (res.headers.etag === etag) {
+  if (res.headers.etag !== data.etag) {
+    
+    data.etag = res.headers.etag;
+    
     res.on('data', d => {
       console.log("What's the data?", d);
       process.stdout.write(d);
     });
     
+    fs.writeFileSync('student-2.json', data);
+    fs.writeFileSync();
+        data.etag = res.headers.etag;
+    
     
   } else {
-    
+    console.log("The etag is the same, so the data is the same don't read this file.");
+    console.log("etag", data.etag);
   }
   
 })
