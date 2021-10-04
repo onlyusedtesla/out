@@ -2,7 +2,7 @@ const { parse } = require('rss-to-json');
 const db = require('./db.js');
 const striptags = require('striptags');
 const validKeys = db.validKeys;
-const dateformat = require("dateformat");
+const dateFormat = require("./dateFormat.js");
 
 parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(function (rss) {
   
@@ -15,7 +15,7 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.item_id = db.uuid();
     item.timestamp = Date.now();
     item.domain = new URL(item.link).host.split("www.").join("");
-    item.item_date_formatted = dateformat(item.timestamp, "mmm d, h:MM tt");
+    item.item_date_formatted = dateFormat(item.published, "mmm d, h:MM tt");
     
     delete item.id;
     delete item.link;

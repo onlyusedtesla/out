@@ -55,14 +55,14 @@ app.get("/", (request, response) => {
     const items = db.getItems();
     
     let firstTwoItems = [];
-    let lastTwoItems = items.slice(2);
+    let nextItems = items.slice(2);
     
     firstTwoItems.push(items[0]);
     firstTwoItems.push(items[1]);
     
     response.render(__dirname + "/views/index", {
       firstTwoItems: firstTwoItems,
-      lastTwoItems: lastTwoItems,
+      nextItems: nextItems,
       favicons: favicons
     });
   }
