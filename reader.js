@@ -13,7 +13,9 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
   
   let items = rss.items.map(function (item) {
     item.domain = item.link;
-    item.description = item.
+    item.description = stripHtml(item.description);
+    item.link_type = "article";
+    
   });
   
 }).catch(function (error) {
