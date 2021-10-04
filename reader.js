@@ -8,7 +8,7 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
   
   let items = rss.items.map(function (item) {
     item.url = item.link;
-    item.description = striptags(item.description);
+    item.description = striptags(item.description).trim();
     item.link_type = "article";
     item.item_date = item.published;
     item.tags = "";
@@ -16,6 +16,7 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.timestamp = Date.now();
     item.domain = new URL(item.link).host.split("www.").join("");
     item.item_date_formatted = dateFormat(item.published, "mmm d, h:MM tt");
+    item.description_trimmed = item.description.length > 140 ? item.description.substring(0, 140) + "..." : item.description;
     
     delete item.id;
     delete item.link;
