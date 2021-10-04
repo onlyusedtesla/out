@@ -15,6 +15,8 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.domain = item.link;
     item.description = stripHtml(item.description);
     item.link_type = "article";
+    item.date = item.published;
+    item.tags = "";
     
   });
   
