@@ -21,6 +21,10 @@ function save(items) {
   saveFile(data);
 }
 
+function saveSubmission(submission) {
+  console.log();
+}
+
 function getItems() {
   rawData = fs.readFileSync(__dirname + '/data.json');
   data = JSON.parse(rawData);

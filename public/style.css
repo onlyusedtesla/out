@@ -464,6 +464,13 @@ header {
   padding: 12px;
 }
 
+/* Hidden Styles */
+.form.hidden,
+.success-message.hidden,
+.error-message.hidden {
+  display: none;
+}
+
 /* More Button */
 
 .more-button {

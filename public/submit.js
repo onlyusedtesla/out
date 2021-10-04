@@ -7,15 +7,18 @@
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/submit", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-      url: url,
-      title: title,
-      description: description
-    }));
+    fetch("/submit", {
+      method: "POST", 
+      body: JSON.stringify({
+        url: url,
+        title: title,
+        description: description,
+        submission_date: Date.now()
+      })
+    }).then(res => {
+      console.log("Request complete! response:", res);
+    });
     
   });
-  
+      
 })();
