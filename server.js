@@ -35,6 +35,14 @@ app.get("/", (request, response) => {
       searchQuery: request.query.search
     });
   } else {
+    
+    const items = db.getItems();
+    
+    let firstTwoItems = [];
+    
+    firstTwoItems.push(items[0]);
+    firstTwoItems.push(items[1]);
+    
     response.render(__dirname + "/views/index", {
       items: db.getItems()
     });
