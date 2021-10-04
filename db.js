@@ -22,7 +22,19 @@ function save(items) {
 }
 
 function saveSubmission(submission) {
-  console.log();
+  rawData = fs.readFileSync(__dirname + '/submissions.json');
+  data = JSON.parse(rawData);
+  
+  data.submissions = data.submissions || [];
+  
+  data.submissions.push(submission);
+  
+  try {
+    fs.writeFileSync("./submissions.json", JSON.stringify(data));
+    return "Submission Saved Successfully";
+  } catch {
+    return new Error("An error occured while saving the submission.");
+  }
 }
 
 function getItems() {
@@ -40,6 +52,7 @@ function getItems() {
 module.exports = {
   save: save,
   getItems: getItems,
+  saveSubmission: saveSubmission,
   validKeys: validKeys,
   uuid: uuid
 };

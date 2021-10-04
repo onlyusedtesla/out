@@ -9,10 +9,14 @@
     
     fetch("/submit", {
       method: "POST", 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-        url: url,
-        title: title,
-        description: description,
+        url: url.value,
+        title: title.value,
+        description: description.value,
         submission_date: Date.now()
       })
     }).then(res => {

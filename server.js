@@ -78,6 +78,9 @@ app.get("/submit", function (request, response) {
 
 app.post("/submit", function (request, response) {
   console.log("What's the request.body?", request.body);
+  
+  const saved = db.saveSubmission(request.body);
+  
 });
 
 // endpoint to get all the dreams in the database
