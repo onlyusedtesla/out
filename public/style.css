@@ -501,6 +501,10 @@ header {
   justify-content: space-between;
 }
 
+.flex-item--stretch {
+  flex: 1;
+}
+
 .mt-onedown {
   margin-top: 8px;
 }

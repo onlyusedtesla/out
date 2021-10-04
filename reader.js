@@ -16,7 +16,7 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.timestamp = Date.now();
     item.domain = new URL(item.link).host.split("www.").join("");
     item.item_date_formatted = dateFormat(item.published, "mmm d, h:MM tt");
-    item.description_trimmed = item.description.length > 140 ? item.description.substring(0, 140) + "..." : item.description;
+    item.description_trimmed = item.description.length > 280 ? item.description.substring(0, 280) + "..." : item.description;
     
     delete item.id;
     delete item.link;
