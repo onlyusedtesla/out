@@ -14,13 +14,14 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.item_id = db.uuid();
     item.timestamp = Date.now();
     
-    delete item['id'];
-    delete item['link'];
+    delete item.id;
+    delete item.link;
     delete item.category
     delete item.content;
     delete item.enclosures;
     delete item.media;
-    
+    delete item.published;
+    delete item.created;
     return item;
     
   });

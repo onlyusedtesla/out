@@ -1,5 +1,5 @@
 const fs = require('fs');
-const rawData = fs.readFileSync(__dirname + '/data.json');
+let rawData = fs.readFileSync(__dirname + '/data.json');
 let data = JSON.parse(rawData);
 
 const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
@@ -22,8 +22,16 @@ function save(items) {
 }
 
 function getItems() {
+  rawData = fs.readFileSync(__dirname + '/data.json');
+  data = JSON.parse(rawData);
   return data["items"];
 }
+
+// function getItemsByDate(items) {
+//   return items.filter(function (item) {
+//     return item.timestamp.
+//   });
+// }
 
 module.exports = {
   save: save,

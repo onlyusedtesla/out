@@ -5,6 +5,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const db = require("./db.js");
 const { auth } = require('express-openid-connect');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,7 +35,9 @@ app.get("/", (request, response) => {
       searchQuery: request.query.search
     });
   } else {
-    response.render(__dirname + "/views/index");
+    response.render(__dirname + "/views/index", {
+      items: db.getItems()
+    });
   }
 });
 
