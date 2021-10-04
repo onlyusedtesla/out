@@ -1,6 +1,6 @@
 const fs = require('fs');
 const rawData = fs.readFileSync(__dirname + '/data.json');
-const data = JSON.parse(rawData);
+let data = JSON.parse(rawData);
 
 const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
 
@@ -16,7 +16,8 @@ function saveFile() {
 }
 
 function save(items) {
-  data[items] = items;
+  console.log("What are items?", items);
+  data["items"] = items;
   saveFile(data);
 }
 

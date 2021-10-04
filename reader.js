@@ -1,11 +1,9 @@
 const { parse } = require('rss-to-json');
 const db = require('./db.js');
 const striptags = require('striptags');
-const validKeys = db.keys;
+const validKeys = db.validKeys;
 
 parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(function (rss) {
-  // save();
-  console.log("What's the rss from feedbin?", rss);
   
   let items = rss.items.map(function (item) {
     item.url = item.link;
@@ -13,11 +11,21 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.link_type = "article";
     item.item_date = item.published;
     item.tags = "";
+    item.item_id = db.uuid();
+    item.timestamp = Date.now();
+    
+    delete item['id'];
+    delete item['link'];
+    delete item.category
+    delete item.content;
+    delete item.enclosures;
+    delete item.media;
+    
+    return item;
+    
   });
   
-  Object.keys(item).forEach((key) => validKeys.includes(key) || delete userInput[key]);
-  
-  save(items);
+  db.save(items);
   
 }).catch(function (error) {
   console.log("There's been an error");
