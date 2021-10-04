@@ -1,14 +1,32 @@
-const Database = require('better-sqlite3');
-const db = new Database('teslatracker.db', { verbose: console.log });
+const fs = require('fs');
+const rawData = fs.readFileSync(__dirname + '/data.json');
+const data = JSON.parse(rawData);
 
-function save(items) {
-  const insert = db.prepare('INSERT INTO items (title, description, url, item_date, tags, link_type) VALUES (@title, @description, @url, @item_date, @tags, @link_type)');
-  
-  db.transaction(function (items) {
-    for (let i = 0; i < items.length; i += 1) {
-      insert.run(items[i]);
-    }
+const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
+
+function uuid() {
+  return 'xxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
   });
 }
 
-module.exports = save;
+function saveFile() {
+  fs.writeFileSync("./data.json", JSON.stringify(data));
+}
+
+function save(items) {
+  data[items] = items;
+  saveFile(data);
+}
+
+function getItems() {
+  return data["items"];
+}
+
+module.exports = {
+  save: save,
+  getItems: getItems,
+  validKeys: validKeys,
+  uuid: uuid
+};
