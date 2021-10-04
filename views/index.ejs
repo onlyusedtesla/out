@@ -81,7 +81,8 @@
         </div>
       <% } %>
       
-        <section class="articles">
+      <section class="articles">
+      <% for (let i = 0; i < firstTwoItems.length; i += 1) { %>
           <article class="article">
             
             <div class="article-details">
@@ -92,6 +93,7 @@
                 </p>
               </div>
               <div class="article-date">
+                <%= item[i].date_formatted; %>
                 Sept 10, 12:03 pm
               </div>
             </div>
@@ -206,8 +208,8 @@
             </div>
                       
           </article>
-          
-        </section>
+      <% } %>
+      </section>
       
         <div class="alert">
           Help passionate Tesla fans track the latest Tesla news. <a href="/submit" class="submit-link">Submit a link</a>

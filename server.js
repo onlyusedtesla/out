@@ -26,6 +26,10 @@ const config = {
   issuerBaseURL: 'https://auth.teslatracker.com'
 };
 
+const favicons = {
+  'cnbc.com': 
+};
+
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
@@ -39,12 +43,14 @@ app.get("/", (request, response) => {
     const items = db.getItems();
     
     let firstTwoItems = [];
+    let lastTwoItems = items.slice(2);
     
     firstTwoItems.push(items[0]);
     firstTwoItems.push(items[1]);
     
     response.render(__dirname + "/views/index", {
-      items: db.getItems()
+      firstTwoItems: firstTwoItems,
+      lastTwoItems: lastTwoItems
     });
   }
 });
