@@ -76,6 +76,10 @@ app.get("/submit", function (request, response) {
   response.render(__dirname + "/views/submit");
 });
 
+app.post("/submit", function (request, response) {
+  console.log("What's the request.body?", request.body);
+});
+
 // endpoint to get all the dreams in the database
 app.get("/getDreams", (request, response) => {
   db.all("SELECT * from Dreams", (err, rows) => {

@@ -263,6 +263,16 @@ textarea {
   color: var(--blue-grey);
 }
 
+.article-link,
+.article-linkTitle {
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+
+.article-linkTitle {
+  color: var(--almost-black);
+}
+
 /* Alert */
 
 .alert {
