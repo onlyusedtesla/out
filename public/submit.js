@@ -2,7 +2,8 @@
   var form = document.querySelector(".js-form"),
       url = document.querySelector(".js-url"),
       title = document.querySelector(".js-title"),
-      description = document.querySelector(".js-description");
+      description = document.querySelector(".js-description"),
+      successMessage = document.querySelector(".js-success-message");
   
   form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -20,7 +21,10 @@
         submission_date: Date.now()
       })
     }).then(res => {
-      console.log("Request complete! response:", res);
+      if (res.status === 200) {
+        form.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+      }
     });
     
   });

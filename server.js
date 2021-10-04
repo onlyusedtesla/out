@@ -77,9 +77,15 @@ app.get("/submit", function (request, response) {
 });
 
 app.post("/submit", function (request, response) {
-  console.log("What's the request.body?", request.body);
-  
-  const saved = db.saveSubmission(request.body);
+  try {
+    db.saveSubmission(request.body);
+    response.status(200).send('Submission saved successfully')
+  } catch {
+    response.status(400).send("An error occured while saving the submission.");
+  }
+});
+
+app.get("/submissions.xml", function (request, response) {
   
 });
 
