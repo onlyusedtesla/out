@@ -16,7 +16,7 @@
     "express-openid-connect": "^2.5.1",
     "better-sqlite3": "^7.4.3",
     "rss-to-json": "^2.0.2",
-    "string-strip-html": "^9.0.1"
+    "striptags": "^3.2.0"
   },
   "engines": {
     "node": "14.x"
