@@ -13,7 +13,7 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.url = item.link;
     item.description = striptags(item.description);
     item.link_type = "article";
-    item.date = item.published;
+    item.item_date = item.published;
     item.tags = "";
   });
   
