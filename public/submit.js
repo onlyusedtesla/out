@@ -2,6 +2,7 @@
   var form = document.querySelector(".js-form"),
       url = document.querySelector(".js-url"),
       title = document.querySelector(".js-title"),
+      author = document.querySelector(".js-author"),
       description = document.querySelector(".js-description"),
       successMessage = document.querySelector(".js-success-message");
   
@@ -15,10 +16,11 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        url: url.value,
+        link: url.value,
         title: title.value,
         description: description.value,
-        submission_date: Date.now()
+        pubDate: Date.now(),
+        author: author.value
       })
     }).then(res => {
       if (res.status === 200) {

@@ -86,7 +86,7 @@ app.post("/submit", function (request, response) {
 });
 
 app.get("/submissions.xml", function (request, response) {
-  
+  const someJSONFeed = require('./load-some-json-feed-data.json')
 });
 
 // endpoint to get all the dreams in the database

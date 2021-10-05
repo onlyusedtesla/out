@@ -17,7 +17,8 @@
     "better-sqlite3": "^7.4.3",
     "rss-to-json": "^2.0.2",
     "striptags": "^3.2.0",
-    "rake-js": "^0.1.1"
+    "rake-js": "^0.1.1",
+    "jsonfeed-to-rss": "^3.0.5"
   },
   "engines": {
     "node": "14.x"
