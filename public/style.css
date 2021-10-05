@@ -488,6 +488,17 @@ header {
   background-color: #233973;
 }
 
+/* Login Button */
+
+a.login-button {
+  color: var(--almost-black);
+  text-decoration: none;
+}
+
+a.login-button:hover {
+  text-decoration: underline;
+}
+
 /* Layout Utilities */
 
 .flex {
