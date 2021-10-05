@@ -53,7 +53,15 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     
     let keywords = rake.default(item.title.trim() + " " + item.description, { language: 'english' });
     
-    item.keywords = getRelevantKeywords();
+    item.keywords = getRelevantKeywords(keywords).map(function (keyword) {
+      let result = "";
+      
+      keyword.split(" ").forEach(function (k) {
+        result += k[0].toUpperCase() + k.substring(1) + " ";
+      });
+      
+      return result.trim();
+    });
     
     delete item.id;
     delete item.link;
@@ -68,9 +76,7 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     
   });
   
-  console.log("What are the items?", items);
-  
-  // db.save(items);
+  db.save(items);
   
 }).catch(function (error) {
   console.log("There's been an error");
