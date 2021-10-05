@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const db = require("./db.js");
 const RSSFeed = require("./feed.js");
-const { auth } = require('express-openid-connect');
+const { auth, requiresAuth } = require('express-openid-connect');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -48,11 +48,11 @@ app.use(auth(config));
 
 app.get("/", (request, response) => {
   
-  console.log("request.oidc", request.oidc);
-  
-  if (typeof request.query.search !== "undefined" && request.query.search.length >= 1) {
+  if (!request.oidc.isAuthenticated()) {
+    if (typeof request.query.search !== "undefined" && request.query.search.length >= 1) {
     response.render(__dirname + "/views/index", {
-      searchQuery: request.query.search
+      searchQuery: request.query.search,
+      userInfo: false
     });
   } else {
     
@@ -70,6 +70,12 @@ app.get("/", (request, response) => {
       favicons: favicons
     });
   }
+  } else {
+    request.oidc.fetchUserInfo().then(function (userInfo) {
+      console.log("What's the info?", userInfo);
+    });
+  }
+  
 });
 
 app.get("/landing", function (request, response) {
