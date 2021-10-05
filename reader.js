@@ -9,7 +9,7 @@ const rake = require('rake-js');
  * @description - Takes an array of strings that are of different words. Some have 1 words, 2 words, 3 words, etc.
  * @return array of strings
  */
-function getRelevantKeywords() {
+function getRelevantKeywords(keywords) {
   // Purpose of this function is to grab keywords
   // like grab all the ones that are of length 2...
   // if none then go to 3... 
@@ -18,6 +18,22 @@ function getRelevantKeywords() {
   
   // So what's the fastest way to do this?
   
+  let results = [];
+  let index = [];
+  
+  for (let i = 0; i < keywords.length; i += 1) {
+    if (keywords[i].split(" ").length === 2 && !index.includes(i)) {
+      results.push(keywords[i]);
+      index.push(i);
+    }
+    
+    if (results.length === 4) {
+      return results;
+    }
+    
+  }
+  
+  return results;
   
 }
 
@@ -35,7 +51,9 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.item_date_formatted = dateFormat(item.published, "mmm d, h:MM tt");
     item.description_trimmed = item.description.length > 280 ? item.description.substring(0, 280) + "..." : item.description;
     
-    item.keywords = rake.default(item.title.trim() + " " + item.description, { language: 'english' });
+    let keywords = rake.default(item.title.trim() + " " + item.description, { language: 'english' });
+    
+    item.keywords = getRelevantKeywords();
     
     delete item.id;
     delete item.link;
