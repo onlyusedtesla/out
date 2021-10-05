@@ -97,8 +97,12 @@ app.get("/landing", function(request, response) {
   response.render(__dirname + "/views/landing");
 });
 
-app.get("/submit", function(request, response) {
-  response.render(__dirname + "/views/submit");
+app.get("/submit", requiresAuth(), function(request, response) {
+  response.render(__dirname + "/views/submit", {
+    userInfo: request.oidc.isAuthenticated()
+        ? request.oidc.user.nickname
+        : false
+  });
 });
 
 app.post("/submit", function(request, response) {

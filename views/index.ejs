@@ -64,15 +64,12 @@
         </button>
         <p class="username">
           <% if (userInfo) { %>
-            <p>
-              
-        </p><%= userInfo %>
+            <%= userInfo %>
           <% } else { %>
-            
+            <a href="/login" class="login-button">
+              login
+            </a>
           <% } %>
-          <a href="/login" class="login-button">
-            <% if (userInfo) { %><%= userInfo %><% } else { %>login<% } %>
-          </a>
         </p>
       </div>
     </header>

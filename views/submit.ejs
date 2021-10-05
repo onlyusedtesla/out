@@ -61,7 +61,13 @@
           </svg>
         </button>
         <p class="username">
-          adamqureshi
+          <% if (userInfo) { %>
+            <%= userInfo %>
+          <% } else { %>
+            <a href="/login" class="login-button">
+              login
+            </a>
+          <% } %>
         </p>
       </div>
     </header>
@@ -91,7 +97,7 @@
           <p class="form-message">Fill out Title and Description to submit an article with your own custom description and title. Leave those fields blank to use the article's title and description.</p>
         </div>
         
-        <input type="hidden" class="js-author" value="adamqureshi" />
+        <input type="hidden" class="js-author" value="<%= userInfo %>" />
         
       </form>
 

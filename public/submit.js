@@ -6,6 +6,15 @@
       description = document.querySelector(".js-description"),
       successMessage = document.querySelector(".js-success-message");
   
+  const contentHtml = (function () {
+    const div = document.createElement('div');
+    const title = document.createElement('h1');
+    title.innerText = title;
+    const link = document.createElement('a');
+    
+    link.href = url.value;
+  })();
+  
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     
@@ -20,7 +29,8 @@
         title: title.value,
         description: description.value,
         pubDate: Date.now(),
-        author: author.value
+        author: author.value,
+        content_html: contentHtml
       })
     }).then(res => {
       if (res.status === 200) {
