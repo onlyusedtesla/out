@@ -5,21 +5,24 @@
       "title": "Here is the title that I must do in order to do this",
       "description": "Here is the description that I must enter in order to do this...",
       "pubDate": 1633381026804,
-      "author": "adamqureshi"
+      "author": "adamqureshi",
+      "content_html": "Title: Here is the title that I must do in order to do this<br><br>Description:Here is the description that I must enter in order to do this..."
     },
     {
       "link": "https://news.ycombinator.com/",
       "title": "This is the title",
       "description": "This is the description.",
       "pubDate": 1633381228230,
-      "author": "adamqureshi"
+      "author": "adamqureshi",
+      "content_html": "Title:This is the title<br><br>Description:This is the description."
     },
     {
       "link": "https://news.ycombinator.com/",
       "title": "This is the title for the thing",
       "description": "This is the description for the thing and it will be a very glorious description.",
       "pubDate": 1633381375313,
-      "author": "adamqureshi"
+      "author": "adamqureshi",
+      "content_html": "Title: This is the title for the thing.<br><br>Description: This is the description for the thing and it will be a very glorious description."
     }
   ]
 }

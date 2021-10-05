@@ -91,7 +91,6 @@ app.get("/submissions.xml", function (request, response) {
   response.writeHead(200);
   response.write(RSSFeed());
   response.end();
-  response.setHeaderRSSFeed();
 });
 
 // endpoint to get all the dreams in the database
