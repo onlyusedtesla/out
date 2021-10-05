@@ -11,20 +11,20 @@
 
     const contentHtml = (() => {
       const div = document.createElement("div");
-      const title = document.createElement("h1");
-      const link = document.createElement("a");
-      const description = document.createElement("p");
+      const titleEl = document.createElement("h1");
+      const linkEl = document.createElement("a");
+      const descriptionEl = document.createElement("p");
 
-      link.href = url.value;
-      link.innerHTML = url.value;
-      title.innerHTML = title.value;
-      description.innerHTML = description.value;
+      linkEl.href = url.value;
+      linkEl.innerHTML = url.value;
+      titleEl.innerHTML = title.value;
+      descriptionEl.innerHTML = description.value;
 
-      div.appendChild(title);
+      div.appendChild(titleEl);
       div.appendChild(document.createElement("br"));
-      div.appendChild(description);
+      div.appendChild(descriptionEl);
       div.appendChild(document.createElement("br"));
-      div.appendChild(link);
+      div.appendChild(linkEl);
 
       return div.innerHTML;
     })();
