@@ -47,6 +47,9 @@ const favicons = {
 app.use(auth(config));
 
 app.get("/", (request, response) => {
+  
+  console.log("request.oidc", request.oidc);
+  
   if (typeof request.query.search !== "undefined" && request.query.search.length >= 1) {
     response.render(__dirname + "/views/index", {
       searchQuery: request.query.search
