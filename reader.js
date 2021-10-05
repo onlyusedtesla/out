@@ -5,6 +5,22 @@ const validKeys = db.validKeys;
 const dateFormat = require("./dateFormat.js");
 const rake = require('rake-js');
 
+/*
+ * @description - Takes an array of strings that are of different words. Some have 1 words, 2 words, 3 words, etc.
+ * @return array of strings
+ */
+function getRelevantKeywords() {
+  // Purpose of this function is to grab keywords
+  // like grab all the ones that are of length 2...
+  // if none then go to 3... 
+  // if none then go to 1.
+  // etc..
+  
+  // So what's the fastest way to do this?
+  
+  
+}
+
 parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(function (rss) {
   
   let items = rss.items.map(function (item) {
