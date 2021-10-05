@@ -1,28 +1,39 @@
-(function () {
+(function() {
   var form = document.querySelector(".js-form"),
-      url = document.querySelector(".js-url"),
-      title = document.querySelector(".js-title"),
-      author = document.querySelector(".js-author"),
-      description = document.querySelector(".js-description"),
-      successMessage = document.querySelector(".js-success-message");
-  
-  const contentHtml = (function () {
-    const div = document.createElement('div');
-    const title = document.createElement('h1');
-    title.innerText = title;
-    const link = document.createElement('a');
-    
-    link.href = url.value;
-  })();
-  
-  form.addEventListener('submit', function (event) {
+    url = document.querySelector(".js-url"),
+    title = document.querySelector(".js-title"),
+    author = document.querySelector(".js-author"),
+    description = document.querySelector(".js-description"),
+    successMessage = document.querySelector(".js-success-message");
+
+  form.addEventListener("submit", function(event) {
     event.preventDefault();
-    
+
+    const contentHtml = (() => {
+      const div = document.createElement("div");
+      const title = document.createElement("h1");
+      const link = document.createElement("a");
+      const description = document.createElement("p");
+
+      link.href = url.value;
+      link.innerHTML = url.value;
+      title.innerHTML = title.value;
+      description.innerHTML = description.value;
+
+      div.appendChild(title);
+      div.appendChild(document.createElement("br"));
+      div.appendChild(description);
+      div.appendChild(document.createElement("br"));
+      div.appendChild(link);
+
+      return div.innerHTML;
+    })();
+
     fetch("/submit", {
-      method: "POST", 
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         link: url.value,
@@ -34,11 +45,9 @@
       })
     }).then(res => {
       if (res.status === 200) {
-        form.classList.add('hidden');
-        successMessage.classList.remove('hidden');
+        form.classList.add("hidden");
+        successMessage.classList.remove("hidden");
       }
     });
-    
   });
-      
 })();
