@@ -3,6 +3,7 @@ const db = require('./db.js');
 const striptags = require('striptags');
 const validKeys = db.validKeys;
 const dateFormat = require("./dateFormat.js");
+const rake = require('rake-js');
 
 parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(function (rss) {
   
@@ -18,6 +19,8 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.item_date_formatted = dateFormat(item.published, "mmm d, h:MM tt");
     item.description_trimmed = item.description.length > 280 ? item.description.substring(0, 280) + "..." : item.description;
     
+    item.keywords = rake.default(item.title.trim() + " " + item.description, { language: 'english' });
+    
     delete item.id;
     delete item.link;
     delete item.category
@@ -31,7 +34,9 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     
   });
   
-  db.save(items);
+  console.log("What are the items?", items);
+  
+  // db.save(items);
   
 }).catch(function (error) {
   console.log("There's been an error");
