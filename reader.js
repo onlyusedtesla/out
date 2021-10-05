@@ -44,7 +44,6 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     item.description = striptags(item.description).trim();
     item.link_type = "article";
     item.item_date = item.published;
-    item.tags = "";
     item.item_id = db.uuid();
     item.timestamp = Date.now();
     item.domain = new URL(item.link).host.split("www.").join("");
@@ -61,7 +60,7 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
       });
       
       return result.trim();
-    });
+    }).join(", ");
     
     delete item.id;
     delete item.link;
