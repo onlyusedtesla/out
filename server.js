@@ -48,32 +48,33 @@ app.use(auth(config));
 
 app.get("/", (request, response) => {
   
+  const items = db.getItems();
+  
+  let firstTwoItems = [];
+  let nextItems = items.slice(2);
+  
+  firstTwoItems.push(items[0]);
+  firstTwoItems.push(items[1]);
+  
   if (!request.oidc.isAuthenticated()) {
     if (typeof request.query.search !== "undefined" && request.query.search.length >= 1) {
-    response.render(__dirname + "/views/index", {
-      searchQuery: request.query.search,
-      userInfo: false
-    });
+      response.render(__dirname + "/views/index", {
+        searchQuery: request.query.search,
+        firstTwoItems: firstTwoItems,
+        nextItems: nextItems,
+        favicons: favicons,
+        userInfo: false
+      });
+    } else {
+      response.render(__dirname + "/views/index", {
+        firstTwoItems: firstTwoItems,
+        nextItems: nextItems,
+        favicons: favicons,
+        userInfo: false
+      });
+    }
   } else {
-    
-    const items = db.getItems();
-    
-    let firstTwoItems = [];
-    let nextItems = items.slice(2);
-    
-    firstTwoItems.push(items[0]);
-    firstTwoItems.push(items[1]);
-    
-    response.render(__dirname + "/views/index", {
-      firstTwoItems: firstTwoItems,
-      nextItems: nextItems,
-      favicons: favicons
-    });
-  }
-  } else {
-    request.oidc.fetchUserInfo().then(function (userInfo) {
-      console.log("What's the info?", userInfo);
-    });
+    console.log("request.oidc.user", request.oidc.user);
   }
   
 });
