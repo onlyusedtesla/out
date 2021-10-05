@@ -6,6 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const db = require("./db.js");
+const RSSFeed = require("./feed.js");
 const { auth } = require('express-openid-connect');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -86,7 +87,11 @@ app.post("/submit", function (request, response) {
 });
 
 app.get("/submissions.xml", function (request, response) {
-  const someJSONFeed = require('./load-some-json-feed-data.json')
+  response.setHeader('Content-Type', 'application/rss+xml');
+  response.writeHead(200);
+  response.write(RSSFeed());
+  response.end();
+  response.setHeaderRSSFeed();
 });
 
 // endpoint to get all the dreams in the database
