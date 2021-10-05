@@ -63,7 +63,16 @@
           </svg>
         </button>
         <p class="username">
-          <a href="/login" class="login-button">login</a>
+          <% if (userInfo) { %>
+            <p>
+              
+        </p><%= userInfo %>
+          <% } else { %>
+            
+          <% } %>
+          <a href="/login" class="login-button">
+            <% if (userInfo) { %><%= userInfo %><% } else { %>login<% } %>
+          </a>
         </p>
       </div>
     </header>
