@@ -108,7 +108,13 @@ app.get("/submit", requiresAuth(), function(request, response) {
 app.get("/items", function (request, response) {
   if (request.query.page) {
     response.setHeader('Content-Type', 'application/json');
-    response.status(200).send(db.getItems(request.query.page));
+    const items = db.getItems(request.query.page);
+    
+    if (items.length < 1) {
+      response.status(400).send("There are no more items to load");
+    } else {
+      response.status(200).send(items);
+    }
   } else {
     response.status(400).send("Please specify the page query parameter and make sure it's a positive number.");
   }
