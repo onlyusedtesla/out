@@ -11,21 +11,16 @@
 
     const contentHtml = (() => {
       const div = document.createElement("div");
-      const titleEl = document.createElement("h1");
       const linkEl = document.createElement("a");
       const descriptionEl = document.createElement("p");
 
-      linkEl.href = url.value;
-      linkEl.innerHTML = url.value;
-      titleEl.innerHTML = title.value;
       descriptionEl.innerHTML = description.value;
-
-      div.appendChild(titleEl);
-      div.appendChild(document.createElement("br"));
-      div.appendChild(descriptionEl);
-      div.appendChild(document.createElement("br"));
+      linkEl.href = url.value;
+      linkEl.style="display: block;";
+      linkEl.appendChild(descriptionEl);
+      
       div.appendChild(linkEl);
-
+      
       return div.innerHTML;
     })();
 
@@ -36,6 +31,7 @@
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        url: url.value,
         link: url.value,
         title: title.value,
         description: description.value,
