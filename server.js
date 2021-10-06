@@ -61,7 +61,7 @@ app.use(auth(config));
 
 app.get("/", (request, response) => {
   const items = db.getItems();
-
+  
   let firstTwoItems = [];
   let nextItems = items.slice(2);
 

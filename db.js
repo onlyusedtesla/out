@@ -37,10 +37,18 @@ function saveSubmission(submission) {
   }
 }
 
-function getItems() {
+function getAllItems() {
   rawData = fs.readFileSync(__dirname + '/data.json');
   data = JSON.parse(rawData);
   return data["items"];
+}
+
+/*
+ * @description - Returns the items based on a number. 
+ * @parameter page:number - 1 will return the first 10 items. 2 will return the second 10 items, 3 will return the 3rd 10 items.. until there are no more items... */
+function getItems(page) {
+  const items = getAllItems();
+  return items;
 }
 
 // function getItemsByDate(items) {
