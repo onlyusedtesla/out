@@ -22,6 +22,7 @@
         console.log("res.json()", res.json());
         if (res.status === 200) {
           console.log("What's the res.body?", res.body);
+          res.json().then();
           resolve(res);
         } else {
           reject(res.body);
