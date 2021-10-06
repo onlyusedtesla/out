@@ -6,24 +6,22 @@
 
   let page = 1; // For getting more articles
   
-  function addItems() {
-    
-  }
-  
+  console.log();
   function getItems(page) {
     return new Promise(function(resolve, reject) {
       fetch("/items?page=" + page, {
         method: "GET",
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'text/html'
         }
       }).then(res => {
         console.log("res", res);
-        console.log("res.json()", res.json());
         if (res.status === 200) {
           console.log("What's the res.body?", res.body);
-          res.json().then();
-          resolve(res);
+          console.log("res.text()", res.text());
+          res.text().then(function (html) {
+            resolve(html);
+          });
         } else {
           reject(res.body);
         }
