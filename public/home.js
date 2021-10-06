@@ -6,7 +6,13 @@
 
   let page = 1; // For getting more articles
   
-  console.log();
+  function addItems(html) {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = html;
+    let articlesEl = document.querySelectorAll('section.articles')[1];
+    articlesEl.appendChild(tpl.content);
+  }
+  
   function getItems(page) {
     return new Promise(function(resolve, reject) {
       fetch("/items?page=" + page, {
@@ -17,8 +23,6 @@
       }).then(res => {
         console.log("res", res);
         if (res.status === 200) {
-          console.log("What's the res.body?", res.body);
-          console.log("res.text()", res.text());
           res.text().then(function (html) {
             resolve(html);
           });
@@ -35,13 +39,20 @@
     moreButton.setAttribute("disabled", "disabled");
     moreButton.innerHTML = "Loading...";
     
-    getItems(page).then(function (response) {
+    getItems(page).then(function (html) {
       console.log("It got accepted");
-      console.log("response", response);
+      addItems(html);
       page += 1;
+      
+      moreButton.removeAttribute("disabled");
+      moreButton.innerHTML = "More";
+      
     }).catch(function (response) {
       console.log("This got rejected");
       console.log("What's the response?", response);
+      
+      moreButton.removeAttribute("disabled");
+      moreButton.innerHTML = "More";
     });
     
   });
