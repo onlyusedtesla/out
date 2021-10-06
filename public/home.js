@@ -40,17 +40,12 @@
     moreButton.innerHTML = "Loading...";
     
     getItems(page).then(function (html) {
-      console.log("It got accepted");
       addItems(html);
       page += 1;
       
       moreButton.removeAttribute("disabled");
       moreButton.innerHTML = "More";
-      
     }).catch(function (response) {
-      console.log("This got rejected");
-      console.log("What's the response?", response);
-      
       moreButton.removeAttribute("disabled");
       moreButton.innerHTML = "More";
     });
