@@ -50,11 +50,9 @@ function getItems(page) {
   const items = getAllItems();
   console.log("What's the length?", items.length);
   
-  page = page >= 0 ? page : 1;
+  page = page >= 0 ? page : 0;
   
-  console.log(items.slice(20, 30).length);
-  
-  return items;
+  return items.slice(page * 10, (page * 10) + 10);
 }
 
 // function getItemsByDate(items) {

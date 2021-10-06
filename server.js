@@ -105,6 +105,14 @@ app.get("/submit", requiresAuth(), function(request, response) {
   });
 });
 
+app.get("/items", function (request, response) {
+  if (request.query.page) {
+    response.status(200).send(db.getItems(request.query.page));
+  } else {
+    response.status(400).send("Please specify the page query parameter and make sure it's a positive number.");
+  }
+});
+
 app.post("/submit", function(request, response) {
   try {
     db.saveSubmission(request.body);
