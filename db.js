@@ -48,6 +48,12 @@ function getAllItems() {
  * @parameter page:number - 1 will return the first 10 items. 2 will return the second 10 items, 3 will return the 3rd 10 items.. until there are no more items... */
 function getItems(page) {
   const items = getAllItems();
+  console.log("What's the length?", items.length);
+  
+  page = page >= 0 ? page : 1;
+  
+  console.log(items.slice(20, 30).length);
+  
   return items;
 }
 
