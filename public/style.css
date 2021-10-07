@@ -576,6 +576,11 @@ a.login-button:hover {
   transition: opacity 0.8s linear;
 }
 
+.tooltip.tooltip--right:before {
+  right: auto;
+  left: 20px;
+}
+
 .tooltip:after {
   display: none;
   opacity: 0;
@@ -594,6 +599,11 @@ a.login-button:hover {
   display: block;
   opacity: 1;
   transition: opacity 0.8s linear;
+}
+
+.tooltip.tooltip--right.show:after {
+  border-color: transparent black transparent transparent;
+  margin-right: -21px;
 }
 
 /* Footer */
