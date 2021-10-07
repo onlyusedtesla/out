@@ -57,7 +57,6 @@
         </svg>
       </a>
       <div class="navigation">
-        <a href="/submit" class="blue-link hidden-on-mobile">Submit<span> A Link</span></a>
         <div class="searchbox js-searchbox"> <!-- The Search Bar -->
           <form method="get" action="">
             <% if (typeof searchQuery !== "undefined") { %>
@@ -113,7 +112,7 @@
         </div>
         
         <div class="form-element error-message js-error-message">
-          <p class="form-message">Only share Tesla related news. Thank you.</p>
+          <p class="form-message form-message--center">Only share Tesla related news. Thank you.</p>
         </div>
         
         <input type="hidden" class="js-author" value="<%= userInfo %>" />
@@ -127,11 +126,12 @@
     </main>
 
     <footer>
-      <p class="footer-text">Teslatracker is an independent organization and is not affiliated with Tesla Motors, Inc. or its subsidiaries. Tesla, Tesla Motors, Tesla Roadster, Model S, Model X, and the “Tesla”, “T” and “Tesla and T in Crest” designs are trademarks or registered trademarks of Tesla Motors, Inc. in the United States and other countries.<br><br><div class="footer-info">© TeslaTracker 2021<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><a href="mailto:contact@teslatracker.com" class="footer-contactlink">contact@teslatracker.com</a></div></p>
+      <p class="footer-text">Teslatracker is an independent organization and is not affiliated with Tesla Motors, Inc. or its subsidiaries. Tesla, Tesla Motors, Tesla Roadster, Model S, Model X, and the “Tesla”, “T” and “Tesla and T in Crest” designs are trademarks or registered trademarks of Tesla Motors, Inc. in the United States and other countries. Privacy policy - We have not, and will not ever sell any data to advertisers or 3rd party companies. We think that’s gross, and we want nothing to do with it.<br><br><div class="footer-info">© TeslaTracker 2021<span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><a href="mailto:contact@teslatracker.com" class="footer-contactlink">contact@teslatracker.com</a></div></p>
     </footer>
     
     </div>
   
+    <script src="dateFormat.js"></script>
     <script src="submit.js"></script>
   
   </body>

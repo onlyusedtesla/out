@@ -460,6 +460,10 @@ header {
   color: var(--blue-grey);
 }
 
+.form-message--center {
+  text-align: center;
+}
+
 .form-textarea {
   resize: vertical;
   max-height: 120px;

@@ -73,6 +73,10 @@ parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(f
     
     return item;
     
+  }).sort(function (a, b) {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.published) - new Date(a.published);
   });
   
   db.save(items);

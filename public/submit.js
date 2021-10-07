@@ -35,7 +35,7 @@
         link: url.value,
         title: title.value,
         description: description.value,
-        pubDate: Date.now(),
+        pubDate: dateFormat(Date.now()),
         author: author.value,
         content_html: contentHtml
       })
