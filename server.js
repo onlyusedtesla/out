@@ -62,18 +62,25 @@ const favicons = {
 app.use(auth(config));
 
 app.get("/", (request, response) => {
-  const items = db.getItems();
-  
-  let firstTwoItems = [];
-  let nextItems = items.slice(2);
-
-  firstTwoItems.push(items[0]);
-  firstTwoItems.push(items[1]);
-
   if (
     typeof request.query.search !== "undefined" &&
     request.query.search.length >= 1
   ) {
+    
+    let items = db.getItemsFromSearch(request.query.search);
+    
+    let firstTwoItems = [];
+    let nextItems = [];
+    
+    if (items.length >= 3) {
+      nextItems = items.slice(3);
+    }
+    
+    if (items.length >= 2) {
+      firstTwoItems.push(items[0]);
+      firstTwoItems.push(items[1]);
+    }
+    
     response.render(__dirname + "/views/index", {
       searchQuery: request.query.search,
       firstTwoItems: firstTwoItems,
@@ -84,6 +91,15 @@ app.get("/", (request, response) => {
         : false
     });
   } else {
+    
+    const items = db.getItems();
+    
+    let firstTwoItems = [];
+    let nextItems = items.slice(2);
+    
+    firstTwoItems.push(items[0]);
+    firstTwoItems.push(items[1]);
+    
     response.render(__dirname + "/views/index", {
       firstTwoItems: firstTwoItems,
       nextItems: nextItems,
@@ -92,6 +108,7 @@ app.get("/", (request, response) => {
         ? request.oidc.user.nickname
         : false
     });
+    
   }
 });
 

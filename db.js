@@ -55,6 +55,21 @@ function getItems(page) {
   return items.slice(page * 10, (page * 10) + 10);
 }
 
+function getItemsFromSearch(searchTerm) {
+  const allItems = getAllItems();
+  
+  let items = [];
+  
+  for (let i = 0; i < allItems.length; i += 1) {
+    if (allItems[i].title.toLowerCase().includes(searchTerm.toLowerCase()) || allItems[i].description.toLowerCase().includes(searchTerm.toLowerCase())) {
+      items.push(allItems[i]);
+    }
+  }
+  
+  return items;
+  
+}
+
 // function getItemsByDate(items) {
 //   return items.filter(function (item) {
 //     return item.timestamp.
@@ -64,6 +79,7 @@ function getItems(page) {
 module.exports = {
   save: save,
   getItems: getItems,
+  getItemsFromSearch: getItemsFromSearch,
   saveSubmission: saveSubmission,
   validKeys: validKeys,
   uuid: uuid
