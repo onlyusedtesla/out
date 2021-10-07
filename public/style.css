@@ -131,6 +131,11 @@ textarea {
   font-weight: bolder;
 }
 
+.blue-link {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
 /* Article */
 
 .articles {
@@ -480,18 +485,8 @@ header {
 /* More Button */
 
 .more-button {
-  background-color: var(--blue);
-  color: #FFF;
-  text-decoration: none;
-  text-align: center;
   display: inline-block;
-  padding: 10px 16px;
-  border-radius: 3px;
   margin-top: 40px;
-}
-
-.more-button:hover {
-  background-color: #233973;
 }
 
 /* Login Button */
