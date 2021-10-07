@@ -160,6 +160,8 @@ textarea {
 
 .article-tags {
   color: var(--blue);
+  line-height: 1;
+  margin-top: 1px;
 }
 
 .article-websitename,
