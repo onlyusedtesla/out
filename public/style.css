@@ -542,6 +542,10 @@ a.login-button:hover {
   margin-right: 16px;
 }
 
+.hidden-on-mobile {
+  display: none;
+}
+
 /* Tooltip */
 
 .tooltip {
@@ -709,6 +713,11 @@ footer {
     margin-top: 88px;
     margin-bottom: 72px;
   }
+  
+  .hidden-on-mobile {
+    display: inline;
+  }
+  
 }
 
 @media only screen and (min-width: 775px) {

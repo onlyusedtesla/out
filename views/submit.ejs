@@ -57,6 +57,7 @@
         </svg>
       </a>
       <div class="navigation">
+        <a href="/submit" class="blue-link hidden-on-mobile">Submit<span> A Link</span></a>
         <div class="searchbox js-searchbox"> <!-- The Search Bar -->
           <form method="get" action="">
             <% if (typeof searchQuery !== "undefined") { %>
@@ -112,7 +113,7 @@
         </div>
         
         <div class="form-element error-message js-error-message">
-          <p class="form-message">Fill out Title and Description to submit an article with your own custom description and title. Leave those fields blank to use the article's title and description.</p>
+          <p class="form-message">Only share Tesla related news. Thank you.</p>
         </div>
         
         <input type="hidden" class="js-author" value="<%= userInfo %>" />
