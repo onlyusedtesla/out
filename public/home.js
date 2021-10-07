@@ -3,7 +3,9 @@
   const searchBox = document.querySelector(".js-searchbox");
   const mobileSearchBox = document.querySelector(".js-searchbutton-mobile");
   const moreButton = document.querySelector(".js-more-button");
-
+  const tooltips = document.querySelectorAll(".js-tooltip");
+  const shares = document.querySelectorAll(".js-share");
+  
   let page = 1; // For getting more articles
   
   function addItems(html) {
@@ -51,7 +53,7 @@
     });
     
   });
-
+  
   // when you focus on the search inbox, then add a class to the outer element, and remove it when you lose focus.
   searchInput.addEventListener("focus", function(event) {
     searchBox.classList.add("searchbox--focused");
@@ -71,4 +73,23 @@
       window.location.href = url.href;
     }
   });
+  
+  Array.from(tooltips).forEach(function (tooltip) {
+    tooltip.addEventListener('click', function (event) {
+      event.preventDefault();
+      tooltip.classList.add('show');
+      setTimeout(function () {
+        tooltip.classList.remove('show');
+      }, 2100);
+    });
+  });
+  
+  Array.from(shares).forEach(function (share) {
+    navigator.clipboard.writeText(share.getAttribute("data-link")).then(function (response) {
+      console.log("response", response);
+    }).catch(function (error) {
+      console.log("error", error);
+    });
+  });
+  
 })();
