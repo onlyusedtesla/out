@@ -371,6 +371,11 @@ header {
   height: auto;
 }
 
+.logo-link {
+  display: block;
+  text-decoration: none;
+}
+
 .navigation {
   display: flex;
   align-items: center;
