@@ -161,6 +161,11 @@ app.get("/submissions.xml", function(request, response) {
   response.end();
 });
 
+//The 404 Routeh
+app.get('*', function (request, response) {
+  response.redirect(404, '/');
+});
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3001, () => {
   console.log(`Your app is listening on port ${listener.address().port}`);
