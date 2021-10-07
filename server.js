@@ -24,7 +24,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: "vf8hOrlz9ntG4nE_a9WyqYvPov6Yu0eWL82nmNrGEfgMeAGF0683-I2Nyhuf0EFS",
-  baseURL: "https://staging-teslatracker.derick.work",
+  baseURL: process.env.STAGING ? "https://staging-teslatracker.derick.work" : "https://teslatracker.com",
   clientID: "nNRceuJ1eDslyoi1dJdGuxElPOx1oU2W",
   issuerBaseURL: "https://auth.teslatracker.com"
 };
