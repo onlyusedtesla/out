@@ -551,7 +551,7 @@ a.login-button:hover {
 /* Tooltip */
 
 .tooltip {
-  display: relative;
+  position: relative;
 }
 
 .tooltip:before {
@@ -563,7 +563,7 @@ a.login-button:hover {
   transform:translateY(-50%);
   
   /* move to right */
-  left:100%;
+  right: 100%;
   margin-left:15px; /* and add a small left margin */
   
   /* basic styles */
@@ -573,8 +573,22 @@ a.login-button:hover {
   background:#000;
   color: #fff;
   text-align:center;
+  
+  font-size: 12px;
+  
+  display: block; /* hide by default */
+}
 
-  display:none; /* hide by default */
+.tooltip:after {
+      content: "";
+    position: absolute;
+    right: 100%;
+    margin-right: -11px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 10px solid #000;
+    border-color: transparent transparent transparent black;
+    display: block;
 }
 
 /* Footer */
