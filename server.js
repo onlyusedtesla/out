@@ -88,7 +88,8 @@ app.get("/", (request, response) => {
       favicons: favicons,
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
-        : false
+        : false,
+      staging: process.env.STAGING || false
     });
   } else {
     
@@ -106,7 +107,8 @@ app.get("/", (request, response) => {
       favicons: favicons,
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
-        : false
+        : false,
+      staging: process.env.STAGING || false
     });
     
   }
@@ -120,7 +122,8 @@ app.get("/submit", requiresAuth(), function(request, response) {
   response.render(__dirname + "/views/submit", {
     userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
-        : false
+        : false,
+    staging: process.env.STAGING || false
   });
 });
 
@@ -161,9 +164,9 @@ app.get("/submissions.xml", function(request, response) {
   response.end();
 });
 
-//The 404 Routeh
+//The 404 Route
 app.get('*', function (request, response) {
-  response.redirect(404, '/');
+  response.render(__dirname + "/views/404");
 });
 
 // listen for requests :)
