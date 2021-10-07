@@ -61,7 +61,7 @@ function getItemsFromSearch(searchTerm) {
   let items = [];
   
   for (let i = 0; i < allItems.length; i += 1) {
-    if (allItems[i].title.toLowerCase().includes(searchTerm.toLowerCase()) || allItems[i].description.toLowerCase().includes(searchTerm.toLowerCase())) {
+    if (allItems[i].title.trim().toLowerCase().includes(searchTerm.toLowerCase()) || allItems[i].description.trim().toLowerCase().includes(searchTerm.toLowerCase())) {
       items.push(allItems[i]);
     }
   }

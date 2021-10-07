@@ -23,7 +23,6 @@
           'Content-Type': 'text/html'
         }
       }).then(res => {
-        console.log("res", res);
         if (res.status === 200) {
           res.text().then(function (html) {
             resolve(html);
