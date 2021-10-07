@@ -84,12 +84,16 @@
     });
   });
   
+  function copy(text) {
+    var copyText = document.querySelector(".js-hidden");
+    copyText.value = text;
+    copyText.select();
+    document.execCommand("copy");
+  }
+  
   Array.from(shares).forEach(function (share) {
-    navigator.clipboard.writeText(share.getAttribute("data-link")).then(function (response) {
-      console.log("response", response);
-    }).catch(function (error) {
-      console.log("error", error);
-    });
+    console.log('share.getAttribute("data-link")', share.getAttribute("data-link"));
+    copy(share.getAttribute("data-link"));
   });
   
 })();
