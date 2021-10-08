@@ -164,6 +164,15 @@ app.get("/submissions.xml", function(request, response) {
   response.end();
 });
 
+app.get('/publish', function (request, response) {
+  if (request.query.code && request.query.code === "d3saztBdZUN7LqBjgJ9NC5PjfjU2dfFW") {
+    const reader = require("./reader.js");
+    reader(function () {
+      response.status(200).send("The website has been updated with the latest articles.");
+    });
+  }
+});
+
 //The 404 Route
 app.get('*', function (request, response) {
   response.render(__dirname + "/views/404");
