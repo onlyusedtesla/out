@@ -24,7 +24,7 @@ html {
 body {
   margin: 0;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: rgb(251 251 251);
+  background-color: #F4F4F4;
 }
 
 main {
@@ -377,6 +377,7 @@ header {
   display: block;
   width: 132px;
   height: auto;
+  transform: none;
 }
 
 .logo-link {
@@ -658,6 +659,7 @@ footer {
   .logo {
     margin-left: 0;
     width: 200px;
+    transform: scale(0.5) translate(-50%);
   }
 
   .navigation {
