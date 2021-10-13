@@ -102,3 +102,4 @@ function addGuidColumnToItemsTable() {
 // addExistingSubmissions();
 // addGuidColumnToItemsTable();
 
+reader();
