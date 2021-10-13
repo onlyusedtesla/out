@@ -1,5 +1,5 @@
 const { parse } = require('rss-to-json');
-const db = require('./db2.js');
+const db = require('./db.js');
 const striptags = require('striptags');
 const validKeys = db.validKeys;
 const dateFormat = require("./dateFormat.js");
@@ -40,6 +40,8 @@ function getRelevantKeywords(keywords) {
 function update(done) {
   parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(function (rss) {
     
+  console.log("RSS", rss);
+  
   let items = rss.items.map(function (item) {
     
     item.url = item.link;
@@ -81,7 +83,7 @@ function update(done) {
     return new Date(b.item_date) - new Date(a.item_date);
   });
   
-  db.saveItems(items);
+  db.save(items);
   done();
     
 }).catch(function (error) {
@@ -91,3 +93,5 @@ function update(done) {
 }
 
 module.exports = update;
+
+update();
