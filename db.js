@@ -16,8 +16,10 @@ function saveFile() {
 }
 
 function save(items) {
-  console.log("What are items?", items);
+  // console.log("What are items?", items);
   data["items"] = items;
+  
+  data["items"].push(items);
   saveFile(data);
 }
 
