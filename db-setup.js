@@ -3,8 +3,12 @@
 // So the first thing that I need to do is to create two tables with the various columns, and then go through each of the 
 
 const db = require('better-sqlite3')('teslatracker.db');
+const fs = require('fs');
 
 function createItemsTable() {
+  
+  console.log("Creating the items table.");
+  
   const sql = 
         `CREATE TABLE IF NOT EXISTS items (
           title TEXT NOT NULL,
@@ -29,9 +33,33 @@ function createItemsTable() {
 
 function createSubmissionsTable() {
   
+  console.log("Creating the submissions table.");
+  
+    const sql = 
+        `CREATE TABLE IF NOT EXISTS submissions (
+          link TEXT,
+          title TEXT NOT NULL,
+          description TEXT,
+          pubDate DATETIME NOT NULL,
+          author TEXT NOT NULL,
+          content_html TEXT NOT NULL
+        )`;
+  
+  const row = db.prepare(sql);
+  const info = row.run();
+  
+  console.log("What's the info?", info);
 }
 
 function addExistingItems() {
+  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let data = JSON.parse(rawData);
+  
+  const sql = `INSERT INTO items (title, description, author, url, link_type, item_date, item_id, timestamp, domain, item_date_formatted, description_trimmed, keywords) VALUES (@title, @description, @author, @url, @link_type, @item_date, @item_id, @timestamp, @domain, @item_date_formatted, @description_trimmed, @keywords)`;
+  
+  const insertItems = db.transaction((cats) => {
+    for (const cat of cats) insert.run(cat);
+  });
   
 }
 
@@ -40,3 +68,4 @@ function addExistingSubmissions() {
 }
 
 createItemsTable();
+createSubmissionsTable();
