@@ -13,41 +13,44 @@ function saveFile() {
   fs.writeFileSync("./data.json", JSON.stringify(data));
 }
 
+function saveItem(items) {
+  
+}
+
 function save(items) {
   console.log("What are items?", items);
   data["items"] = items;
   saveFile(data);
 }
 
-function insert() {
-  
-  const sql = `INSERT INTO submissions (link, title, description, pubDate, author, content_html) VALUES (@link, @title, @description, @pubDate, @author, @content_html)`;
+function insert(table, items) {
+  const sql = `INSERT INTO ${table} (link, title, description, pubDate, author, content_html) VALUES (@link, @title, @description, @pubDate, @author, @content_html)`;
   const insert = db.prepare(sql);
+  
+  if (typeof items.length === "undefined") {
+    items = [items];
+  }
   
   const insertItems = db.transaction((items) => {
     for (const item of items) {
       const info = insert.run(item);
-      console.log("Just inserted the submissions", item);
+      console.log("Just inserted the " + table === "submissions" ? "submission" : "item", item);
     }
   });
   
-  insertItems(data.submissions);
+  insertItems(items);
+}
+
+function insertItems(table, items) {
+  insert("items", items);
+}
+
+function insertSubmissions(table, submissions) {
+  insert("submissions", submissions);
 }
 
 function saveSubmission(submission) {
-  rawData = fs.readFileSync(__dirname + '/submissions.json');
-  data = JSON.parse(rawData);
-  
-  data.submissions = data.submissions || [];
-  
-  data.submissions.push(submission);
-  
-  try {
-    fs.writeFileSync("./submissions.json", JSON.stringify(data));
-    return "Submission Saved Successfully";
-  } catch {
-    return new Error("An error occured while saving the submission.");
-  }
+  insertSubmissions(submission);
 }
 
 function getAllItems() {
