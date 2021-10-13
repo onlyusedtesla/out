@@ -13,8 +13,8 @@ function saveFile() {
   fs.writeFileSync("./data.json", JSON.stringify(data));
 }
 
-function insert(table, items) {
-  const sql = `INSERT INTO ${table} (link, title, description, pubDate, author, content_html) VALUES (@link, @title, @description, @pubDate, @author, @content_html)`;
+function insertSubmission(items) {
+  const sql = `INSERT INTO submissions (link, title, description, pubDate, author, content_html) VALUES (@link, @title, @description, @pubDate, @author, @content_html)`;
   const insert = db.prepare(sql);
   
   if (typeof items.length === "undefined") {
@@ -24,21 +24,23 @@ function insert(table, items) {
   const insertItems = db.transaction((items) => {
     for (const item of items) {
       const info = insert.run(item);
-      console.log("Just inserted the " + table === "submissions" ? "submission" : "item", item);
+      console.log("Just inserted the submissions", item);
     }
   });
   
   insertItems(items);
 }
 
-function insertItems(items) {
-  const sql = `INSERT INTO items (title, description, author, url, link_type, item_date, item_id, timestamp, domain, item_date_formatted, description_trimmed, keywords) VALUES (@title, @description, @author, @url, @link_type, @item_date, @item_id, @timestamp, @domain, @item_date_formatted, @description_trimmed, @keywords) WHERE NOT EXISTS(SELECT 1 FROM items WHERE title = '@title')`;
+function saveItems (items) {
+  const sql = `INSERT INTO items (title, description, author, url, link_type, item_date, item_id, timestamp, domain, item_date_formatted, description_trimmed, keywords) VALUES (@title, @description, @author, @url, @link_type, @item_date, @item_id, @timestamp, @domain, @item_date_formatted, @description_trimmed, @keywords) WHERE NOT EXISTS(SELECT 1 FROM items WHERE title = @title)`;
   
   const insert = db.prepare(sql);
   
   if (typeof items.length === "undefined") {
     items = [items];
   }
+  
+  console.log("items", items);
   
   const insertMany = db.transaction((items) => {
     for (const item of items) {
@@ -49,10 +51,6 @@ function insertItems(items) {
   
   insertMany(items);
   
-}
-
-function saveItems(items) {
-  return insertItems(items)
 }
 
 function insertSubmissions(table, submissions) {

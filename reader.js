@@ -42,8 +42,6 @@ function update(done) {
     
   let items = rss.items.map(function (item) {
     
-    console.log("item", item);
-    
     item.url = item.link;
     item.description = striptags(item.description).trim();
     item.link_type = "article";
