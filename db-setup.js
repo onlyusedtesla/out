@@ -4,6 +4,7 @@
 
 const db = require('better-sqlite3')('teslatracker.db');
 const fs = require('fs');
+const reader = require('./reader.js');
 
 function createItemsTable() {
   
@@ -86,7 +87,18 @@ function addExistingSubmissions() {
   insertItems(data.submissions);
 }
 
-createItemsTable();
-createSubmissionsTable();
-addExistingItems();
-addExistingSubmissions();
+function addGuidColumnToItemsTable() {
+  const sql = `ALTER TABLE items ADD COLUMN guid TEXT`;
+  const insert = db.prepare(sql);
+  const info = insert.run();
+  
+  console.log("What's the info?", info);
+  
+}
+
+// createItemsTable();
+// createSubmissionsTable();
+// addExistingItems();
+// addExistingSubmissions();
+// addGuidColumnToItemsTable();
+

@@ -40,7 +40,12 @@ function getRelevantKeywords(keywords) {
 function update(done) {
   parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml").then(function (rss) {
   
+    console.log("What's the RSS?", rss);
+    
   let items = rss.items.map(function (item) {
+    
+    console.log("item", item);
+    
     item.url = item.link;
     item.description = striptags(item.description).trim();
     item.link_type = "article";
@@ -80,7 +85,7 @@ function update(done) {
     return new Date(b.item_date) - new Date(a.item_date);
   });
   
-  db.save(items);
+  // db.save(items);
   done();
     
 }).catch(function (error) {
