@@ -93,10 +93,11 @@ function addGuidColumnToItemsTable() {
   const info = insert.run();
 }
 
-db.prepare('DROP TABLE items').run();
-createItemsTable();
+// db.prepare('DROP TABLE items').run();
+// createItemsTable();
 // createSubmissionsTable();
-addExistingItems();
+// addExistingItems();
 // addExistingSubmissions();
 // addGuidColumnToItemsTable();
-// reader();
+
+reader();

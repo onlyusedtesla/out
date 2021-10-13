@@ -13,16 +13,6 @@ function saveFile() {
   fs.writeFileSync("./data.json", JSON.stringify(data));
 }
 
-function saveItem(items) {
-  
-}
-
-function save(items) {
-  console.log("What are items?", items);
-  data["items"] = items;
-  saveFile(data);
-}
-
 function insert(table, items) {
   const sql = `INSERT INTO ${table} (link, title, description, pubDate, author, content_html) VALUES (@link, @title, @description, @pubDate, @author, @content_html)`;
   const insert = db.prepare(sql);
@@ -41,8 +31,28 @@ function insert(table, items) {
   insertItems(items);
 }
 
-function insertItems(table, items) {
-  insert("items", items);
+function insertItems(items) {
+  const sql = `INSERT INTO items (title, description, author, url, link_type, item_date, item_id, timestamp, domain, item_date_formatted, description_trimmed, keywords) VALUES (@title, @description, @author, @url, @link_type, @item_date, @item_id, @timestamp, @domain, @item_date_formatted, @description_trimmed, @keywords) WHERE NOT EXISTS(SELECT 1 FROM items WHERE title = '@title')`;
+  
+  const insert = db.prepare(sql);
+  
+  if (typeof items.length === "undefined") {
+    items = [items];
+  }
+  
+  const insertMany = db.transaction((items) => {
+    for (const item of items) {
+      const info = insert.run(item);
+      console.log("Just inserted the item", item);
+    }
+  });
+  
+  insertMany(items);
+  
+}
+
+function saveItems(items) {
+  return insertItems(items)
 }
 
 function insertSubmissions(table, submissions) {
@@ -87,10 +97,7 @@ function getItemsFromSearch(searchTerm) {
 }
 
 module.exports = {
-  save: save,
-  getItems: getItems,
-  getItemsFromSearch: getItemsFromSearch,
-  saveSubmission: saveSubmission,
+  saveItems: saveItems,
   validKeys: validKeys,
   uuid: uuid
 };

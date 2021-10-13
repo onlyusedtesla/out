@@ -1,5 +1,5 @@
 const { parse } = require('rss-to-json');
-const db = require('./db.js');
+const db = require('./db2.js');
 const striptags = require('striptags');
 const validKeys = db.validKeys;
 const dateFormat = require("./dateFormat.js");
@@ -83,7 +83,7 @@ function update(done) {
     return new Date(b.item_date) - new Date(a.item_date);
   });
   
-  // db.save(items);
+  db.saveItems(items);
   done();
     
 }).catch(function (error) {
