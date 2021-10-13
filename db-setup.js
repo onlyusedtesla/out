@@ -57,15 +57,36 @@ function addExistingItems() {
   
   const sql = `INSERT INTO items (title, description, author, url, link_type, item_date, item_id, timestamp, domain, item_date_formatted, description_trimmed, keywords) VALUES (@title, @description, @author, @url, @link_type, @item_date, @item_id, @timestamp, @domain, @item_date_formatted, @description_trimmed, @keywords)`;
   
-  const insertItems = db.transaction((cats) => {
-    for (const cat of cats) insert.run(cat);
+  const insert = db.prepare(sql);
+  
+  const insertItems = db.transaction((items) => {
+    for (const item of items) {
+      const info = insert.run(item);
+      console.log("Just inserted the item", item);
+    }
   });
   
+  insertItems(data.items);
 }
 
-function addExistingSubmissions() {
+function () {
+  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let data = JSON.parse(rawData);
   
+  const sql = `INSERT INTO items (title, description, author, url, link_type, item_date, item_id, timestamp, domain, item_date_formatted, description_trimmed, keywords) VALUES (@title, @description, @author, @url, @link_type, @item_date, @item_id, @timestamp, @domain, @item_date_formatted, @description_trimmed, @keywords)`;
+  
+  const insert = db.prepare(sql);
+  
+  const insertItems = db.transaction((items) => {
+    for (const item of items) {
+      const info = insert.run(item);
+      console.log("Just inserted the item", item);
+    }
+  });
+  
+  insertItems(data.items);
 }
 
 createItemsTable();
 createSubmissionsTable();
+addExistingItems();
