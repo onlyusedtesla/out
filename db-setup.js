@@ -91,23 +91,12 @@ function addGuidColumnToItemsTable() {
   const sql = `ALTER TABLE items ADD COLUMN guid TEXT`;
   const insert = db.prepare(sql);
   const info = insert.run();
-  
-  console.log("What's the info?", info);
-  
 }
 
-function makeTitleColumnUnique() {
-  const sql  = `ALTER TABLE items DROP COLUMN title`;
-  const sql2 = `ALTER TABLE items ADD COLUMN title TEXT UNIQUE`
-  
-  console.log(db.prepare(sql).run());
-  console.log(db.);
-}
-
-// createItemsTable();
+db.prepare('DROP TABLE items').run();
+createItemsTable();
 // createSubmissionsTable();
-// addExistingItems();
+addExistingItems();
 // addExistingSubmissions();
 // addGuidColumnToItemsTable();
-
-reader();
+// reader();
