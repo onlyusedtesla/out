@@ -69,24 +69,24 @@ function addExistingItems() {
   insertItems(data.items);
 }
 
-function () {
-  let rawData = fs.readFileSync(__dirname + '/data.json');
+function addExistingSubmissions() {
+  let rawData = fs.readFileSync(__dirname + '/submissions.json');
   let data = JSON.parse(rawData);
   
-  const sql = `INSERT INTO items (title, description, author, url, link_type, item_date, item_id, timestamp, domain, item_date_formatted, description_trimmed, keywords) VALUES (@title, @description, @author, @url, @link_type, @item_date, @item_id, @timestamp, @domain, @item_date_formatted, @description_trimmed, @keywords)`;
-  
+  const sql = `INSERT INTO submissions (link, title, description, pubDate, author, content_html) VALUES (@link, @title, @description, @pubDate, @author, @content_html)`;
   const insert = db.prepare(sql);
   
   const insertItems = db.transaction((items) => {
     for (const item of items) {
       const info = insert.run(item);
-      console.log("Just inserted the item", item);
+      console.log("Just inserted the submissions", item);
     }
   });
   
-  insertItems(data.items);
+  insertItems(data.submissions);
 }
 
 createItemsTable();
 createSubmissionsTable();
 addExistingItems();
+addExistingSubmissions();
