@@ -96,6 +96,14 @@ function addGuidColumnToItemsTable() {
   
 }
 
+function makeTitleColumnUnique() {
+  const sql  = `ALTER TABLE items DROP COLUMN title`;
+  const sql2 = `ALTER TABLE items ADD COLUMN title TEXT UNIQUE`
+  
+  console.log(db.prepare(sql).run());
+  console.log(db.);
+}
+
 // createItemsTable();
 // createSubmissionsTable();
 // addExistingItems();
