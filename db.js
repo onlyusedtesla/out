@@ -16,9 +16,7 @@ function saveFile() {
 }
 
 function save(items) {
-  // console.log("What are items?", items);
-  data["items"] = items;
-  
+  console.log("What are items?", items);
   data["items"].push(items);
   saveFile(data);
 }
@@ -81,6 +79,7 @@ function getItemsFromSearch(searchTerm) {
 module.exports = {
   save: save,
   getItems: getItems,
+  getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
   saveSubmission: saveSubmission,
   validKeys: validKeys,
