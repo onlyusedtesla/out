@@ -221,8 +221,16 @@ textarea {
   cursor: pointer;
 }
 
+.article-share.article-share--upvote {
+  background-color: var(--light-blue);
+}
+
 .article-share:hover {
   background-color: #c3c3c3;
+}
+
+.article-share.article-share--upvote:hover {
+  background-color: #b3d8f3;
 }
 
 .article-shareText {
