@@ -5,6 +5,7 @@
   const moreButton = document.querySelector(".js-more-button");
   const tooltips = document.querySelectorAll(".js-tooltip");
   const shares = document.querySelectorAll(".js-share");
+  const favoriteButtons = document.querySelectorAll(".js-favorite");
   
   let page = 1; // For getting more articles
   
@@ -87,6 +88,31 @@
     share.addEventListener('click', function (event) {
       event.preventDefault();
       navigator.clipboard.writeText(share.getAttribute("data-link")).then(function() {}, function() {});
+    });
+  });
+  
+  function toggleFavorite(favoriteEls) {
+    Array.from(favoriteEls).forEach(function (favoriteButton) {
+      
+      if (favoriteButton.hasAttribute("path")) {
+        favoriteButton.setAttribute("fill", favoriteButton.getAttribute("data-original-fill"));
+        favoriteButton.removeAttribute("path");
+      } else {
+        favoriteButton.setAttribute("path", favoriteButton.getAttribute("data-original-path"));
+        favoriteButton.removeAttribute("fill");
+      }
+      
+    });
+  }
+  
+  Array.from(favoriteButtons).forEach(function (favoriteButton) {
+    favoriteButton.addEventListener('click', function (event) {
+      var article = favoriteButton.closest(".js-article");
+      var favoritesForArticle = article.querySelectorAll(".js-favorite");
+      console.log("What's the article?", article);
+      console.log("favoritsForArticle?", favoritesForArticle);
+      
+      toggleFavorite();
     });
   });
   
