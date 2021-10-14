@@ -167,8 +167,8 @@ app.post("/addFavorite", function (request, response) {
   // We want to use the ID not the username
   console.log("What's the user information?", request.oidc.user);
   
-  if (request.query.article_id) {
-    if (db.itemExists(request.query.article_id)) {
+  if (request.query.item_id) {
+    if (db.itemExists(request.query.item_id)) {
       const result = db.addFavorite(request.oidc.user.nickname, request.query.article_id);
     }
   } else {

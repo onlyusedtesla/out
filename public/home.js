@@ -34,7 +34,11 @@
       });
     });
   }
-
+  
+  function favoriteItem() {
+    
+  }
+  
   moreButton.addEventListener("click", function(event) {
     event.preventDefault();
 
@@ -94,12 +98,14 @@
   function toggleFavorite(favoriteEls) {
     Array.from(favoriteEls).forEach(function (favoriteButton) {
       
-      if (favoriteButton.hasAttribute("path")) {
+      const isNotFavorited = favoriteButton.getAttribute("fill") === "none";
+      
+      if (isNotFavorited) {
         favoriteButton.setAttribute("fill", favoriteButton.getAttribute("data-original-fill"));
-        favoriteButton.removeAttribute("path");
+        favoriteButton.setAttribute("stroke", "none");
       } else {
-        favoriteButton.setAttribute("path", favoriteButton.getAttribute("data-original-path"));
-        favoriteButton.removeAttribute("fill");
+        favoriteButton.setAttribute("stroke", favoriteButton.getAttribute("data-original-stroke"));
+        favoriteButton.setAttribute("fill", "none");
       }
       
     });
@@ -107,12 +113,19 @@
   
   Array.from(favoriteButtons).forEach(function (favoriteButton) {
     favoriteButton.addEventListener('click', function (event) {
+      
+      event.preventDefault();
+      
+      console.log("clicking on the favorite button.");
       var article = favoriteButton.closest(".js-article");
-      var favoritesForArticle = article.querySelectorAll(".js-favorite");
+      var favoritesForArticle = article.querySelectorAll(".js-favorite > path");
       console.log("What's the article?", article);
       console.log("favoritsForArticle?", favoritesForArticle);
       
-      toggleFavorite();
+      toggleFavorite(favoritesForArticle);
+      
+      fetch();
+      
     });
   });
   
