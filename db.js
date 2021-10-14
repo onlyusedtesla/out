@@ -70,8 +70,13 @@ function getItemsFromSearch(searchTerm) {
   
 }
 
-function saveFavoritesFile(userFavorites) {
-  
+function saveFavoritesFile(data) {
+  try {
+    fs.writeFileSync("./favorites.json", JSON.stringify(data));
+    return "Success";
+  } catch {
+    throw new Error("There was an error while writing to the favorites.json file.");
+  }
 }
 
 function addFavorite(userId, articleId) {
@@ -91,7 +96,8 @@ function addFavorite(userId, articleId) {
     });
   }
   
-  saveFavoritesFile(data["favorites"][userId]);
+  return saveFavoritesFile(data);
+  
 }
 
 module.exports = {
