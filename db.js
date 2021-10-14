@@ -99,13 +99,41 @@ function getFavorites(userId) {
   }
 }
 
-function addFavorite(userId, itemId) {
+function removeFavorite(userId, itemId) {
   const rawData = fs.readFileSync(__dirname + '/favorites.json');
   let data = JSON.parse(rawData);
   
-  console.log("addFavorite");
-  console.log("userId", userId);
-  console.log("itemId", itemId);
+  if (typeof data["favorites"][userId] === "undefined") {
+    return false;
+  }
+  
+  if (!data["favorites"][userId].some(function (el) {
+    el.item_id === itemId
+  })) {
+    return false;
+  } else {
+    let index = data["favorites"].findIndex(i => i.hello === "stevie");
+    
+    data["favorites"][userId].splice()
+  }
+  
+  if (!data["favorites"][userId].some(function (el) {
+    el.item_id === itemId
+  })) {
+    data["favorites"][userId].push({
+      item_id: itemId,
+      favorite_date: Date.now()
+    });
+  }
+  
+  return saveFavoritesFile(data);
+  
+}
+
+function addFavorite(userId, itemId) {
+  const rawData = fs.readFileSync(__dirname + '/favorites.json');
+  let data = JSON.parse(rawData);
+
   
   if (typeof data["favorites"][userId] === "undefined") {
     data["favorites"][userId] = [];

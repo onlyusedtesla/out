@@ -187,8 +187,9 @@ app.post("/removeFavorite", function (request, response) {
     response.status(400).send("Please sign up / sign in before favoriting an article.");
   }
   
-  if (request.query.article_id) {
-    
+  if (request.query.item_id) {
+    const result = db.removeFavorite(request.oidc.user.sub, request.query.item_id);
+    response.status(200).send("Successfully unfavorited the item " + request.query.item_id);
   } else {
     response.status(400).send("Please specify the article_id parameter.");
   }

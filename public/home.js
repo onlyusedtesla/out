@@ -35,6 +35,28 @@
     });
   }
   
+  function removeFavorite(itemId) {
+    
+    console.log("Calling the removeFavorite function for " + itemId);
+    
+    return new Promise(function(resolve, reject) {
+      fetch("/removeFavorite?item_id=" + itemId, {
+        method: "POST"
+      }).then(res => {
+        
+        console.log("What's the response?", res);
+        
+        if (res.status === 200) {
+          res.text().then(function (html) {
+            resolve(html);
+          });
+        } else {
+          reject(res.body);
+        }
+      });
+    });
+  }
+  
   function favoriteItem(itemId) {
     
     console.log("Calling the favoriteItem function for " + itemId);
@@ -141,12 +163,16 @@
           action = favoriteButton.getAttribute("data-favorite-action");
       toggleFavorite(favoritesForArticle);
       
-      if (action === "favorite") {
+      if (action === "add") {
         favoriteItem(itemId).then(function (response) { }).catch(function (error) {
-          toggleFavorite(favoritesForArticle) // put the state of the button back.
+          toggleFavorite(favoritesForArticle); // put the state of the button back.
         });
-      } else {
+      } else if (action === "remove") {
         console.log("going to unfavorite the item.");
+        removeFavorite(itemId).then(function (response) {}).catch(function (error) {
+          toggleFavorite(favoritesForArticle);
+        });
+        
       }
       
     });
