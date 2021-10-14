@@ -70,17 +70,38 @@ function getItemsFromSearch(searchTerm) {
   
 }
 
-// function getItemsByDate(items) {
-//   return items.filter(function (item) {
-//     return item.timestamp.
-//   });
-// }
+function saveFavoritesFile(userFavorites) {
+  
+}
+
+function addFavorite(userId, articleId) {
+  const rawData = fs.readFileSync(__dirname + '/favorites.json');
+  let data = JSON.parse(rawData);
+  
+  if (typeof data["favorites"][userId] === "undefined") {
+    data["favorites"][userId] = [];
+  }
+  
+  if (!data["favorites"][userId].some(function (el) {
+    el.article_id === articleId
+  })) {
+    data["favorites"][userId].push({
+      article_id: articleId,
+      favorite_date: Date.now()
+    });
+  }
+  
+  saveFavoritesFile(data["favorites"][userId]);
+}
 
 module.exports = {
   save: save,
   getItems: getItems,
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
+  
+  addFavorite: addFavorite,
+  
   saveSubmission: saveSubmission,
   validKeys: validKeys,
   uuid: uuid

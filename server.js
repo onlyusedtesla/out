@@ -162,9 +162,12 @@ app.post("/addFavorite", function (request, response) {
     response.status(400).send("Please sign up / sign in before favoriting an article.");
   }
   
+  // We want to use the ID not the username
+  console.log("What's the user information?", request.oidc.user);
+  
   if (request.query.article_id) {
     if (db.itemExists(request.query.article_id)) {
-      db.addFavorite(request.query.article_id);
+      db.addFavorite(request.oidc.user.nickname, request.query.article_id);
     }
   } else {
     response.status(400).send("Please specify the article_id parameter.");
