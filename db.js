@@ -44,9 +44,9 @@ function getAllItems() {
 }
 
 function itemExists(itemId) {
-  console.log("db.itemExists");
-  console.log("What's the itemId?", itemId);
-  return getAllItems.some(el => el.item_id === itemId);
+  let results = getAllItems().some(el => el.item_id === itemId);
+  console.log("itemExists results?", results);
+  return results;
 }
 
 /*
