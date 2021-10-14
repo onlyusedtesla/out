@@ -85,19 +85,37 @@ function saveFavoritesFile(data) {
   }
 }
 
-function addFavorite(userId, articleId) {
+/*
+ * @description - Gets all favorits for a specific user id.
+ */
+function getFavorites(userId) {
+  rawData = fs.readFileSync(__dirname + '/favorites.json');
+  data = JSON.parse(rawData);
+  
+  if (typeof data["favorites"][userId] !== "undefined") {
+    return data["favorites"][userId];
+  } else {
+    return [];
+  }
+}
+
+function addFavorite(userId, itemId) {
   const rawData = fs.readFileSync(__dirname + '/favorites.json');
   let data = JSON.parse(rawData);
+  
+  console.log("addFavorite");
+  console.log("userId", userId);
+  console.log("itemId", itemId);
   
   if (typeof data["favorites"][userId] === "undefined") {
     data["favorites"][userId] = [];
   }
   
   if (!data["favorites"][userId].some(function (el) {
-    el.article_id === articleId
+    el.item_id === itemId
   })) {
     data["favorites"][userId].push({
-      article_id: articleId,
+      item_id: itemId,
       favorite_date: Date.now()
     });
   }
@@ -114,6 +132,7 @@ module.exports = {
   itemExists: itemExists,
   
   addFavorite: addFavorite,
+  getFavorites: getFavorites,
   
   saveSubmission: saveSubmission,
   validKeys: validKeys,

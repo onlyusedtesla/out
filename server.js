@@ -160,20 +160,19 @@ app.post("/addFavorite", function (request, response) {
   
   console.log("Calling the /addFavorite post route");
   
-  console.log("is the user logged in?", request.oidc.isAuthenticated());
-  console.log("What's request.oidc?", request.oidc);
-  console.log("What's the user?", request.oidc.user);
-  
   if (!request.oidc.isAuthenticated()) {
     response.status(400).send("Please sign up / sign in before favoriting an article.");
   }
   
-  // We want to use the ID not the username
-  console.log("What's the user information?", request.oidc.user);
+  // Something with wrong with auth. Either log the user out, and have them try again or something.
+  // TODO: Fix this issue with  sometimes the use being undefined
+  if (typeof request.oidc.user === "undefined") {
+    response.status(400).send("Please sign in again.");
+  }
   
   if (request.query.item_id) {
     if (db.itemExists(request.query.item_id)) {
-      const result = db.addFavorite(request.oidc.user.nickname, request.query.article_id);
+      const result = db.addFavorite(request.oidc.user.sub, request.query.item_id);
     }
   } else {
     response.status(400).send("Please specify the article_id parameter.");
