@@ -108,25 +108,33 @@ function removeFavorite(userId, itemId) {
   console.log("itemId", itemId);
   
   console.log("data", data);
+  console.log("favorites for specific userId", data["favorites"][userId]);
   
   if (typeof data["favorites"][userId] === "undefined") {
     return false;
   }
   
-  if (!data["favorites"][userId].some(function (el) {
+  console.log("Gonna check if favorites contains the item_id");
+  
+  console.log('data["favorites"][userId].some', data["favorites"][userId].some(function (el) {
     el.item_id === itemId
+  }));
+  
+  if (data["favorites"][userId].some(function (el) {
+    return el.item_id === itemId
   })) {
-    return false;
-  } else {
-    console.log("What's thte previous favorites?", data["favorites"][userId]);
+    console.log("What's the previous favorites?", data["favorites"][userId]);
     let index = data["favorites"][userId].findIndex(i => i.item_id === itemId);
     data["favorites"][userId].splice(index, 1);
+  } else {
+    return false;
   }
   
   console.log("What's the new favorites?", data["favorites"][userId]);
   return saveFavoritesFile(data);
   
 }
+
 
 function addFavorite(userId, itemId) {
   const rawData = fs.readFileSync(__dirname + '/favorites.json');
@@ -138,7 +146,7 @@ function addFavorite(userId, itemId) {
   }
   
   if (!data["favorites"][userId].some(function (el) {
-    el.item_id === itemId
+    return el.item_id === itemId
   })) {
     data["favorites"][userId].push({
       item_id: itemId,
