@@ -156,28 +156,13 @@
                 </div>
               </div>
               <div class="flex-item">
-                
-                <div class="flex flex--spaceOneDown flex--alignItemsCenter">
-                  <div class="flex-item">
-                    <div class="article-sharecontainer">
-                      <div class="article-upvote tooltip js-tooltip">
-                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" fill="#3F67CE"/>
-                        </svg>
-                      </div>
-                      <p class="article-shareText">1</p>
-                    </div>
+                <div class="article-sharecontainer">
+                  <div class="article-share tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= firstTwoItems[i].url %>">
+                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
+                    </svg>
                   </div>
-                  <div class="flex-item">
-                    <div class="article-sharecontainer">
-                      <div class="article-share tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= firstTwoItems[i].url %>">
-                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
-                        </svg>
-                      </div>
-                      <p class="article-shareText">Share</p>
-                    </div>
-                  </div>
+                  <p class="article-shareText">Share</p>
                 </div>
               </div>
             </div>
