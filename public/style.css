@@ -600,7 +600,7 @@ a.login-button:hover {
   content: "";
   position: absolute;
   right: 100%;
-  margin-right: -11px;
+  margin-right: -8px;
   top: 50%;
   transform: translateY(-50%);
   border: 10px solid #000;

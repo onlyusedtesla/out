@@ -127,7 +127,15 @@
   });
   
   Array.from(hoverTooltips).forEach(function (tooltip) {
+    tooltip.addEventListener('mouseover', function (event) {
+      event.preventDefault();
+      tooltip.classList.add('show');
+    });
     
+    tooltip.addEventListener('mouseout', function (event) {
+      event.preventDefault();
+      tooltip.classList.remove('show');
+    });
   });
   
   Array.from(shares).forEach(function (share) {
