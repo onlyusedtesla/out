@@ -141,7 +141,6 @@ app.get("/items", function (request, response) {
       }, function (err, str) {
         response.status(200).send(str);
       });
-      
     }
   } else {
     response.status(400).send("Please specify the page query parameter and make sure it's a positive number.");
@@ -154,6 +153,34 @@ app.post("/submit", function(request, response) {
     response.status(200).send("Submission saved successfully");
   } catch {
     response.status(400).send("An error occured while saving the submission.");
+  }
+});
+
+app.post("/addFavorite", function (request, response) {
+  
+  if (!request.oidc.isAuthenticated()) {
+    response.status(400).send("Please sign up / sign in before favoriting an article.");
+  }
+  
+  if (request.query.article_id) {
+    if (db.itemExists(request.query.article_id)) {
+      db.addFavorite(request.query.article_id);
+    }
+  } else {
+    response.status(400).send("Please specify the article_id parameter.");
+  }
+});
+
+app.post("/removeFavorite", function (request, response) {
+  
+  if (!request.oidc.isAuthenticated()) {
+    response.status(400).send("Please sign up / sign in before favoriting an article.");
+  }
+  
+  if (request.query.article_id) {
+    
+  } else {
+    response.status(400).send("Please specify the article_id parameter.");
   }
 });
 
