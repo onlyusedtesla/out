@@ -158,6 +158,8 @@ app.post("/submit", function(request, response) {
 
 app.post("/addFavorite", function (request, response) {
   
+  console.log("Calling the /addFavorite post route");
+  
   if (!request.oidc.isAuthenticated()) {
     response.status(400).send("Please sign up / sign in before favoriting an article.");
   }
