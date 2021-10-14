@@ -4,6 +4,7 @@
   const mobileSearchBox = document.querySelector(".js-searchbutton-mobile");
   const moreButton = document.querySelector(".js-more-button");
   const tooltips = document.querySelectorAll(".js-tooltip");
+  const hoverTooltips = document.querySelectorAll(".js-tooltip-hover");
   const shares = document.querySelectorAll(".js-share");
   const favoriteButtons = document.querySelectorAll(".js-favorite");
   
@@ -36,9 +37,6 @@
   }
   
   function removeFavorite(itemId) {
-    
-    console.log("Calling the removeFavorite function for " + itemId);
-    
     return new Promise(function(resolve, reject) {
       fetch("/removeFavorite?item_id=" + itemId, {
         method: "POST"
@@ -126,6 +124,10 @@
         tooltip.classList.remove('show');
       }, 2100);
     });
+  });
+  
+  Array.from(hoverTooltips).forEach(function (tooltip) {
+    
   });
   
   Array.from(shares).forEach(function (share) {
