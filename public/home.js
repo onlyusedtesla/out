@@ -129,25 +129,25 @@
     });
   }
   
+  // Takes care of favoriting.
   Array.from(favoriteButtons).forEach(function (favoriteButton) {
     favoriteButton.addEventListener('click', function (event) {
       
       event.preventDefault();
       
-      console.log("clicking on the favorite button.");
-      var article = favoriteButton.closest(".js-article");
-      var favoritesForArticle = article.querySelectorAll(".js-favorite > path");
-      var itemId = favoriteButton.getAttribute("data-item-id");
-      console.log("What's the article?", article);
-      console.log("favoritsForArticle?", favoritesForArticle);
-      
+      var article = favoriteButton.closest(".js-article"),
+          favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
+          itemId = favoriteButton.getAttribute("data-item-id"),
+          action = favoriteButton.getAttribute("data-favorite-action");
       toggleFavorite(favoritesForArticle);
       
-      favoriteItem(itemId).then(function (response) {
-        console.log("This is the callback function for the favoriteItem");
-        console.log("What's the response?", response);
-        
-      });
+      if (action === "favorite") {
+        favoriteItem(itemId).then(function (response) { }).catch(function (error) {
+          toggleFavorite(favoritesForArticle) // put the state of the button back.
+        });
+      } else {
+        console.log("going to unfavorite the item.");
+      }
       
     });
   });

@@ -174,6 +174,7 @@ app.post("/addFavorite", function (request, response) {
   if (request.query.item_id) {
     if (db.itemExists(request.query.item_id)) {
       const result = db.addFavorite(request.oidc.user.sub, request.query.item_id);
+      response.status(200).send("Successfully favorited the item " + request.query.item_id);
     }
   } else {
     response.status(400).send("Please specify the article_id parameter.");
