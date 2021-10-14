@@ -108,6 +108,7 @@ app.get("/", (request, response) => {
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
+      favorites: request.oidc.isAuthenticated() ? db.getFavorites(request.oidc.user.sub) : [],
       staging: process.env.STAGING || false
     });
     
