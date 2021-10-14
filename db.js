@@ -103,6 +103,12 @@ function removeFavorite(userId, itemId) {
   const rawData = fs.readFileSync(__dirname + '/favorites.json');
   let data = JSON.parse(rawData);
   
+  console.log("removeFavorite");
+  console.log("userId", userId);
+  console.log("itemId", itemId);
+  
+  console.log("data", data);
+  
   if (typeof data["favorites"][userId] === "undefined") {
     return false;
   }
@@ -112,20 +118,12 @@ function removeFavorite(userId, itemId) {
   })) {
     return false;
   } else {
-    let index = data["favorites"].findIndex(i => i.hello === "stevie");
-    
-    data["favorites"][userId].splice()
+    console.log("What's thte previous favorites?", data["favorites"][userId]);
+    let index = data["favorites"][userId].findIndex(i => i.item_id === itemId);
+    data["favorites"][userId].splice(index, 1);
   }
   
-  if (!data["favorites"][userId].some(function (el) {
-    el.item_id === itemId
-  })) {
-    data["favorites"][userId].push({
-      item_id: itemId,
-      favorite_date: Date.now()
-    });
-  }
-  
+  console.log("What's the new favorites?", data["favorites"][userId]);
   return saveFavoritesFile(data);
   
 }
@@ -161,6 +159,7 @@ module.exports = {
   
   addFavorite: addFavorite,
   getFavorites: getFavorites,
+  removeFavorite: removeFavorite,
   
   saveSubmission: saveSubmission,
   validKeys: validKeys,

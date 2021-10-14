@@ -191,7 +191,7 @@ app.post("/removeFavorite", function (request, response) {
     const result = db.removeFavorite(request.oidc.user.sub, request.query.item_id);
     response.status(200).send("Successfully unfavorited the item " + request.query.item_id);
   } else {
-    response.status(400).send("Please specify the article_id parameter.");
+    response.status(400).send("Please specify the item_id parameter.");
   }
 });
 
