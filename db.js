@@ -43,6 +43,12 @@ function getAllItems() {
   return data["items"];
 }
 
+function itemExists(itemId) {
+  console.log("db.itemExists");
+  console.log("What's the itemId?", itemId);
+  return getAllItems.some(el => el.item_id === itemId);
+}
+
 /*
  * @description - Returns the items based on a number. 
  * @parameter page:number - 1 will return the first 10 items. 2 will return the second 10 items, 3 will return the 3rd 10 items.. until there are no more items... */
@@ -105,6 +111,7 @@ module.exports = {
   getItems: getItems,
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
+  itemExists: itemExists,
   
   addFavorite: addFavorite,
   

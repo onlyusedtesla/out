@@ -35,8 +35,26 @@
     });
   }
   
-  function favoriteItem() {
+  function favoriteItem(itemId) {
     
+    console.log("Calling the favoriteItem function for " + itemId);
+    
+    return new Promise(function(resolve, reject) {
+      fetch("/addFavorite?item_id=" + itemId, {
+        method: "POST"
+      }).then(res => {
+        
+        console.log("What's the response?", res);
+        
+        if (res.status === 200) {
+          res.text().then(function (html) {
+            resolve(html);
+          });
+        } else {
+          reject(res.body);
+        }
+      });
+    });
   }
   
   moreButton.addEventListener("click", function(event) {
@@ -119,12 +137,17 @@
       console.log("clicking on the favorite button.");
       var article = favoriteButton.closest(".js-article");
       var favoritesForArticle = article.querySelectorAll(".js-favorite > path");
+      var itemId = favoriteButton.getAttribute("data-item-id");
       console.log("What's the article?", article);
       console.log("favoritsForArticle?", favoritesForArticle);
       
       toggleFavorite(favoritesForArticle);
       
-      fetch();
+      favoriteItem(itemId).then(function (response) {
+        console.log("This is the callback function for the favoriteItem");
+        console.log("What's the response?", response);
+        
+      });
       
     });
   });
