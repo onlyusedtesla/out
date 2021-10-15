@@ -424,6 +424,16 @@ header {
   padding: 10px 16px;
   border-radius: 3px;
   font-size: 14px;
+  
+  outline: none;
+  
+  border-color: rgb(19 46 125 / 52%);
+  -webkit-box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+  box-shadow: 0 0 0 4px rgb(192 192 192 / 10%);
+}
+
+.form-input:focus {
+  border-color: rgb(19 46 125 / 75%);
 }
 
 .form-input::placeholder {
