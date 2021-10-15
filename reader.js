@@ -38,8 +38,6 @@ function getRelevantKeywords(keywords) {
 function update(done) {
   parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml")
     .then(function(rss) {
-      const allItems = db.getAllItems();
-
       let items = rss.items
         .map(function(item) {
           item.url = item.link;
@@ -90,18 +88,9 @@ function update(done) {
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.
           return new Date(b.item_date) - new Date(a.item_date);
-        })
-        .filter(function(item) {
-          return (
-            allItems.filter(e => e.title === item.title && e.url === item.url)
-              .length === 0
-          );
         });
-
-      if (items && items.length >= 1) {
-        db.save(items);
-      }
-
+    
+      db.save(items);
       done();
     })
     .catch(function(error) {
