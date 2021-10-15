@@ -93,26 +93,23 @@
     <main>
       <form class="form js-form">
         <div class="form-element">
-          <label class="form-label" for="url">Url</label>
           <input required id="url" name="url" type="text" maxlength="50" placeholder="Enter Url" class="js-url form-input">
         </div>
 
         <div class="form-element">
-          <label class="form-label" for="title">Title</label>
           <input id="title" name="title" type="text" maxlength="140" placeholder="Enter Title" class="js-title form-input">
         </div>
 
         <div class="form-element">
-          <label class="form-label" for="description">Description</label>
           <textarea required name="description" id="description" type="text" maxlength="280" placeholder="Enter Description" class="js-description form-input form-textarea"></textarea>
         </div>
         
         <div class="form-element">
-          <input type="submit" value="Submit Link" data-original-value="Submit Link" class="form-button js-form-button" />
+          <input type="submit" value="Submit Post" data-original-value="Submit Post" class="form-button js-form-button" />
         </div>
         
         <div class="form-element error-message js-error-message">
-          <p class="form-message form-message--center">Only share Tesla related news. Thank you.</p>
+          <p class="form-message form-message--center">Only share Tesla and Electric Vehicles related content. Thank you.</p>
         </div>
         
         <input type="hidden" class="js-author" value="<%= userInfo %>" />
@@ -133,6 +130,7 @@
   
     <script src="dateFormat.js"></script>
     <script src="submit.js"></script>
+    <script src="search.js"></script>
   
   </body>
 </html>
