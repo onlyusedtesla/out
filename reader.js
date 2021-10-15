@@ -2,7 +2,7 @@ const { parse } = require("rss-to-json");
 const db = require("./db.js");
 const striptags = require("striptags");
 const validKeys = db.validKeys;
-const dateFormat = require("./dateFormat.js");
+const dateFormat = require("./public/dateFormat.js");
 const rake = require("rake-js");
 
 /*

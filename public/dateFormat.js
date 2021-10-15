@@ -118,3 +118,9 @@ dateFormat.i18n = {
 		"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 	]
 };
+
+if (module && module.exports) {
+  module.exports = dateFormat;
+} else {
+  window.dateFormat = dateFormat
+}
