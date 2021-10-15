@@ -49,7 +49,7 @@ function update(done) {
           item.domain = new URL(item.link).host.split("www.").join("");
           item.item_date_formatted = dateFormat(
             item.published,
-            "mmm d, h:MM tt"
+            "mmm d"
           );
           item.description_trimmed =
             item.description.length > 280
