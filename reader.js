@@ -111,5 +111,3 @@ function update(done) {
 }
 
 module.exports = update;
-
-update();
