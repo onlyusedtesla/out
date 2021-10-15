@@ -117,7 +117,7 @@
                   <%= firstTwoItems[i].domain %>
                 </p>
               </div>
-              <div class="article-date">
+              <div class="article-date js-article-date" data-time="<%= firstTwoItems[i].item_date %>">
                 <%= firstTwoItems[i].item_date_formatted %>
               </div>
             </div>
@@ -232,7 +232,7 @@
                   <%= nextItems[i].domain %>
                 </p>
               </div>
-              <div class="article-date" data-time="<%= item_date %>">
+              <div class="article-date js-article-date" data-time="<%= nextItems[i].item_date %>">
                 <%= nextItems[i].item_date_formatted %>
               </div>
             </div>
@@ -326,6 +326,7 @@
     
     </div>
     
+    <script src="dateFormat.js"></script>
     <script src="home.js"></script>
     
   </body>

@@ -119,7 +119,7 @@ dateFormat.i18n = {
 	]
 };
 
-if (module && module.exports) {
+if (typeof module !== "undefined") {
   module.exports = dateFormat;
 } else {
   window.dateFormat = dateFormat

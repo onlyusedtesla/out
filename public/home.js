@@ -7,6 +7,7 @@
   const hoverTooltips = document.querySelectorAll(".js-tooltip-hover");
   const shares = document.querySelectorAll(".js-share");
   const favoriteButtons = document.querySelectorAll(".js-favorite");
+  const articleDates = document.querySelectorAll(".js-article-date");
   
   let page = 1; // For getting more articles
   
@@ -143,6 +144,11 @@
       event.preventDefault();
       navigator.clipboard.writeText(share.getAttribute("data-link")).then(function() {}, function() {});
     });
+  });
+  
+  Array.from(articleDates).forEach(function(articleDate) {
+    console.log("data-date", articleDate.getAttribute("data-time"));
+    articleDate.innerHTML = dateFormat(articleDate.getAttribute("data-time"), "mmm d, h:MM TT Z");
   });
   
   function toggleFavorite(favoriteEls) {
