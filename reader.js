@@ -91,7 +91,10 @@ function update(done) {
         });
     
       db.save(items);
-      done();
+    
+      if (typeof done !== "undefined") {
+        done();
+      }
     })
     .catch(function(error) {
       console.log("There's been an error");
