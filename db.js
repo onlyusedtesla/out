@@ -142,14 +142,11 @@ function removeFavoriteOrUpvote(tableName, userId, itemId) {
  * @description - Gets all favorits for a specific user id.
  */
 function getFavorites(userId) {
-  rawData = fs.readFileSync(__dirname + '/favorites.json');
-  data = JSON.parse(rawData);
-  
-  if (typeof data["favorites"][userId] !== "undefined") {
-    return data["favorites"][userId];
-  } else {
-    return [];
-  }
+  return getFavoritesOrUpvotes('favorites', userId);
+}
+
+function getUpvotes(userId) {
+  return getFavoritesOrUpvotes('upvotes', userId);
 }
 
 function getFavoritesOrUpvotes(tableName, userId) {
@@ -157,7 +154,7 @@ function getFavoritesOrUpvotes(tableName, userId) {
   let data = JSON.parse(rawData);
   
   if (typeof data[tableName][userId] !== "undefined") {
-    return data["favorites"][userId];
+    return data[tableName][userId];
   } else {
     return [];
   }
@@ -192,6 +189,7 @@ module.exports = {
   
   addUpvote: addUpvote,
   removeUpvote: removeUpvote,
+  getUpvotes: getUpvotes,
   
   saveSubmission: saveSubmission,
   validKeys: validKeys,

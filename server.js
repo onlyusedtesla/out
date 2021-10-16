@@ -24,7 +24,9 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: "vf8hOrlz9ntG4nE_a9WyqYvPov6Yu0eWL82nmNrGEfgMeAGF0683-I2Nyhuf0EFS",
-  baseURL: process.env.STAGING ? "https://staging-teslatracker.derick.work" : "https://teslatracker.com",
+  baseURL: process.env.STAGING
+    ? "https://staging-teslatracker.derick.work"
+    : "https://teslatracker.com",
   clientID: "nNRceuJ1eDslyoi1dJdGuxElPOx1oU2W",
   issuerBaseURL: "https://auth.teslatracker.com"
 };
@@ -66,21 +68,20 @@ app.get("/", (request, response) => {
     typeof request.query.search !== "undefined" &&
     request.query.search.length >= 1
   ) {
-    
     let items = db.getItemsFromSearch(request.query.search);
-    
+
     let firstTwoItems = [];
     let nextItems = [];
-    
+
     if (items.length >= 3) {
       nextItems = items.slice(3);
     }
-    
+
     if (items.length >= 2) {
       firstTwoItems.push(items[0]);
       firstTwoItems.push(items[1]);
     }
-    
+
     response.render(__dirname + "/views/index", {
       searchQuery: request.query.search,
       firstTwoItems: firstTwoItems,
@@ -89,20 +90,23 @@ app.get("/", (request, response) => {
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
-      favorites: request.oidc.isAuthenticated() ? db.getFavorites(request.oidc.user.sub) : [],
-      upvotes: request.oidc.isAuthenticated() ? db.getUpvotes(request.oidc.user.sub) : [],
+      favorites: request.oidc.isAuthenticated()
+        ? db.getFavorites(request.oidc.user.sub)
+        : [],
+      upvotes: request.oidc.isAuthenticated()
+        ? db.getUpvotes(request.oidc.user.sub)
+        : [],
       staging: process.env.STAGING || false
     });
   } else {
-    
     const items = db.getItems();
-    
+
     let firstTwoItems = [];
     let nextItems = items.slice(2);
-    
+
     firstTwoItems.push(items[0]);
     firstTwoItems.push(items[1]);
-    
+
     response.render(__dirname + "/views/index", {
       firstTwoItems: firstTwoItems,
       nextItems: nextItems,
@@ -110,10 +114,11 @@ app.get("/", (request, response) => {
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
-      favorites: request.oidc.isAuthenticated() ? db.getFavorites(request.oidc.user.sub) : [],
+      favorites: request.oidc.isAuthenticated()
+        ? db.getFavorites(request.oidc.user.sub)
+        : [],
       staging: process.env.STAGING || false
     });
-    
   }
 });
 
@@ -124,29 +129,37 @@ app.get("/landing", function(request, response) {
 app.get("/submit", requiresAuth(), function(request, response) {
   response.render(__dirname + "/views/submit", {
     userInfo: request.oidc.isAuthenticated()
-        ? request.oidc.user.nickname
-        : false,
+      ? request.oidc.user.nickname
+      : false,
     staging: process.env.STAGING || false
   });
 });
 
-app.get("/items", function (request, response) {
+app.get("/items", function(request, response) {
   if (request.query.page) {
-    response.setHeader('Content-Type', 'text/html');
+    response.setHeader("Content-Type", "text/html");
     const items = db.getItems(request.query.page);
-    
+
     if (items.length < 1) {
       response.status(400).send("There are no more items to load");
     } else {
-      let articles = ejs.renderFile(__dirname + '/partials/article.ejs', {
-        nextItems: items,
-        favicons: favicons,
-      }, function (err, str) {
-        response.status(200).send(str);
-      });
+      let articles = ejs.renderFile(
+        __dirname + "/partials/article.ejs",
+        {
+          nextItems: items,
+          favicons: favicons
+        },
+        function(err, str) {
+          response.status(200).send(str);
+        }
+      );
     }
   } else {
-    response.status(400).send("Please specify the page query parameter and make sure it's a positive number.");
+    response
+      .status(400)
+      .send(
+        "Please specify the page query parameter and make sure it's a positive number."
+      );
   }
 });
 
@@ -159,67 +172,81 @@ app.post("/submit", function(request, response) {
   }
 });
 
-app.post("/addFavorite", function (request, response) {
-  
+app.post("/addFavorite", function(request, response) {
   console.log("Calling the /addFavorite post route");
-  
+
   if (!request.oidc.isAuthenticated()) {
-    response.status(400).send("Please sign up / sign in before favoriting an article.");
+    response
+      .status(400)
+      .send("Please sign up / sign in before favoriting an article.");
   }
-  
+
   // Something with wrong with auth. Either log the user out, and have them try again or something.
   // TODO: Fix this issue with  sometimes the use being undefined
   if (typeof request.oidc.user === "undefined") {
     response.status(400).send("Please sign in again.");
   }
-  
+
   if (request.query.item_id) {
     if (db.itemExists(request.query.item_id)) {
-      const result = db.addFavorite(request.oidc.user.sub, request.query.item_id);
-      response.status(200).send("Successfully favorited the item " + request.query.item_id);
+      const result = db.addFavorite(
+        request.oidc.user.sub,
+        request.query.item_id
+      );
+      response
+        .status(200)
+        .send("Successfully favorited the item " + request.query.item_id);
     }
   } else {
     response.status(400).send("Please specify the article_id parameter.");
   }
 });
 
-app.post("/removeFavorite", function (request, response) {
-
+app.post("/removeFavorite", function(request, response) {
   if (!request.oidc.isAuthenticated()) {
-    response.status(400).send("Please sign up / sign in before favoriting an article.");
+    response
+      .status(400)
+      .send("Please sign up / sign in before favoriting an article.");
   }
-  
+
   if (request.query.item_id) {
-    const result = db.removeFavorite(request.oidc.user.sub, request.query.item_id);
-    response.status(200).send("Successfully unfavorited the item " + request.query.item_id);
+    const result = db.removeFavorite(
+      request.oidc.user.sub,
+      request.query.item_id
+    );
+    response
+      .status(200)
+      .send("Successfully unfavorited the item " + request.query.item_id);
   } else {
     response.status(400).send("Please specify the item_id parameter.");
   }
 });
 
-app.post("/upvote", function (request, response) {
-  
-   console.log("Calling the /upvote post route");
-  
+app.post("/upvote", function(request, response) {
+  console.log("Calling the /upvote post route");
+
   if (!request.oidc.isAuthenticated()) {
-    response.status(400).send("Please sign up / sign in before upvoting an article.");
+    response
+      .status(400)
+      .send("Please sign up / sign in before upvoting an article.");
   }
-  
+
   // Something with wrong with auth. Either log the user out, and have them try again or something.
   // TODO: Fix this issue with  sometimes the use being undefined
   if (typeof request.oidc.user === "undefined") {
     response.status(400).send("Please sign in again.");
   }
-  
+
   if (request.query.item_id) {
     if (db.itemExists(request.query.item_id)) {
       const result = db.addUpvote(request.oidc.user.sub, request.query.item_id);
-      response.status(200).send("Successfully upvoted the item " + request.query.item_id);
+      response
+        .status(200)
+        .send("Successfully upvoted the item " + request.query.item_id);
     }
   } else {
     response.status(400).send("Please specify the article_id parameter.");
   }
-  
 });
 
 app.get("/submissions.xml", function(request, response) {
@@ -229,17 +256,22 @@ app.get("/submissions.xml", function(request, response) {
   response.end();
 });
 
-app.get('/publish', function (request, response) {
-  if (request.query.code && request.query.code === "d3saztBdZUN7LqBjgJ9NC5PjfjU2dfFW") {
+app.get("/publish", function(request, response) {
+  if (
+    request.query.code &&
+    request.query.code === "d3saztBdZUN7LqBjgJ9NC5PjfjU2dfFW"
+  ) {
     const reader = require("./reader.js");
-    reader(function () {
-      response.status(200).send("The website has been updated with the latest articles.");
+    reader(function() {
+      response
+        .status(200)
+        .send("The website has been updated with the latest articles.");
     });
   }
 });
 
 //The 404 Route
-app.get('*', function (request, response) {
+app.get("*", function(request, response) {
   response.render(__dirname + "/views/404");
 });
 
