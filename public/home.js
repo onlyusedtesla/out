@@ -7,6 +7,7 @@
   const hoverTooltips = document.querySelectorAll(".js-tooltip-hover");
   const shares = document.querySelectorAll(".js-share");
   const favoriteButtons = document.querySelectorAll(".js-favorite");
+  const upvotes = document.querySelectorAll(".js-upvote");
   
   let page = 1; // For getting more articles
   
@@ -148,6 +149,28 @@
       event.preventDefault();
       navigator.clipboard.writeText(share.getAttribute("data-link")).then(function() {}, function() {});
     });
+  });
+  
+  function toggleUpvote(upvoteEls) {
+    Array.from(upvoteEls).forEach(function (button) {
+      
+      const svg = button.querySelector("svg > path");
+      const isNotUpvoted = button.querySelector("svg > path").getAttribute("data-favorited") === "none";
+      
+      if (isNotUpvoted) {
+        svg.setAttribute("fill", svg.getAttribute("data-fill-upvoted"));
+      } else {
+        svg.setAttribute("fill", svg.getAttribute("data-fill-notupvoted"));
+      }      
+    });
+  }
+  
+  Array.from(upvotes).forEach(function (upvote) {
+    upvote.addEventListener('click', function (event) {
+      event.preventDefault();
+      
+      
+    });                       
   });
   
   function convertArticleDates() {

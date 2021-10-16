@@ -225,6 +225,10 @@ textarea {
   background-color: var(--light-blue);
 }
 
+.article-share.article-share--upvote.article-share--upvoted {
+  background-color: var(--blue);
+}
+
 .article-share:hover {
   background-color: #c3c3c3;
 }
