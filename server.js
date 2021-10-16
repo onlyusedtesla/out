@@ -182,7 +182,7 @@ app.post("/addFavorite", function (request, response) {
 });
 
 app.post("/removeFavorite", function (request, response) {
-  
+
   if (!request.oidc.isAuthenticated()) {
     response.status(400).send("Please sign up / sign in before favoriting an article.");
   }
@@ -196,8 +196,28 @@ app.post("/removeFavorite", function (request, response) {
 });
 
 app.post("/upvote", function (request, response) {
-  // eventually the code for the upvote stuff will go in here.
-  response.status(200).send("Successfully upvotes the item " + request.query.item_id);
+  
+   console.log("Calling the /upvote post route");
+  
+  if (!request.oidc.isAuthenticated()) {
+    response.status(400).send("Please sign up / sign in before upvoting an article.");
+  }
+  
+  // Something with wrong with auth. Either log the user out, and have them try again or something.
+  // TODO: Fix this issue with  sometimes the use being undefined
+  if (typeof request.oidc.user === "undefined") {
+    response.status(400).send("Please sign in again.");
+  }
+  
+  if (request.query.item_id) {
+    if (db.itemExists(request.query.item_id)) {
+      const result = db.addUpvote(request.oidc.user.sub, request.query.item_id);
+      response.status(200).send("Successfully upvoted the item " + request.query.item_id);
+    }
+  } else {
+    response.status(400).send("Please specify the article_id parameter.");
+  }
+  
 });
 
 app.get("/submissions.xml", function(request, response) {

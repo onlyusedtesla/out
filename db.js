@@ -15,6 +15,10 @@ function saveFile() {
   fs.writeFileSync("./data.json", JSON.stringify(data));
 }
 
+function saveSpecificFile(fileName) {
+  fs.writeFileSync("./" + f);
+}
+
 function save(items) {
   console.log("What are items?", items);
   data["items"] = items;
@@ -135,6 +139,35 @@ function removeFavorite(userId, itemId) {
   
 }
 
+/*
+ * @description - TODO: I'll change the name of this func later.
+ * @return Void
+ */
+function addFavoriteOrUpvote(tableName, userId, itemId) {
+    const rawData = fs.readFileSync(__dirname + '/' + tableName + '.json');
+  let data = JSON.parse(rawData);
+
+  let tables = ['favorites', 'upvotes'];
+  
+  if (!tables.included(tableName)) {
+    return new Error("Please make sure you use the correct table name " + tables.join(" "));
+  }
+  
+  if (typeof data[tableName][userId] === "undefined") {
+    data[tableName][userId] = [];
+  }
+  
+  if (!data[tableName][userId].some(function (el) {
+    return el.item_id === itemId
+  })) {
+    data[tableName][userId].push({
+      item_id: itemId,
+      action_date: Date.now()
+    });
+  }
+  
+  return saveSpecificFile(tableName, data);
+}
 
 function addFavorite(userId, itemId) {
   const rawData = fs.readFileSync(__dirname + '/favorites.json');
@@ -158,6 +191,26 @@ function addFavorite(userId, itemId) {
   
 }
 
+function addUpvote(userId, itemId) {
+  const rawData = fs.readFileSync(__dirname + '/upvotes.json');
+  let data = JSON.parse(rawData);
+  
+  if (typeof data["upvotes"][userId] === "undefined") {
+    data["upvotes"][userId] = [];
+  }
+  
+  if (!data["upvotes"][userId].some(function (el) {
+    return el.item_id === itemId
+  })) {
+    data["favorites"][userId].push({
+      item_id: itemId,
+      favorite_date: Date.now()
+    });
+  }
+  
+  return saveFavoritesFile(data);
+}
+
 module.exports = {
   save: save,
   getItems: getItems,
@@ -168,6 +221,9 @@ module.exports = {
   addFavorite: addFavorite,
   getFavorites: getFavorites,
   removeFavorite: removeFavorite,
+  
+  addUpvote: addUpvote,
+  removeUpvote: removeUpvote,
   
   saveSubmission: saveSubmission,
   validKeys: validKeys,

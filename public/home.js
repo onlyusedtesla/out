@@ -154,9 +154,6 @@
   function toggleUpvotes(upvoteEls) {
     Array.from(upvoteEls).forEach(function (button) {
       
-      console.log("In the toggleUpvotes func");
-      console.log("What's the button?", button);
-      
       const svg = button.querySelector("svg > path"),
             isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
       
@@ -174,15 +171,11 @@
   
   Array.from(upvotes).forEach(function (upvote) {
     upvote.addEventListener('click', function (event) {
-      
-      console.log("clickingon the upvote. Which cone isit ?", upvote);
-      
       event.preventDefault();
       
       var article = upvote.closest(".js-article"),
           upvotesForArticle = article.querySelectorAll(".js-upvote");
       
-      console.log("What are the upvote for article?", upvotesForArticle);
       toggleUpvotes(upvotesForArticle);
       
     });                       
