@@ -195,6 +195,11 @@ app.post("/removeFavorite", function (request, response) {
   }
 });
 
+app.post("/upvote", function (request, response) {
+  // eventually the code for the upvote stuff will go in here.
+  response.status(200).send("Successfully upvotes the item " + request.query.item_id);
+});
+
 app.get("/submissions.xml", function(request, response) {
   response.setHeader("Content-Type", "application/rss+xml");
   response.writeHead(200);

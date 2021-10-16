@@ -153,7 +153,6 @@
   function convertArticleDates() {
     var articleDates = document.querySelectorAll(".js-article-date");
     Array.from(articleDates).forEach(function(articleDate) {
-      console.log("data-date", +articleDate.getAttribute("data-time"));
       articleDate.innerHTML = dateFormat(+articleDate.getAttribute("data-time"), "mmm d, h:MM TT");
       articleDate.setAttribute("title", dateFormat(+articleDate.getAttribute("data-time"), "mmm d, h:MM TT Z"));
     });
