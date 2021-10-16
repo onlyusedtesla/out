@@ -225,8 +225,14 @@ textarea {
   background-color: var(--light-blue);
 }
 
-.article-share.article-share--upvote.article-share--upvoted {
+.article-share.article-share--upvote.article-share--upvoted,
+.article-share.article-share--upvote.article-share--upvoted:hover {
   background-color: var(--blue);
+}
+
+/* Using this to make the link blue on mobile when it gets upvoted. */
+.article-share--upvoted > .article-detailsMobileShareText {
+  color: var(--blue);
 }
 
 .article-share:hover {

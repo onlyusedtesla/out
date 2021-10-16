@@ -152,16 +152,21 @@
   });
   
   function toggleUpvotes(upvoteEls) {
-    Array.from(upvoteEls).forEach(function (svg) {
+    Array.from(upvoteEls).forEach(function (button) {
       
+      console.log("In the toggleUpvotes func");
+      console.log("What's the button?", button);
       
-      const isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
+      const svg = button.querySelector("svg > path"),
+            isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
       
       if (isNotUpvoted) {
         svg.setAttribute("fill", svg.getAttribute("data-fill-upvoted"));
+        button.classList.add("article-share--upvoted");
         svg.setAttribute("data-upvoted", "true");
       } else {
         svg.setAttribute("fill", svg.getAttribute("data-fill-notupvoted"));
+        button.classList.remove("article-share--upvoted");
         svg.setAttribute("data-upvoted", "false");
       }      
     });
