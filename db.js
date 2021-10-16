@@ -152,6 +152,17 @@ function getFavorites(userId) {
   }
 }
 
+function getFavoritesOrUpvotes(tableName, userId) {
+  let rawData = fs.readFileSync(__dirname + `/${tableName}.json`);
+  let data = JSON.parse(rawData);
+  
+  if (typeof data[tableName][userId] !== "undefined") {
+    return data["favorites"][userId];
+  } else {
+    return [];
+  }
+}
+
 function removeFavorite(userId, itemId) {
   return removeFavoriteOrUpvote('favorites', userId, itemId);
 }

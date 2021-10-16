@@ -89,6 +89,8 @@ app.get("/", (request, response) => {
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
+      favorites: request.oidc.isAuthenticated() ? db.getFavorites(request.oidc.user.sub) : [],
+      upvotes: request.oidc.isAuthenticated() ? db.getUpvotes(request.oidc.user.sub) : [],
       staging: process.env.STAGING || false
     });
   } else {
@@ -212,8 +214,6 @@ app.post("/upvote", function (request, response) {
   if (request.query.item_id) {
     if (db.itemExists(request.query.item_id)) {
       const result = db.addUpvote(request.oidc.user.sub, request.query.item_id);
-      console.log("What's the result?", resuslt);
-      
       response.status(200).send("Successfully upvoted the item " + request.query.item_id);
     }
   } else {

@@ -79,7 +79,7 @@
   }
   
   function upvoteItem(itemId) {
-        console.log("Calling the favoriteItem function for " + itemId);
+        console.log("Calling the upvoteItem function for " + itemId);
     
     return new Promise(function(resolve, reject) {
       fetch("/upvote?item_id=" + itemId, {
@@ -199,9 +199,15 @@
       event.preventDefault();
       
       var article = upvote.closest(".js-article"),
-          upvotesForArticle = article.querySelectorAll(".js-upvote");
+          upvotesForArticle = article.querySelectorAll(".js-upvote"),
+          itemId = article.getAttribute("data-item-id");
       
       toggleUpvotes(upvotesForArticle);
+      
+      // Turn it off if error from the server.
+      upvoteItem(itemId).catch(function () {
+        toggleUpvotes(upvotesForArticle);
+      });
       
     });                       
   });
@@ -238,7 +244,7 @@
       
       var article = favoriteButton.closest(".js-article"),
           favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
-          itemId = favoriteButton.getAttribute("data-item-id"),
+          itemId = article.getAttribute("data-item-id"),
           action = favoriteButton.getAttribute("data-favorite-action");
       
       toggleFavorite(favoritesForArticle);
