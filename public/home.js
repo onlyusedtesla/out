@@ -151,24 +151,34 @@
     });
   });
   
-  function toggleUpvote(upvoteEls) {
-    Array.from(upvoteEls).forEach(function (button) {
+  function toggleUpvotes(upvoteEls) {
+    Array.from(upvoteEls).forEach(function (svg) {
       
-      const svg = button.querySelector("svg > path");
-      const isNotUpvoted = button.querySelector("svg > path").getAttribute("data-favorited") === "none";
+      
+      const isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
       
       if (isNotUpvoted) {
         svg.setAttribute("fill", svg.getAttribute("data-fill-upvoted"));
+        svg.setAttribute("data-upvoted", "true");
       } else {
         svg.setAttribute("fill", svg.getAttribute("data-fill-notupvoted"));
+        svg.setAttribute("data-upvoted", "false");
       }      
     });
   }
   
   Array.from(upvotes).forEach(function (upvote) {
     upvote.addEventListener('click', function (event) {
+      
+      console.log("clickingon the upvote. Which cone isit ?", upvote);
+      
       event.preventDefault();
       
+      var article = upvote.closest(".js-article"),
+          upvotesForArticle = article.querySelectorAll(".js-upvote");
+      
+      console.log("What are the upvote for article?", upvotesForArticle);
+      toggleUpvotes(upvotesForArticle);
       
     });                       
   });
@@ -207,6 +217,7 @@
           favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
           itemId = favoriteButton.getAttribute("data-item-id"),
           action = favoriteButton.getAttribute("data-favorite-action");
+      
       toggleFavorite(favoritesForArticle);
       
       if (action === "add") {
