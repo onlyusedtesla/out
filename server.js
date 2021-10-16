@@ -212,6 +212,8 @@ app.post("/upvote", function (request, response) {
   if (request.query.item_id) {
     if (db.itemExists(request.query.item_id)) {
       const result = db.addUpvote(request.oidc.user.sub, request.query.item_id);
+      console.log("What's the result?", resuslt);
+      
       response.status(200).send("Successfully upvoted the item " + request.query.item_id);
     }
   } else {

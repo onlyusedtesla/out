@@ -78,6 +78,31 @@
     });
   }
   
+  function upvoteItem(itemId) {
+        console.log("Calling the favoriteItem function for " + itemId);
+    
+    return new Promise(function(resolve, reject) {
+      fetch("/upvote?item_id=" + itemId, {
+        method: "POST"
+      }).then(res => {
+        
+        console.log("What's the response?", res);
+        
+        if (res.status === 200) {
+          res.text().then(function (html) {
+            resolve(html);
+          });
+        } else {
+          reject(res.body);
+        }
+      });
+    });
+  }
+  
+  function removeUpvote() {
+    
+  }
+  
   moreButton.addEventListener("click", function(event) {
     event.preventDefault();
 

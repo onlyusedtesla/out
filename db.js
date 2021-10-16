@@ -1,7 +1,7 @@
 const fs = require('fs');
 let rawData = fs.readFileSync(__dirname + '/data.json');
 let data = JSON.parse(rawData);
-
+const tables = ['favorites', 'upvotes'];
 const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
 
 function uuid() {
@@ -11,12 +11,13 @@ function uuid() {
   });
 }
 
-function saveFile() {
-  fs.writeFileSync("./data.json", JSON.stringify(data));
+function saveSpecificFile(fileName, data) {
+  const fname = fileName.toLowerCase();
+  fs.writeFileSync("./" + fname + ".json", JSON.stringify(data));
 }
 
-function saveSpecificFile(fileName) {
-  fs.writeFileSync("./" + f);
+function saveFile() {
+  return saveSpecificFile("data", data);
 }
 
 function save(items) {
@@ -81,62 +82,7 @@ function getItemsFromSearch(searchTerm) {
 }
 
 function saveFavoritesFile(data) {
-  try {
-    fs.writeFileSync("./favorites.json", JSON.stringify(data));
-    return "Success";
-  } catch {
-    throw new Error("There was an error while writing to the favorites.json file.");
-  }
-}
-
-/*
- * @description - Gets all favorits for a specific user id.
- */
-function getFavorites(userId) {
-  rawData = fs.readFileSync(__dirname + '/favorites.json');
-  data = JSON.parse(rawData);
-  
-  if (typeof data["favorites"][userId] !== "undefined") {
-    return data["favorites"][userId];
-  } else {
-    return [];
-  }
-}
-
-function removeFavorite(userId, itemId) {
-  const rawData = fs.readFileSync(__dirname + '/favorites.json');
-  let data = JSON.parse(rawData);
-  
-  console.log("removeFavorite");
-  console.log("userId", userId);
-  console.log("itemId", itemId);
-  
-  console.log("data", data);
-  console.log("favorites for specific userId", data["favorites"][userId]);
-  
-  if (typeof data["favorites"][userId] === "undefined") {
-    return false;
-  }
-  
-  console.log("Gonna check if favorites contains the item_id");
-  
-  console.log('data["favorites"][userId].some', data["favorites"][userId].some(function (el) {
-    el.item_id === itemId
-  }));
-  
-  if (data["favorites"][userId].some(function (el) {
-    return el.item_id === itemId
-  })) {
-    console.log("What's the previous favorites?", data["favorites"][userId]);
-    let index = data["favorites"][userId].findIndex(i => i.item_id === itemId);
-    data["favorites"][userId].splice(index, 1);
-  } else {
-    return false;
-  }
-  
-  console.log("What's the new favorites?", data["favorites"][userId]);
-  return saveFavoritesFile(data);
-  
+  return saveSpecificFile("favorites", data);
 }
 
 /*
@@ -146,10 +92,8 @@ function removeFavorite(userId, itemId) {
 function addFavoriteOrUpvote(tableName, userId, itemId) {
     const rawData = fs.readFileSync(__dirname + '/' + tableName + '.json');
   let data = JSON.parse(rawData);
-
-  let tables = ['favorites', 'upvotes'];
   
-  if (!tables.included(tableName)) {
+  if (!tables.includes(tableName)) {
     return new Error("Please make sure you use the correct table name " + tables.join(" "));
   }
   
@@ -169,46 +113,59 @@ function addFavoriteOrUpvote(tableName, userId, itemId) {
   return saveSpecificFile(tableName, data);
 }
 
-function addFavorite(userId, itemId) {
-  const rawData = fs.readFileSync(__dirname + '/favorites.json');
-  let data = JSON.parse(rawData);
-
+function removeFavoriteOrUpvote(tableName, userId, itemId) {
   
-  if (typeof data["favorites"][userId] === "undefined") {
-    data["favorites"][userId] = [];
+  if (!tables.includes(tableName)) {
+    return new Error("Please specify the correct table.");
   }
   
-  if (!data["favorites"][userId].some(function (el) {
+  const rawData = fs.readFileSync(__dirname + '/' + tableName + '.json');
+  let data = JSON.parse(rawData);
+  
+  if (typeof data[tableName][userId] === "undefined") {
+    return false;
+  }
+  
+  if (data[tableName][userId].some(function (el) {
     return el.item_id === itemId
   })) {
-    data["favorites"][userId].push({
-      item_id: itemId,
-      favorite_date: Date.now()
-    });
+    let index = data[tableName][userId].findIndex(i => i.item_id === itemId);
+    data[tableName][userId].splice(index, 1);
+  } else {
+    return false;
   }
   
-  return saveFavoritesFile(data);
+  return saveSpecificFile(tableName, data);
+}
+
+/*
+ * @description - Gets all favorits for a specific user id.
+ */
+function getFavorites(userId) {
+  rawData = fs.readFileSync(__dirname + '/favorites.json');
+  data = JSON.parse(rawData);
   
+  if (typeof data["favorites"][userId] !== "undefined") {
+    return data["favorites"][userId];
+  } else {
+    return [];
+  }
+}
+
+function removeFavorite(userId, itemId) {
+  return removeFavoriteOrUpvote('favorites', userId, itemId);
+}
+
+function addFavorite(userId, itemId) {
+  return addFavoriteOrUpvote('favorites', userId, itemId);
 }
 
 function addUpvote(userId, itemId) {
-  const rawData = fs.readFileSync(__dirname + '/upvotes.json');
-  let data = JSON.parse(rawData);
-  
-  if (typeof data["upvotes"][userId] === "undefined") {
-    data["upvotes"][userId] = [];
-  }
-  
-  if (!data["upvotes"][userId].some(function (el) {
-    return el.item_id === itemId
-  })) {
-    data["favorites"][userId].push({
-      item_id: itemId,
-      favorite_date: Date.now()
-    });
-  }
-  
-  return saveFavoritesFile(data);
+  return addFavoriteOrUpvote('upvotes', userId, itemId);
+}
+
+function removeUpvote(userId, itemId) {
+  removeFavoriteOrUpvote('favorites', userId, itemId);
 }
 
 module.exports = {
