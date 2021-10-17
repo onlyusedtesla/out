@@ -701,5 +701,19 @@
       "description_trimmed": "SMMT chief says high costs compared with European rivals put sector at ‘competitive disadvantage’",
       "keywords": ""
     }
-  ]
+  ],
+  "user_favorites": {
+    "auth0|615cb90b861e13006987e6c1": [
+      { "item_id": "4a7ed1c0", "action_date": 1634188847270 },
+      { "item_id": "ac1f4744", "action_date": 1634188998838 },
+      { "item_id": "6c12d760", "action_date": 1634191599061 },
+      { "item_id": "17dff6cb", "action_date": 1634191604066 },
+      { "item_id": "525fb9fc", "action_date": 1634351511045 }
+    ]
+  },
+  "user_upvotes": {
+    "auth0|615cb90b861e13006987e6c1": [
+      { "item_id": "81e2497b", "action_date": 1634353534128 }
+    ]
+  }
 }

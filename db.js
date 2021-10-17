@@ -11,13 +11,8 @@ function uuid() {
   });
 }
 
-function saveSpecificFile(fileName, data) {
-  const fname = fileName.toLowerCase();
-  fs.writeFileSync("./" + fname + ".json", JSON.stringify(data));
-}
-
 function saveFile() {
-  return saveSpecificFile("data", data);
+  return fs.writeFileSync("./data.json", JSON.stringify(data));
 }
 
 function save(items) {
@@ -50,7 +45,6 @@ function getAllItems() {
 
 function itemExists(itemId) {
   let results = getAllItems().some(el => el.item_id === itemId);
-  console.log("itemExists results?", results);
   return results;
 }
 
@@ -59,10 +53,7 @@ function itemExists(itemId) {
  * @parameter page:number - 1 will return the first 10 items. 2 will return the second 10 items, 3 will return the 3rd 10 items.. until there are no more items... */
 function getItems(page) {
   const items = getAllItems();
-  console.log("What's the length?", items.length);
-  
   page = page >= 0 ? page : 0;
-  
   return items.slice(page * 10, (page * 10) + 10);
 }
 
@@ -81,21 +72,13 @@ function getItemsFromSearch(searchTerm) {
   
 }
 
-function saveFavoritesFile(data) {
-  return saveSpecificFile("favorites", data);
-}
-
 /*
  * @description - TODO: I'll change the name of this func later.
  * @return Void
  */
 function addFavoriteOrUpvote(tableName, userId, itemId) {
-    const rawData = fs.readFileSync(__dirname + '/' + tableName + '.json');
+  const rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
-  
-  if (!tables.includes(tableName)) {
-    return new Error("Please make sure you use the correct table name " + tables.join(" "));
-  }
   
   if (typeof data[tableName][userId] === "undefined") {
     data[tableName][userId] = [];
@@ -173,7 +156,7 @@ function addUpvote(userId, itemId) {
 }
 
 function removeUpvote(userId, itemId) {
-  removeFavoriteOrUpvote('favorites', userId, itemId);
+  return removeFavoriteOrUpvote('favorites', userId, itemId);
 }
 
 module.exports = {
