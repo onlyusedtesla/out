@@ -181,16 +181,22 @@
     Array.from(upvoteEls).forEach(function (button) {
       
       const svg = button.querySelector("svg > path"),
+            count = button.querySelector(".js-upvoteCount"),
+            
             isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
+      
+      console.log("What's count?", count);
       
       if (isNotUpvoted) {
         svg.setAttribute("fill", svg.getAttribute("data-fill-upvoted"));
         button.classList.add("article-share--upvoted");
         svg.setAttribute("data-upvoted", "true");
+        count.innerHTML = +count.innerHTML + 1;
       } else {
         svg.setAttribute("fill", svg.getAttribute("data-fill-notupvoted"));
         button.classList.remove("article-share--upvoted");
         svg.setAttribute("data-upvoted", "false");
+        count.innerHTML = +count.innerHTML - 1;
       }      
     });
   }
