@@ -79,7 +79,8 @@
   }
   
   function upvoteItem(itemId) {
-        console.log("Calling the upvoteItem function for " + itemId);
+    
+    console.log("Calling the upvoteItem function for " + itemId);
     
     return new Promise(function(resolve, reject) {
       fetch("/upvote?item_id=" + itemId, {

@@ -158,6 +158,8 @@ function getUpvoteCountForItem(itemId) {
   
   let result = undefined;
   
+  console.log("Calling the getUpvoteCountForItem func");
+  
   // All items by default have 1 vote by default when it's created.
   if (typeof data['item_upvotes'][itemId] === "undefined") {
     result = 1; 

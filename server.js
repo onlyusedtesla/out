@@ -45,11 +45,11 @@ app.get("/", (request, response) => {
     let firstTwoItems = [];
     let nextItems = [];
     
-    items.forEach(function (one) {
-      let upvoteCount = one.getUpvoteCountForItem(item.item_id);
-      console.log9
-      one["upvoteCount"] = upvoteCount;
-    });
+    // Getting the upvote count for each of the items.
+    for (let i = 0; i < items.length; i += 1) {
+      items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
+      console.log("item upvotecount", items[i].item_id + " " + items[i].upvoteCount);
+    }
     
     if (items.length >= 3) {
       nextItems = items.slice(3);
@@ -81,7 +81,13 @@ app.get("/", (request, response) => {
 
     let firstTwoItems = [];
     let nextItems = items.slice(2);
-
+    
+    // Getting the upvote count for each of the items.
+    for (let i = 0; i < items.length; i += 1) {
+      items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
+      console.log("item upvotecount", items[i].item_id + " " + items[i].upvoteCount);
+    }
+    
     firstTwoItems.push(items[0]);
     firstTwoItems.push(items[1]);
 
