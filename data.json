@@ -702,6 +702,11 @@
       "keywords": ""
     }
   ],
+  "item_upvotes": {
+    "4a7ed1c0": {
+      "auth0|615cb90b861e13006987e6c1": true
+    }
+  },
   "user_favorites": {
     "auth0|615cb90b861e13006987e6c1": [
       { "item_id": "4a7ed1c0", "action_date": 1634188847270 },

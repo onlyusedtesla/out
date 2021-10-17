@@ -8,6 +8,7 @@ const app = express();
 const db = require("./db.js");
 const RSSFeed = require("./feed.js");
 const ejs = require("ejs");
+const favicons = require("./favicons.json");
 
 const { auth, requiresAuth } = require("express-openid-connect");
 
@@ -29,35 +30,6 @@ const config = {
     : "https://teslatracker.com",
   clientID: "nNRceuJ1eDslyoi1dJdGuxElPOx1oU2W",
   issuerBaseURL: "https://auth.teslatracker.com"
-};
-
-const favicons = {
-  "twitter.com":
-    "https://favicons.feedbinusercontent.com/eee/eee14e8a36b0512c12ba26c0516b4553618dea36.png",
-  "bloomberg.com":
-    "https://favicons.feedbinusercontent.com/f69/f6936297929ac2dc992008db38e655fa2221653f.png",
-  "businessinsider.com":
-    "https://favicons.feedbinusercontent.com/f8f/f8fd5dd260f11ea41d669aba064d8798c8b54e1e.png",
-  "cleantechnica.com":
-    "https://favicons.feedbinusercontent.com/94e/94efba6cc235ce9e6d8ddd51c8d733688cef153b.png",
-  "electrek.co":
-    "https://favicons.feedbinusercontent.com/69b/69b665de831b9db58e38056275c8c37624f35c98.png",
-  "greencarreports.com":
-    "https://favicons.feedbinusercontent.com/279/279cbba3d5f9940c028bcf11c7e94ab175681685.png",
-  "techcrunch.com":
-    "https://favicons.feedbinusercontent.com/224/2245821916d8964b802acb191e1220d4b408a0a5.png",
-  "youtube.com":
-    "https://favicons.feedbinusercontent.com/f2e/f2e22853e5da3e1017d5e1e319eeefe4f622e8c8.png",
-  "tesla.com":
-    "https://favicons.feedbinusercontent.com/160/160a8b53aeef50066e05f33e85a98b173ec0381d.png",
-  "teslarati.com":
-    "https://favicons.feedbinusercontent.com/3d5/3d56ef4537ef8b173efb51c083d4ac16055fbedc.png",
-  "theteslashow.com":
-    "https://favicons.feedbinusercontent.com/9b8/9b859ddeb9c368c1e8ec9fabe53c0747c0050922.png",
-  "vice.com":
-    "https://favicons.feedbinusercontent.com/f13/f131cb7704a83caf362ccdc3641071ed2a62bd55.png",
-  "wsj.com":
-    "https://favicons.feedbinusercontent.com/fc6/fc6976a0f023bb3f4c0dbf9b2dfd1dfb28d11537.png"
 };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL

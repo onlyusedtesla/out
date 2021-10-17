@@ -80,20 +80,29 @@ function addFavoriteOrUpvote(tableName, userId, itemId) {
   const rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
   
-  if (typeof data[tableName][userId] === "undefined") {
-    data[tableName][userId] = [];
+  if (typeof data['user_' + tableName][userId] === "undefined") {
+    data['user_' + tableName][userId] = [];
   }
   
-  if (!data[tableName][userId].some(function (el) {
+  if (!data['user_' + tableName][userId].some(function (el) {
     return el.item_id === itemId
   })) {
-    data[tableName][userId].push({
+    data['user_' + tableName][userId].push({
       item_id: itemId,
       action_date: Date.now()
     });
+    
+    // Add upvotes to the table name to be able to render it later.
+    if (tableName === 'upvotes') {
+      if (typeof data['item_upvotes'][item_id] === "undefined") {
+        data['item_upvotes'][itemId] = {};
+        data['item_upvotes'][itemId][userId] = true;
+      }
+    }
+    
   }
   
-  return saveSpecificFile(tableName, data);
+  return saveFile(data);
 }
 
 function removeFavoriteOrUpvote(tableName, userId, itemId) {
@@ -105,20 +114,27 @@ function removeFavoriteOrUpvote(tableName, userId, itemId) {
   const rawData = fs.readFileSync(__dirname + '/' + tableName + '.json');
   let data = JSON.parse(rawData);
   
-  if (typeof data[tableName][userId] === "undefined") {
+  if (typeof data['user_' + tableName][userId] === "undefined") {
     return false;
   }
   
-  if (data[tableName][userId].some(function (el) {
+  if (data['user_' + tableName][userId].some(function (el) {
     return el.item_id === itemId
   })) {
-    let index = data[tableName][userId].findIndex(i => i.item_id === itemId);
-    data[tableName][userId].splice(index, 1);
+    let index = data['user_' + tableName][userId].findIndex(i => i.item_id === itemId);
+    data['user_' + tableName][userId].splice(index, 1);
+    
+    // Go ahead and remove the userkey frrom the item_upvotes too.
+    if (tableName === 'upvotes') {
+      delete data['item_upvotes'][itemId][userId]
+    }
+    
   } else {
     return false;
   }
   
-  return saveSpecificFile(tableName, data);
+  return saveFile(data);
+  
 }
 
 /*
@@ -133,11 +149,11 @@ function getUpvotes(userId) {
 }
 
 function getFavoritesOrUpvotes(tableName, userId) {
-  let rawData = fs.readFileSync(__dirname + `/${tableName}.json`);
+  let rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
   
-  if (typeof data[tableName][userId] !== "undefined") {
-    return data[tableName][userId];
+  if (typeof data['user_' + tableName][userId] !== "undefined") {
+    return data['user_' + tableName][userId];
   } else {
     return [];
   }
