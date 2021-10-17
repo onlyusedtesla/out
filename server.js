@@ -44,7 +44,13 @@ app.get("/", (request, response) => {
 
     let firstTwoItems = [];
     let nextItems = [];
-
+    
+    items.forEach(function (one) {
+      let upvoteCount = one.getUpvoteCountForItem(item.item_id);
+      console.log9
+      one["upvoteCount"] = upvoteCount;
+    });
+    
     if (items.length >= 3) {
       nextItems = items.slice(3);
     }
@@ -53,7 +59,7 @@ app.get("/", (request, response) => {
       firstTwoItems.push(items[0]);
       firstTwoItems.push(items[1]);
     }
-
+    
     response.render(__dirname + "/views/index", {
       searchQuery: request.query.search,
       firstTwoItems: firstTwoItems,

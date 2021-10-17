@@ -148,6 +148,28 @@ function getUpvotes(userId) {
   return getFavoritesOrUpvotes('upvotes', userId);
 }
 
+/*
+ * @description - Returns the number of upvotes for a specific item
+ * @return Number
+ */
+function getUpvoteCountForItem(itemId) {
+  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let data = JSON.parse(rawData);
+  
+  let result = undefined;
+  
+  // All items by default have 1 vote by default when it's created.
+  if (typeof data['item_upvotes'][itemId] === "undefined") {
+    result = 1; 
+  } else {
+    result = Object.keys(data['item_upvotes'][itemId]).length + 1;
+  }
+  
+  console.log("What's the result?", result);
+  
+  return result;
+}
+
 function getFavoritesOrUpvotes(tableName, userId) {
   let rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
@@ -189,6 +211,7 @@ module.exports = {
   addUpvote: addUpvote,
   removeUpvote: removeUpvote,
   getUpvotes: getUpvotes,
+  getUpvoteCountForItem: getUpvoteCountForItem,
   
   saveSubmission: saveSubmission,
   validKeys: validKeys,
