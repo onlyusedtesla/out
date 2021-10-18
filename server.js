@@ -223,7 +223,7 @@ app.post("/upvote", function(request, response) {
   if (typeof request.oidc.user === "undefined") {
     response.status(400).send("Please sign in again.");
   }
-
+  
   if (request.query.item_id) {
     if (db.itemExists(request.query.item_id)) {
       const result = db.addUpvote(request.oidc.user.sub, request.query.item_id);
