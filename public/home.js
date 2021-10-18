@@ -206,11 +206,13 @@
         svg.setAttribute("fill", svg.getAttribute("data-fill-upvoted"));
         button.classList.add("article-share--upvoted");
         svg.setAttribute("data-upvoted", "true");
+        button.setAttribute("data-action", "remove");
         count.innerHTML = +count.innerHTML + 1;
       } else {
         svg.setAttribute("fill", svg.getAttribute("data-fill-notupvoted"));
         button.classList.remove("article-share--upvoted");
         svg.setAttribute("data-upvoted", "false");
+        button.setAttribute("data-action", "add");
         count.innerHTML = +count.innerHTML - 1;
       }      
     });
