@@ -90,7 +90,9 @@ app.get("/", (request, response) => {
     
     firstTwoItems.push(items[0]);
     firstTwoItems.push(items[1]);
-
+    
+    console.log('db.getUpvotes(request.oidc.user.sub)', db.getUpvotes(request.oidc.user.sub));
+    
     response.render(__dirname + "/views/index", {
       firstTwoItems: firstTwoItems,
       nextItems: nextItems,

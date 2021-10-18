@@ -109,7 +109,10 @@ function addFavoriteOrUpvote(tableName, userId, itemId) {
     
   }
   
-  return saveFile(data);
+  console.log("What's the data?", data);
+  
+  saveFile(data);
+  
 }
 
 function removeFavoriteOrUpvote(tableName, userId, itemId) {
@@ -138,8 +141,9 @@ function removeFavoriteOrUpvote(tableName, userId, itemId) {
   } else {
     return false;
   }
+
   
-  return saveFile(data);
+  saveFile(data);
   
 }
 
@@ -164,8 +168,6 @@ function getUpvoteCountForItem(itemId) {
   
   let result = undefined;
   
-  console.log("Calling the getUpvoteCountForItem func");
-  
   // All items by default have 1 vote by default when it's created.
   if (typeof data['item_upvotes'][itemId] === "undefined") {
     result = 1; 
@@ -173,9 +175,8 @@ function getUpvoteCountForItem(itemId) {
     result = Object.keys(data['item_upvotes'][itemId]).length + 1;
   }
   
-  console.log("What's the result?", result);
-  
   return result;
+  
 }
 
 function getFavoritesOrUpvotes(tableName, userId) {
