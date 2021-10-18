@@ -96,8 +96,10 @@ function addFavoriteOrUpvote(tableName, userId, itemId) {
     if (tableName === 'upvotes') {
       if (typeof data['item_upvotes'][itemId] === "undefined") {
         data['item_upvotes'][itemId] = {};
-        data['item_upvotes'][itemId][userId] = true;
       }
+      
+      data['item_upvotes'][itemId][userId] = true;
+      
     }
     
   }
