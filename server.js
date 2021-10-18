@@ -236,6 +236,26 @@ app.post("/upvote", function(request, response) {
   }
 });
 
+app.post("/removeUpvote", function(request, response) {
+  if (!request.oidc.isAuthenticated()) {
+    response
+      .status(400)
+      .send("Please sign up / sign in before upvoting article.");
+  }
+
+  if (request.query.item_id) {
+    const result = db.removeUpvote(
+      request.oidc.user.sub,
+      request.query.item_id
+    );
+    response
+      .status(200)
+      .send("Successfully unfavorited the item " + request.query.item_id);
+  } else {
+    response.status(400).send("Please specify the item_id parameter.");
+  }
+});
+
 app.get("/submissions.xml", function(request, response) {
   response.setHeader("Content-Type", "application/rss+xml");
   response.writeHead(200);

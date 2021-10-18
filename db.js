@@ -125,9 +125,15 @@ function removeFavoriteOrUpvote(tableName, userId, itemId) {
     return false;
   }
   
+  console.log("data['user_' + tableName][userId]", data['user_' + tableName][userId]);
+  
   if (data['user_' + tableName][userId].some(function (el) {
     return el.item_id === itemId
   })) {
+    
+    console.log("About to delete the thing.");
+    console.log("tableName", tableName);
+    
     let index = data['user_' + tableName][userId].findIndex(i => i.item_id === itemId);
     data['user_' + tableName][userId].splice(index, 1);
     
@@ -200,7 +206,7 @@ function addUpvote(userId, itemId) {
 }
 
 function removeUpvote(userId, itemId) {
-  return removeFavoriteOrUpvote('favorites', userId, itemId);
+  return removeFavoriteOrUpvote('upvotes', userId, itemId);
 }
 
 module.exports = {
