@@ -100,8 +100,23 @@
     });
   }
   
-  function removeUpvote() {
-    
+  function removeUpvote(itemId) {
+    return new Promise(function(resolve, reject) {
+      fetch("/removeUpvote?item_id=" + itemId, {
+        method: "POST"
+      }).then(res => {
+        
+        console.log("What's the response?", res);
+        
+        if (res.status === 200) {
+          res.text().then(function (html) {
+            resolve(html);
+          });
+        } else {
+          reject(res.body);
+        }
+      });
+    });
   }
   
   moreButton.addEventListener("click", function(event) {
@@ -207,14 +222,21 @@
       
       var article = upvote.closest(".js-article"),
           upvotesForArticle = article.querySelectorAll(".js-upvote"),
-          itemId = article.getAttribute("data-item-id");
-          
+          itemId = article.getAttribute("data-item-id"),
+          action = upvote.getAttribute("data-action");
+      
       toggleUpvotes(upvotesForArticle);
       
-      // Turn it off if error from the server.
-      upvoteItem(itemId).catch(function () {
-        toggleUpvotes(upvotesForArticle);
-      });
+      if (action === "add") {
+        // Turn it off if error from the server.
+        upvoteItem(itemId).catch(function () {
+          toggleUpvotes(upvotesForArticle);
+        });
+      } else {
+        removeUpvote(itemId).catch(function () {
+          toggleUpvotes(upvotesForArticle);
+        });
+      }
       
     });                       
   });
