@@ -118,7 +118,7 @@ function removeFavoriteOrUpvote(tableName, userId, itemId) {
     return new Error("Please specify the correct table.");
   }
   
-  const rawData = fs.readFileSync(__dirname + '/' + tableName + '.json');
+  const rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
   
   if (typeof data['user_' + tableName][userId] === "undefined") {
