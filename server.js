@@ -101,6 +101,9 @@ app.get("/", (request, response) => {
       favorites: request.oidc.isAuthenticated()
         ? db.getFavorites(request.oidc.user.sub)
         : [],
+      upvotes: request.oidc.isAuthenticated()
+        ? db.getUpvotes(request.oidc.user.sub)
+        : [],
       staging: process.env.STAGING || false
     });
   }

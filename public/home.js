@@ -181,11 +181,11 @@
     Array.from(upvoteEls).forEach(function (button) {
       
       const svg = button.querySelector("svg > path"),
-            count = button.querySelector(".js-upvoteCount"),
+            count = button.parentNode.querySelector(".js-upvoteCount"),
             
             isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
       
-      console.log("What's count?", count);
+      console.log("What's the countEl?", count);
       
       if (isNotUpvoted) {
         svg.setAttribute("fill", svg.getAttribute("data-fill-upvoted"));
@@ -208,7 +208,7 @@
       var article = upvote.closest(".js-article"),
           upvotesForArticle = article.querySelectorAll(".js-upvote"),
           itemId = article.getAttribute("data-item-id");
-      
+          
       toggleUpvotes(upvotesForArticle);
       
       // Turn it off if error from the server.
