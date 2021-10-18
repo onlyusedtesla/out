@@ -15,6 +15,11 @@ function saveFile(data) {
   fs.writeFileSync(__dirname + "/data.json", JSON.stringify(data));
 }
 
+function save(items) {
+  data["items"] = items;
+  saveFile(data);
+}
+
 function saveSubmission(submission) {
   rawData = fs.readFileSync(__dirname + '/submissions.json');
   data = JSON.parse(rawData);
@@ -199,7 +204,7 @@ function removeUpvote(userId, itemId) {
 }
 
 module.exports = {
-
+  save: save,
   getItems: getItems,
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
