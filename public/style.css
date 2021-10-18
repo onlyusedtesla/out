@@ -299,6 +299,10 @@ textarea {
   color: var(--almost-black);
 }
 
+.article-favoriteMobile {
+  vertical-align: middle;
+}
+
 /* Alert */
 
 .alert {
