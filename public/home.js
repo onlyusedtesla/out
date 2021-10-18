@@ -252,7 +252,7 @@
       var article = favoriteButton.closest(".js-article"),
           favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
           itemId = article.getAttribute("data-item-id"),
-          action = favoriteButton.getAttribute("data-favorite-action");
+          action = favoriteButton.getAttribute("data-action");
       
       toggleFavorite(favoritesForArticle);
       
