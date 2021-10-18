@@ -12,7 +12,7 @@ function uuid() {
 }
 
 function saveFile() {
-  return fs.writeFileSync("./data.json", JSON.stringify(data));
+  fs.writeFileSync("./data.json", JSON.stringify(data));
 }
 
 function save(items) {
@@ -87,6 +87,11 @@ function addFavoriteOrUpvote(tableName, userId, itemId) {
   if (!data['user_' + tableName][userId].some(function (el) {
     return el.item_id === itemId
   })) {
+    
+    console.log("I'm gonna push the thing up to the table");
+    console.log("tableName", tableName);
+    console.log("userId", userId);
+    
     data['user_' + tableName][userId].push({
       item_id: itemId,
       action_date: Date.now()
@@ -128,9 +133,8 @@ function removeFavoriteOrUpvote(tableName, userId, itemId) {
     
     // Go ahead and remove the userkey frrom the item_upvotes too.
     if (tableName === 'upvotes') {
-      delete data['item_upvotes'][itemId][userId]
+      delete data['item_upvotes'][itemId][userId];
     }
-    
   } else {
     return false;
   }
