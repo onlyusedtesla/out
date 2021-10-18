@@ -227,6 +227,8 @@
       
       toggleUpvotes(upvotesForArticle);
       
+      console.log("action", action);
+      
       if (action === "add") {
         // Turn it off if error from the server.
         upvoteItem(itemId).catch(function () {

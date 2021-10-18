@@ -94,7 +94,7 @@ function addFavoriteOrUpvote(tableName, userId, itemId) {
     
     // Add upvotes to the table name to be able to render it later.
     if (tableName === 'upvotes') {
-      if (typeof data['item_upvotes'][item_id] === "undefined") {
+      if (typeof data['item_upvotes'][itemId] === "undefined") {
         data['item_upvotes'][itemId] = {};
         data['item_upvotes'][itemId][userId] = true;
       }
