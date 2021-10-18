@@ -11,14 +11,8 @@ function uuid() {
   });
 }
 
-function saveFile() {
-  fs.writeFileSync("./data.json", JSON.stringify(data));
-}
-
-function save(items) {
-  console.log("What are items?", items);
-  data["items"] = items;
-  saveFile(data);
+function saveFile(data) {
+  fs.writeFileSync(__dirname + "/data.json", JSON.stringify(data));
 }
 
 function saveSubmission(submission) {
@@ -108,8 +102,6 @@ function addFavoriteOrUpvote(tableName, userId, itemId) {
     }
     
   }
-  
-  console.log("What's the data?", data);
   
   saveFile(data);
   
@@ -207,7 +199,7 @@ function removeUpvote(userId, itemId) {
 }
 
 module.exports = {
-  save: save,
+
   getItems: getItems,
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
