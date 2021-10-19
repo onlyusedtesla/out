@@ -679,8 +679,6 @@ footer {
   position: relative;
 }
 
-.mobile-menuToggle.
-
 .mobile-navigation {
   display: none;
 }
@@ -726,6 +724,11 @@ footer {
   left: 0;
   background-color: rgba(232, 244, 234, 0.7);
   z-index: 2;
+  display: none;
+}
+
+.mobile-navigation.mobile-navigation--open {
+  display: block;
 }
 
 .mobile-navigation ul {
@@ -755,6 +758,20 @@ footer {
 
 .mobile-navigation ul > li + li {
   margin-top: 1rem;
+}
+
+.mobile-menuToggle.mobile-menuToggle--activated .mobile-menuToggle-graphic {
+  background: none;
+}
+
+.mobile-menuToggle.mobile-menuToggle--activated .mobile-menuToggle-graphic::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+.mobile-menuToggle.mobile-menuToggle--activated .mobile-menuToggle-graphic::before {
+  transform: rotate(45deg);
+  top: 0;
 }
 
 /* Media Queries */
