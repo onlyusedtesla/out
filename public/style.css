@@ -675,14 +675,39 @@ footer {
 
 .mobile-menuToggle {
   display: none;
+  align-items: center;
 }
 
 .mobile-navigation {
   display: none;
 }
 
+.mobile-menuToggle-graphic::before,
+.mobile-menuToggle-graphic::after {
+  content: " ";
+  display: block;
+  position: absolute;
+}
+
+.mobile-menuToggle-graphic::before {
+  top: -1rem;
+}
+
+.mobile-menuToggle-graphic::after {
+  top: 1rem;
+}
+
+.mobile-menuToggle-graphic,
+.mobile-menuToggle-graphic::before,
+.mobile-menuToggle-graphic::after {
+  background-color: var(--blue);
+  height: 2px;
+  width: 1.2rem;
+}
+
 .mobile-menuToggle-graphic {
-  
+  position: relative;
+  width: 1rem;
 }
 
 /* Media Queries */
@@ -710,7 +735,7 @@ footer {
   }
   
   .mobile-menuToggle {
-    display: block;
+    display: flex;
   }
   
   .mobile-navigation {
