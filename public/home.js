@@ -1,7 +1,7 @@
 (function() {
   const searchInput = document.querySelector(".js-searchbox-input");
   const searchBox = document.querySelector(".js-searchbox");
-  const mobileSearchBox = document.querySelector(".js-searchbutton-mobile");
+  const mobileSearchBox = document.querySelectorAll(".js-searchbutton-mobile");
   const moreButton = document.querySelector(".js-more-button");
   const tooltips = document.querySelectorAll(".js-tooltip");
   const hoverTooltips = document.querySelectorAll(".js-tooltip-hover");
@@ -153,16 +153,18 @@
   searchInput.addEventListener("blur", function(event) {
     searchBox.classList.remove("searchbox--focused");
   });
+  
+  Array.from(mobileSearchBox).forEach(function (mobileSearch) {
+    mobileSearch.addEventListener("click", function(event) {
+      event.preventDefault();
+      var searchTerms = prompt("Enter search");
 
-  mobileSearchBox.addEventListener("click", function(event) {
-    event.preventDefault();
-    var searchTerms = prompt("Enter search");
-
-    if (searchTerms && searchTerms.length >= 1) {
-      var url = new URL(window.location.href);
-      url.searchParams.set("search", encodeURIComponent(searchTerms));
-      window.location.href = url.href;
-    }
+      if (searchTerms && searchTerms.length >= 1) {
+        var url = new URL(window.location.href);
+        url.searchParams.set("search", encodeURIComponent(searchTerms));
+        window.location.href = url.href;
+      }
+    });
   });
   
   Array.from(tooltips).forEach(function (tooltip) {

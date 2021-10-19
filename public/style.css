@@ -680,10 +680,6 @@ footer {
   cursor: pointer;
 }
 
-.mobile-navigation {
-  display: none;
-}
-
 .mobile-menuToggle-graphic::before,
 .mobile-menuToggle-graphic::after {
   content: " ";
@@ -726,7 +722,10 @@ footer {
   
   width: 0%;
   height: 0%;
+  
+  overflow: hidden;
 }
+
 .mobile-navigation ul {
   margin: 0;
   padding: 0;
@@ -737,7 +736,7 @@ footer {
 
 .mobile-navigation.mobile-navigation--opened ul,
 .mobile-navigation ul {
-  transition: margin-top 0.3s cubic-bezier(.17,.67,.83,.67);
+  transition: margin-top 0.15s cubic-bezier(.17,.67,.83,.67);
 }
 
 .mobile-navigation.mobile-navigation--opened ul {
@@ -818,7 +817,8 @@ footer {
   }
   
   .mobile-navigation.mobile-navigation--opened {
-    display: block;
+    width: 100%;
+    height: 100%;
   }
   
 }
