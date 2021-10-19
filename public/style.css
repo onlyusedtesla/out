@@ -718,15 +718,42 @@ footer {
 
 .mobile-navigation {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   background-color: rgba(232, 244, 234, 0.7);
   z-index: 2;
 }
 
+.mobile-navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  margin-top: 3.8rem;
+}
 
+.mobile-navigation ul > li a {
+  border-radius: 1rem;
+  background-color: #000;
+  padding: 1rem;
+  width: 8rem;
+  text-align: center;
+  background-color: var(--blue);
+  color: #FFF;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: 1rem;
+  display: block;
+}
+
+.mobile-navigation ul > li a:hover {
+  text-decoration: underline;
+}
+
+.mobile-navigation ul > li + li {
+  margin-top: 1rem;
+}
 
 /* Media Queries */
 
