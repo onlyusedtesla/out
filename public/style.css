@@ -675,7 +675,6 @@ footer {
 
 .mobile-menuToggle {
   display: none;
-  align-items: center;
 }
 
 .mobile-navigation {
@@ -690,11 +689,11 @@ footer {
 }
 
 .mobile-menuToggle-graphic::before {
-  top: -1rem;
+  top: -0.4rem;
 }
 
 .mobile-menuToggle-graphic::after {
-  top: 1rem;
+  top: 0.4rem;
 }
 
 .mobile-menuToggle-graphic,
@@ -708,6 +707,11 @@ footer {
 .mobile-menuToggle-graphic {
   position: relative;
   width: 1rem;
+  transform: scaleX(-1);
+}
+
+.mobile-menuToggle-text {
+  color: var(--blue);
 }
 
 /* Media Queries */
