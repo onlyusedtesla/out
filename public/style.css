@@ -675,6 +675,8 @@ footer {
 
 .mobile-menuToggle {
   display: none;
+  z-index: 3;
+  position: relative;
 }
 
 .mobile-navigation {
@@ -713,6 +715,18 @@ footer {
 .mobile-menuToggle-text {
   color: var(--blue);
 }
+
+.mobile-navigation {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(232, 244, 234, 0.7);
+  z-index: 2;
+}
+
+
 
 /* Media Queries */
 
