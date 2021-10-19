@@ -677,6 +677,7 @@ footer {
   display: none;
   z-index: 3;
   position: relative;
+  cursor: pointer;
 }
 
 .mobile-navigation {
@@ -725,10 +726,6 @@ footer {
   background-color: rgba(232, 244, 234, 0.7);
   z-index: 2;
   display: none;
-}
-
-.mobile-navigation.mobile-navigation--open {
-  display: block;
 }
 
 .mobile-navigation ul {
@@ -802,7 +799,7 @@ footer {
     display: flex;
   }
   
-  .mobile-navigation {
+  .mobile-navigation.mobile-navigation--open {
     display: block;
   }
   
