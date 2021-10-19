@@ -8,6 +8,8 @@
   const shares = document.querySelectorAll(".js-share");
   const favoriteButtons = document.querySelectorAll(".js-favorite");
   const upvotes = document.querySelectorAll(".js-upvote");
+  const mobileToggle = document.querySelector(".js-mobilemenutoggle");
+  const mobileNavigation = document.querySelector(".js-mobilenavigation");
   
   let page = 1; // For getting more articles
   
@@ -295,6 +297,11 @@
       }
       
     });
+  });
+  
+  mobileToggle.addEventListener('click', function (event) {
+    mobileToggle.classList.toggle('mobile-menuToggle--activated');
+    mobileNavigation.classList.toggle('mobile-navigation--opened');
   });
   
   convertArticleDates();

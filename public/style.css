@@ -725,7 +725,6 @@ footer {
   left: 0;
   background-color: rgba(232, 244, 234, 0.7);
   z-index: 2;
-  display: none;
 }
 
 .mobile-navigation ul {
@@ -755,6 +754,13 @@ footer {
 
 .mobile-navigation ul > li + li {
   margin-top: 1rem;
+}
+
+.mobile-menuToggle .mobile-menuToggle-graphic,
+.mobile-menuToggle.mobile-menuToggle--activated .mobile-menuToggle-graphic,
+.mobile-menuToggle.mobile-menuToggle--activated .mobile-menuToggle-graphic::after,
+.mobile-menuToggle.mobile-menuToggle--activated .mobile-menuToggle-graphic::before {
+  transition: top 0.2s linear, transform 0.6s linear;
 }
 
 .mobile-menuToggle.mobile-menuToggle--activated .mobile-menuToggle-graphic {
@@ -799,7 +805,7 @@ footer {
     display: flex;
   }
   
-  .mobile-navigation.mobile-navigation--open {
+  .mobile-navigation.mobile-navigation--opened {
     display: block;
   }
   
