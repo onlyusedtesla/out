@@ -90,13 +90,28 @@
           <% } %>
         </p>
       </div>
+      
+      <div class="mobile-menuToggle">
+        <div class="mobile-menuToggle-graphic"></div>
+        <span>Menu</span>
+      </div>
+      
     </header>
     
     <div class="mobile-navigation">
       <nav>
         <ul>
-          <li>Add Post</li>
-          <li></li>
+          <li><a href="/submit">Add Post</a></li>
+          <li><a href="#">Search</a></li>
+          <li>
+            <% if (userInfo) { %>
+              <a href="/logout" class="login-button">Sign Out</a>
+            <% } else { %>
+              <a href="/login" class="login-button">
+                Sign In
+              </a>
+            <% } %>
+          </li>
         </ul>
       </nav>
     </div>
