@@ -22,6 +22,14 @@ function save(items) {
     data["item_upvotes"] = {};
   }
   
+  if (typeof data["user_favorites"] === "undefined") {
+    data["user_favorites"] = {};
+  }
+  
+  if (typeof data["user_upvotes"] === "undefined") {
+    data["user_upvotes"] = {};
+  }
+  
   saveFile(data);
 }
 
