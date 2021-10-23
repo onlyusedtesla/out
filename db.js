@@ -17,6 +17,11 @@ function saveFile(data) {
 
 function save(items) {
   data["items"] = items;
+  
+  if (typeof data["item_upvotes"] === "undefined") {
+    data["item_upvotes"] = {};
+  }
+  
   saveFile(data);
 }
 
