@@ -92,13 +92,9 @@ function update(done) {
     
       // only save the new rss items that are not already in the db.
       let itemsToSave = items.filter(function (item) {
-        console.log("item.title", item.title);
-        let exists = db.getAllItems().some(function (el) {
-          console.log("el.title", el.title);
+        return db.getAllItems().some(function (el) {
           return el.title === item.title;
         });
-        console.log("exists", exists);
-        return exists;
       });
     
       // console.log("itemsToSave", itemsToSave);
