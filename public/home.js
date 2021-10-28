@@ -5,7 +5,6 @@
   const moreButton = document.querySelector(".js-more-button");
   const tooltips = document.querySelectorAll(".js-tooltip");
   const hoverTooltips = document.querySelectorAll(".js-tooltip-hover");
-  const shares = document.querySelectorAll(".js-share");
   const mobileToggle = document.querySelector(".js-mobilemenutoggle");
   const mobileNavigation = document.querySelector(".js-mobilenavigation");
 
@@ -185,16 +184,25 @@
       tooltip.classList.remove("show");
     });
   });
-
-  Array.from(shares).forEach(function(share) {
-    share.addEventListener("click", function(event) {
-      event.preventDefault();
-      navigator.clipboard
-        .writeText(share.getAttribute("data-link"))
-        .then(function() {}, function() {});
+  
+  function shareHandler(event) {
+    var share = event.target;
+    
+    event.preventDefault();
+    navigator.clipboard
+      .writeText(share.getAttribute("data-link"))
+      .then(function() {}, function() {});
+  }
+  
+  function addShareListeners() {
+    var shares = document.querySelectorAll(".js-share");
+    
+    Array.from(shares).forEach(function(share) {
+      share.removeEventListener('click', shareHandler);
+      share.addEventListener("click", shareHandler);
     });
-  });
-
+  }
+  
   function toggleUpvotes(upvoteEls) {
     Array.from(upvoteEls).forEach(function(button) {
       const svg = button.querySelector("svg > path"),
@@ -336,5 +344,6 @@
   convertArticleDates();
   addFavoriteListeners();
   addUpvoteListeners();
+  addShareListeners();
   
 })();
