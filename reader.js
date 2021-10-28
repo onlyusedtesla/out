@@ -9,30 +9,15 @@ const querystring = require("querystring");
 const axios = require("axios");
 const favicons = require("./favicons.json");
 
-function getFavicon(domain) {
-  return axios.get("https://favicongrabber.com/api/grab/" + domain);
-}
-
 function addFavicons(domains) {
-  
-  for (let i = 0; i < domains.length; )
-  axios.all([
-    axios.get('https://api.github.com/users/MaksymRudnyi'), 
-    axios.get('https://api.github.com/users/taylorotwell')
-  ])
-    .then(axios.spread((obj1, obj2) => {
-  // Both requests are now complete
-  console.log(obj1.data.login + ' has ' + obj1.data.public_repos + ' public repos on GitHub');
-  console.log(obj2.data.login + ' has ' + obj2.data.public_repos + ' public repos on GitHub');
-}));
-  
-  const promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
-    return axios.get("https://favicongrabber.com/api/grab/" + domain);
+  console.log("addFavicons", addFavicons);
+  domains.filter(domain => typeof favicons[domain] === "undefined").forEach(function (domain) {
+    console.log("What's the domain?", domain);
+    axios.get("https://favicongrabber.com/api/grab/" + domain).then(function (results) {
+      console.log("results.data", results.data);
+    });
   });
   
-  axios.all(promises).then(function (results) {
-  
-  });
 }
 
 /*
@@ -127,9 +112,6 @@ function update(done) {
       let domainNames = [...new Set(items.map(item => item.domain))];  
       addFavicons(domainNames);
     
-      console.log("itemsToSave.length", itemsToSave.length);
-      console.log("What's the domainNames?", domainNames);
-      
       // db.save(items);
 
       if (typeof done !== "undefined") {
@@ -142,6 +124,6 @@ function update(done) {
     });
 }
 
-update.getFavicon = getFavicon;
+update.addFavicons = addFavicons;
 
 module.exports = update;
