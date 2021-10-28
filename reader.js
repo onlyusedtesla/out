@@ -15,13 +15,24 @@ function getFavicon(domain) {
 
 function addFavicons(domains) {
   
-  const promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
+  console.log("domains", domains);
+  
+  // const promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
     return getFavicon(domain);
+  // });
+  
+  getFavicon(domains[0]).then(function (results) {
+    console.log("Getting the first domain");
+    console.log("results", results);
   });
   
+  console.log("addFavicons", addFavicons);
   console.log("what are the promises?", promises);
   
-  // Promise.all(promises);
+  Promise.all(promises).then(function (results) {
+    console.log("What are the results?");
+    console.log(results);
+  });
 }
 
 /*
