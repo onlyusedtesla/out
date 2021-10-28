@@ -10,26 +10,29 @@
   const upvotes = document.querySelectorAll(".js-upvote");
   const mobileToggle = document.querySelector(".js-mobilemenutoggle");
   const mobileNavigation = document.querySelector(".js-mobilenavigation");
-  
+
   let page = 1; // For getting more articles
-  
+
   function addItems(html) {
-    var tpl = document.createElement('template');
-    tpl.innerHTML = html;
-    let articlesEl = document.querySelectorAll('section.articles')[1];
-    articlesEl.appendChild(tpl.content);
+    return new Promise(function (resolve, reject) {
+      var tpl = document.createElement("template");
+      tpl.innerHTML = html;
+      let articlesEl = document.querySelectorAll("section.articles")[1];
+      articlesEl.appendChild(tpl.content);
+      resolve(tpl);
+    });
   }
-  
+
   function getItems(page) {
     return new Promise(function(resolve, reject) {
       fetch("/items?page=" + page, {
         method: "GET",
         headers: {
-          'Content-Type': 'text/html'
+          "Content-Type": "text/html"
         }
       }).then(res => {
         if (res.status === 200) {
-          res.text().then(function (html) {
+          res.text().then(function(html) {
             resolve(html);
           });
         } else {
@@ -38,17 +41,16 @@
       });
     });
   }
-  
+
   function removeFavorite(itemId) {
     return new Promise(function(resolve, reject) {
       fetch("/removeFavorite?item_id=" + itemId, {
         method: "POST"
       }).then(res => {
-        
         console.log("What's the response?", res);
-        
+
         if (res.status === 200) {
-          res.text().then(function (html) {
+          res.text().then(function(html) {
             resolve(html);
           });
         } else {
@@ -57,20 +59,18 @@
       });
     });
   }
-  
+
   function favoriteItem(itemId) {
-    
     console.log("Calling the favoriteItem function for " + itemId);
-    
+
     return new Promise(function(resolve, reject) {
       fetch("/addFavorite?item_id=" + itemId, {
         method: "POST"
       }).then(res => {
-        
         console.log("What's the response?", res);
-        
+
         if (res.status === 200) {
-          res.text().then(function (html) {
+          res.text().then(function(html) {
             resolve(html);
           });
         } else {
@@ -79,20 +79,18 @@
       });
     });
   }
-  
+
   function upvoteItem(itemId) {
-    
     console.log("Calling the upvoteItem function for " + itemId);
-    
+
     return new Promise(function(resolve, reject) {
       fetch("/upvote?item_id=" + itemId, {
         method: "POST"
       }).then(res => {
-        
         console.log("What's the response?", res);
-        
+
         if (res.status === 200) {
-          res.text().then(function (html) {
+          res.text().then(function(html) {
             resolve(html);
           });
         } else {
@@ -101,17 +99,16 @@
       });
     });
   }
-  
+
   function removeUpvote(itemId) {
     return new Promise(function(resolve, reject) {
       fetch("/removeUpvote?item_id=" + itemId, {
         method: "POST"
       }).then(res => {
-        
         console.log("What's the response?", res);
-        
+
         if (res.status === 200) {
-          res.text().then(function (html) {
+          res.text().then(function(html) {
             resolve(html);
           });
         } else {
@@ -120,31 +117,35 @@
       });
     });
   }
-  
+
   moreButton.addEventListener("click", function(event) {
     event.preventDefault();
 
     moreButton.setAttribute("disabled", "disabled");
     moreButton.innerHTML = "Loading...";
-    
-    getItems(page).then(function (html) {
-      addItems(html);
-      page += 1;
+
+    getItems(page)
+      .then(function(html) {
       
-      moreButton.removeAttribute("disabled");
-      moreButton.innerHTML = "More";
+        addItems(html).then(function (tpl) {
+          console.log("What's the tpl?", tpl);
+          // setTimeout(function() {
+          //   convertArticleDates();
+          // });
+        });
       
-      setTimeout(function () {
-        convertArticleDates();
+        page += 1;
+
+        moreButton.removeAttribute("disabled");
+        moreButton.innerHTML = "More";
+      
+      })
+      .catch(function(response) {
+        moreButton.removeAttribute("disabled");
+        moreButton.innerHTML = "More";
       });
-      
-    }).catch(function (response) {
-      moreButton.removeAttribute("disabled");
-      moreButton.innerHTML = "More";
-    });
-    
   });
-  
+
   // when you focus on the search inbox, then add a class to the outer element, and remove it when you lose focus.
   searchInput.addEventListener("focus", function(event) {
     searchBox.classList.add("searchbox--focused");
@@ -153,8 +154,8 @@
   searchInput.addEventListener("blur", function(event) {
     searchBox.classList.remove("searchbox--focused");
   });
-  
-  Array.from(mobileSearchBox).forEach(function (mobileSearch) {
+
+  Array.from(mobileSearchBox).forEach(function(mobileSearch) {
     mobileSearch.addEventListener("click", function(event) {
       event.preventDefault();
       var searchTerms = prompt("Enter search");
@@ -166,46 +167,46 @@
       }
     });
   });
-  
-  Array.from(tooltips).forEach(function (tooltip) {
-    tooltip.addEventListener('click', function (event) {
+
+  Array.from(tooltips).forEach(function(tooltip) {
+    tooltip.addEventListener("click", function(event) {
       event.preventDefault();
-      tooltip.classList.add('show');
-      setTimeout(function () {
-        tooltip.classList.remove('show');
+      tooltip.classList.add("show");
+      setTimeout(function() {
+        tooltip.classList.remove("show");
       }, 2100);
     });
   });
-  
-  Array.from(hoverTooltips).forEach(function (tooltip) {
-    tooltip.addEventListener('mouseover', function (event) {
+
+  Array.from(hoverTooltips).forEach(function(tooltip) {
+    tooltip.addEventListener("mouseover", function(event) {
       event.preventDefault();
-      tooltip.classList.add('show');
+      tooltip.classList.add("show");
     });
-    
-    tooltip.addEventListener('mouseout', function (event) {
+
+    tooltip.addEventListener("mouseout", function(event) {
       event.preventDefault();
-      tooltip.classList.remove('show');
-    });
-  });
-  
-  Array.from(shares).forEach(function (share) {
-    share.addEventListener('click', function (event) {
-      event.preventDefault();
-      navigator.clipboard.writeText(share.getAttribute("data-link")).then(function() {}, function() {});
+      tooltip.classList.remove("show");
     });
   });
-  
+
+  Array.from(shares).forEach(function(share) {
+    share.addEventListener("click", function(event) {
+      event.preventDefault();
+      navigator.clipboard
+        .writeText(share.getAttribute("data-link"))
+        .then(function() {}, function() {});
+    });
+  });
+
   function toggleUpvotes(upvoteEls) {
-    Array.from(upvoteEls).forEach(function (button) {
-      
+    Array.from(upvoteEls).forEach(function(button) {
       const svg = button.querySelector("svg > path"),
-            count = button.parentNode.querySelector(".js-upvoteCount"),
-            
-            isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
-      
+        count = button.parentNode.querySelector(".js-upvoteCount"),
+        isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
+
       console.log("What's the countEl?", count);
-      
+
       if (isNotUpvoted) {
         svg.setAttribute("fill", svg.getAttribute("data-fill-upvoted"));
         button.classList.add("article-share--upvoted");
@@ -218,94 +219,102 @@
         svg.setAttribute("data-upvoted", "false");
         button.setAttribute("data-action", "add");
         count.innerHTML = +count.innerHTML - 1;
-      }      
+      }
     });
   }
-  
-  Array.from(upvotes).forEach(function (upvote) {
-    upvote.addEventListener('click', function (event) {
+
+  Array.from(upvotes).forEach(function(upvote) {
+    upvote.addEventListener("click", function(event) {
       event.preventDefault();
-      
+
       var article = upvote.closest(".js-article"),
-          upvotesForArticle = article.querySelectorAll(".js-upvote"),
-          itemId = article.getAttribute("data-item-id"),
-          action = upvote.getAttribute("data-action");
-      
+        upvotesForArticle = article.querySelectorAll(".js-upvote"),
+        itemId = article.getAttribute("data-item-id"),
+        action = upvote.getAttribute("data-action");
+
       toggleUpvotes(upvotesForArticle);
-      
+
       console.log("action", action);
-      
+
       if (action === "add") {
         // Turn it off if error from the server.
-        upvoteItem(itemId).catch(function () {
+        upvoteItem(itemId).catch(function() {
           toggleUpvotes(upvotesForArticle);
         });
       } else {
-        removeUpvote(itemId).catch(function () {
+        removeUpvote(itemId).catch(function() {
           toggleUpvotes(upvotesForArticle);
         });
       }
-      
-    });                       
+    });
   });
-  
-  function convertArticleDates() {
-    var articleDates = document.querySelectorAll(".js-article-date");
+
+  function convertArticleDates(articleDates) {
     Array.from(articleDates).forEach(function(articleDate) {
-      articleDate.innerHTML = dateFormat(+articleDate.getAttribute("data-time"), "mmm d, h:MM TT");
-      articleDate.setAttribute("title", dateFormat(+articleDate.getAttribute("data-time"), "mmm d, h:MM TT Z"));
+      articleDate.innerHTML = dateFormat(
+        +articleDate.getAttribute("data-time"),
+        "mmm d, h:MM TT"
+      );
+      articleDate.setAttribute(
+        "title",
+        dateFormat(+articleDate.getAttribute("data-time"), "mmm d, h:MM TT Z")
+      );
     });
   }
-  
+
   function toggleFavorite(favoriteEls) {
-    Array.from(favoriteEls).forEach(function (favoriteButton) {
-      
+    Array.from(favoriteEls).forEach(function(favoriteButton) {
       const isNotFavorited = favoriteButton.getAttribute("fill") === "none";
-      
+
       if (isNotFavorited) {
-        favoriteButton.setAttribute("fill", favoriteButton.getAttribute("data-original-fill"));
+        favoriteButton.setAttribute(
+          "fill",
+          favoriteButton.getAttribute("data-original-fill")
+        );
         favoriteButton.setAttribute("stroke", "none");
       } else {
-        favoriteButton.setAttribute("stroke", favoriteButton.getAttribute("data-original-stroke"));
+        favoriteButton.setAttribute(
+          "stroke",
+          favoriteButton.getAttribute("data-original-stroke")
+        );
         favoriteButton.setAttribute("fill", "none");
       }
-      
     });
   }
-  
+
   // Takes care of favoriting.
-  Array.from(favoriteButtons).forEach(function (favoriteButton) {
-    favoriteButton.addEventListener('click', function (event) {
-      
+  Array.from(favoriteButtons).forEach(function(favoriteButton) {
+    favoriteButton.addEventListener("click", function(event) {
       event.preventDefault();
-      
+
       var article = favoriteButton.closest(".js-article"),
-          favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
-          itemId = article.getAttribute("data-item-id"),
-          action = favoriteButton.getAttribute("data-action");
-      
+        favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
+        itemId = article.getAttribute("data-item-id"),
+        action = favoriteButton.getAttribute("data-action");
+
       toggleFavorite(favoritesForArticle);
-      
+
       if (action === "add") {
-        favoriteItem(itemId).then(function (response) { }).catch(function (error) {
-          toggleFavorite(favoritesForArticle); // put the state of the button back.
-        });
+        favoriteItem(itemId)
+          .then(function(response) {})
+          .catch(function(error) {
+            toggleFavorite(favoritesForArticle); // put the state of the button back.
+          });
       } else if (action === "remove") {
         console.log("going to unfavorite the item.");
-        removeFavorite(itemId).then(function (response) {}).catch(function (error) {
-          toggleFavorite(favoritesForArticle);
-        });
-        
+        removeFavorite(itemId)
+          .then(function(response) {})
+          .catch(function(error) {
+            toggleFavorite(favoritesForArticle);
+          });
       }
-      
     });
   });
-  
-  mobileToggle.addEventListener('click', function (event) {
-    mobileToggle.classList.toggle('mobile-menuToggle--activated');
-    mobileNavigation.classList.toggle('mobile-navigation--opened');
+
+  mobileToggle.addEventListener("click", function(event) {
+    mobileToggle.classList.toggle("mobile-menuToggle--activated");
+    mobileNavigation.classList.toggle("mobile-navigation--opened");
   });
-  
-  convertArticleDates();
-  
+
+  convertArticleDates(document.querySelectorAll(".js-article-date"));
 })();
