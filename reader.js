@@ -98,10 +98,7 @@ function update(done) {
         });
       });
     
-      let domainNames = [...new Set(items.map(item => item.domain))];  
-      addFavicons(domainNames);
-    
-      // db.save(items);
+      db.save(items);
 
       if (typeof done !== "undefined") {
         done();
@@ -112,7 +109,5 @@ function update(done) {
       console.log("error", error);
     });
 }
-
-update.addFavicons = addFavicons;
 
 module.exports = update;
