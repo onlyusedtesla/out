@@ -4,21 +4,6 @@ const striptags = require("striptags");
 const validKeys = db.validKeys;
 const dateFormat = require("./public/dateFormat.js");
 const rake = require("rake-js");
-const http = require("http");
-const querystring = require("querystring");
-const axios = require("axios");
-const favicons = require("./favicons.json");
-
-function addFavicons(domains) {
-  console.log("addFavicons", addFavicons);
-  let promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
-    return axios.get("https://favicongrabber.com/api/grab/" + domain);
-  });
-  
-  Promise.all(promises).then(function (allResults) {
-    console.log("All Results?", allResults);
-  });
-}
 
 /*
  * @description - Takes an array of strings that are of different words. Some have 1 words, 2 words, 3 words, etc.
