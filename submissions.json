@@ -83,6 +83,15 @@
       "pubDate": "Fri Oct 08 2021 02:49:18",
       "author": "derick.realwebdev+teslatracker",
       "content_html": "<a href=\"https://news.ycombinator.com/\" style=\"display: block;\"><p>Thank you</p></a>"
+    },
+    {
+      "url": "https://www.tesla.com/cybertruck",
+      "link": "https://www.tesla.com/cybertruck",
+      "title": "Tesla Cybertruck",
+      "description": "This is a very good description of the cybertruck that will appear on the individual page and also on the main page.",
+      "pubDate": "Fri Oct 29 2021 03:59:37",
+      "author": "derick.realwebdev+teslatracker",
+      "content_html": "<a href=\"https://www.tesla.com/cybertruck\" style=\"display: block;\"><p>This is a very good description of the cybertruck that will appear on the individual page and also on the main page.</p></a>"
     }
   ]
 }

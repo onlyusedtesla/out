@@ -21,6 +21,17 @@
       
       div.appendChild(linkEl);
       
+      let by = document.createElement("span");
+      by.innerHTML = " by ";
+      
+      div.appendChild(by);
+      
+      let username = document.createElement("a");
+      username.innerHTML = author.value;
+      username.href = "https://teslatracker.com/user?id=" + author.value;
+      
+      div.appendChild(username);
+      
       return div.innerHTML;
     })();
 
