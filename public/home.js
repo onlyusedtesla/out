@@ -3,7 +3,6 @@
   const searchBox = document.querySelector(".js-searchbox");
   const mobileSearchBox = document.querySelectorAll(".js-searchbutton-mobile");
   const moreButton = document.querySelector(".js-more-button");
-  const tooltips = document.querySelectorAll(".js-tooltip");
   const hoverTooltips = document.querySelectorAll(".js-tooltip-hover");
   const mobileToggle = document.querySelector(".js-mobilemenutoggle");
   const mobileNavigation = document.querySelector(".js-mobilenavigation");
@@ -132,6 +131,8 @@
           convertArticleDates();
           addFavoriteListeners();
           addUpvoteListeners();
+          addShareListeners();
+          addTooltipListeners();
         });
       
       })
@@ -162,17 +163,26 @@
       }
     });
   });
-
-  Array.from(tooltips).forEach(function(tooltip) {
-    tooltip.addEventListener("click", function(event) {
-      event.preventDefault();
-      tooltip.classList.add("show");
-      setTimeout(function() {
-        tooltip.classList.remove("show");
-      }, 2100);
+  
+  function tooltipHandler(event) {
+    
+    var tooltip = event.target;
+    
+    event.preventDefault();
+    tooltip.classList.add("show");
+    setTimeout(function() {
+      tooltip.classList.remove("show");
+    }, 2100);
+  }
+  
+  function addTooltipListeners() {
+    var tooltips = document.querySelectorAll(".js-tooltip");
+    Array.from(tooltips).forEach(function(tooltip) {
+      tooltip.removeEventListener("click", tooltipHandler);
+      tooltip.addEventListener("click", tooltipHandler);
     });
-  });
-
+  }
+  
   Array.from(hoverTooltips).forEach(function(tooltip) {
     tooltip.addEventListener("mouseover", function(event) {
       event.preventDefault();
@@ -345,5 +355,6 @@
   addFavoriteListeners();
   addUpvoteListeners();
   addShareListeners();
+  addTooltipListeners();
   
 })();
