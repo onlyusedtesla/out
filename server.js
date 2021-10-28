@@ -8,7 +8,6 @@ const app = express();
 const db = require("./db.js");
 const RSSFeed = require("./feed.js");
 const ejs = require("ejs");
-const favicons = require("./favicons.json");
 
 const { auth, requiresAuth } = require("express-openid-connect");
 
@@ -67,7 +66,6 @@ app.get("/", (request, response) => {
       searchQuery: request.query.search,
       firstTwoItems: firstTwoItems,
       nextItems: nextItems,
-      favicons: favicons,
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
@@ -100,7 +98,6 @@ app.get("/", (request, response) => {
     response.render(__dirname + "/views/index", {
       firstTwoItems: firstTwoItems,
       nextItems: nextItems,
-      favicons: favicons,
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
