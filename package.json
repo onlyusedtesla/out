@@ -14,7 +14,6 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-openid-connect": "^2.5.1",
-    "better-sqlite3": "^7.4.3",
     "rss-to-json": "^2.0.2",
     "striptags": "^3.2.0",
     "rake-js": "^0.1.1",
