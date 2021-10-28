@@ -218,40 +218,41 @@
       }
     });
   }
+  
+  function upvoteHandler(event) {
+    event.preventDefault();
+    
+    var upvote = event.target;
+    
+    var article = upvote.closest(".js-article"),
+      upvotesForArticle = article.querySelectorAll(".js-upvote"),
+      itemId = article.getAttribute("data-item-id"),
+      action = upvote.getAttribute("data-action");
 
+    toggleUpvotes(upvotesForArticle);
+
+    console.log("action", action);
+
+    if (action === "add") {
+      // Turn it off if error from the server.
+      upvoteItem(itemId).catch(function() {
+        toggleUpvotes(upvotesForArticle);
+      });
+    } else {
+      removeUpvote(itemId).catch(function() {
+        toggleUpvotes(upvotesForArticle);
+      });
+    }
+  }
+  
   function addUpvoteListeners() {
     
     var upvotes = document.querySelectorAll(".js-upvote");
     
-      Array.from(upvotes).forEach(function(upvote) {
-        
-        upvote.removeEventListener("click", upvoteHandler);
-        upvote.addEventListener("click", upvoteHandler);
-        
-        upvote.addEventListener("click", function(event) {
-          event.preventDefault();
-
-          var article = upvote.closest(".js-article"),
-            upvotesForArticle = article.querySelectorAll(".js-upvote"),
-            itemId = article.getAttribute("data-item-id"),
-            action = upvote.getAttribute("data-action");
-
-          toggleUpvotes(upvotesForArticle);
-
-          console.log("action", action);
-
-          if (action === "add") {
-            // Turn it off if error from the server.
-            upvoteItem(itemId).catch(function() {
-              toggleUpvotes(upvotesForArticle);
-            });
-          } else {
-            removeUpvote(itemId).catch(function() {
-              toggleUpvotes(upvotesForArticle);
-            });
-          }
-        });
-      });
+    Array.from(upvotes).forEach(function(upvote) {
+      upvote.removeEventListener("click", upvoteHandler);
+      upvote.addEventListener("click", upvoteHandler);
+    });
   }
   
   function convertArticleDates(articleDates) {
@@ -290,37 +291,41 @@
 
   // Takes care of favoriting.
   
-  function addFavoriteListeners() {
+  function favoriteHandler(event) {
+    event.preventDefault();
     
+    var favoriteButton = event.target;
+    
+    var article = favoriteButton.closest(".js-article"),
+      favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
+      itemId = article.getAttribute("data-item-id"),
+      action = favoriteButton.getAttribute("data-action");
+
+    toggleFavorite(favoritesForArticle);
+
+    if (action === "add") {
+      favoriteItem(itemId)
+        .then(function(response) {})
+        .catch(function(error) {
+          toggleFavorite(favoritesForArticle); // put the state of the button back.
+        });
+    } else if (action === "remove") {
+      console.log("going to unfavorite the item.");
+      removeFavorite(itemId)
+        .then(function(response) {})
+        .catch(function(error) {
+          toggleFavorite(favoritesForArticle);
+        });
+    }
+  }
+  
+  function addFavoriteListeners() {
     var favoriteButtons = document.querySelectorAll(".js-favorite");
     
-      Array.from(favoriteButtons).forEach(function(favoriteButton) {
-        favoriteButton.addEventListener("click", function(event) {
-          event.preventDefault();
-
-          var article = favoriteButton.closest(".js-article"),
-            favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
-            itemId = article.getAttribute("data-item-id"),
-            action = favoriteButton.getAttribute("data-action");
-
-          toggleFavorite(favoritesForArticle);
-
-          if (action === "add") {
-            favoriteItem(itemId)
-              .then(function(response) {})
-              .catch(function(error) {
-                toggleFavorite(favoritesForArticle); // put the state of the button back.
-              });
-          } else if (action === "remove") {
-            console.log("going to unfavorite the item.");
-            removeFavorite(itemId)
-              .then(function(response) {})
-              .catch(function(error) {
-                toggleFavorite(favoritesForArticle);
-              });
-          }
-        });
-      });
+    Array.from(favoriteButtons).forEach(function(favoriteButton) {
+      favoriteButton.removeEventListener("click", favoriteHandler);
+      favoriteButton.addEventListener("click", favoriteHandler);
+    });
   }
   
   mobileToggle.addEventListener("click", function(event) {
