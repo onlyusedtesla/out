@@ -7,9 +7,21 @@ const rake = require("rake-js");
 const http = require("http");
 const querystring = require("querystring");
 const axios = require("axios");
+const favicons = require("./favicons.json");
 
 function getFavicon(domain) {
   return axios.get("https://favicongrabber.com/api/grab/" + domain);
+}
+
+function addDomains(domains) {
+  
+  const promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
+    return getFavicon(domain);
+  });
+  
+  console.log("what are the promises?", promises);
+  
+  // Promise.all(promises);
 }
 
 /*
@@ -100,10 +112,15 @@ function update(done) {
           return el.title === item.title;
         });
       });
-
+    
       console.log("itemsToSave.length", itemsToSave.length);
-
-      db.save(items);
+      console.log("What's the domainNames?", domainNames);
+      
+      let domainNames = [...new Set(items.map(item => item.domain))];
+      
+      addFavicons(domainNames);
+    
+      // db.save(items);
 
       if (typeof done !== "undefined") {
         done();
