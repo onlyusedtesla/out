@@ -4,42 +4,39 @@ const striptags = require("striptags");
 const validKeys = db.validKeys;
 const dateFormat = require("./public/dateFormat.js");
 const rake = require("rake-js");
-const https = require('https');
-const querystring = require('querystring');
-
-// GET parameters
-const parameters = {
-	url: 123,
-	size: "post"
-}
-
-// GET parameters as query string : "?id=123&type=post"
-const get_request_args = querystring.stringify(parameters);
+const https = require("https");
+const querystring = require("querystring");
 
 function getFavicon(domain) {
-  https://besticon-demo.herokuapp.com/icon?url=yelp.com&size=32..48..64
-  
+  const queryParams = querystring.stringify({
+    url: domain,
+    size: "32..48..64"
+  });
+
   const options = {
-    hostname: 'besticon-demo.herokuapp.com',
-  port: 443,
-  path: '/icon',
-  method: 'GET'
-}
+    hostname: "besticon-demo.herokuapp.com",
+    port: 443,
+    path: "/icon?" + queryParams,
+    method: "GET"
+  };
 
-const req = https.request(options, res => {
-  console.log(`statusCode: ${res.statusCode}`)
+  return new Promise(function(resolve, reject) {
+    const req = https.request(options, res => {
+      console.log(`statusCode: ${res.statusCode}`);
 
-  res.on('data', d => {
-    console.log("What's the data?", d);
-  })
-})
+      res.on("data", d => {
+        console.log("What's the data?", d.toString());
+        resolve(d.toString());
+      });
+    });
 
-req.on('error', error => {
-  console.error(error)
-})
+    req.on("error", error => {
+      console.error(error);
+      reject(error);
+    });
 
-req.end()
-  
+    req.end();
+  });
 }
 
 /*
@@ -84,10 +81,7 @@ function update(done) {
           item.item_id = db.uuid();
           item.timestamp = Date.now();
           item.domain = new URL(item.link).host.split("www.").join("");
-          item.item_date_formatted = dateFormat(
-            item.published,
-            "mmm d"
-          );
+          item.item_date_formatted = dateFormat(item.published, "mmm d");
           item.description_trimmed =
             item.description.length > 280
               ? item.description.substring(0, 280) + "..."
@@ -126,18 +120,18 @@ function update(done) {
           // to get a value that is either negative, positive, or zero.
           return new Date(b.item_date) - new Date(a.item_date);
         });
-    
+
       // only save the new rss items that are not already in the db.
-      let itemsToSave = items.filter(function (item) {
-        return !db.getAllItems().some(function (el) {
+      let itemsToSave = items.filter(function(item) {
+        return !db.getAllItems().some(function(el) {
           return el.title === item.title;
         });
       });
-    
+
       console.log("itemsToSave.length", itemsToSave.length);
-      
+
       db.save(items);
-    
+
       if (typeof done !== "undefined") {
         done();
       }
@@ -147,5 +141,7 @@ function update(done) {
       console.log("error", error);
     });
 }
+
+update.getFavicon = getFavicon;
 
 module.exports = update;
