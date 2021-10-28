@@ -13,7 +13,7 @@ function getFavicon(domain) {
   return axios.get("https://favicongrabber.com/api/grab/" + domain);
 }
 
-function addDomains(domains) {
+function addFavicons(domains) {
   
   const promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
     return getFavicon(domain);
@@ -113,13 +113,12 @@ function update(done) {
         });
       });
     
+      let domainNames = [...new Set(items.map(item => item.domain))];  
+      addFavicons(domainNames);
+    
       console.log("itemsToSave.length", itemsToSave.length);
       console.log("What's the domainNames?", domainNames);
       
-      let domainNames = [...new Set(items.map(item => item.domain))];
-      
-      addFavicons(domainNames);
-    
       // db.save(items);
 
       if (typeof done !== "undefined") {
