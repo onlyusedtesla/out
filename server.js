@@ -44,13 +44,16 @@ app.get("/", (request, response) => {
 
     let firstTwoItems = [];
     let nextItems = [];
-    
+
     // Getting the upvote count for each of the items.
     for (let i = 0; i < items.length; i += 1) {
       items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
-      console.log("item upvotecount", items[i].item_id + " " + items[i].upvoteCount);
+      console.log(
+        "item upvotecount",
+        items[i].item_id + " " + items[i].upvoteCount
+      );
     }
-    
+
     if (items.length >= 3) {
       nextItems = items.slice(3);
     }
@@ -59,7 +62,7 @@ app.get("/", (request, response) => {
       firstTwoItems.push(items[0]);
       firstTwoItems.push(items[1]);
     }
-    
+
     response.render(__dirname + "/views/index", {
       searchQuery: request.query.search,
       firstTwoItems: firstTwoItems,
@@ -81,16 +84,19 @@ app.get("/", (request, response) => {
 
     let firstTwoItems = [];
     let nextItems = items.slice(2);
-    
+
     // Getting the upvote count for each of the items.
     for (let i = 0; i < items.length; i += 1) {
       items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
-      console.log("item upvotecount", items[i].item_id + " " + items[i].upvoteCount);
+      console.log(
+        "item upvotecount",
+        items[i].item_id + " " + items[i].upvoteCount
+      );
     }
-    
+
     firstTwoItems.push(items[0]);
     firstTwoItems.push(items[1]);
-    
+
     response.render(__dirname + "/views/index", {
       firstTwoItems: firstTwoItems,
       nextItems: nextItems,
@@ -127,6 +133,15 @@ app.get("/items", function(request, response) {
     response.setHeader("Content-Type", "text/html");
     const items = db.getItems(request.query.page);
 
+    // Getting the upvote count for each of the items.
+    for (let i = 0; i < items.length; i += 1) {
+      items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
+      console.log(
+        "item upvotecount",
+        items[i].item_id + " " + items[i].upvoteCount
+      );
+    }
+
     if (items.length < 1) {
       response.status(400).send("There are no more items to load");
     } else {
@@ -134,7 +149,12 @@ app.get("/items", function(request, response) {
         __dirname + "/partials/article.ejs",
         {
           nextItems: items,
-          favicons: favicons
+          favorites: request.oidc.isAuthenticated()
+            ? db.getFavorites(request.oidc.user.sub)
+            : [],
+          upvotes: request.oidc.isAuthenticated()
+            ? db.getUpvotes(request.oidc.user.sub)
+            : []
         },
         function(err, str) {
           response.status(200).send(str);
@@ -223,7 +243,7 @@ app.post("/upvote", function(request, response) {
   if (typeof request.oidc.user === "undefined") {
     response.status(400).send("Please sign in again.");
   }
-  
+
   if (request.query.item_id) {
     if (db.itemExists(request.query.item_id)) {
       const result = db.addUpvote(request.oidc.user.sub, request.query.item_id);
