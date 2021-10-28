@@ -17,9 +17,9 @@ function addFavicons(domains) {
   
   console.log("domains", domains);
   
-  // const promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
+  const promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
     return getFavicon(domain);
-  // });
+  });
   
   getFavicon(domains[0]).then(function (results) {
     console.log("Getting the first domain");
