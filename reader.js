@@ -4,6 +4,43 @@ const striptags = require("striptags");
 const validKeys = db.validKeys;
 const dateFormat = require("./public/dateFormat.js");
 const rake = require("rake-js");
+const https = require('https');
+const querystring = require('querystring');
+
+// GET parameters
+const parameters = {
+	url: 123,
+	size: "post"
+}
+
+// GET parameters as query string : "?id=123&type=post"
+const get_request_args = querystring.stringify(parameters);
+
+function getFavicon(domain) {
+  https://besticon-demo.herokuapp.com/icon?url=yelp.com&size=32..48..64
+  
+  const options = {
+    hostname: 'besticon-demo.herokuapp.com',
+  port: 443,
+  path: '/icon',
+  method: 'GET'
+}
+
+const req = https.request(options, res => {
+  console.log(`statusCode: ${res.statusCode}`)
+
+  res.on('data', d => {
+    console.log("What's the data?", d);
+  })
+})
+
+req.on('error', error => {
+  console.error(error)
+})
+
+req.end()
+  
+}
 
 /*
  * @description - Takes an array of strings that are of different words. Some have 1 words, 2 words, 3 words, etc.
