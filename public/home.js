@@ -6,21 +6,16 @@
   const tooltips = document.querySelectorAll(".js-tooltip");
   const hoverTooltips = document.querySelectorAll(".js-tooltip-hover");
   const shares = document.querySelectorAll(".js-share");
-  const favoriteButtons = document.querySelectorAll(".js-favorite");
-  const upvotes = document.querySelectorAll(".js-upvote");
   const mobileToggle = document.querySelector(".js-mobilemenutoggle");
   const mobileNavigation = document.querySelector(".js-mobilenavigation");
 
   let page = 1; // For getting more articles
 
   function addItems(html) {
-    return new Promise(function (resolve, reject) {
-      var tpl = document.createElement("template");
-      tpl.innerHTML = html;
-      let articlesEl = document.querySelectorAll("section.articles")[1];
-      articlesEl.appendChild(tpl.content);
-      resolve(tpl);
-    });
+    var tpl = document.createElement("template");
+    tpl.innerHTML = html;
+    let articlesEl = document.querySelectorAll("section.articles")[1];
+    articlesEl.appendChild(tpl.content);
   }
 
   function getItems(page) {
@@ -127,17 +122,18 @@
     getItems(page)
       .then(function(html) {
       
-        addItems(html).then(function (tpl) {
-          console.log("What's the tpl?", tpl);
-          // setTimeout(function() {
-          //   convertArticleDates();
-          // });
-        });
+        addItems(html);
       
         page += 1;
 
         moreButton.removeAttribute("disabled");
         moreButton.innerHTML = "More";
+      
+        setTimeout(function() {
+          convertArticleDates();
+          addFavoriteListeners();
+          addUpvoteListeners();
+        });
       
       })
       .catch(function(response) {
@@ -223,33 +219,43 @@
     });
   }
 
-  Array.from(upvotes).forEach(function(upvote) {
-    upvote.addEventListener("click", function(event) {
-      event.preventDefault();
+  function addUpvoteListeners() {
+    
+    var upvotes = document.querySelectorAll(".js-upvote");
+    
+      Array.from(upvotes).forEach(function(upvote) {
+        
+        upvote.removeEventListener("click", upvoteHandler);
+        upvote.addEventListener("click", upvoteHandler);
+        
+        upvote.addEventListener("click", function(event) {
+          event.preventDefault();
 
-      var article = upvote.closest(".js-article"),
-        upvotesForArticle = article.querySelectorAll(".js-upvote"),
-        itemId = article.getAttribute("data-item-id"),
-        action = upvote.getAttribute("data-action");
+          var article = upvote.closest(".js-article"),
+            upvotesForArticle = article.querySelectorAll(".js-upvote"),
+            itemId = article.getAttribute("data-item-id"),
+            action = upvote.getAttribute("data-action");
 
-      toggleUpvotes(upvotesForArticle);
-
-      console.log("action", action);
-
-      if (action === "add") {
-        // Turn it off if error from the server.
-        upvoteItem(itemId).catch(function() {
           toggleUpvotes(upvotesForArticle);
-        });
-      } else {
-        removeUpvote(itemId).catch(function() {
-          toggleUpvotes(upvotesForArticle);
-        });
-      }
-    });
-  });
 
+          console.log("action", action);
+
+          if (action === "add") {
+            // Turn it off if error from the server.
+            upvoteItem(itemId).catch(function() {
+              toggleUpvotes(upvotesForArticle);
+            });
+          } else {
+            removeUpvote(itemId).catch(function() {
+              toggleUpvotes(upvotesForArticle);
+            });
+          }
+        });
+      });
+  }
+  
   function convertArticleDates(articleDates) {
+    var articleDates = document.querySelectorAll(".js-article-date")
     Array.from(articleDates).forEach(function(articleDate) {
       articleDate.innerHTML = dateFormat(
         +articleDate.getAttribute("data-time"),
@@ -283,38 +289,47 @@
   }
 
   // Takes care of favoriting.
-  Array.from(favoriteButtons).forEach(function(favoriteButton) {
-    favoriteButton.addEventListener("click", function(event) {
-      event.preventDefault();
+  
+  function addFavoriteListeners() {
+    
+    var favoriteButtons = document.querySelectorAll(".js-favorite");
+    
+      Array.from(favoriteButtons).forEach(function(favoriteButton) {
+        favoriteButton.addEventListener("click", function(event) {
+          event.preventDefault();
 
-      var article = favoriteButton.closest(".js-article"),
-        favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
-        itemId = article.getAttribute("data-item-id"),
-        action = favoriteButton.getAttribute("data-action");
+          var article = favoriteButton.closest(".js-article"),
+            favoritesForArticle = article.querySelectorAll(".js-favorite > path"),
+            itemId = article.getAttribute("data-item-id"),
+            action = favoriteButton.getAttribute("data-action");
 
-      toggleFavorite(favoritesForArticle);
+          toggleFavorite(favoritesForArticle);
 
-      if (action === "add") {
-        favoriteItem(itemId)
-          .then(function(response) {})
-          .catch(function(error) {
-            toggleFavorite(favoritesForArticle); // put the state of the button back.
-          });
-      } else if (action === "remove") {
-        console.log("going to unfavorite the item.");
-        removeFavorite(itemId)
-          .then(function(response) {})
-          .catch(function(error) {
-            toggleFavorite(favoritesForArticle);
-          });
-      }
-    });
-  });
-
+          if (action === "add") {
+            favoriteItem(itemId)
+              .then(function(response) {})
+              .catch(function(error) {
+                toggleFavorite(favoritesForArticle); // put the state of the button back.
+              });
+          } else if (action === "remove") {
+            console.log("going to unfavorite the item.");
+            removeFavorite(itemId)
+              .then(function(response) {})
+              .catch(function(error) {
+                toggleFavorite(favoritesForArticle);
+              });
+          }
+        });
+      });
+  }
+  
   mobileToggle.addEventListener("click", function(event) {
     mobileToggle.classList.toggle("mobile-menuToggle--activated");
     mobileNavigation.classList.toggle("mobile-navigation--opened");
   });
 
-  convertArticleDates(document.querySelectorAll(".js-article-date"));
+  convertArticleDates();
+  addFavoriteListeners();
+  addUpvoteListeners();
+  
 })();
