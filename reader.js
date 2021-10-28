@@ -90,7 +90,15 @@ function update(done) {
           return new Date(b.item_date) - new Date(a.item_date);
         });
     
-      db.save(items);
+      // only save the new rss items that are not already in the db.
+      let itemsToSave = items.filter(function (item) {
+        let exists = db.getAllItems().some(el => el.title === item.title && el.url === item.url);
+        return !exists;
+      });
+    
+      console.log("itemsToSave", itemsToSave);
+      
+      // db.save(items);
     
       if (typeof done !== "undefined") {
         done();
