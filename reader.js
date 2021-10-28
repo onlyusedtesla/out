@@ -4,36 +4,12 @@ const striptags = require("striptags");
 const validKeys = db.validKeys;
 const dateFormat = require("./public/dateFormat.js");
 const rake = require("rake-js");
-const https = require("https");
+const http = require("http");
 const querystring = require("querystring");
+const axios = require("axios");
 
 function getFavicon(domain) {
-  
-  http://favicongrabber.com/api/grab/github.com
-  const options = {
-    hostname: "favicongrabber.com" + domain,
-    port: 443,
-    method: "GET"
-  };
-
-  return new Promise(function(resolve, reject) {
-    const req = https.request(options, res => {
-      console.log(`statusCode: ${res.statusCode}`);
-
-      res.on("data", d => {
-        console.log("d", d);
-        console.log("What's the data?", d.toString());
-        resolve(d.toString());
-      });
-    });
-
-    req.on("error", error => {
-      console.error(error);
-      reject(error);
-    });
-
-    req.end();
-  });
+  return axios.get("https://favicongrabber.com/api/grab/" + domain);
 }
 
 /*
