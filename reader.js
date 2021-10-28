@@ -15,23 +15,23 @@ function getFavicon(domain) {
 
 function addFavicons(domains) {
   
-  console.log("domains", domains);
+  for (let i = 0; i < domains.length; )
+  axios.all([
+    axios.get('https://api.github.com/users/MaksymRudnyi'), 
+    axios.get('https://api.github.com/users/taylorotwell')
+  ])
+    .then(axios.spread((obj1, obj2) => {
+  // Both requests are now complete
+  console.log(obj1.data.login + ' has ' + obj1.data.public_repos + ' public repos on GitHub');
+  console.log(obj2.data.login + ' has ' + obj2.data.public_repos + ' public repos on GitHub');
+}));
   
   const promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
-    return getFavicon(domain);
+    return axios.get("https://favicongrabber.com/api/grab/" + domain);
   });
   
-  getFavicon(domains[0]).then(function (results) {
-    console.log("Getting the first domain");
-    console.log("results", results);
-  });
+  axios.all(promises).then(function (results) {
   
-  console.log("addFavicons", addFavicons);
-  console.log("what are the promises?", promises);
-  
-  Promise.all(promises).then(function (results) {
-    console.log("What are the results?");
-    console.log(results);
   });
 }
 
