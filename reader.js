@@ -8,15 +8,10 @@ const https = require("https");
 const querystring = require("querystring");
 
 function getFavicon(domain) {
-  const queryParams = querystring.stringify({
-    url: domain,
-    size: "32..48..64"
-  });
-
+  
   const options = {
-    hostname: "besticon-demo.herokuapp.com",
+    hostname: "api.faviconkit.com/" + domain,
     port: 443,
-    path: "/icon?" + queryParams,
     method: "GET"
   };
 
@@ -25,6 +20,7 @@ function getFavicon(domain) {
       console.log(`statusCode: ${res.statusCode}`);
 
       res.on("data", d => {
+        console.log("d", d);
         console.log("What's the data?", d.toString());
         resolve(d.toString());
       });
