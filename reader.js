@@ -11,13 +11,13 @@ const favicons = require("./favicons.json");
 
 function addFavicons(domains) {
   console.log("addFavicons", addFavicons);
-  domains.filter(domain => typeof favicons[domain] === "undefined").forEach(function (domain) {
-    console.log("What's the domain?", domain);
-    axios.get("https://favicongrabber.com/api/grab/" + domain).then(function (results) {
-      console.log("results.data", results.data);
-    });
+  let promises = domains.filter(domain => typeof favicons[domain] === "undefined").map(function (domain) {
+    return axios.get("https://favicongrabber.com/api/grab/" + domain);
   });
   
+  Promise.all(promises).then(function (allResults) {
+    console.log("All Results?", allResults);
+  });
 }
 
 /*
