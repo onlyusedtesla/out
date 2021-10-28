@@ -9,8 +9,9 @@ const querystring = require("querystring");
 
 function getFavicon(domain) {
   
+  http://favicongrabber.com/api/grab/github.com
   const options = {
-    hostname: "api.faviconkit.com/" + domain,
+    hostname: "favicongrabber.com" + domain,
     port: 443,
     method: "GET"
   };
