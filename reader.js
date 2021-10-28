@@ -72,7 +72,11 @@ function update(done) {
             item.title.trim() + " " + item.description,
             { language: "english" }
           );
-
+          
+          if (item.domain === "youtu.be") {
+            item.domain = "youtube.com";
+          }
+          
           item.keywords = getRelevantKeywords(keywords)
             .map(function(keyword) {
               let result = "";

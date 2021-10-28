@@ -208,6 +208,10 @@ textarea {
   display: none;
 }
 
+.article-footer > svg {
+  cursor: pointer;
+}
+
 .article-share {
   padding: 16px;
 

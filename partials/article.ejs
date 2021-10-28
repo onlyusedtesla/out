@@ -1,72 +1,72 @@
-      <% for (let i = 0; i < nextItems.length; i += 1) { %>
-          <article class="article">
-            
-            <div class="article-details">
-              <div class="article-website">
-                <img src="<%= favicons[nextItems[i].domain] %>" class="article-favicon">
-                <p class="article-websitename">
-                  <%= nextItems[i].domain %>
-                </p>
-              </div>
-              <div class="article-date">
-                <%= nextItems[i].item_date_formatted %>
-              </div>
-            </div>
-            
-            <div class="flex mt-onedown">
-              <div class="flex-item mr-default flex-item--stretch">
-                <div class="flex flex--spaceOneDown flex--alignItemsCenter">
-                  <div class="flex-item">
-                    <p class="article-title">
-                      <a href="<%= nextItems[i].url %>" target="_blank" class="article-linkTitle">
-                        <%= nextItems[i].title; %>
-                      </a>
-                    </p>
-                  </div>
-                  <div class="flex-item">
-                    <span class="article-icon desktop"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 0H1.23438C0.828125 0 0.5 0.34375 0.5 0.75V5.26562C0.5 5.67188 0.828125 6 1.23438 6H5.75C6.15625 6 6.5 5.67188 6.5 5.26562V0.75C6.5 0.34375 6.15625 0 5.75 0ZM8.70312 0.59375L7 1.78125V4.23438L8.70312 5.42188C9.03125 5.64062 9.5 5.40625 9.5 5.01562V1C9.5 0.609375 9.03125 0.375 8.70312 0.59375Z" fill="white"></path></svg></span>
-                  </div>
-                </div>
-                <p class="article-description">
-                  <a href="<%= nextItems[i].url %>" target="_blank" class="article-link">
-                    <%= nextItems[i].description_trimmed; %>
-                  </a>
-                </p>
+<% for (let i = 0; i < nextItems.length; i += 1) { %>
+    <article class="article">
 
-                <div class="article-footer">
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" fill="#EDA44D"/>
-                  </svg>
-                  <p class="article-tags">
-                    <%= nextItems[i].keywords %>
-                  </p>
-                </div>
-              </div>
-              <div class="flex-item">
-                <div class="article-sharecontainer">
-                  <div class="article-share">
-                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
-                    </svg>
-                  </div>
-                  <p class="article-shareText">Share</p>
-                </div>
-              </div>
+      <div class="article-details">
+        <div class="article-website">
+          <img src="<%= favicons[nextItems[i].domain] %>" class="article-favicon">
+          <p class="article-websitename">
+            <%= nextItems[i].domain %>
+          </p>
+        </div>
+        <div class="article-date">
+          <%= nextItems[i].item_date_formatted %>
+        </div>
+      </div>
+
+      <div class="flex mt-onedown">
+        <div class="flex-item mr-default flex-item--stretch">
+          <div class="flex flex--spaceOneDown flex--alignItemsCenter">
+            <div class="flex-item">
+              <p class="article-title">
+                <a href="<%= nextItems[i].url %>" target="_blank" class="article-linkTitle">
+                  <%= nextItems[i].title; %>
+                </a>
+              </p>
             </div>
-            
-                        <div class="article-detailsMobile flex flex--spaceBetween flex--alignItemsCenter">
-              <div class="flex-item">
-                <div class="flex-item">
-                  <span class="article-icon"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 0H1.23438C0.828125 0 0.5 0.34375 0.5 0.75V5.26562C0.5 5.67188 0.828125 6 1.23438 6H5.75C6.15625 6 6.5 5.67188 6.5 5.26562V0.75C6.5 0.34375 6.15625 0 5.75 0ZM8.70312 0.59375L7 1.78125V4.23438L8.70312 5.42188C9.03125 5.64062 9.5 5.40625 9.5 5.01562V1C9.5 0.609375 9.03125 0.375 8.70312 0.59375Z" fill="white"></path></svg></span>
-                </div>
-              </div>
-              <div class="flex-item">
-                <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
-                </svg>
-                <span class="article-detailsMobileShareText">Share</span>
-              </div>
+            <div class="flex-item">
+              <span class="article-icon desktop"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 0H1.23438C0.828125 0 0.5 0.34375 0.5 0.75V5.26562C0.5 5.67188 0.828125 6 1.23438 6H5.75C6.15625 6 6.5 5.67188 6.5 5.26562V0.75C6.5 0.34375 6.15625 0 5.75 0ZM8.70312 0.59375L7 1.78125V4.23438L8.70312 5.42188C9.03125 5.64062 9.5 5.40625 9.5 5.01562V1C9.5 0.609375 9.03125 0.375 8.70312 0.59375Z" fill="white"></path></svg></span>
             </div>
-            
-          </article>
-      <% } %>
+          </div>
+          <p class="article-description">
+            <a href="<%= nextItems[i].url %>" target="_blank" class="article-link">
+              <%= nextItems[i].description_trimmed; %>
+            </a>
+          </p>
+
+          <div class="article-footer">
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" fill="#EDA44D"/>
+            </svg>
+            <p class="article-tags">
+              <%= nextItems[i].keywords %>
+            </p>
+          </div>
+        </div>
+        <div class="flex-item">
+          <div class="article-sharecontainer">
+            <div class="article-share">
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
+              </svg>
+            </div>
+            <p class="article-shareText">Share</p>
+          </div>
+        </div>
+      </div>
+
+                  <div class="article-detailsMobile flex flex--spaceBetween flex--alignItemsCenter">
+        <div class="flex-item">
+          <div class="flex-item">
+            <span class="article-icon"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 0H1.23438C0.828125 0 0.5 0.34375 0.5 0.75V5.26562C0.5 5.67188 0.828125 6 1.23438 6H5.75C6.15625 6 6.5 5.67188 6.5 5.26562V0.75C6.5 0.34375 6.15625 0 5.75 0ZM8.70312 0.59375L7 1.78125V4.23438L8.70312 5.42188C9.03125 5.64062 9.5 5.40625 9.5 5.01562V1C9.5 0.609375 9.03125 0.375 8.70312 0.59375Z" fill="white"></path></svg></span>
+          </div>
+        </div>
+        <div class="flex-item">
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
+          </svg>
+          <span class="article-detailsMobileShareText">Share</span>
+        </div>
+      </div>
+
+    </article>
+<% } %>

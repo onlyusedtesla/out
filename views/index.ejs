@@ -82,9 +82,9 @@
         </button>
         <p class="username">
           <% if (userInfo) { %>
-            <%= userInfo %> | <a href="/logout" class="login-button">Sign Out</a>
+            <%= userInfo %> | <a href="/logout" class="blue-link">Sign Out</a>
           <% } else { %>
-            <a href="/login" class="login-button">
+            <a href="/login" class="blue-link">
               Sign In
             </a>
           <% } %>
@@ -138,7 +138,7 @@
             
             <div class="article-details">
               <div class="article-website">
-                <img src="https://logo.clearbit.com/<%= favicons[] %>" class="article-favicon">
+                <img src="https://logo.clearbit.com/<%= firstTwoItems[i].domain %>" class="article-favicon">
                 <p class="article-websitename">
                   <%= firstTwoItems[i].domain %>
                 </p>
@@ -261,7 +261,7 @@
             
             <div class="article-details">
               <div class="article-website">
-                <img src="<%= favicons[nextItems[i].domain] %>" class="article-favicon">
+                <img src="https://logo.clearbit.com/<%= nextItems[i].domain %>" class="article-favicon">
                 <p class="article-websitename">
                   <%= nextItems[i].domain %>
                 </p>
