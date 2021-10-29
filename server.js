@@ -112,6 +112,10 @@ app.get("/", (request, response) => {
   }
 });
 
+app.get("/item/:id", (request, response) => {
+  // This is the page where we will render the individual comments page.
+});
+
 app.get("/landing", function(request, response) {
   response.render(__dirname + "/views/landing");
 });
