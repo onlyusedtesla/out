@@ -307,6 +307,21 @@ textarea {
   vertical-align: middle;
 }
 
+.article-author {
+  margin-left: 0.5em;
+  color: var(--dark-grey);
+  font-size: 0.75em;
+}
+
+.article-authorName {
+  color: var(--dark-grey);
+  text-decoration: none;
+}
+
+.article-authorName:hover {
+  text-decoration: underline;
+}
+
 /* Alert */
 
 .alert {

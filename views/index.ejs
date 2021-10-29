@@ -178,9 +178,13 @@
                   
                   <% if (typeof firstTwoItems[i].submitted_by !== "undefined") { %>
                   <p class="article-author">
-                    <span> by </span><span class="article-authorName"><%= firstTwoItems[i].submitted_by %></span><span> · </span>
+                    <span> by </span><a href="/u/<%= firstTwoItems[i].submitted_by %>" class="article-authorName"><%= firstTwoItems[i].submitted_by %></a><span> · </span>
                   </p>
                   <% } %>
+                  
+                  <p class="article-comments">
+                    <a href="/item/<%= firstTwoItems[i].item_id %>">Discuss (147 comments)</a> <span> · </span> 
+                  </p>
                   
                   <p class="article-tags">
                     <%= firstTwoItems[i].keywords %>
