@@ -307,18 +307,21 @@ textarea {
   vertical-align: middle;
 }
 
-.article-author {
+.article-author,
+.article-comments {
   margin-left: 0.5em;
   color: var(--dark-grey);
   font-size: 0.75em;
 }
 
-.article-authorName {
+.article-authorName,
+.article-commentLink {
   color: var(--dark-grey);
   text-decoration: none;
 }
 
-.article-authorName:hover {
+.article-authorName:hover,
+.article-commentLink:hover {
   text-decoration: underline;
 }
 

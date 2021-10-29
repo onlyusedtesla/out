@@ -183,12 +183,13 @@
                   <% } %>
                   
                   <p class="article-comments">
-                    <a href="/item/<%= firstTwoItems[i].item_id %>">Discuss (147 comments)</a> <span> · </span> 
+                    <a class="article-commentLink" href="/item/<%= firstTwoItems[i].item_id %>">Discuss<% if (typeof firstTwoItems[i].numberOfComments !== "undefined") { %> (<%= firstTwoItems[i].numberOfComments %> comments)<% } %></a> <span> · </span>
                   </p>
                   
                   <p class="article-tags">
                     <%= firstTwoItems[i].keywords %>
                   </p>
+                  
                 </div>
               </div>
               <div class="flex-item">
