@@ -73,7 +73,9 @@ function update(done) {
               return result.trim();
             })
             .join(", ");
-
+          
+          console.log("What's the author?", item.author);
+          
           delete item.id;
           delete item.link;
           delete item.category;
@@ -98,7 +100,7 @@ function update(done) {
         });
       });
     
-      db.save(items);
+      // db.save(items);
 
       if (typeof done !== "undefined") {
         done();
