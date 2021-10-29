@@ -80,9 +80,11 @@ function update(done) {
               title: item.title,
               url: item.url
             });
-            console.log("This is a user submission")
-            ;
-            console.log("What's the submission?", submission);
+            
+            if (typeof submission !== "undefined") {
+              item.submitted_by = submission.author;
+              item.description = submission.description;
+            }
           }
           
           delete item.id;
@@ -109,7 +111,7 @@ function update(done) {
         });
       });
     
-      // db.save(items);
+      db.save(items);
 
       if (typeof done !== "undefined") {
         done();
