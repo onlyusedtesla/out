@@ -178,7 +178,7 @@
                   
                   <% if (typeof firstTwoItems[i].submitted_by !== "undefined") { %>
                   <p class="article-author">
-                    <%= firstTwoItems[i].submitted_by %>
+                    <span> by </span><span class="article-authorName"><%= firstTwoItems[i].submitted_by %></span><span> · </span>
                   </p>
                   <% } %>
                   
