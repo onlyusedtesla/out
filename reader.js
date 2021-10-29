@@ -74,7 +74,16 @@ function update(done) {
             })
             .join(", ");
           
-          console.log("What's the author?", item.author);
+          // Treat this one like a submission because it's coming from a user.
+          if (item.author === "TeslaTracker Submissions") {
+            let submission = db.findSubmission({
+              title: item.title,
+              url: item.url
+            });
+            console.log("This is a user submission")
+            ;
+            console.log("What's the submission?", submission);
+          }
           
           delete item.id;
           delete item.link;

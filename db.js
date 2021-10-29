@@ -33,6 +33,14 @@ function save(items) {
   saveFile(data);
 }
 
+function findSubmission(submission) {
+  const rawData = fs.readFileSync(__dirname + "/submissions.json"),
+        data = JSON.parse(rawData),
+        allSubmissions = data["submissions"],
+        indexOfSubmission = allSubmissions.findIndex(i => i.title === submission.title && i.url === submission.url);
+  return allSubmissions[indexOfSubmission];
+}
+
 function saveSubmission(submission) {
   rawData = fs.readFileSync(__dirname + '/submissions.json');
   data = JSON.parse(rawData);
@@ -239,6 +247,7 @@ module.exports = {
   getUpvoteCountForItem: getUpvoteCountForItem,
   
   saveSubmission: saveSubmission,
+  findSubmission: findSubmission,
   validKeys: validKeys,
   uuid: uuid
 };
