@@ -114,6 +114,28 @@ app.get("/", (request, response) => {
 
 app.get("/item/:id", (request, response) => {
   // This is the page where we will render the individual comments page.
+  
+  const item = db.getItems()[0];
+  
+  console.log("Rendering the item view");
+  console.log("What's the item", item);
+  
+  // Getting the upvote count for each of the items.
+  for (let i = 0; i < items.length; i += 1) {
+    items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
+    console.log(
+      "item upvotecount",
+      items[i].item_id + " " + items[i].upvoteCount
+    );
+  }
+  
+  response.render(__dirname + "/views/comments", {
+    item: item,
+    staging: process.env.STAGING || false,
+    userInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false,
+    favorites: request.oidc.isAuthenticated() ? db.getFavorites(request.oidc.user.sub) : [],
+    upvotes: 
+  });
 });
 
 app.get("/landing", function(request, response) {

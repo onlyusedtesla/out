@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="All your Tesla news in one spot. The easiest and fastest way to always know what's happening in the Tesla world.">
 
-    <title>TeslaTracker</title>
+    <title><%= item.title %> | TeslaTracker</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,30 +120,17 @@
       
     <main>
       
-      <% if (typeof searchQuery !== "undefined") { %>
-        <div class="searchcontainer">
-          <p class="searchcontainer-term">
-            Search: <span class="searchcontainer-searchtext"><%= searchQuery %></span>
-          </p>
-          <p class="searchcontainer-description">
-            You're viewing all recent articles related to <em><%= searchQuery %></em>
-          </p>
-        </div>
-      <% } %>
-      
-      <section class="articles">
-      <% for (let i = 0; i < firstTwoItems.length; i += 1) { %>
-          <article class="article js-article" data-item-id="<%= firstTwoItems[i].item_id %>">
+      <article class="article js-article" data-item-id="<%= item.item_id %>">
             
             <div class="article-details">
               <div class="article-website">
-                <img src="https://logo.clearbit.com/<%= firstTwoItems[i].domain %>" class="article-favicon">
+                <img src="https://logo.clearbit.com/<%= item.domain %>" class="article-favicon">
                 <p class="article-websitename">
-                  <%= firstTwoItems[i].domain %>
+                  <%= item.domain %>
                 </p>
               </div>
-              <div class="article-date js-article-date" data-time="<%= firstTwoItems[i].item_date %>">
-                <%= firstTwoItems[i].item_date_formatted %>
+              <div class="article-date js-article-date" data-time="<%= item.item_date %>">
+                <%= item.item_date_formatted %>
               </div>
             </div>
             
@@ -152,8 +139,8 @@
                 <div class="flex flex--spaceOneDown flex--alignItemsCenter">
                   <div class="flex-item">
                     <p class="article-title">
-                      <a href="<%= firstTwoItems[i].url %>" target="_blank" class="article-linkTitle">
-                        <%= firstTwoItems[i].title; %>
+                      <a href="<%= item.url %>" target="_blank" class="article-linkTitle">
+                        <%= item.title; %>
                       </a>
                     </p>
                   </div>
@@ -162,32 +149,28 @@
                   </div>
                 </div>
                 <p class="article-description">
-                  <a href="<%= firstTwoItems[i].url %>" target="_blank" class="article-link">
-                    <%= firstTwoItems[i].description_trimmed; %>
+                  <a href="<%= item.url %>" target="_blank" class="article-link">
+                    <%= item.description_trimmed; %>
                   </a>
                 </p>
 
                 <div class="article-footer">
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="js-favorite" <% if (favorites.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
-                    <% if (favorites && favorites.length >= 1 && favorites.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %>
+                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="js-favorite" <% if (favorites.some((favorite) => favorite.item_id === item.item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
+                    <% if (favorites && favorites.length >= 1 && favorites.some((favorite) => favorite.item_id === item.item_id)) { %>
                       <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="none" fill="#EDA44D" data-original-fill="#EDA44D" />
                     <% } else { %>
                       <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="#BBBBBB" fill="none" data-original-fill="#EDA44D" />
                     <% } %>
                   </svg>
                   
-                  <% if (typeof firstTwoItems[i].submitted_by !== "undefined") { %>
+                  <% if (typeof item.submitted_by !== "undefined") { %>
                   <p class="article-author">
-                    <span> by </span><a href="/u/<%= firstTwoItems[i].submitted_by %>" class="article-authorName"><%= firstTwoItems[i].submitted_by %></a><span> · </span>
+                    <span> by </span><a href="/u/<%= item.submitted_by %>" class="article-authorName"><%= item.submitted_by %></a><span> · </span>
                   </p>
                   <% } %>
                   
-                  <p class="article-comments">
-                    <a class="article-commentLink" href="/item/<%= firstTwoItems[i].item_id %>">Discuss<% if (typeof firstTwoItems[i].numberOfComments !== "undefined") { %> (<%= firstTwoItems[i].numberOfComments %> comments)<% } %></a> <span> · </span>
-                  </p>
-                  
                   <p class="article-tags">
-                    <%= firstTwoItems[i].keywords %>
+                    <%= item.keywords %>
                   </p>
                   
                 </div>
@@ -196,21 +179,21 @@
                 <div class="flex flex--spaceOneDown flex--alignItemsCenter">
                   <div class="flex-item">
                     <div class="article-sharecontainer">
-                      <div class="article-share article-share--upvote js-upvote <% if (upvotes.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %> article-share--upvoted <% } %>" <% if (upvotes.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
+                      <div class="article-share article-share--upvote js-upvote <% if (upvotes.some((favorite) => favorite.item_id === item.item_id)) { %> article-share--upvoted <% } %>" <% if (upvotes.some((favorite) => favorite.item_id === item.item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
                         <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %>
+                          <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === item.item_id)) { %>
                             <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="true" data-fill-upvoted="#FFFFFF" data-fill-notupvoted="#3F67CE" fill="#FFFFFF" />
                           <% } else { %>
                             <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="false" data-fill-upvoted="#FFFFFF" data-fill-notupvoted="#3F67CE" fill="#3F67CE" />
                           <% } %>
                         </svg>
                       </div>
-                      <p class="article-shareText js-upvoteCount"><%= firstTwoItems[i].upvoteCount %></p>
+                      <p class="article-shareText js-upvoteCount"><%= item.upvoteCount %></p>
                     </div>
                   </div>
                   <div class="flex-item">
                     <div class="article-sharecontainer">
-                      <div class="article-share tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= firstTwoItems[i].url %>">
+                      <div class="article-share tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= item.url %>">
                         <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
                         </svg>
@@ -231,25 +214,25 @@
               <div class="flex-item">
                 <div class="flex flex--space">
                   <div class="flex-item">
-                    <svg width="10" height="10" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="js-favorite article-favoriteMobile" <% if (favorites.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
-                    <% if (favorites && favorites.length >= 1 && favorites.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %>
+                    <svg width="10" height="10" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="js-favorite article-favoriteMobile" <% if (favorites.some((favorite) => favorite.item_id === item.item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
+                    <% if (favorites && favorites.length >= 1 && favorites.some((favorite) => favorite.item_id === item.item_id)) { %>
                       <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="none" fill="#EDA44D" data-original-fill="#EDA44D" />
                     <% } else { %>
                       <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="#BBBBBB" fill="none" data-original-fill="#EDA44D" />
                     <% } %>
                   </svg>
                   </div>
-                  <div class="flex-item js-upvote <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %> article-share--upvoted <% } %>" <% if (upvotes.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
+                  <div class="flex-item js-upvote <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === item.item_id)) { %> article-share--upvoted <% } %>" <% if (upvotes.some((favorite) => favorite.item_id === item.item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === firstTwoItems[i].item_id)) { %>
+                      <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === item.item_id)) { %>
                         <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="true" data-fill-upvoted="#3F67CE" fill="#3F67CE" data-fill-notupvoted="#BBBBBB" />
                       <% } else { %>
                         <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="false" data-fill-upvoted="#3F67CE" fill="#BBBBBB" data-fill-notupvoted="#BBBBBB" />
                       <% } %>
                     </svg>
-                    <span class="article-detailsMobileShareText js-upvoteCount"><%= firstTwoItems[i].upvoteCount %></span>
+                    <span class="article-detailsMobileShareText js-upvoteCount"><%= item.upvoteCount %></span>
                   </div>
-                  <div class="flex-item tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= firstTwoItems[i].url %>">
+                  <div class="flex-item tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= item.url %>">
                     <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
                     </svg>
@@ -259,139 +242,6 @@
               </div>
             </div>
           </article>
-      <% } %>
-      </section>
-      
-        <div class="alert">
-          Help passionate Tesla fans track the latest Tesla news. <a href="/submit" class="submit-link">Add Post</a>
-        </div>
-      
-              <section class="articles">
-      <% for (let i = 0; i < nextItems.length; i += 1) { %>
-          <article class="article js-article" data-item-id="<%= nextItems[i].item_id %>">
-            
-            <div class="article-details">
-              <div class="article-website">
-                <img src="https://logo.clearbit.com/<%= nextItems[i].domain %>" class="article-favicon">
-                <p class="article-websitename">
-                  <%= nextItems[i].domain %>
-                </p>
-              </div>
-              <div class="article-date js-article-date" data-time="<%= nextItems[i].item_date %>">
-                <%= nextItems[i].item_date_formatted %>
-              </div>
-            </div>
-            
-            <div class="flex mt-onedown">
-              <div class="flex-item mr-default flex-item--stretch">
-                <div class="flex flex--spaceOneDown flex--alignItemsCenter">
-                  <div class="flex-item">
-                    <p class="article-title">
-                      <a href="<%= nextItems[i].url %>" target="_blank" class="article-linkTitle">
-                        <%= nextItems[i].title; %>
-                      </a>
-                    </p>
-                  </div>
-                  <div class="flex-item">
-                    <span class="article-icon desktop" style="display: none;"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 0H1.23438C0.828125 0 0.5 0.34375 0.5 0.75V5.26562C0.5 5.67188 0.828125 6 1.23438 6H5.75C6.15625 6 6.5 5.67188 6.5 5.26562V0.75C6.5 0.34375 6.15625 0 5.75 0ZM8.70312 0.59375L7 1.78125V4.23438L8.70312 5.42188C9.03125 5.64062 9.5 5.40625 9.5 5.01562V1C9.5 0.609375 9.03125 0.375 8.70312 0.59375Z" fill="white"></path></svg></span>
-                  </div>
-                </div>
-                <p class="article-description">
-                  <a href="<%= nextItems[i].url %>" target="_blank" class="article-link">
-                    <%= nextItems[i].description_trimmed; %>
-                  </a>
-                </p>
-
-                <div class="article-footer">
-                  
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="js-favorite" <% if (favorites.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
-                    
-                    <% if (favorites && favorites.length >= 1 && favorites.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %>
-                      <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="none" fill="#EDA44D" data-original-fill="#EDA44D" />
-                    <% } else { %>
-                      <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="#BBBBBB" fill="none" data-original-fill="#EDA44D" />
-                    <% } %>
-                    
-                  </svg>
-                  <p class="article-tags">
-                    <%= nextItems[i].keywords %>
-                  </p>
-                </div>
-              </div>
-              <div class="flex-item">
-                <div class="flex-item">
-                <div class="flex flex--spaceOneDown flex--alignItemsCenter">
-                <div class="flex-item">
-                    <div class="article-sharecontainer">
-                      <div class="article-share article-share--upvote js-upvote <% if (upvotes.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %> article-share--upvoted <% } %>" <% if (upvotes.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
-                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %>
-                            <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="true" data-fill-upvoted="#FFFFFF" data-fill-notupvoted="#3F67CE" fill="#FFFFFF" />
-                          <% } else { %>
-                            <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="false" data-fill-upvoted="#FFFFFF" data-fill-notupvoted="#3F67CE" fill="#3F67CE" />
-                          <% } %>
-                        </svg>
-                      </div>
-                      <p class="article-shareText js-upvoteCount"><%= nextItems[i].upvoteCount %></p>
-                    </div>
-                  </div>
-                  <div class="flex-item">
-                    <div class="article-sharecontainer">
-                      <div class="article-share tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= nextItems[i].url %>">
-                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
-                        </svg>
-                      </div>
-                      <p class="article-shareText">Share</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-            
-                        <div class="article-detailsMobile flex flex--spaceBetween flex--alignItemsCenter">
-              <div class="flex-item">
-                <div class="flex-item">
-                  <span class="article-icon" style="display: none;"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 0H1.23438C0.828125 0 0.5 0.34375 0.5 0.75V5.26562C0.5 5.67188 0.828125 6 1.23438 6H5.75C6.15625 6 6.5 5.67188 6.5 5.26562V0.75C6.5 0.34375 6.15625 0 5.75 0ZM8.70312 0.59375L7 1.78125V4.23438L8.70312 5.42188C9.03125 5.64062 9.5 5.40625 9.5 5.01562V1C9.5 0.609375 9.03125 0.375 8.70312 0.59375Z" fill="white"></path></svg></span>
-                </div>
-              </div>
-              <div class="flex-item">
-                <div class="flex flex--space">
-                  <div class="flex-item">
-                    <svg width="10" height="10" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="js-favorite article-favoriteMobile" <% if (favorites.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
-                    <% if (favorites && favorites.length >= 1 && favorites.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %>
-                      <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="none" fill="#EDA44D" data-original-fill="#EDA44D" />
-                    <% } else { %>
-                      <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="#BBBBBB" fill="none" data-original-fill="#EDA44D" />
-                    <% } %>
-                  </svg>
-                  </div>
-                  <div class="flex-item js-upvote <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %> article-share--upvoted <% } %>" <% if (upvotes.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %>>
-                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <% if (upvotes && upvotes.length >= 1 && upvotes.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %>
-                        <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="true" data-fill-upvoted="#3F67CE" fill="#3F67CE" data-fill-notupvoted="#BBBBBB" />
-                      <% } else { %>
-                        <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="false" data-fill-upvoted="#3F67CE" fill="#BBBBBB" data-fill-notupvoted="#BBBBBB" />
-                      <% } %>
-                    </svg>
-                    <span class="article-detailsMobileShareText js-upvoteCount"><%= nextItems[i].upvoteCount %></span>
-                  </div>
-                  <div class="flex-item tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= nextItems[i].url %>">
-                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
-                    </svg>
-                    <span class="article-detailsMobileShareText">Share</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </article>
-      <% } %>
-      </section>
-      
-      <a href="#" class="blue-link more-button js-more-button">More</a>
       
     </main>
 
@@ -409,4 +259,4 @@
     
   </body>
 </html>
-=
+
