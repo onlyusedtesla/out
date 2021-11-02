@@ -266,9 +266,10 @@
             
             <% if (typeof comments[i].replies !== "undefined" && comments[i].replies.length >= 1) { %>
               <div class="comment-replies">
-                <%- include('partials/comments.ejs', { comments: comments[i].replies }) %>
+                <%- include(commentPartialPath, { commentPartialPath: commentPartialPath, comments: comments[i].replies }) %>
               </div>
             <% } %>
+            
           </div>
         <% } %>  
       </div>
