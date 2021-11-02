@@ -125,6 +125,10 @@ app.get("/item/:id", (request, response) => {
   
   comments["comments"][0]["contents"] = comments["comments"][0]["contents"].trim();
   
+  // duplicating this thing for testing purposes.
+  
+  comments["comments"][1] = comments["comments"][0];
+  
   response.render(__dirname + "/views/comments", {
     item: item,
     staging: process.env.STAGING || false,
@@ -135,6 +139,7 @@ app.get("/item/:id", (request, response) => {
         : [],
     comments: comments["comments"]
   });
+  
 });
 
 app.get("/landing", function(request, response) {

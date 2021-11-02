@@ -251,7 +251,7 @@
       
       <div class="comments">
         <% for (var i = 0; i < comments.length; i += 1) { %>
-          <div class="comment">
+          <div class="comment <% if (i === 1) { %>comment--reply<% } %>">
             <div class="comment-header">
               <span> by </span><a href="/u/<%= comments[i].author %>" class="comment-authorName"><%= comments[i].author %></a><span> · </span>
               <time class="comment-date js-comment-date" datetime="<%= comments[i].comment_date %>"><%= comments[i].comment_date %></time>
@@ -259,7 +259,6 @@
             <div class="comment-contents">
               <%= comments[i].contents %>
             </div>
-            
           </div>
         <% } %>  
       </div>

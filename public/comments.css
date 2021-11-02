@@ -7,5 +7,13 @@
 }
 
 .comment-contents {
-  white-space: break-spaces;
+  white-space: pre-line;
+}
+
+.comment + .comment {
+  margin-top: 1rem;
+}
+
+.comment.comment--reply {
+  margin-left: 2rem;
 }
