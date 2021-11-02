@@ -1,11 +1,11 @@
 (function() {
-  const searchInput = document.querySelector(".js-searchbox-input");
-  const searchBox = document.querySelector(".js-searchbox");
-  const mobileSearchBox = document.querySelectorAll(".js-searchbutton-mobile");
-  const moreButton = document.querySelector(".js-more-button");
-  const hoverTooltips = document.querySelectorAll(".js-tooltip-hover");
-  const mobileToggle = document.querySelector(".js-mobilemenutoggle");
-  const mobileNavigation = document.querySelector(".js-mobilenavigation");
+  const searchInput = document.querySelector(".js-searchbox-input"),
+        searchBox = document.querySelector(".js-searchbox"),
+        mobileSearchBox = document.querySelectorAll(".js-searchbutton-mobile"),
+        moreButton = document.querySelector(".js-more-button"),
+        hoverTooltips = document.querySelectorAll(".js-tooltip-hover"),
+        mobileToggle = document.querySelector(".js-mobilemenutoggle"),
+        mobileNavigation = document.querySelector(".js-mobilenavigation");
 
   let page = 1; // For getting more articles
 
