@@ -139,9 +139,7 @@
                 <div class="flex flex--spaceOneDown flex--alignItemsCenter">
                   <div class="flex-item">
                     <p class="article-title">
-                      <a href="<%= item.url %>" target="_blank" class="article-linkTitle">
-                        <%= item.title; %>
-                      </a>
+                      <%= item.title; %>
                     </p>
                   </div>
                   <div class="flex-item">
@@ -149,9 +147,7 @@
                   </div>
                 </div>
                 <p class="article-description">
-                  <a href="<%= item.url %>" target="_blank" class="article-link">
-                    <%= item.description_trimmed; %>
-                  </a>
+                  <%= item.description_trimmed; %>
                 </p>
 
                 <div class="article-footer">
@@ -242,6 +238,12 @@
               </div>
             </div>
           </article>
+      
+      <form class="form js-form">
+        <div class="form-element">
+          <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-description form-input form-textarea"></textarea>
+        </div>
+      </form>
       
     </main>
 

@@ -120,21 +120,16 @@ app.get("/item/:id", (request, response) => {
   console.log("Rendering the item view");
   console.log("What's the item", item);
   
-  // Getting the upvote count for each of the items.
-  for (let i = 0; i < items.length; i += 1) {
-    items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
-    console.log(
-      "item upvotecount",
-      items[i].item_id + " " + items[i].upvoteCount
-    );
-  }
+  item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
   
   response.render(__dirname + "/views/comments", {
     item: item,
     staging: process.env.STAGING || false,
     userInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false,
     favorites: request.oidc.isAuthenticated() ? db.getFavorites(request.oidc.user.sub) : [],
-    upvotes: 
+    upvotes: request.oidc.isAuthenticated()
+        ? db.getUpvotes(request.oidc.user.sub)
+        : [],
   });
 });
 
