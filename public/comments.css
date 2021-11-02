@@ -10,10 +10,30 @@
   white-space: pre-line;
 }
 
+.comment {
+  padding-right: 1rem;
+}
+
 .comment + .comment {
   margin-top: 1rem;
 }
 
 .comment.comment--reply {
-  margin-left: 2rem;
+  margin-left: 2.5rem;
+}
+
+.comment.comment--reply.two {
+  margin-left: 5rem;
+}
+
+.comment.comment--reply.three {
+  margin-left: 7.5rem;
+}
+
+.comment.comment--reply.four {
+  margin-left: 10rem;
+}
+
+.comment.comment--reply.five {
+  margin-left: 12.5rem;
 }
