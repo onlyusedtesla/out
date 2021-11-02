@@ -123,6 +123,8 @@ app.get("/item/:id", (request, response) => {
   
   const comments = require(__dirname + "/comments.json");
   
+  comments["comments"][0]["contents"] = comments["comments"][0]["contents"].trim();
+  
   response.render(__dirname + "/views/comments", {
     item: item,
     staging: process.env.STAGING || false,
