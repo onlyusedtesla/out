@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="/style.css">
-    
+    <link rel="stylesheet" href="/comments.css">
+      
     <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.glitch.com/d53aa53a-c591-4e03-8635-621cfc75b4fc%2Fapple-touch-icon.png?v=1633024068411">
     <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.glitch.com/d53aa53a-c591-4e03-8635-621cfc75b4fc%2Ffavicon-32x32.png?v=1633024067536">
     <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.glitch.com/d53aa53a-c591-4e03-8635-621cfc75b4fc%2Ffavicon-16x16.png?v=1633024067378">
@@ -239,11 +240,27 @@
             </div>
           </article>
       
-      <form class="form js-form">
+      <form class="form form--comments js-form">
         <div class="form-element">
-          <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-description form-input form-textarea"></textarea>
+          <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
+        </div>
+        <div class="form-element">
+          <input type="submit" value="Add Comment" data-original-value="Add Comment" class="form-button js-form-button" />
         </div>
       </form>
+      
+      <div class="comments">
+        <%= for (let i = 0; i < comments.length; i += 1) { %>
+          <div class="comment">
+            <div class="comment-header">
+              <span> by </span><a href="/u/derick.realwebdev+teslatracker" class="comment-authorName">The Author</a><span> · </span>
+            </div>
+            <div class="comment-contents">
+              <%= comments[i].content %>
+            </div>
+          </div>
+        <% } %>  
+      </div>
       
     </main>
 
