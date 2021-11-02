@@ -121,9 +121,7 @@ app.get("/item/:id", (request, response) => {
   
   item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
   
-  const comments = require("./comments.json");
-  
-  console.log("What are the ", comments);
+  const comments = require(__dirname + "/comments.json");
   
   response.render(__dirname + "/views/comments", {
     item: item,
@@ -133,7 +131,7 @@ app.get("/item/:id", (request, response) => {
     upvotes: request.oidc.isAuthenticated()
         ? db.getUpvotes(request.oidc.user.sub)
         : [],
-    comments: comments
+    comments: comments["comments"]
   });
 });
 

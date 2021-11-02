@@ -1,3 +1,11 @@
 .form.form--comments {
   margin-left: 0;
 }
+
+.comments {
+  margin-top: 3rem;
+}
+
+.comment-contents {
+  white-space: pre-line;
+}

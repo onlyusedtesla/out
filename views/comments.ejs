@@ -250,7 +250,6 @@
       </form>
       
       <div class="comments">
-        <%= comments %>
         <% for (var i = 0; i < comments.length; i += 1) { %>
           <div class="comment">
             <div class="comment-header">
@@ -258,8 +257,9 @@
               <time class="comment-date js-comment-date" datetime="<%= comments[i].comment_date %>"><%= comments[i].comment_date %></time>
             </div>
             <div class="comment-contents">
-              <%= comments[i].content %>
+              <%= comments[i].contents.trim() %>
             </div>
+            
           </div>
         <% } %>  
       </div>
