@@ -21,8 +21,6 @@ app.use(express.static("public"));
 // set the view engine to ejs
 app.set("view engine", "ejs");
 
-app.set('views', path.join(__dirname, 'views'));
-
 const config = {
   authRequired: false,
   auth0Logout: true,
@@ -139,7 +137,8 @@ app.get("/item/:id", (request, response) => {
     upvotes: request.oidc.isAuthenticated()
         ? db.getUpvotes(request.oidc.user.sub)
         : [],
-    comments: comments["comments"]
+    comments: comments["comments"],
+    commentPartialPath: __dirname + "/views/partials/comments.ejs"
   });
   
 });
@@ -175,7 +174,7 @@ app.get("/items", function(request, response) {
       response.status(400).send("There are no more items to load");
     } else {
       let articles = ejs.renderFile(
-        __dirname + "/partials/article.ejs",
+        __dirname + "views/partials/article.ejs",
         {
           nextItems: items,
           favorites: request.oidc.isAuthenticated()
