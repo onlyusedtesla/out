@@ -75,6 +75,7 @@ app.get("/", (request, response) => {
         : [],
       staging: process.env.STAGING || false
     });
+    
   } else {
     const items = db.getItems();
 
@@ -123,8 +124,11 @@ app.get("/item/:id", (request, response) => {
   const comments = require(__dirname + "/comments.json");
   comments["comments"][0]["contents"] = comments["comments"][0]["contents"].trim();
   comments["comments"][1] = comments["comments"][0];
-  comments["comments"][0].replies = comments["comments"];
-  comments["comments"][1].replies = comments["comments"];
+  let firstReply = Object.assign({}, comments["comments"][0]);
+  let secondReply = Object.assign({}, comments["comments"][0]);
+  
+  comments["comments"][0].replies = [firstReply];
+  comments["comments"][1].replies = [secondReply];
   
   response.render(__dirname + "/views/comments", {
     item: item,
