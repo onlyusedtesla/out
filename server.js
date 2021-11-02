@@ -48,13 +48,9 @@ app.get("/", (request, response) => {
     // Getting the upvote count for each of the items.
     for (let i = 0; i < items.length; i += 1) {
       items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
-      
-      console.log(
-        "item upvotecount",
-        items[i].item_id + " " + items[i].upvoteCount
-      );
+      console.log("item upvotecount", items[i].item_id + " " + items[i].upvoteCount);
     }
-
+    
     if (items.length >= 3) {
       nextItems = items.slice(3);
     }
