@@ -126,11 +126,13 @@ app.get("/item/:id", (request, response) => {
   
   let firstReply = JSON.parse(JSON.stringify(comments["comments"][0]));
   let secondReply = JSON.parse(JSON.stringify(comments["comments"][0]));
+  let replyForReply = JSON.parse(JSON.stringify(comments["comments"][0]));
   
-  comments["comments"][0].replies = firstReply;
-  comments["comments"][1].replies = secondReply;
+  comments["comments"][0].replies = [firstReply];
+  comments["comments"][1].replies = [firstReply, firstReply, firstReply];
+  comments["comments"][0].replies[0].replies = [replyForReply];
   
-  console.log("comments", JSON.stringify(comments["comments"]));
+  console.log("JSON.stringify", JSON.stringify(comments["comments"]));
   
   response.render(__dirname + "/views/comments", {
     item: item,
