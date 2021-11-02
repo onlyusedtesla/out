@@ -122,12 +122,15 @@ app.get("/item/:id", (request, response) => {
   
   // Doing some stuff for testing purposes.
   const comments = require(__dirname + "/comments.json");
-  comments["comments"][1] = Object.assign({}, comments["comments"][0]);
-  let firstReply = Object.assign({}, comments["comments"][0]);
-  let secondReply = Object.assign({}, comments["comments"][1]);
+  comments["comments"][1] = JSON.parse(JSON.stringify((comments["comments"][0])));
   
-  comments["comments"][0].replies = [firstReply];
-  comments["comments"][1].replies = [secondReply];
+  let firstReply = JSON.parse(JSON.stringify(comments["comments"][0]));
+  let secondReply = JSON.parse(JSON.stringify(comments["comments"][0]));
+  
+  comments["comments"][0].replies = firstReply;
+  comments["comments"][1].replies = secondReply;
+  
+  console.log("comments", JSON.stringify(comments["comments"]));
   
   response.render(__dirname + "/views/comments", {
     item: item,
