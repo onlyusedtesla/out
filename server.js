@@ -8,6 +8,7 @@ const app = express();
 const db = require("./db.js");
 const RSSFeed = require("./feed.js");
 const ejs = require("ejs");
+const path = require("path");
 
 const { auth, requiresAuth } = require("express-openid-connect");
 
@@ -19,6 +20,8 @@ app.use(express.static("public"));
 
 // set the view engine to ejs
 app.set("view engine", "ejs");
+
+app.set('views', path.join(__dirname, 'views'));
 
 const config = {
   authRequired: false,
@@ -121,13 +124,12 @@ app.get("/item/:id", (request, response) => {
   
   item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
   
+  // Doing some stuff for testing purposes.
   const comments = require(__dirname + "/comments.json");
-  
   comments["comments"][0]["contents"] = comments["comments"][0]["contents"].trim();
-  
-  // duplicating this thing for testing purposes.
-  
   comments["comments"][1] = comments["comments"][0];
+  comments["comments"][0].replies = comments["comments"];
+  comments["comments"][1].replies = comments["comments"];
   
   response.render(__dirname + "/views/comments", {
     item: item,

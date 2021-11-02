@@ -259,6 +259,11 @@
             <div class="comment-contents">
               <%= comments[i].contents %>
             </div>
+            
+            <% if (typeof comments[i].replies !== "undefined" && comments[i].replies.length >= 1) { %>
+              <%- include('partials/comments.ejs', comments[i].replies) %>
+            <% } %>
+            
           </div>
         <% } %>  
       </div>
