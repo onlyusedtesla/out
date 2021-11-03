@@ -24,10 +24,10 @@ for (let i = 0; i < 50; i += 1) {
   });
 }
 
-let commentIds = 
-    
-    {
-      "comment_id": "81gbh",
-      "item_id": "499jfjd",
-      "replies": [5940, 45040, 40540504, 45405045]
-    }
+for (let i = 0; i < 50; i += 1) {
+  comments[i].parent_id = comments[Math.floor(Math.random() * comments.length)].comment_id
+}
+
+for (let i = 0; i < 10; i += 1) {
+  comments[i].parent
+}
