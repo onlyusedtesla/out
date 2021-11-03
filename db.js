@@ -241,7 +241,6 @@ function getComments(itemId) {
   
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   
-  
   for (let i = 0; i < allCommentsForItem.length; i += 1) {
     if (typeof allCommentsForItem[i].replies !== "undefined" && allCommentsForItem[i].replies.length >= 1) {
       allCommentsForItem[i].replyComments = getReplies(allCommentsForItem, allCommentsForItem[i].replies);
