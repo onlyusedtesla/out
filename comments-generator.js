@@ -29,5 +29,8 @@ for (let i = 0; i < 50; i += 1) {
 }
 
 for (let i = 0; i < 10; i += 1) {
-  comments[i].parent_
+  comments[Math.floor(Math.random()*comments.length)].parent_id = null;
 }
+
+fs.writeFileSync();
+console.log("comments", comments);
