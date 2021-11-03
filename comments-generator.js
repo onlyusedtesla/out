@@ -29,5 +29,5 @@ for (let i = 0; i < 50; i += 1) {
 }
 
 for (let i = 0; i < 10; i += 1) {
-  comments[i].parent
+  comments[i].parent_
 }
