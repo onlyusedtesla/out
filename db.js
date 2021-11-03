@@ -236,29 +236,23 @@ function getComments(itemId) {
   
   // The comments will all be in a flat file as a flat json structure.
   // An array of objects.
-  
   // First we will grab the nested comments in an array.
-  
   // and then we will call a nested function on that array to start filtering and creating a new array based on that array.
   
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   
-  return getReplies(allCommentsForItem);  
-}
-
-function getReplies(allComments) {
-  
-  // What are the necessary parameters?
-  // the original array with all the data for the replies
-  // the array of ids
-  // and then the destination array where the results will go.
-  
-  for (let i = 0; i < allComments.length; i += 1) {
-    if (typeof allComments[i].replies !== "undefined" && allComments[i].replies.length >= 1) {
-      allComments[i].replyComments = getReplies();
-      return getReplies();
+  for (let i = 0; i < allCommentsForItem.length; i += 1) {
+    if (typeof allCommentsForItem[i].replies !== "undefined" && allCommentsForItem[i].replies.length >= 1) {
+      allCommentsForItem[i].replyComments = getReplies(allCommentsForItem, allCommentsForItem[i].replies);
     }
   }
+  
+  return allCommentsForItem;
+  
+}
+
+function getReplies(allComments, replyIds) {
+  
   
 }
 
