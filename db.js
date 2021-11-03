@@ -246,6 +246,8 @@ module.exports = {
   getUpvotes: getUpvotes,
   getUpvoteCountForItem: getUpvoteCountForItem,
   
+  getComments: getComments,
+  
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
   validKeys: validKeys,
