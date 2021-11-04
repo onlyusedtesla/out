@@ -74,10 +74,10 @@
       };
       
       addComment(comment).then(function (newCommentId) {
+        console.log("Added a comment - in the then.");
         // Refresh the page and let's go directly to the new comment_id
-        let url = "/item/" + itemId;
-        url += "#" + newCommentId;
-        window.location.url = url;
+        window.location.hash = newCommentId;
+        window.location.reload();
       });
       
     });

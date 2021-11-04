@@ -156,10 +156,9 @@ app.post("/comment", function(request, response) {
     db.itemExists(request.query.item_id) &&
     request.query.contents &&
     request.query.contents.length >= 1 &&
-    request.query.comment_date 
+    request.query.comment_date &&
+    request.query.parent_id
   ) {
-    
-    
     const result = db.addComment({
       item_id: request.query.item_id,
       author: request.oidc.user.nickname,

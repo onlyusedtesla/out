@@ -255,14 +255,14 @@ function getComments(itemId) {
   allCommentsForItem.forEach(comment => commentMap[comment.comment_id] = comment);
   
   allCommentsForItem.forEach(comment => {
-    if (comment.parent_id !== null) {
+    if (comment.parent_id !== null && comment.parent_id !== "null") {
       let parent = commentMap[comment.parent_id];
       (parent.replies = parent.replies || []).push(comment);
     }
   });
   
   return allCommentsForItem.filter(comment => {
-    return comment.parent_id === null;
+    return comment.parent_id === null || comment.parent_id === "null";
   });
   
 }
