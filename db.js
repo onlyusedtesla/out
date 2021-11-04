@@ -250,6 +250,8 @@ function getComments(itemId) {
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   let commentMap = {};
   
+  console.log("allCommentsForItem", allCommentsForItem);
+  
   allCommentsForItem.forEach(comment => commentMap[comment.comment_id] = comment);
   
   allCommentsForItem.forEach(comment => {
@@ -275,7 +277,7 @@ function addComment(comment) {
   data["comments"].push(comment);
   
   try {
-    fs.writeFileSync(__dirname + "/comments.json", JSON.stringify(data));
+    fs.writeFileSync(__dirname + '/comments.json', JSON.stringify(data));
     return commentId;
   } catch {
     return false;
