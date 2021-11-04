@@ -247,14 +247,7 @@ function removeUpvote(userId, itemId) {
 function getComments(itemId) {
   let rawData = fs.readFileSync(__dirname + '/comments.json');
   let data = JSON.parse(rawData);
-  
-  // The comments will all be in a flat file as a flat json structure.
-  // An array of objects.
-  // First we will grab the nested comments in an array.
-  // and then we will call a nested function on that array to start filtering and creating a new array based on that array.
-  
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
-  
   let commentMap = {};
   
   allCommentsForItem.forEach(comment => commentMap[comment.comment_id] = comment);
@@ -266,24 +259,9 @@ function getComments(itemId) {
     }
   });
   
-  
-  // filter the list to return a list of correctly nested comments
-  return commentList.filter(comment => {
-    return comment.parentId === null;
+  return allCommentsForItem.filter(comment => {
+    return comment.parent_id === null;
   });
-  
-  for (let i = 0; i < allCommentsForItem.length; i += 1) {
-    let comment = allCommentsForItem[i];
-    
-    if (comment.parent_id !== null) {
-      comment.replies = [];
-      
-    }
-  }
-  
-  console.log("allCommentsForItem", allCommentsForItem);
-  
-  return allCommentsForItem;
   
 }
 
