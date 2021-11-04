@@ -114,19 +114,18 @@ app.get("/", (request, response) => {
 });
 
 app.get("/item/:id", (request, response) => {
+  
   // This is the page where we will render the individual comments page.
 
   const item = db.getItem(request.params.id);
-
-  console.log("Rendering the item view");
-
+  
   if (item) {
+    
     item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
-
+    item.commentCount = db.getCommentCountForItem(item.item_id);
+    
     const comments = db.getComments(item.item_id);
-
-    console.log("comments", comments);
-
+    
     response.render(__dirname + "/views/comments", {
       item: item,
       staging: process.env.STAGING || false,

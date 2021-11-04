@@ -285,6 +285,16 @@ function addComment(comment) {
   
 }
 
+/*
+ * @description - Returns the number of comments for a specific item
+ * @return Number
+ */
+function getCommentCountForItem(itemId) {
+  let rawData = fs.readFileSync(__dirname + '/comments.json');
+  let data = JSON.parse(rawData);
+  return data["comments"].filter(i => i.item_id === itemId);
+}
+
 module.exports = {
   save: save,
   getItems: getItems,
@@ -304,9 +314,11 @@ module.exports = {
   
   getComments: getComments,
   addComment: addComment,
+  getCommentCountForItem: getCommentCountForItem,
   
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
   validKeys: validKeys,
   uuid: uuid
+  
 };
