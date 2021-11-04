@@ -242,7 +242,7 @@
             </div>
           </article>
       
-      <form class="form form--comments js-comment-form">
+      <form class="form form--comments js-comment-form js-comment-form-primary">
         <div class="form-element">
           <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
         </div>
@@ -253,7 +253,7 @@
       
       <div class="comments comments--start">
         <% for (var i = 0; i < comments.length; i += 1) { %>
-          <div class="comment">
+          <div class="comment js-comment">
             
             <div class="comment-header flex flex--spaceOneDown flex--alignItemsCenter">
               <div class="flex-item">
@@ -274,7 +274,7 @@
             <div class="comment-reply">
               <a href="#" class="grey-link js-comment-reply-button comment-reply-button">Reply</a>
               
-              <form class="form form--comments form--commentsInline js-comment-form">
+              <form class="form form--comments form--commentsInline js-comment-form hidden">
                 <div class="form-element">
                   <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
                 </div>

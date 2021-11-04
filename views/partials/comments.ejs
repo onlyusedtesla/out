@@ -19,6 +19,14 @@
       
       <div class="comment-reply">
         <a href="#" class="grey-link js-comment-reply-button comment-reply-button">Reply</a>
+        <form class="form form--comments form--commentsInline js-comment-form">
+          <div class="form-element">
+            <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
+          </div>
+          <div class="form-element">
+            <input type="submit" value="Add Comment" data-original-value="Add Comment" class="form-button js-form-button" />
+          </div>
+        </form>
       </div>
       
       <% if (typeof comments[i].replies !== "undefined" && comments[i].replies.length >= 1) { %>
