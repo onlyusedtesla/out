@@ -266,7 +266,7 @@ module.exports = {
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
   itemExists: itemExists,
-  
+
   addFavorite: addFavorite,
   getFavorites: getFavorites,
   removeFavorite: removeFavorite,
