@@ -5,6 +5,7 @@
   const allCommentBoxes = document.querySelectorAll(".js-comment-form");
   const article = document.querySelector(".js-article");
   
+  const author = document.querySelector(".js-author").value;
   const itemId = article.getAttribute("data-item-id");
   
   function hideAllCommentBoxes() {
@@ -61,6 +62,7 @@
   
   Array.from(allCommentBoxes).forEach(function (el) {
     
+    el.addEventListener();
     const contents = el.querySelectorAll(".js-comment").value;
     const commentId = el.getAttribute("data-comment-id");
     
@@ -68,22 +70,15 @@
       item_id: itemId,
       parent_id: typeof commentId !== "undefined" ? commentId : null,
       contents: contents,
-      comment_date: 
+      comment_date: (new Date()).toString(),
+      author: author
     };
     
-          {
-      "item_id": "0b914140",
-      "author": "Jack",
-      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-      "comment_date": 1635450631000,
-      "comment_date_formatted": "Oct 28",
-      "comment_id": "e651327c",
-      "parent_id": "8212d336"
-    },
+    addComment(comment).then(function (response) {
       
-    el.addEventListener("submit", function (event) {
-      event.preventDefault();
     });
+    
   });
+
   
 }());
