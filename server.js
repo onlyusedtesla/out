@@ -48,9 +48,12 @@ app.get("/", (request, response) => {
     // Getting the upvote count for each of the items.
     for (let i = 0; i < items.length; i += 1) {
       items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
-      console.log("item upvotecount", items[i].item_id + " " + items[i].upvoteCount);
+      console.log(
+        "item upvotecount",
+        items[i].item_id + " " + items[i].upvoteCount
+      );
     }
-    
+
     if (items.length >= 3) {
       nextItems = items.slice(3);
     }
@@ -75,7 +78,6 @@ app.get("/", (request, response) => {
         : [],
       staging: process.env.STAGING || false
     });
-    
   } else {
     const items = db.getItems();
 
@@ -113,33 +115,34 @@ app.get("/", (request, response) => {
 
 app.get("/item/:id", (request, response) => {
   // This is the page where we will render the individual comments page.
-  
+
   const item = db.getItem(request.params.id);
-  
-  console.log("request.params", request.params);
-  console.log("item", item);
-  
-  return false;
-  
+
   console.log("Rendering the item view");
-  
-  item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
-  
-  // Doing some stuff for testing purposes.
-  const comments = db.getComments();
-  
-  response.render(__dirname + "/views/comments", {
-    item: item,
-    staging: process.env.STAGING || false,
-    userInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false,
-    favorites: request.oidc.isAuthenticated() ? db.getFavorites(request.oidc.user.sub) : [],
-    upvotes: request.oidc.isAuthenticated()
+
+  if (item) {
+    item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
+    
+    const comments = db.getComments(item.item_id);
+
+    response.render(__dirname + "/views/comments", {
+      item: item,
+      staging: process.env.STAGING || false,
+      userInfo: request.oidc.isAuthenticated()
+        ? request.oidc.user.nickname
+        : false,
+      favorites: request.oidc.isAuthenticated()
+        ? db.getFavorites(request.oidc.user.sub)
+        : [],
+      upvotes: request.oidc.isAuthenticated()
         ? db.getUpvotes(request.oidc.user.sub)
         : [],
-    comments: comments["comments"],
-    commentPartialPath: __dirname + "/views/partials/comments.ejs"
-  });
-  
+      comments: comments,
+      commentPartialPath: __dirname + "/views/partials/comments.ejs"
+    });
+  } else {
+    // Render the 404 page.
+  }
 });
 
 app.get("/landing", function(request, response) {
