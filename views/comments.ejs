@@ -244,7 +244,7 @@
       
       <form class="form form--comments js-comment-form js-comment-form-primary">
         <div class="form-element">
-          <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
+          <textarea required type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
         </div>
         <div class="form-element">
           <input type="submit" value="Add Comment" data-original-value="Add Comment" class="form-button js-form-button" />
@@ -253,7 +253,7 @@
       
       <div class="comments comments--start">
         <% for (var i = 0; i < comments.length; i += 1) { %>
-          <div class="comment js-comment">
+          <div class="comment js-commentContainer">
             
             <div class="comment-header flex flex--spaceOneDown flex--alignItemsCenter">
               <div class="flex-item">
@@ -276,7 +276,7 @@
               
               <form class="form form--comments form--commentsInline js-comment-form hidden">
                 <div class="form-element">
-                  <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
+                  <textarea required type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
                 </div>
                 <div class="form-element">
                   <input type="submit" value="Add Comment" data-original-value="Add Comment" class="form-button js-form-button" />
