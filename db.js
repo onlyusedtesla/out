@@ -231,7 +231,7 @@ function removeUpvote(userId, itemId) {
 }
 
 function getComments(itemId) {
-  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let rawData = fs.readFileSync(__dirname + '/comments.json');
   let data = JSON.parse(rawData);
   
   // The comments will all be in a flat file as a flat json structure.
@@ -251,8 +251,13 @@ function getComments(itemId) {
   
 }
 
-function getReplies(allComments, replyIds) {
-  
+function getReplies(comment, allComments) {
+  return {
+    ...comment,
+    children: allComments
+      .filter(c => String(c.parent_id) === comment.objectID)
+      .map(c => getChildren(c, allComments))
+  };
 }
 
 module.exports = {

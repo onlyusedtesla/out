@@ -32,5 +32,8 @@ for (let i = 0; i < 10; i += 1) {
   comments[Math.floor(Math.random()*comments.length)].parent_id = null;
 }
 
-fs.writeFileSync();
-console.log("comments", comments);
+let data = {
+  "comments": comments
+}
+
+fs.writeFileSync(__dirname + "/comments.json", JSON.stringify(data));

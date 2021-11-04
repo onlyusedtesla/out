@@ -1,181 +1,404 @@
 {
   "comments": [
     {
-      "comment_id": "81gbh",
+      "item_id": "0b914140",
       "author": "Jack",
       "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
       "comment_date": "1635450631000",
-      "item_id": "499jfjd",
-      "replies": [5940, 45040, 40540504, 45405045]
+      "comment_id": "45d6e789",
+      "parent_id": "044071f3"
     },
     {
+      "item_id": "0b914140",
       "author": "Jack",
       "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
       "comment_date": "1635450631000",
-      "replies": [
-        {
-          "author": "Jack",
-          "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-          "comment_date": "1635450631000",
-          "replies": [
-            {
-              "author": "Jack",
-              "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-              "comment_date": "1635450631000",
-              "replies": [
-                {
-                  "author": "Jack",
-                  "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                  "comment_date": "1635450631000",
-                  "replies": [
-                    {
-                      "author": "Jack",
-                      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                      "comment_date": "1635450631000",
-                      "replies": [
-                        {
-                          "author": "Jack",
-                          "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                          "comment_date": "1635450631000",
-                          "replies": [
-                            {
-                              "author": "Jack",
-                              "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                              "comment_date": "1635450631000",
-                              "replies": [
-                                {
-                                  "author": "Jack",
-                                  "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                                  "comment_date": "1635450631000",
-                                  "replies": [
-                                    {
-                                      "author": "Jack",
-                                      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                                      "comment_date": "1635450631000"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "author": "Jack",
-          "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-          "comment_date": "1635450631000",
-          "replies": [
-            {
-              "author": "Jack",
-              "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-              "comment_date": "1635450631000",
-              "replies": [
-                {
-                  "author": "Jack",
-                  "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                  "comment_date": "1635450631000",
-                  "replies": [
-                    {
-                      "author": "Jack",
-                      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                      "comment_date": "1635450631000",
-                      "replies": [
-                        {
-                          "author": "Jack",
-                          "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                          "comment_date": "1635450631000",
-                          "replies": [
-                            {
-                              "author": "Jack",
-                              "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                              "comment_date": "1635450631000",
-                              "replies": [
-                                {
-                                  "author": "Jack",
-                                  "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                                  "comment_date": "1635450631000",
-                                  "replies": [
-                                    {
-                                      "author": "Jack",
-                                      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                                      "comment_date": "1635450631000"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "author": "Jack",
-          "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-          "comment_date": "1635450631000",
-          "replies": [
-            {
-              "author": "Jack",
-              "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-              "comment_date": "1635450631000",
-              "replies": [
-                {
-                  "author": "Jack",
-                  "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                  "comment_date": "1635450631000",
-                  "replies": [
-                    {
-                      "author": "Jack",
-                      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                      "comment_date": "1635450631000",
-                      "replies": [
-                        {
-                          "author": "Jack",
-                          "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                          "comment_date": "1635450631000",
-                          "replies": [
-                            {
-                              "author": "Jack",
-                              "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                              "comment_date": "1635450631000",
-                              "replies": [
-                                {
-                                  "author": "Jack",
-                                  "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                                  "comment_date": "1635450631000",
-                                  "replies": [
-                                    {
-                                      "author": "Jack",
-                                      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-                                      "comment_date": "1635450631000"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "comment_id": "d2acfa24",
+      "parent_id": "91f52f27"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "318ca4a1",
+      "parent_id": "9fc485dd"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "42ed4a54",
+      "parent_id": "16a4fd79"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "fd6b1dc1",
+      "parent_id": "4875af6d"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "3c390a60",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "e61d43a2",
+      "parent_id": "ea73f055"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "e35c520b",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "59492d58",
+      "parent_id": "ff0ff9d8"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "de460290",
+      "parent_id": "2bb60bf2"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "4afb046c",
+      "parent_id": "ea73f055"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "5eaec12d",
+      "parent_id": "16a4fd79"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "e1c6d775",
+      "parent_id": "5c63316e"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "16a4fd79",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "de53e04c",
+      "parent_id": "3c390a60"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "2f73b4c3",
+      "parent_id": "318ca4a1"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "5c63316e",
+      "parent_id": "fa847633"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "bb3c2a4e",
+      "parent_id": "4afb046c"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "044071f3",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "1a096835",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "e53826bc",
+      "parent_id": "5c63316e"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "19dd177e",
+      "parent_id": "45d6e789"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "d2b55b0b",
+      "parent_id": "19dd177e"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "defcf53f",
+      "parent_id": "45d6e789"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "db219dc3",
+      "parent_id": "1c89bb17"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "2bb60bf2",
+      "parent_id": "fa847633"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "d3333348",
+      "parent_id": "8727ac17"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "de40b96a",
+      "parent_id": "45d6e789"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "72f30bdf",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "ea73f055",
+      "parent_id": "e53826bc"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "eee92952",
+      "parent_id": "6db45ecf"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "ff0ff9d8",
+      "parent_id": "de460290"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "91f52f27",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "4b429ce7",
+      "parent_id": "91f52f27"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "8727ac17",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "9fc485dd",
+      "parent_id": "318ca4a1"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "fa847633",
+      "parent_id": "e35c520b"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "3d66541c",
+      "parent_id": "de40b96a"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "fffd6f2f",
+      "parent_id": "fa847633"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "9485ab91",
+      "parent_id": "ff66b533"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "c0e4a372",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "251634cc",
+      "parent_id": "b9753006"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "6db45ecf",
+      "parent_id": "de53e04c"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "4875af6d",
+      "parent_id": "d2acfa24"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "b9753006",
+      "parent_id": null
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "1c89bb17",
+      "parent_id": "b9753006"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "f90cf532",
+      "parent_id": "8727ac17"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "3f7b988e",
+      "parent_id": "d2b55b0b"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "ff66b533",
+      "parent_id": "f90cf532"
+    },
+    {
+      "item_id": "0b914140",
+      "author": "Jack",
+      "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+      "comment_date": "1635450631000",
+      "comment_id": "c40262ec",
+      "parent_id": "fa847633"
     }
   ]
 }
