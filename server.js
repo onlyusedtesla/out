@@ -121,18 +121,7 @@ app.get("/item/:id", (request, response) => {
   item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
   
   // Doing some stuff for testing purposes.
-  const comments = require(__dirname + "/comments.json");
-  comments["comments"][1] = JSON.parse(JSON.stringify((comments["comments"][0])));
-  
-  let firstReply = JSON.parse(JSON.stringify(comments["comments"][0]));
-  let secondReply = JSON.parse(JSON.stringify(comments["comments"][0]));
-  let replyForReply = JSON.parse(JSON.stringify(comments["comments"][0]));
-  
-  comments["comments"][0].replies = [firstReply];
-  comments["comments"][1].replies = [firstReply, firstReply, firstReply];
-  comments["comments"][0].replies[0].replies = [replyForReply];
-  
-  console.log("JSON.stringify", JSON.stringify(comments["comments"]));
+  const comments = db.getComments();
   
   response.render(__dirname + "/views/comments", {
     item: item,

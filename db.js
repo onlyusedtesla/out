@@ -242,22 +242,22 @@ function getComments(itemId) {
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   
   for (let i = 0; i < allCommentsForItem.length; i += 1) {
-    if (typeof allCommentsForItem[i].replies !== "undefined" && allCommentsForItem[i].replies.length >= 1) {
-      allCommentsForItem[i].replyComments = getReplies(allCommentsForItem, allCommentsForItem[i].replies);
-    }
+    getReplies(allCommentsForItem[i], allCommentsForItem);
   }
+  
+  console.log("allCommentsForItem", allCommentsForItem);
   
   return allCommentsForItem;
   
 }
 
 function getReplies(comment, allComments) {
-  return {
-    ...comment,
-    children: allComments
-      .filter(c => String(c.parent_id) === comment.objectID)
-      .map(c => getChildren(c, allComments))
-  };
+  if (typeof comment.parent_id !== null) {
+    comment.replies = 
+    allComments
+    .filter(c => c.parent_id === comment.comment_id)
+    .map(c => getReplies(c, allComments));
+  }
 }
 
 module.exports = {
