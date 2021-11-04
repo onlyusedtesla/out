@@ -147,6 +147,10 @@ app.get("/item/:id", (request, response) => {
   }
 });
 
+app.post("/comment", function (request, response) {
+  
+});
+
 app.get("/landing", function(request, response) {
   response.render(__dirname + "/views/landing");
 });
