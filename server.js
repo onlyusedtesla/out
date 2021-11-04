@@ -122,11 +122,11 @@ app.get("/item/:id", (request, response) => {
 
   if (item) {
     item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
-    
+
     const comments = db.getComments(item.item_id);
-    
+
     console.log("comments", comments);
-    
+
     response.render(__dirname + "/views/comments", {
       item: item,
       staging: process.env.STAGING || false,
@@ -147,20 +147,37 @@ app.get("/item/:id", (request, response) => {
   }
 });
 
-app.post("/comment", function (request, response) {
-  
-    //   {
-    //   "item_id": "0b914140",
-    //   "author": "Jack",
-    //   "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-    //   "comment_date": 1635450631000,
-    //   "comment_date_formatted": "Oct 28",
-    //   "comment_id": "e651327c",
-    //   "parent_id": "8212d336"
-    // },
+app.post("/comment", function(request, response) {
+  //   {
+  //   "item_id": "0b914140",
+  //   "author": "Jack",
+  //   "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+  //   "comment_date": 1635450631000,
+  //   "comment_date_formatted": "Oct 28",
+  //   "comment_id": "e651327c",
+  //   "parent_id": "8212d336"
+  // },
+
+  if (
+    request.oidc.isAuthenticated() &&
+    request.query.author &&
+    request.query.author === request.oidc.user.nickname &&
+    request.query.item_id &&
+    db.itemExists(request.query.item_id) &&
+    request.query.contents &&
+    request.query.contents.length >= 1
+  ) {
+    db.saveComment({
+      item_id: request.query.item_id,
+      author: request.oidc.user.nickname,
+      contents: request.query.contents,
+      comment_date: request.query.comment_date,
       
+    });
+  } else {
+    return 404.
+  }
   console.log("What's request.query?", request.query);
-  
 });
 
 app.get("/landing", function(request, response) {

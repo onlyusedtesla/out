@@ -46,7 +46,6 @@
   }
   
   Array.from(timeEls).forEach(function (el) {
-    console.log("What's el?", el);
     el.innerHTML = dateFormat(+el.getAttribute("datetime"), "mmm d, h:MM TT");
   });
   
@@ -62,21 +61,17 @@
   
   Array.from(allCommentBoxes).forEach(function (el) {
     
-    console.log("allCommentBoxes");
-    
-    console.log("el", el);
-    
     el.addEventListener("submit", function (event) {
       event.preventDefault();
       
-      const contents = el.querySelectorAll(".js-comment").value;
+      const contents = el.querySelector(".js-comment").value;
       const commentId = el.getAttribute("data-comment-id");
-    
+      
       const comment = {
         item_id: itemId,
         parent_id: typeof commentId !== "undefined" ? commentId : null,
         contents: contents,
-        comment_date: (new Date()).toString(),
+        comment_date: (new Date()).getTime(),
         author: author
       };
       
@@ -85,7 +80,7 @@
         console.log("What's the response?", response);
       });
       
-    });    
+    });
   });
 
   
