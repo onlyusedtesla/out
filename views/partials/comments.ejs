@@ -19,7 +19,7 @@
       
       <div class="comment-reply">
         <a href="#" class="grey-link js-comment-reply-button comment-reply-button">Reply</a>
-        <form class="form form--comments form--commentsInline js-comment-form">
+        <form class="form form--comments form--commentsInline js-comment-form hidden" <% if (typeof comments[i].parent_id !== "undefined" && comments[i].parent_id !== null) { %>data-parent-id="<%= comments[i].parent_id %>"<% } %>>
           <div class="form-element">
             <textarea required name="comment" id="comment" type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
           </div>
