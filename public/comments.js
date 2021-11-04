@@ -66,12 +66,14 @@
       
       const contents = el.querySelector(".js-comment").value;
       const commentId = el.getAttribute("data-comment-id");
+      const commentDate = (new Date()).getTime();
       
       const comment = {
         item_id: itemId,
         parent_id: typeof commentId !== "undefined" ? commentId : null,
         contents: contents,
-        comment_date: (new Date()).getTime(),
+        comment_date: commentDate,
+        comment_date_formatted: dateFormat(commentDate, "mmm d"),
         author: author
       };
       

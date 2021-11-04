@@ -148,16 +148,6 @@ app.get("/item/:id", (request, response) => {
 });
 
 app.post("/comment", function(request, response) {
-  //   {
-  //   "item_id": "0b914140",
-  //   "author": "Jack",
-  //   "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
-  //   "comment_date": 1635450631000,
-  //   "comment_date_formatted": "Oct 28",
-  //   "comment_id": "e651327c",
-  //   "parent_id": "8212d336"
-  // },
-
   if (
     request.oidc.isAuthenticated() &&
     request.query.author &&
@@ -165,19 +155,28 @@ app.post("/comment", function(request, response) {
     request.query.item_id &&
     db.itemExists(request.query.item_id) &&
     request.query.contents &&
-    request.query.contents.length >= 1
+    request.query.contents.length >= 1 &&
+    request.query.comment_date
   ) {
-    db.saveComment({
+    const result = db.saveComment({
       item_id: request.query.item_id,
       author: request.oidc.user.nickname,
       contents: request.query.contents,
       comment_date: request.query.comment_date,
-      
+      comment_date_formatted: request.query.comment_date_formatted,
+      parent_id: request.query.parent_id,
+      comment_id: request.query.comment_id
     });
+    
+    if (result) {
+      response.status(200).send("Comment successfully saved.");
+    } else {
+      response.status(400).send("Please make sure you're logged in and all the information is properly filled out.");
+    }
   } else {
-    return 404.
+    response.status(400).send("Please make sure you're logged in and all the information is properly filled out.");
   }
-  console.log("What's request.query?", request.query);
+  
 });
 
 app.get("/landing", function(request, response) {

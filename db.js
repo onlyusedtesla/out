@@ -265,13 +265,19 @@ function getComments(itemId) {
   
 }
 
-function getReplies(comment, allComments) {
-  if (typeof comment.parent_id !== "undefined" && comment.parent_id !== null) {
-    comment.replies = 
-    allComments
-    .filter(c => c.parent_id === comment.comment_id)
-    .map(c => getReplies(c, allComments));
+function addComment(comment) {
+  let rawData = fs.readFileSync(__dirname + '/comments.json');
+  let data = JSON.parse(rawData);
+  
+  data["comments"].push(comment);
+  
+  try {
+    fs.writeFileSync(__dirname + "/comments.json", JSON.stringify(data["comments"]));
+    return true; 
+  } catch {
+    return false;
   }
+  
 }
 
 module.exports = {
@@ -292,6 +298,7 @@ module.exports = {
   getUpvoteCountForItem: getUpvoteCountForItem,
   
   getComments: getComments,
+  addComment: addComment,
   
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
