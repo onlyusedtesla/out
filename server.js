@@ -127,8 +127,6 @@ app.get("/item/:id", (request, response) => {
     
     console.log("comments", comments);
     
-    return false;
-    
     response.render(__dirname + "/views/comments", {
       item: item,
       staging: process.env.STAGING || false,

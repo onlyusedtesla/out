@@ -259,10 +259,6 @@ function getComments(itemId) {
     }
   });
   
-  console.log("allCommentsForItem", allCommentsForItem);
-  
-  return false;
-  
   return allCommentsForItem.filter(comment => {
     return comment.parent_id === null;
   });
