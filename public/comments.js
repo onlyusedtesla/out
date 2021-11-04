@@ -62,22 +62,30 @@
   
   Array.from(allCommentBoxes).forEach(function (el) {
     
-    el.addEventListener();
-    const contents = el.querySelectorAll(".js-comment").value;
-    const commentId = el.getAttribute("data-comment-id");
+    console.log("allCommentBoxes");
     
-    const comment = {
-      item_id: itemId,
-      parent_id: typeof commentId !== "undefined" ? commentId : null,
-      contents: contents,
-      comment_date: (new Date()).toString(),
-      author: author
-    };
+    console.log("el", el);
     
-    addComment(comment).then(function (response) {
+    el.addEventListener("submit", function (event) {
+      event.preventDefault();
       
-    });
+      const contents = el.querySelectorAll(".js-comment").value;
+      const commentId = el.getAttribute("data-comment-id");
     
+      const comment = {
+        item_id: itemId,
+        parent_id: typeof commentId !== "undefined" ? commentId : null,
+        contents: contents,
+        comment_date: (new Date()).toString(),
+        author: author
+      };
+      
+      addComment(comment).then(function (response) {
+        console.log("Added comment");
+        console.log("What's the response?", response);
+      });
+      
+    });    
   });
 
   
