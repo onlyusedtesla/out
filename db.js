@@ -255,6 +255,24 @@ function getComments(itemId) {
   
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   
+  let commentMap = {};
+  
+  allCommentsForItem.forEach(comment => commentMap[comment.comment_id] = comment);
+  
+  allCommentsForItem.forEach(comment =>);
+  // iterate over the comments again and correctly nest the children
+  commentList.forEach(comment => {
+    if(comment.parentId !== null) {
+      const parent = commentMap[comment.parentId];
+      (parent.children = parent.children || []).push(comment);
+    }
+  });
+
+  // filter the list to return a list of correctly nested comments
+  return commentList.filter(comment => {
+    return comment.parentId === null;
+  });
+  
   for (let i = 0; i < allCommentsForItem.length; i += 1) {
     let comment = allCommentsForItem[i];
     
