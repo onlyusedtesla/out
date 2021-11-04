@@ -236,7 +236,7 @@
       action = favoriteButton.getAttribute("data-action");
 
     toggleFavorite(favoritesForArticle);
-
+    
     if (action === "add") {
       favoriteItem(itemId)
         .then(function(response) {})
