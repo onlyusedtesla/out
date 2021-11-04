@@ -254,10 +254,14 @@ function getComments(itemId) {
   
   allCommentsForItem.forEach(comment => {
     if (comment.parent_id !== null) {
-      let parent = commentMap[comment.item_id];
+      let parent = commentMap[comment.parent_id];
       (parent.replies = parent.replies || []).push(comment);
     }
   });
+  
+  console.log("allCommentsForItem", allCommentsForItem);
+  
+  return false;
   
   return allCommentsForItem.filter(comment => {
     return comment.parent_id === null;

@@ -124,7 +124,11 @@ app.get("/item/:id", (request, response) => {
     item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
     
     const comments = db.getComments(item.item_id);
-
+    
+    console.log("comments", comments);
+    
+    return false;
+    
     response.render(__dirname + "/views/comments", {
       item: item,
       staging: process.env.STAGING || false,
