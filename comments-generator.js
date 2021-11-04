@@ -1,10 +1,11 @@
 const fs = require("fs");
+const dateFormat = require('./public/dateFormat.js');
 
 let itemId = "0b914140";
 let author = "Jack";
 let contents = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.";
 let comment_date = 1635450631000;
-
+let comment_date_formatted = dateFormat(comment_date, "mmm d");
 let comments = [];
 
 function uuid() {
@@ -20,6 +21,7 @@ for (let i = 0; i < 50; i += 1) {
     author: author,
     contents: contents,
     comment_date: comment_date,
+    comment_date_formatted: comment_date_formatted,
     comment_id: uuid()
   });
 }

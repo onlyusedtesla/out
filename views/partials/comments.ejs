@@ -1,10 +1,16 @@
 <div class="comments">
   <% for (var i = 0; i < comments.length; i += 1) { %>
-    <div class="comment <% if (i === 1) { %>comment--reply<% } %>">
-
-      <div class="comment-header">
-        <span> by </span><a href="/u/<%= comments[i].author %>" class="comment-authorName"><%= comments[i].author %></a><span> · </span>
-        <time class="comment-date js-comment-date" datetime="<%= comments[i].comment_date %>"><%= comments[i].comment_date %></time>
+    <div class="comment">
+      <div class="comment-header flex flex--spaceOneDown flex--alignItemsCenter">
+        <div class="flex-item">
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.37801 0.153119C5.17182 -0.0510397 4.82818 -0.0510397 4.62199 0.153119L0.154639 4.55388C-0.0515464 4.78072 -0.0515464 5.12098 0.154639 5.32514L0.681558 5.84688C0.887743 6.05104 1.23139 6.05104 1.46048 5.84688L5.01145 2.3535L8.53952 5.84688C8.76861 6.05104 9.11226 6.05104 9.31844 5.84688L9.84536 5.32514C10.0515 5.12098 10.0515 4.78072 9.84536 4.55388L5.37801 0.153119Z" data-upvoted="false" data-fill-upvoted="#FFFFFF" data-fill-notupvoted="#3F67CE" fill="#3F67CE"></path>
+          </svg>
+        </div>
+        <div class="flex-item">
+          <span> by </span><a href="/u/<%= comments[i].author %>" class="comment-authorName"><%= comments[i].author %></a><span> · </span>
+          <time class="comment-date js-comment-date" datetime="<%= comments[i].comment_date %>"><%= comments[i].comment_date_formatted %></time>
+        </div>
       </div>
 
       <div class="comment-contents">
