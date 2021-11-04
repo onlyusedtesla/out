@@ -269,11 +269,14 @@ function addComment(comment) {
   let rawData = fs.readFileSync(__dirname + '/comments.json');
   let data = JSON.parse(rawData);
   
+  let commentId = uuid();
+  comment.comment_id = commentId;
+  
   data["comments"].push(comment);
   
   try {
-    fs.writeFileSync(__dirname + "/comments.json", JSON.stringify(data["comments"]));
-    return true; 
+    fs.writeFileSync(__dirname + "/comments.json", JSON.stringify(data));
+    return commentId;
   } catch {
     return false;
   }

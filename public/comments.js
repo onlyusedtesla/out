@@ -30,13 +30,9 @@
       fetch("/comment?" + serialize(comment), {
         method: "POST"
       }).then(res => {
-        console.log("What's the response?", res);
-        
-        return false;
-        
         if (res.status === 200) {
-          res.text().then(function(html) {
-            resolve(html);
+          res.text().then(function(responseText) {
+            resolve(responseText);
           });
         } else {
           reject(res.body);
@@ -77,9 +73,11 @@
         author: author
       };
       
-      addComment(comment).then(function (response) {
-        console.log("Added comment");
-        console.log("What's the response?", response);
+      addComment(comment).then(function (newCommentId) {
+        // Refresh the page and let's go directly to the new comment_id
+        let url = "/item/" + itemId;
+        url += "#" + newCommentId;
+        window.location.url = url;
       });
       
     });

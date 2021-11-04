@@ -158,18 +158,17 @@ app.post("/comment", function(request, response) {
     request.query.contents.length >= 1 &&
     request.query.comment_date
   ) {
-    const result = db.saveComment({
+    const result = db.addComment({
       item_id: request.query.item_id,
       author: request.oidc.user.nickname,
       contents: request.query.contents,
       comment_date: request.query.comment_date,
       comment_date_formatted: request.query.comment_date_formatted,
-      parent_id: request.query.parent_id,
-      comment_id: request.query.comment_id
+      parent_id: request.query.parent_id
     });
     
     if (result) {
-      response.status(200).send("Comment successfully saved.");
+      response.status(200).send(result);
     } else {
       response.status(400).send("Please make sure you're logged in and all the information is properly filled out.");
     }
