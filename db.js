@@ -256,7 +256,12 @@ function getComments(itemId) {
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   
   for (let i = 0; i < allCommentsForItem.length; i += 1) {
-    getReplies(allCommentsForItem[i], allCommentsForItem);
+    let comment = allCommentsForItem[i];
+    
+    if (comment.parent_id !== null) {
+      comment.replies = [];
+      
+    }
   }
   
   console.log("allCommentsForItem", allCommentsForItem);
@@ -266,7 +271,7 @@ function getComments(itemId) {
 }
 
 function getReplies(comment, allComments) {
-  if (typeof comment.parent_id !== null) {
+  if (typeof comment.parent_id !== "undefined" && comment.parent_id !== null) {
     comment.replies = 
     allComments
     .filter(c => c.parent_id === comment.comment_id)
