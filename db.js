@@ -259,15 +259,14 @@ function getComments(itemId) {
   
   allCommentsForItem.forEach(comment => commentMap[comment.comment_id] = comment);
   
-  allCommentsForItem.forEach(comment =>);
-  // iterate over the comments again and correctly nest the children
-  commentList.forEach(comment => {
-    if(comment.parentId !== null) {
-      const parent = commentMap[comment.parentId];
-      (parent.children = parent.children || []).push(comment);
+  allCommentsForItem.forEach(comment => {
+    if (comment.parent_id !== null) {
+      let parent = commentMap[comment.item_id];
+      (parent.replies = parent.replies || []).push(comment);
     }
   });
-
+  
+  
   // filter the list to return a list of correctly nested comments
   return commentList.filter(comment => {
     return comment.parentId === null;
