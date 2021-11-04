@@ -149,6 +149,18 @@ app.get("/item/:id", (request, response) => {
 
 app.post("/comment", function (request, response) {
   
+    //   {
+    //   "item_id": "0b914140",
+    //   "author": "Jack",
+    //   "contents": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.",
+    //   "comment_date": 1635450631000,
+    //   "comment_date_formatted": "Oct 28",
+    //   "comment_id": "e651327c",
+    //   "parent_id": "8212d336"
+    // },
+      
+  console.log("What's request.query?", request.query);
+  
 });
 
 app.get("/landing", function(request, response) {
