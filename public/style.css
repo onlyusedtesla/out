@@ -137,6 +137,11 @@ textarea {
   text-decoration: underline;
 }
 
+.grey-link {
+  color: var(--dark-grey);
+  text-decoration: underline;
+}
+
 /* Article */
 
 .articles {

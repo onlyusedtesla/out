@@ -16,7 +16,11 @@
       <div class="comment-contents">
         <%= comments[i].contents %>
       </div>
-
+      
+      <div class="comment-reply">
+        <a href="#" class="grey-link js-comment-reply-button comment-reply-button">Reply</a>
+      </div>
+      
       <% if (typeof comments[i].replies !== "undefined" && comments[i].replies.length >= 1) { %>
         <div class="comment-replies">
           <%- include(commentPartialPath, { commentPartialPath: commentPartialPath, comments: comments[i].replies }) %>

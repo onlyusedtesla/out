@@ -2,6 +2,10 @@
   margin-left: 0;
 }
 
+.form.form--commentsInline {
+  margin-top: 1rem;
+}
+
 .comments.comments--start {
   margin-top: 3rem;
 }
@@ -36,4 +40,12 @@
 .comment-replies > .comments {
   margin-left: 3rem;
   margin-top: 1.5rem;
+}
+
+.comment-reply {
+  margin-top: 0.75rem;
+}
+
+.comment-reply-button {
+  font-size: 0.75rem;
 }

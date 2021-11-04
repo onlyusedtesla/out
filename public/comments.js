@@ -6,7 +6,7 @@
   
   Array.from(timeEls).forEach(function (el) {
     console.log("What's el?", el);
-    el.innerHTML = dateFormat(+el.getAttribute("datetime"), "mmm d, h:MM TT Z");
+    el.innerHTML = dateFormat(+el.getAttribute("datetime"), "mmm d, h:MM TT");
   });
   
 }());
