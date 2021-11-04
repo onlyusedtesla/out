@@ -8,10 +8,25 @@
 
 .comment-contents {
   white-space: pre-line;
+  color: var(--almost-black);
 }
 
 .comment {
   padding-right: 1rem;
+}
+
+.comment-header {
+  font-size: 0.75rem;
+  color: var(--dark-grey);
+}
+
+.comment-authorName {
+  color: var(--dark-grey);
+  text-decoration: none;
+}
+
+.comment-authorName:hover {
+  text-decoration: underline;
 }
 
 .comment + .comment {

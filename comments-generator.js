@@ -3,7 +3,7 @@ const fs = require("fs");
 let itemId = "0b914140";
 let author = "Jack";
 let contents = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis.";
-let comment_date = "1635450631000";
+let comment_date = 1635450631000;
 
 let comments = [];
 
