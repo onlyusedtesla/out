@@ -183,7 +183,7 @@
                   <% } %>
                   
                   <p class="article-comments">
-                    <a class="article-commentLink" href="/item/<%= firstTwoItems[i].item_id %>">Discuss<% if (typeof firstTwoItems[i].numberOfComments !== "undefined") { %> (<%= firstTwoItems[i].numberOfComments %> comments)<% } %></a> <span> · </span>
+                    <a class="article-commentLink" href="/item/<%= firstTwoItems[i].item_id %>">Discuss<% if (typeof firstTwoItems[i].commentCount !== "undefined" && firstTwoItems[i].commentCount >= 1) { %> (<%= firstTwoItems[i].commentCount %> <% if (firstTwoItems[i].commentCount >= 2) { %>comments<% } else { %>comment<% } %>)<% } %></a> <span> · </span>
                   </p>
                   
                   <p class="article-tags">

@@ -292,7 +292,7 @@ function addComment(comment) {
 function getCommentCountForItem(itemId) {
   let rawData = fs.readFileSync(__dirname + '/comments.json');
   let data = JSON.parse(rawData);
-  return data["comments"].filter(i => i.item_id === itemId);
+  return data["comments"].filter(i => i.item_id === itemId).length;
 }
 
 module.exports = {

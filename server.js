@@ -44,14 +44,11 @@ app.get("/", (request, response) => {
 
     let firstTwoItems = [];
     let nextItems = [];
-
+    
     // Getting the upvote count for each of the items.
     for (let i = 0; i < items.length; i += 1) {
       items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
-      console.log(
-        "item upvotecount",
-        items[i].item_id + " " + items[i].upvoteCount
-      );
+      items[i]["commentCount"] = db.getCommentCountForItem(items[i].item_id);
     }
 
     if (items.length >= 3) {
@@ -78,6 +75,7 @@ app.get("/", (request, response) => {
         : [],
       staging: process.env.STAGING || false
     });
+    
   } else {
     const items = db.getItems();
 
@@ -86,11 +84,8 @@ app.get("/", (request, response) => {
 
     // Getting the upvote count for each of the items.
     for (let i = 0; i < items.length; i += 1) {
-      items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
-      console.log(
-        "item upvotecount",
-        items[i].item_id + " " + items[i].upvoteCount
-      );
+      items[i]["upvoteCount"]  = db.getUpvoteCountForItem(items[i].item_id);
+      items[i]["commentCount"] = db.getCommentCountForItem(items[i].item_id);
     }
 
     firstTwoItems.push(items[0]);
@@ -122,7 +117,6 @@ app.get("/item/:id", (request, response) => {
   if (item) {
     
     item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
-    item.commentCount = db.getCommentCountForItem(item.item_id);
     
     const comments = db.getComments(item.item_id);
     
