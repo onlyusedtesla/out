@@ -69,12 +69,26 @@ function itemExists(itemId) {
 }
 
 /*
- * @description - Returns the items based on a number. 
+ * @description - Returns the items based on a number.
+ * - Used for AJAX calls from the home page's more button.
  * @parameter page:number - 1 will return the first 10 items. 2 will return the second 10 items, 3 will return the 3rd 10 items.. until there are no more items... */
 function getItems(page) {
   const items = getAllItems();
   page = page >= 0 ? page : 0;
   return items.slice(page * 10, (page * 10) + 10);
+}
+
+/*
+ * @description - Returns an individual item based on an id.
+ * - Used for when rendering the item contents on the /item page.
+ * @parameter itemId:String
+ */
+function getItem(itemId) {
+  if (itemExists(itemId)) {
+    return getAllItems().filter(el => el.item_id === itemId)[0];
+  } else {
+    return null;
+  }
 }
 
 function getItemsFromSearch(searchTerm) {
@@ -263,10 +277,11 @@ function getReplies(comment, allComments) {
 module.exports = {
   save: save,
   getItems: getItems,
+  getItem: getItem,
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
   itemExists: itemExists,
-
+  
   addFavorite: addFavorite,
   getFavorites: getFavorites,
   removeFavorite: removeFavorite,

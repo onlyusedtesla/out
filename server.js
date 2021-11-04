@@ -114,7 +114,12 @@ app.get("/", (request, response) => {
 app.get("/item/:id", (request, response) => {
   // This is the page where we will render the individual comments page.
   
-  const item = db.getItems()[0];
+  const item = db.getItem(request.params.id);
+  
+  console.log("request.params", request.params);
+  console.log("item", item);
+  
+  return false;
   
   console.log("Rendering the item view");
   
