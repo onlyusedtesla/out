@@ -163,6 +163,9 @@
   }
   
   function upvoteHandler(event) {
+    
+    event.preventDefault();
+    
     var upvote = event.target;
     
     var article = upvote.closest(".js-article"),
