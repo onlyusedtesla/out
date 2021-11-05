@@ -12,11 +12,6 @@ function uuid() {
 }
 
 function saveFile(data) {
-  fs.writeFileSync(__dirname + "/data.json", JSON.stringify(data));
-}
-
-function save(items) {
-  data["items"] = items;
   
   if (typeof data["item_upvotes"] === "undefined") {
     data["item_upvotes"] = {};
@@ -30,6 +25,15 @@ function save(items) {
     data["user_upvotes"] = {};
   }
   
+  if (typeof data["comments"] === "undefined") {
+    data["comments"] = [];
+  }
+  
+  fs.writeFileSync(__dirname + "/data.json", JSON.stringify(data));
+}
+
+function save(items) {
+  data["items"] = items;
   saveFile(data);
 }
 
@@ -245,7 +249,7 @@ function removeUpvote(userId, itemId) {
 }
 
 function getComments(itemId) {
-  let rawData = fs.readFileSync(__dirname + '/comments.json');
+  let rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   let commentMap = {};
@@ -267,7 +271,7 @@ function getComments(itemId) {
 }
 
 function addComment(comment) {
-  let rawData = fs.readFileSync(__dirname + '/comments.json');
+  let rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
   
   let commentId = uuid();
@@ -276,7 +280,7 @@ function addComment(comment) {
   data["comments"].push(comment);
   
   try {
-    fs.writeFileSync(__dirname + '/comments.json', JSON.stringify(data));
+    saveFile(data);
     return commentId;
   } catch {
     return false;
@@ -289,7 +293,7 @@ function addComment(comment) {
  * @return Number
  */
 function getCommentCountForItem(itemId) {
-  let rawData = fs.readFileSync(__dirname + '/comments.json');
+  let rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
   return data["comments"].filter(i => i.item_id === itemId).length;
 }
