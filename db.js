@@ -32,7 +32,8 @@ function saveFile(data) {
   fs.writeFileSync(__dirname + "/data.json", JSON.stringify(data));
 }
 
-function save(items) {
+function save
+items) {
   data["items"] = items;
   saveFile(data);
 }
@@ -321,7 +322,12 @@ module.exports = {
   
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
-  validKeys: validKeys,
+  validKeys: validKe
+  
+  backup: backup,ys,
   uuid: uuid
   
-};
+};,
+  
+  backup:,
+  
