@@ -1,6 +1,5 @@
 (function() {
-  const moreButton = document.querySelector(".js-more-button"),
-        hoverTooltips = document.querySelectorAll(".js-tooltip-hover"),
+  const hoverTooltips = document.querySelectorAll(".js-tooltip-hover"),
         mobileToggle = document.querySelector(".js-mobilemenutoggle"),
         mobileNavigation = document.querySelector(".js-mobilenavigation");
   
@@ -268,70 +267,19 @@
     mobileNavigation.classList.toggle("mobile-navigation--opened");
   });
   
-  let page = 1; // For getting more articles
-
-  function addItems(html) {
-    var tpl = document.createElement("template");
-    tpl.innerHTML = html;
-    let articlesEl = document.querySelectorAll("section.articles")[1];
-    articlesEl.appendChild(tpl.content);
-  }
-
-  function getItems(page) {
-    return new Promise(function(resolve, reject) {
-      fetch("/items?page=" + page, {
-        method: "GET",
-        headers: {
-          "Content-Type": "text/html"
-        }
-      }).then(res => {
-        if (res.status === 200) {
-          res.text().then(function(html) {
-            resolve(html);
-          });
-        } else {
-          reject(res.body);
-        }
-      });
-    });
-  }
-  
-  moreButton.addEventListener("click", function(event) {
-    event.preventDefault();
-
-    moreButton.setAttribute("disabled", "disabled");
-    moreButton.innerHTML = "Loading...";
-
-    getItems(page)
-      .then(function(html) {
-      
-        addItems(html);
-      
-        page += 1;
-
-        moreButton.removeAttribute("disabled");
-        moreButton.innerHTML = "More";
-      
-        setTimeout(function() {
-          convertArticleDates();
-          addFavoriteListeners();
-          addUpvoteListeners();
-          addShareListeners();
-          addTooltipListeners();
-        });
-      
-      })
-      .catch(function(response) {
-        moreButton.removeAttribute("disabled");
-        moreButton.innerHTML = "More";
-      });
-  });
-  
   convertArticleDates();
   addFavoriteListeners();
   addUpvoteListeners();
   addShareListeners();
   addTooltipListeners();
+  
+  window.APP = {};
+  
+  window.APP.convertArticleDates = convertArticleDates;
+  window.APP.addFavoriteListeners = addFavoriteListeners;
+  window.APP.addUpvoteListeners = addUpvoteListeners;
+  window.APP.addShareListeners = addShareListeners;
+  window.APP.addTooltipListeners = addTooltipListeners;
   
 })();
 
