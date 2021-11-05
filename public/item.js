@@ -99,7 +99,11 @@
   }
   
   function addLoggedOutTooltipListeners() {
-    var tooltips = document.querySelectorAll(".js-")
+    var tooltips = document.querySelectorAll(".js-logged-out-tooltip");
+    Array.from(tooltips).forEach(function(tooltip) {
+      tooltip.removeEventListener("click", tooltipHandler);
+      tooltip.addEventListener("click", tooltipHandler);
+    });
   }
   
   Array.from(hoverTooltips).forEach(function(tooltip) {
