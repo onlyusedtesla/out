@@ -80,10 +80,10 @@
   }
   
   function tooltipHandler(event) {
+    event.preventDefault();
     
     var tooltip = event.target;
     
-    event.preventDefault();
     tooltip.classList.add("show");
     setTimeout(function() {
       tooltip.classList.remove("show");
@@ -99,6 +99,7 @@
   }
   
   function addLoggedOutTooltipListeners() {
+    console.log("Gonna add listeners for each tooltip.");
     var tooltips = document.querySelectorAll(".js-logged-out-tooltip");
     Array.from(tooltips).forEach(function(tooltip) {
       tooltip.removeEventListener("click", tooltipHandler);
@@ -162,8 +163,6 @@
   }
   
   function upvoteHandler(event) {
-    event.preventDefault();
-    
     var upvote = event.target;
     
     var article = upvote.closest(".js-article"),
@@ -280,6 +279,7 @@
   addUpvoteListeners();
   addShareListeners();
   addTooltipListeners();
+  addLoggedOutTooltipListeners();
   
   window.APP = {};
   
