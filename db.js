@@ -264,7 +264,6 @@ function getComments(itemId) {
   return allCommentsForItem.filter(comment => {
     return comment.parent_id === null || comment.parent_id === "null";
   });
-  
 }
 
 function addComment(comment) {
