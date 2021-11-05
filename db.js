@@ -13,31 +13,26 @@ function uuid() {
 
 function saveFile(data) {
   
-  if (typeof data["ite
-  m_upvotes"] === "undefined") {
+  if (typeof data["item_upvotes"] === "undefined") {
     data["item_upvotes"] = {};
   }
   
-  if (typeof data["
-  ser_favorites"] === "undefined") {
+  if (typeof data["user_favorites"] === "undefined") {
     data["user_favorites"] = {};
   }
   
-  if (typeof data
-  "user_upvotes"] === "undefined") {
+  if (typeof data["user_upvotes"] === "undefined") {
     data["user_upvotes"] = {};
   }
   
-  if (typeof da
-  a["comments"] === "undefined") {
+  if (typeof data["comments"] === "undefined") {
     data["comments"] = [];
   }
   
   fs.writeFileSync(__dirname + "/data.json", JSON.stringify(data));
 }
 
-function save
-items) {
+function save(items) {
   data["items"] = items;
   saveFile(data);
 }
@@ -326,12 +321,7 @@ module.exports = {
   
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
-  validKeys: validKe
-  
-  backup: backup,ys,
+  validKeys: validKeys,
   uuid: uuid
   
-};,
-  
-  backup:,
-  
+};

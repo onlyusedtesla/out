@@ -36,9 +36,6 @@ function getRelevantKeywords(keywords) {
 }
 
 function update(done) {
-  
-  db.backup();
-  
   parse("https://feedbin.com/starred/c5abfc079595d929aa9a1ef735cccd7b.xml")
     .then(function(rss) {
       let items = rss.items
