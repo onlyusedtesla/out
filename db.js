@@ -1,10 +1,31 @@
 const fs = require('fs');
-let rawData = fs.readFileSync(__dirname + '/data.json');
-let data = JSON.parse(rawData);
-const tables = ['favorites', 'upvotes'];
-const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
 const dbFileName = process.env.staging ? "data-staging.json" : "data.json";
 const submissionsFileName = process.env.staging ? "submissions-staging.json" : "submissions.json";
+
+const tables = ['favorites', 'upvotes'];
+const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
+
+// Check if the files exist and if they don't create them.
+
+if (!fs.existsSync(__dirname + "/" + dbFileName)) {
+  
+  let data = {
+    "items": {},
+    "item_upvotes": {},
+    "user_favorites": {},
+    "user_upvotes": {},
+    "comments": []
+  };
+  
+  fs.writeFileSync(__dirname + "/" + dbFileName, JSON.stringify(data));
+}
+
+if (!fs.existsSync(__dirname + "/" + submissionsFileName)) {
+  let data = {
+    "submissions": []
+  }
+  fs.writeFileSync(__dirname + "/" + submissionsFileName, JSON.stringify(data));
+}
 
 function uuid() {
   return 'xxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -14,27 +35,12 @@ function uuid() {
 }
 
 function saveFile(data) {
-  
-  if (typeof data["item_upvotes"] === "undefined") {
-    data["item_upvotes"] = {};
-  }
-  
-  if (typeof data["user_favorites"] === "undefined") {
-    data["user_favorites"] = {};
-  }
-  
-  if (typeof data["user_upvotes"] === "undefined") {
-    data["user_upvotes"] = {};
-  }
-  
-  if (typeof data["comments"] === "undefined") {
-    data["comments"] = [];
-  }
-  
   fs.writeFileSync(__dirname + "/" + dbFileName, JSON.stringify(data));
 }
 
 function save(items) {
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
   data["items"] = items;
   saveFile(data);
 }
@@ -46,8 +52,8 @@ function backupData() {
 }
 
 function backupSubmissions() {
-  let rawData2 = fs.readFileSync(__dirname + '/submissions.json');
-  let data2 = JSON.parse(data2);
+  let rawData = fs.readFileSync(__dirname + '/submissions.json');
+  let data = JSON.parse(rawData);
   fs.writeFileSync(__dirname + (process.env.staging ? "/backups/submissions-staging-backup-" : "/backups/submissions-backup-") + (new Date()).getTime() + ".json", JSON.stringify(data));
 }
 
@@ -60,8 +66,8 @@ function findSubmission(submission) {
 }
 
 function saveSubmission(submission) {
-  rawData = fs.readFileSync(__dirname + "/" + submissionsFileName);
-  data = JSON.parse(rawData);
+  let rawData = fs.readFileSync(__dirname + "/" + submissionsFileName);
+  let data = JSON.parse(rawData);
   
   data.submissions = data.submissions || [];
   
@@ -77,8 +83,8 @@ function saveSubmission(submission) {
 }
 
 function getAllItems() {
-  rawData = fs.readFileSync(__dirname + "/" + dbFileName);
-  data = JSON.parse(rawData);
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
   return data["items"];
 }
 
@@ -220,7 +226,7 @@ function getUpvotes(userId) {
  * @return Number
  */
 function getUpvoteCountForItem(itemId) {
-  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
   let result = undefined;
@@ -237,7 +243,7 @@ function getUpvoteCountForItem(itemId) {
 }
 
 function getFavoritesOrUpvotes(tableName, userId) {
-  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
   if (typeof data['user_' + tableName][userId] !== "undefined") {
@@ -264,7 +270,7 @@ function removeUpvote(userId, itemId) {
 }
 
 function getComments(itemId) {
-  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   let commentMap = {};
@@ -286,7 +292,7 @@ function getComments(itemId) {
 }
 
 function addComment(comment) {
-  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
   let commentId = uuid();
@@ -308,7 +314,7 @@ function addComment(comment) {
  * @return Number
  */
 function getCommentCountForItem(itemId) {
-  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   return data["comments"].filter(i => i.item_id === itemId).length;
 }
