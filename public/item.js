@@ -84,7 +84,9 @@
     
     var tooltip = event.target;
     
-    
+    if (tooltip.classList.contains("js-favorite")) {
+      tooltip = tooltip.closest("js-favorite-container");
+    }
     
     tooltip.classList.add("show");
     setTimeout(function() {
