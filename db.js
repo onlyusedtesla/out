@@ -37,10 +37,20 @@ function save(items) {
   saveFile(data);
 }
 
-function backup() {
+function backupData() {
   let rawData = fs.readFileSync(__dirname + '/data.json');
   let data = JSON.parse(rawData);
+  
   fs.writeFileSync(__dirname + "/backups/data-backup-" + (new Date()).getTime() + ".json", JSON.stringify(data));
+  
+}
+
+function backupSubmissions() {
+  let rawData2 = fs.readFileSync(__dirname + '/submissions.json');
+  let data2 = JSON.parse(data2);
+  
+  fs.writeFileSync(__dirname + "/backups/submissions-backup-" + (new Date()).getTime() + ".json", JSON.stringify(data));
+  
 }
 
 function findSubmission(submission) {
@@ -60,6 +70,7 @@ function saveSubmission(submission) {
   data.submissions.push(submission);
   
   try {
+    backupSubmissions();
     fs.writeFileSync("./submissions.json", JSON.stringify(data));
     return "Submission Saved Successfully";
   } catch {
@@ -330,5 +341,6 @@ module.exports = {
   validKeys: validKeys,
   uuid: uuid,
   
-  backup: backup
+  backupData: backupData,
+  backupSubmissions: backupSubmissions
 };
