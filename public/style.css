@@ -825,6 +825,11 @@ footer {
 }
 
 @media only screen and (max-width: 37.5em) {
+  
+  .article-author, .article-comments {
+    margin-left: 0;
+  }
+  
   .article-title {
     font-size: 1em;
     line-height: 1.2;

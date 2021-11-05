@@ -228,23 +228,22 @@
             <div class="article-detailsMobile flex flex--spaceBetween flex--alignItemsCenter">
               <div class="flex-item">
                 <div class="flex flex--spaceOneDown">
-                  <div class="flex-item">
+                  <div class="flex-item" style="display: none;">
                     <span class="article-icon" style="display: none;"><svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.75 0H1.23438C0.828125 0 0.5 0.34375 0.5 0.75V5.26562C0.5 5.67188 0.828125 6 1.23438 6H5.75C6.15625 6 6.5 5.67188 6.5 5.26562V0.75C6.5 0.34375 6.15625 0 5.75 0ZM8.70312 0.59375L7 1.78125V4.23438L8.70312 5.42188C9.03125 5.64062 9.5 5.40625 9.5 5.01562V1C9.5 0.609375 9.03125 0.375 8.70312 0.59375Z" fill="white"></path></svg></span>
                   </div>
                   <div class="flex-item">
-                    <% if (typeof firstTwoItems[i].submitted_by !== "undefined") { %>
-                      <p class="article-author">
-                        <span> by </span><a href="#" class="article-authorName"><%= firstTwoItems[i].submitted_by %></a><span> · </span>
-                      </p>
-                    <% } %>
+                    
+                    <span class="article-author">
+                        <span> by </span><a href="#" class="article-authorName">derick.realwebdev+teslatracker</a><span> · </span>
+                    </span>
 
-                    <p class="article-comments">
+                    <span class="article-comments">
                       <a class="article-commentLink" href="/item/<%= firstTwoItems[i].item_id %>">Discuss<% if (typeof firstTwoItems[i].commentCount !== "undefined" && firstTwoItems[i].commentCount >= 1) { %> (<%= firstTwoItems[i].commentCount %> <% if (firstTwoItems[i].commentCount >= 2) { %>comments<% } else { %>comment<% } %>)<% } %></a> <% if (firstTwoItems[i].keywords) { %><span> · </span><% } %>
-                    </p>
+                    </span>
 
-                    <p class="article-tags">
+                    <span class="article-tags">
                       <%= firstTwoItems[i].keywords %>
-                    </p>
+                    </span>
                   </div>
                 </div>
               </div>
