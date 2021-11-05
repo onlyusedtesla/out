@@ -130,13 +130,14 @@
   }
   
   function toggleUpvotes(upvoteEls) {
+    
+    console.log("toggleUpvotes", toggleUpvotes);
+    
     Array.from(upvoteEls).forEach(function(button) {
       const svg = button.querySelector("svg > path"),
         count = button.parentNode.querySelector(".js-upvoteCount"),
         isNotUpvoted = svg.getAttribute("data-upvoted") === "false";
-
-      console.log("What's the countEl?", count);
-
+      
       if (isNotUpvoted) {
         svg.setAttribute("fill", svg.getAttribute("data-fill-upvoted"));
         button.classList.add("article-share--upvoted");
@@ -266,7 +267,66 @@
     mobileToggle.classList.toggle("mobile-menuToggle--activated");
     mobileNavigation.classList.toggle("mobile-navigation--opened");
   });
+  
+  let page = 1; // For getting more articles
 
+  function addItems(html) {
+    var tpl = document.createElement("template");
+    tpl.innerHTML = html;
+    let articlesEl = document.querySelectorAll("section.articles")[1];
+    articlesEl.appendChild(tpl.content);
+  }
+
+  function getItems(page) {
+    return new Promise(function(resolve, reject) {
+      fetch("/items?page=" + page, {
+        method: "GET",
+        headers: {
+          "Content-Type": "text/html"
+        }
+      }).then(res => {
+        if (res.status === 200) {
+          res.text().then(function(html) {
+            resolve(html);
+          });
+        } else {
+          reject(res.body);
+        }
+      });
+    });
+  }
+  
+  moreButton.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    moreButton.setAttribute("disabled", "disabled");
+    moreButton.innerHTML = "Loading...";
+
+    getItems(page)
+      .then(function(html) {
+      
+        addItems(html);
+      
+        page += 1;
+
+        moreButton.removeAttribute("disabled");
+        moreButton.innerHTML = "More";
+      
+        setTimeout(function() {
+          convertArticleDates();
+          addFavoriteListeners();
+          addUpvoteListeners();
+          addShareListeners();
+          addTooltipListeners();
+        });
+      
+      })
+      .catch(function(response) {
+        moreButton.removeAttribute("disabled");
+        moreButton.innerHTML = "More";
+      });
+  });
+  
   convertArticleDates();
   addFavoriteListeners();
   addUpvoteListeners();
