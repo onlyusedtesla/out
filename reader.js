@@ -106,9 +106,16 @@ function update(done) {
 
       // only save the new rss items that are not already in the db.
       let itemsToSave = items.filter(function(item) {
-        return !db.getAllItems().some(function(el) {
-          return el.title === item.title;
-        });
+        
+        const allItems = db.getAllItems();
+        
+        if (typeof allItems === "undefined") {
+          return true;
+        } else {
+          return !allItems.some(function(el) {
+            return el.title === item.title;
+          });
+        }
       });
     
       db.save(items);
