@@ -112,7 +112,9 @@ function update(done) {
         
         const allItems = db.getAllItems();
         
-        if (typeof allItems === "undefined") {
+        console.log("allItems", allItems);
+        
+        if (typeof allItems === "undefined" || allItems.length === 0) {
           return true;
         } else {
           return !allItems.some(function(el) {

@@ -1,6 +1,6 @@
 const fs = require('fs');
-const dbFileName = process.env.staging ? "data-staging.json" : "data.json";
-const submissionsFileName = process.env.staging ? "submissions-staging.json" : "submissions.json";
+const dbFileName = process.env.STAGING ? "data-staging.json" : "data.json";
+const submissionsFileName = process.env.STAGING ? "submissions-staging.json" : "submissions.json";
 
 const tables = ['favorites', 'upvotes'];
 const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
