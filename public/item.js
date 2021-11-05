@@ -79,12 +79,10 @@
     });
   }
   
-  function tooltipHandler(event) {
-    event.preventDefault();
-    
+  function tooltipHandler(event) {    
     var tooltip = event.target;
     
-    if (tooltip.classList.contains("js-favorite")) {
+    if (["js-favorite", "js-form-button"].some(el => tooltip.classList.contains(el))) {
       tooltip = tooltip.parentNode;
     }
     

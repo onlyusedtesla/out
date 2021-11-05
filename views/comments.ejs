@@ -259,8 +259,8 @@
         <div class="form-element">
           <textarea required type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
         </div>
-        <div class="form-element">
-          <input type="submit" value="Add Comment" data-original-value="Add Comment" class="form-button js-form-button <% if (!userInfo) { %>tooltip js-logged-out-tooltip<% } %>" data-text="Please sign in to comment." />
+        <div class="form-element <% if (!userInfo) { %>tooltip js-logged-out-tooltip tooltip--right<% } %>" data-text="Please sign in to comment.">
+          <input type="submit" value="Add Comment" data-original-value="Add Comment" class="form-button js-form-button" />
         </div>
         
         <input type="hidden" class="js-author" value="<%= userInfo %>" />
