@@ -13,19 +13,23 @@ function uuid() {
 
 function saveFile(data) {
   
-  if (typeof data["item_upvotes"] === "undefined") {
+  if (typeof data["ite
+  m_upvotes"] === "undefined") {
     data["item_upvotes"] = {};
   }
   
-  if (typeof data["user_favorites"] === "undefined") {
+  if (typeof data["
+  ser_favorites"] === "undefined") {
     data["user_favorites"] = {};
   }
   
-  if (typeof data["user_upvotes"] === "undefined") {
+  if (typeof data
+  "user_upvotes"] === "undefined") {
     data["user_upvotes"] = {};
   }
   
-  if (typeof data["comments"] === "undefined") {
+  if (typeof da
+  a["comments"] === "undefined") {
     data["comments"] = [];
   }
   
