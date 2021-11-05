@@ -37,6 +37,12 @@ function save(items) {
   saveFile(data);
 }
 
+function backup() {
+  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let data = JSON.parse(rawData);
+  fs.writeFileSync(__dirname + "/backups/data-backup-" + (new Date()).getTime() + ".json", JSON.stringify(data));
+}
+
 function findSubmission(submission) {
   const rawData = fs.readFileSync(__dirname + "/submissions.json"),
         data = JSON.parse(rawData),
@@ -322,6 +328,7 @@ module.exports = {
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
   validKeys: validKeys,
-  uuid: uuid
+  uuid: uuid,
   
+  backup: backup
 };

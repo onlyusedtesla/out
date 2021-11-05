@@ -200,7 +200,7 @@ app.get("/items", function(request, response) {
       response.status(400).send("There are no more items to load");
     } else {
       let articles = ejs.renderFile(
-        __dirname + "views/partials/article.ejs",
+        __dirname + "/views/partials/article.ejs",
         {
           nextItems: items,
           favorites: request.oidc.isAuthenticated()
