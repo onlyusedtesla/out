@@ -164,7 +164,7 @@
                   
                   <% if (typeof item.submitted_by !== "undefined") { %>
                   <p class="article-author">
-                    <span> by </span><a href="/u/<%= item.submitted_by %>" class="article-authorName"><%= item.submitted_by %></a><span> · </span>
+                    <span> by </span><a href="#" class="article-authorName"><%= item.submitted_by %></a><% if (item.keywords) { %><span> · </span>
                   </p>
                   <% } %>
                   
