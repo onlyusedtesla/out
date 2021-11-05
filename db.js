@@ -3,6 +3,8 @@ let rawData = fs.readFileSync(__dirname + '/data.json');
 let data = JSON.parse(rawData);
 const tables = ['favorites', 'upvotes'];
 const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
+const dbFileName = process.env.staging ? "data-staging.json" : "data.json";
+const submissionsFileName = process.env.staging ? "submissions-staging.json" : "submissions.json";
 
 function uuid() {
   return 'xxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -29,7 +31,7 @@ function saveFile(data) {
     data["comments"] = [];
   }
   
-  fs.writeFileSync(__dirname + "/data.json", JSON.stringify(data));
+  fs.writeFileSync(__dirname + "/" + dbFileName, JSON.stringify(data));
 }
 
 function save(items) {
@@ -38,23 +40,19 @@ function save(items) {
 }
 
 function backupData() {
-  let rawData = fs.readFileSync(__dirname + '/data.json');
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
-  fs.writeFileSync(__dirname + "/backups/data-backup-" + (new Date()).getTime() + ".json", JSON.stringify(data));
-  
+  fs.writeFileSync(__dirname + (process.env.staging ? "/backups/data-staging-backup-" : "/backups/data-backup") + (new Date()).getTime() + ".json", JSON.stringify(data));
 }
 
 function backupSubmissions() {
   let rawData2 = fs.readFileSync(__dirname + '/submissions.json');
   let data2 = JSON.parse(data2);
-  
-  fs.writeFileSync(__dirname + "/backups/submissions-backup-" + (new Date()).getTime() + ".json", JSON.stringify(data));
-  
+  fs.writeFileSync(__dirname + (process.env.staging ? "/backups/submissions-staging-backup-" : "/backups/submissions-backup-") + (new Date()).getTime() + ".json", JSON.stringify(data));
 }
 
 function findSubmission(submission) {
-  const rawData = fs.readFileSync(__dirname + "/submissions.json"),
+  const rawData = fs.readFileSync(__dirname + "/" + submissionsFileName),
         data = JSON.parse(rawData),
         allSubmissions = data["submissions"],
         indexOfSubmission = allSubmissions.findIndex(i => i.title === submission.title && i.url === submission.url);
@@ -62,7 +60,7 @@ function findSubmission(submission) {
 }
 
 function saveSubmission(submission) {
-  rawData = fs.readFileSync(__dirname + '/submissions.json');
+  rawData = fs.readFileSync(__dirname + "/" + submissionsFileName);
   data = JSON.parse(rawData);
   
   data.submissions = data.submissions || [];
@@ -71,7 +69,7 @@ function saveSubmission(submission) {
   
   try {
     backupSubmissions();
-    fs.writeFileSync("./submissions.json", JSON.stringify(data));
+    fs.writeFileSync(__dirname + "/" + submissionsFileName, JSON.stringify(data));
     return "Submission Saved Successfully";
   } catch {
     return new Error("An error occured while saving the submission.");
@@ -79,7 +77,7 @@ function saveSubmission(submission) {
 }
 
 function getAllItems() {
-  rawData = fs.readFileSync(__dirname + '/data.json');
+  rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   data = JSON.parse(rawData);
   return data["items"];
 }
@@ -132,7 +130,7 @@ function getItemsFromSearch(searchTerm) {
  * @return Void
  */
 function addFavoriteOrUpvote(tableName, userId, itemId) {
-  const rawData = fs.readFileSync(__dirname + '/data.json');
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
   if (typeof data['user_' + tableName][userId] === "undefined") {
@@ -174,7 +172,7 @@ function removeFavoriteOrUpvote(tableName, userId, itemId) {
     return new Error("Please specify the correct table.");
   }
   
-  const rawData = fs.readFileSync(__dirname + '/data.json');
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
   if (typeof data['user_' + tableName][userId] === "undefined") {
