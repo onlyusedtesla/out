@@ -44,7 +44,7 @@ app.get("/", (request, response) => {
 
     let firstTwoItems = [];
     let nextItems = [];
-    
+
     // Getting the upvote count for each of the items.
     for (let i = 0; i < items.length; i += 1) {
       items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
@@ -75,7 +75,6 @@ app.get("/", (request, response) => {
         : [],
       staging: process.env.STAGING || false
     });
-    
   } else {
     const items = db.getItems();
 
@@ -84,7 +83,7 @@ app.get("/", (request, response) => {
 
     // Getting the upvote count for each of the items.
     for (let i = 0; i < items.length; i += 1) {
-      items[i]["upvoteCount"]  = db.getUpvoteCountForItem(items[i].item_id);
+      items[i]["upvoteCount"] = db.getUpvoteCountForItem(items[i].item_id);
       items[i]["commentCount"] = db.getCommentCountForItem(items[i].item_id);
     }
 
@@ -109,17 +108,15 @@ app.get("/", (request, response) => {
 });
 
 app.get("/item/:id", (request, response) => {
-  
   // This is the page where we will render the individual comments page.
 
   const item = db.getItem(request.params.id);
-  
+
   if (item) {
-    
     item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
-    
+
     const comments = db.getComments(item.item_id);
-    
+
     response.render(__dirname + "/views/comments", {
       item: item,
       staging: process.env.STAGING || false,
@@ -160,16 +157,23 @@ app.post("/comment", function(request, response) {
       comment_date_formatted: request.query.comment_date_formatted,
       parent_id: request.query.parent_id
     });
-    
+
     if (result) {
       response.status(200).send(result);
     } else {
-      response.status(400).send("Please make sure you're logged in and all the information is properly filled out.");
+      response
+        .status(400)
+        .send(
+          "Please make sure you're logged in and all the information is properly filled out."
+        );
     }
   } else {
-    response.status(400).send("Please make sure you're logged in and all the information is properly filled out.");
+    response
+      .status(400)
+      .send(
+        "Please make sure you're logged in and all the information is properly filled out."
+      );
   }
-  
 });
 
 app.get("/landing", function(request, response) {
@@ -208,7 +212,10 @@ app.get("/items", function(request, response) {
             : [],
           upvotes: request.oidc.isAuthenticated()
             ? db.getUpvotes(request.oidc.user.sub)
-            : []
+            : [],
+          userInfo: request.oidc.isAuthenticated()
+            ? request.oidc.user.nickname
+            : false
         },
         function(err, str) {
           response.status(200).send(str);

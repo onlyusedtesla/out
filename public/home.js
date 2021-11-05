@@ -65,6 +65,7 @@
           window.APP.addUpvoteListeners();
           window.APP.addShareListeners();
           window.APP.addTooltipListeners();
+          window.APP.addLoggedOutTooltipListeners();
         });
       
       })

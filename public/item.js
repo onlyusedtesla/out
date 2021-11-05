@@ -85,7 +85,7 @@
     var tooltip = event.target;
     
     if (tooltip.classList.contains("js-favorite")) {
-      tooltip = tooltip.closest("js-favorite-container");
+      tooltip = tooltip.parentNode;
     }
     
     tooltip.classList.add("show");
@@ -295,6 +295,7 @@
   window.APP.addUpvoteListeners = addUpvoteListeners;
   window.APP.addShareListeners = addShareListeners;
   window.APP.addTooltipListeners = addTooltipListeners;
+  window.APP.addLoggedOutTooltipListeners = addLoggedOutTooltipListeners;
   
 })();
 
