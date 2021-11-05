@@ -84,6 +84,8 @@
     
     var tooltip = event.target;
     
+    
+    
     tooltip.classList.add("show");
     setTimeout(function() {
       tooltip.classList.remove("show");
