@@ -98,6 +98,10 @@
     });
   }
   
+  function addLoggedOutTooltipListeners() {
+    var tooltips = document.querySelectorAll(".js-")
+  }
+  
   Array.from(hoverTooltips).forEach(function(tooltip) {
     tooltip.addEventListener("mouseover", function(event) {
       event.preventDefault();
