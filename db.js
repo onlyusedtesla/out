@@ -10,7 +10,7 @@ const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type'
 if (!fs.existsSync(__dirname + "/" + dbFileName)) {
   
   let data = {
-    "items": {},
+    "items": [],
     "item_upvotes": {},
     "user_favorites": {},
     "user_upvotes": {},
