@@ -305,13 +305,15 @@
 
                 <div class="article-footer">
                   
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="js-favorite <% if (!userInfo) { %>tooltip js-logged-out-tooltip<% } %>" <% if (favorites.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %> data-text="Please sign in to favorite items.">
-                    <% if (favorites && favorites.length >= 1 && favorites.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %>
-                      <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="none" fill="#EDA44D" data-original-fill="#EDA44D" />
-                    <% } else { %>
-                      <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="#BBBBBB" fill="none" data-original-fill="#EDA44D" />
-                    <% } %>
-                  </svg>
+                  <div style="width: 16px; height: 17px;">
+                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="js-favorite <% if (!userInfo) { %>tooltip js-logged-out-tooltip<% } %>" <% if (favorites.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %> data-action="remove" <% } else { %> data-action="add" <% } %> data-text="Please sign in to favorite items.">
+                      <% if (favorites && favorites.length >= 1 && favorites.some((favorite) => favorite.item_id === nextItems[i].item_id)) { %>
+                        <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="none" fill="#EDA44D" data-original-fill="#EDA44D" />
+                      <% } else { %>
+                        <path d="M7.14719 0.550844L5.2022 4.70709L0.803509 5.36334C0.0255095 5.48834 -0.273721 6.48834 0.294817 7.08209L3.43674 10.3008L2.68866 14.8321C2.56897 15.6446 3.40681 16.2696 4.09504 15.8946L8.01496 13.7383L11.905 15.8946C12.5932 16.2696 13.431 15.6446 13.3113 14.8321L12.5633 10.3008L15.7052 7.08209C16.2737 6.48834 15.9745 5.48834 15.1965 5.36334L10.8277 4.70709L8.85281 0.550844C8.52365 -0.167906 7.50627 -0.199156 7.14719 0.550844Z" data-original-stroke="#BBBBBB" stroke="#BBBBBB" fill="none" data-original-fill="#EDA44D" />
+                      <% } %>
+                    </svg>
+                  </div>
                   
                   <% if (typeof nextItems[i].submitted_by !== "undefined") { %>
                     <p class="article-author">
