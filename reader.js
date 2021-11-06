@@ -80,6 +80,8 @@ function update(done) {
           // Treat this one like a submission because it's coming from a user.
           if (item.author === "TeslaTracker Submissions") {
             
+            console.log("What's the item for this submission?");
+            console.log("item", item);
             let submission = db.findSubmission({
               title: item.title,
               url: item.url
@@ -92,7 +94,7 @@ function update(done) {
             
             // Checking to see if it's a question based on if it has "Ask TT:" in the title.
             if (submission.title.includes("Ask TT:")) {
-              
+              item.is_question = true;
             }
             
           }

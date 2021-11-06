@@ -309,9 +309,15 @@
                 <div class="flex flex--spaceOneDown flex--alignItemsCenter">
                   <div class="flex-item">
                     <p class="article-title">
-                      <a href="<%= nextItems[i].url %>" target="_blank" class="article-linkTitle">
-                        <%= nextItems[i].title; %>
-                      </a>
+                      <% if (nextItems[i].is_question) { %>
+                        <a href="/item/<%= nextItems[i].item_id %>" class="article-linkTitle">
+                          <%= nextItems[i].title; %>
+                        </a>
+                      <% } else { %>
+                        <a href="<%= nextItems[i].url %>" target="_blank" class="article-linkTitle">
+                          <%= nextItems[i].title; %>
+                        </a>
+                      <% } %>
                     </p>
                   </div>
                   <div class="flex-item">
