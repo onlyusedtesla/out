@@ -181,12 +181,30 @@ app.get("/landing", function(request, response) {
 });
 
 app.get("/submit", requiresAuth(), function(request, response) {
-  response.render(__dirname + "/views/submit", {
-    userInfo: request.oidc.isAuthenticated()
-      ? request.oidc.user.nickname
-      : false,
-    staging: process.env.STAGING || false
-  });
+  // Render the question here...
+  
+  console.log("Whats' the request.query?", request.query);
+  
+  console.log("request.query.type", request.query.type);
+  
+  if (typeof request.query.type !== "undefined") {
+    response.render(__dirname + "/views/submit", {
+      userInfo: request.oidc.isAuthenticated()
+        ? request.oidc.user.nickname
+        : false,
+      staging: process.env.STAGING || false,
+      isQuesiton: true
+    });
+    
+  } else {
+    response.render(__dirname + "/views/submit", {
+      userInfo: request.oidc.isAuthenticated()
+        ? request.oidc.user.nickname
+        : false,
+      staging: process.env.STAGING || false,
+      isQuestion: false
+    });
+  }
 });
 
 app.get("/items", function(request, response) {
