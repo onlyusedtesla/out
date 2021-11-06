@@ -70,7 +70,6 @@ function saveSubmission(submission) {
   let data = JSON.parse(rawData);
   
   data.submissions = data.submissions || [];
-  
   data.submissions.push(submission);
   
   try {

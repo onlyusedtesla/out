@@ -17,14 +17,20 @@
       const div = document.createElement("div");
       const linkEl = document.createElement("a");
       const descriptionEl = document.createElement("p");
-
       descriptionEl.innerHTML = description.value;
-      linkEl.href = url.value;
+      
+      // don't put the link in there unless it exists. It won't for the question.
+      if (url) {
+        linkEl.href = url.value;
+      } else {
+        linkEl.href = "https://teslatracker.com/";
+      }
+      
       linkEl.style = "display: block;";
       linkEl.appendChild(descriptionEl);
-
+      linkEl.appendChild(descriptionEl);
       div.appendChild(linkEl);
-
+      
       let by = document.createElement("span");
       by.innerHTML = " by ";
 
@@ -40,9 +46,9 @@
     })();
 
     var responseBody = undefined;
-
+    
     if (isQuestion) {
-      let responseBody = {
+      responseBody = {
         question: question.value,
         description: description.value,
         pubDate: dateFormat(Date.now()),

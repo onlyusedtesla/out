@@ -248,8 +248,6 @@ app.post("/submit", function(request, response) {
   console.log("submitting an item or a question");
   console.log("What's the body?", request.body);
   
-  return false;
-  
   try {
     db.saveSubmission(request.body);
     response.status(200).send("Submission saved successfully");
