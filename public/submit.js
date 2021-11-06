@@ -50,7 +50,7 @@
     
     if (isQuestion) {
       responseBody = {
-        title: "Ask TT: " + question.value,
+        title: "Ask TT: " + question.value.trim(),
         description: description.value,
         date_published: dateFormat(Date.now()),
         author: author.value,

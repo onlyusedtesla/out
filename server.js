@@ -244,15 +244,10 @@ app.get("/items", function(request, response) {
 });
 
 app.post("/submit", function(request, response) {
-  
-  console.log("What's the request.body?", request.body);
-  
-  return false;
-  
   try {
     db.saveSubmission(request.body);
     response.status(200).send("Submission saved successfully");
-  } catch {
+  } catch { 
     response.status(400).send("An error occured while saving the submission.");
   }
 });
