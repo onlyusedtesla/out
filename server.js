@@ -182,21 +182,15 @@ app.get("/landing", function(request, response) {
 
 app.get("/submit", requiresAuth(), function(request, response) {
   // Render the question here...
-  
-  console.log("Whats' the request.query?", request.query);
-  
-  console.log("request.query.type", request.query.type);
-  
-  if (typeof request.query.type !== "undefined") {
+  if (request.query.type && request.query.type === "question") {
     response.render(__dirname + "/views/submit", {
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
       staging: process.env.STAGING || false,
-      isQuesiton: true
+      isQuestion: true
     });
-    
-  } else {
+  } else { // Render the normal submit view here...
     response.render(__dirname + "/views/submit", {
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
