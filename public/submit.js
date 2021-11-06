@@ -3,8 +3,12 @@
     url = document.querySelector(".js-url"),
     title = document.querySelector(".js-title"),
     author = document.querySelector(".js-author"),
+    question = document.querySelector(".js-question"),
     description = document.querySelector(".js-description"),
     successMessage = document.querySelector(".js-success-message");
+
+  var isQuestion =
+    form.getAttribute("data-is-question") === "true" ? true : false;
 
   form.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -16,24 +20,48 @@
 
       descriptionEl.innerHTML = description.value;
       linkEl.href = url.value;
-      linkEl.style="display: block;";
+      linkEl.style = "display: block;";
       linkEl.appendChild(descriptionEl);
-      
+
       div.appendChild(linkEl);
-      
+
       let by = document.createElement("span");
       by.innerHTML = " by ";
-      
+
       div.appendChild(by);
-      
+
       let username = document.createElement("a");
       username.innerHTML = author.value;
       username.href = "https://teslatracker.com/user?id=" + author.value;
-      
+
       div.appendChild(username);
-      
+
       return div.innerHTML;
     })();
+
+    var responseBody = undefined;
+
+    if (isQuestion) {
+      let responseBody = {
+        question: question.value,
+        description: description.value,
+        pubDate: dateFormat(Date.now()),
+        author: author.value,
+        content_html: contentHtml,
+        isQuestion: true
+      };
+    } else {
+      responseBody = {
+        url: url.value,
+        link: url.value,
+        title: title.value,
+        description: description.value,
+        pubDate: dateFormat(Date.now()),
+        author: author.value,
+        content_html: contentHtml,
+        isQuestion: false
+      };
+    }
 
     fetch("/submit", {
       method: "POST",
@@ -41,15 +69,7 @@
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        url: url.value,
-        link: url.value,
-        title: title.value,
-        description: description.value,
-        pubDate: dateFormat(Date.now()),
-        author: author.value,
-        content_html: contentHtml
-      })
+      body: JSON.stringify(responseBody)
     }).then(res => {
       if (res.status === 200) {
         form.classList.add("hidden");

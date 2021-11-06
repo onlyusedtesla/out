@@ -83,10 +83,10 @@
         </button>
         <p class="username">
           <% if (userInfo) { %>
-            <%= userInfo %>
+            <%= userInfo %> | <a href="/logout" class="blue-link">Sign Out</a>
           <% } else { %>
-            <a href="/login" class="login-button">
-              login
+            <a href="/login" class="blue-link">
+              Sign In
             </a>
           <% } %>
         </p>
@@ -95,13 +95,7 @@
 
     <main>
       
-      <% if (isQuestion) { %>
-        <p class="submit-title">
-          Ask Your Question
-        </p>
-      <% } %>
-      
-      <form class="form js-form">
+      <form class="form js-form" data-is-question="<%= isQuestion %>">
         
         <% if (!isQuestion) { %>
         <div class="form-element">
