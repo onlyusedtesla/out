@@ -79,6 +79,7 @@ function update(done) {
           
           // Treat this one like a submission because it's coming from a user.
           if (item.author === "TeslaTracker Submissions") {
+            
             let submission = db.findSubmission({
               title: item.title,
               url: item.url
@@ -111,8 +112,6 @@ function update(done) {
       let itemsToSave = items.filter(function(item) {
         
         const allItems = db.getAllItems();
-        
-        console.log("allItems", allItems);
         
         if (typeof allItems === "undefined" || allItems.length === 0) {
           return true;
