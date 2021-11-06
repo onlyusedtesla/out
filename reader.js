@@ -89,6 +89,12 @@ function update(done) {
               item.submitted_by = submission.author;
               item.description = submission.description;
             }
+            
+            // Checking to see if it's a question based on if it has "Ask TT:" in the title.
+            if (submission.title.includes("Ask TT:")) {
+              
+            }
+            
           }
           
           delete item.id;
