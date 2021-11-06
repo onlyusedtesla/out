@@ -274,8 +274,6 @@ function getComments(itemId) {
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   let commentMap = {};
   
-  console.log("allCommentsForItem", allCommentsForItem);
-  
   allCommentsForItem.forEach(comment => commentMap[comment.comment_id] = comment);
   
   allCommentsForItem.forEach(comment => {

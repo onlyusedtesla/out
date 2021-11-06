@@ -174,11 +174,7 @@
               <span> by </span><a href="/u/<%= item.submitted_by %>" class="article-authorName"><%= item.submitted_by %></a><span> · </span>
             </p>
           <% } %>
-
-          <p class="article-comments">
-            <a class="article-commentLink" href="/item/<%= item.item_id %>">Discuss<% if (typeof item.commentCount !== "undefined" && item.commentCount >= 1) { %> (<%= item.commentCount %> <% if (item.commentCount >= 2) { %>comments<% } else { %>comment<% } %>)<% } %></a><% if (item.keywords) { %><span> · </span><% } %>
-          </p>
-
+          
           <p class="article-tags">
             <%= item.keywords %>
           </p>

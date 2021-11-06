@@ -155,9 +155,15 @@
                 <div class="flex flex--spaceOneDown flex--alignItemsCenter">
                   <div class="flex-item">
                     <p class="article-title">
-                      <a href="<%= firstTwoItems[i].url %>" target="_blank" class="article-linkTitle">
-                        <%= firstTwoItems[i].title; %>
-                      </a>
+                      <% if (firstTwoItems[i].is_question) { %>
+                        <a href="/item/<%= firstTwoItems[i].item_id %>" class="article-linkTitle">
+                          <%= firstTwoItems[i].title; %>
+                        </a>
+                      <% } else { %>
+                        <a href="<%= firstTwoItems[i].url %>" target="_blank" class="article-linkTitle">
+                          <%= firstTwoItems[i].title; %>
+                        </a>
+                      <% } %>
                     </p>
                   </div>
                   <div class="flex-item">
