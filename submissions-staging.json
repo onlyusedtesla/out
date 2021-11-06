@@ -3,7 +3,7 @@
     {
       "question": "Here's the first question",
       "description": "Here's the description for the thing.",
-      "pubDate": "Sat Nov 06 2021 19:22:04",
+      "date_published": "Sat Nov 06 2021 19:22:04",
       "author": "derick.realwebdev+teslatracker",
       "content_html": "<a href=\"https://teslatracker.com/\" style=\"display: block;\"><p>Here's the first question<br>Here's the description for the thing.</p></a><span> by </span><a href=\"https://teslatracker.com/user?id=derick.realwebdev+teslatracker\">derick.realwebdev+teslatracker</a>",
       "isQuestion": true

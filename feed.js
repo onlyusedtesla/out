@@ -1,8 +1,10 @@
 const fs = require('fs');
 const jsonfeedToRSS = require('jsonfeed-to-rss');
 
+const submissionFileName = process.env.STAGING ? 'submissions-staging.json' : 'submissions.json';
+
 module.exports = function () {
-  let rawData = fs.readFileSync(__dirname + '/submissions.json'),
+  let rawData = fs.readFileSync(__dirname + "/" + submissionFileName),
       data = JSON.parse(rawData);
   
   let obj = {
@@ -10,7 +12,7 @@ module.exports = function () {
     "title":"TeslaTracker Submissions",
     "home_page_url":"https://teslatracker.com/",
     "feed_url":"https://teslatracker.com/submissions.xml",
-    "description": "A feed that that provides access to the latest TeslaTracker submissions.",
+    "description": "A feed that that provides access to the latest TeslaTracker submissions and questions.",
     "icon":"https://cdn.glitch.com/d53aa53a-c591-4e03-8635-621cfc75b4fc%2Fandroid-chrome-192x192.png?v=1633025139630",
     "author":{
       "name":"TeslaTracker",

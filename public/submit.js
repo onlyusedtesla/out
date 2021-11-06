@@ -56,7 +56,7 @@
       responseBody = {
         question: question.value,
         description: description.value,
-        pubDate: dateFormat(Date.now()),
+        date_published: dateFormat(Date.now()),
         author: author.value,
         content_html: contentHtml,
         isQuestion: true
@@ -67,7 +67,7 @@
         link: url.value,
         title: title.value,
         description: description.value,
-        pubDate: dateFormat(Date.now()),
+        date_published: dateFormat(Date.now()),
         author: author.value,
         content_html: contentHtml,
         isQuestion: false
