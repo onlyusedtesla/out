@@ -17,8 +17,13 @@
       const div = document.createElement("div");
       const linkEl = document.createElement("a");
       const descriptionEl = document.createElement("p");
-      descriptionEl.innerHTML = description.value;
       
+      if (isQuestion) {
+        descriptionEl.innerHTML = question.value + "<br>" + description.value;
+      } else {
+        descriptionEl.innerHTML = description.value;
+      }
+        
       // don't put the link in there unless it exists. It won't for the question.
       if (url) {
         linkEl.href = url.value;
