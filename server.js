@@ -142,7 +142,18 @@ app.get("/item/:id", (request, response) => {
   }
 });
 
-app.get("/user/:userId", (request, respsonse) => {
+app.get("/user/:userId", (request, response) => {
+  const user = db.findUser(request.params.userId);
+  
+  if (typeof user !== "undefined" && user) {
+    response.render(__dirname + "/views/user_profile", {
+      userInfo: user,
+      staging: process.env.STAGING || false
+    });
+  } else {
+    console.log("This user does not exist.");
+    // Render a 404 route.
+  }
   
 });
 

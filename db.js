@@ -324,18 +324,25 @@ function getCommentCountForItem(itemId) {
 
 function saveUserProfile(user) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
-  const data = JSON.parse(rawData);
+  let data = JSON.parse(rawData);
   
-  const users = data["users"];
-  
-  console.log("What's the user?", user);
-  
-  if (typeof users[user.sub] === "undefined") {
-    console.log("The user is undefined?");
-    data["users"][user.sub] === user;
+  if (typeof data["users"][user.sub] === "undefined") {
+    data["users"][user.sub] = user;
     saveFile(data);
-  }
-  
+    
+    try {
+      saveFile(data);
+      return true;
+    } catch {
+      return false;
+    }
+  }  
+}
+
+function findUser(userId) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  return data["users"][userId];
 }
 
 module.exports = {
@@ -365,6 +372,7 @@ module.exports = {
   uuid: uuid,
   
   saveUserProfile: saveUserProfile,
+  findUser: findUser,
   
   backupData: backupData,
   backupSubmissions: backupSubmissions

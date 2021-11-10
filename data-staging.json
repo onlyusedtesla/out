@@ -721,5 +721,15 @@
     ]
   },
   "comments": [],
-  "users": {}
+  "users": {
+    "auth0|615cb90b861e13006987e6c1": {
+      "nickname": "derick.realwebdev+teslatracker",
+      "name": "derick.realwebdev+teslatracker@gmail.com",
+      "picture": "https://s.gravatar.com/avatar/bb113ac06bd5fb93059d57dc16ffc0d6?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fde.png",
+      "updated_at": "2021-11-10T11:25:01.389Z",
+      "email": "derick.realwebdev+teslatracker@gmail.com",
+      "email_verified": true,
+      "sub": "auth0|615cb90b861e13006987e6c1"
+    }
+  }
 }
