@@ -14,7 +14,8 @@ if (!fs.existsSync(__dirname + "/" + dbFileName)) {
     "item_upvotes": {},
     "user_favorites": {},
     "user_upvotes": {},
-    "comments": []
+    "comments": [],
+    "users": {}
   };
   
   fs.writeFileSync(__dirname + "/" + dbFileName, JSON.stringify(data));
@@ -327,17 +328,14 @@ function saveUserProfile(user) {
   
   const users = data["users"];
   
-  console.log("What's the user");
+  console.log("What's the user?", user);
+  
   if (typeof users[user.sub] === "undefined") {
-    users[user.sub] === user;
+    console.log("The user is undefined?");
+    data["users"][user.sub] === user;
+    saveFile(data);
   }
   
-  try {
-    saveFile(data);
-    return true;
-  } catch {
-    return false; 
-  }
 }
 
 module.exports = {
