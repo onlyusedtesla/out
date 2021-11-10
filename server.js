@@ -147,7 +147,8 @@ app.get("/user/:userId", (request, response) => {
   if (typeof user !== "undefined" && user) {
     response.render(__dirname + "/views/user_profile", {
       userInfo: user,
-      staging: process.env.STAGING || false
+      staging: process.env.STAGING || false,
+      editable: request.oidc.isAuthenticated() && request.oidc.user.nickname === request.params.userId
     });
   } else {
     console.log("This user does not exist.");
