@@ -137,6 +137,10 @@ app.get("/item/:id", (request, response) => {
   }
 });
 
+app.get("/user/:userId", (request, respsonse) => {
+  
+});
+
 app.post("/comment", function(request, response) {
   if (
     request.oidc.isAuthenticated() &&
