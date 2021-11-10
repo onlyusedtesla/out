@@ -29,7 +29,20 @@ const config = {
     ? "https://staging-teslatracker.derick.work"
     : "https://teslatracker.com",
   clientID: "nNRceuJ1eDslyoi1dJdGuxElPOx1oU2W",
-  issuerBaseURL: "https://auth.teslatracker.com"
+  issuerBaseURL: "https://auth.teslatracker.com",
+  afterCallback: (request, response, session, decodedState) => {
+    console.log("In the afterCallback session.");
+    console.log("request.oidc", request.oidc);
+    console.log("");
+    console.log("authenticated?", request.oidc.isAuthenticated());
+    console.log("username?", request.oidc.isAuthenticated() ? request.oidc.user.nickname : "not logged in");
+    // db.saveUserProfile();
+    console.log("session", session);
+    
+    return {
+      ...session
+    }
+  }
 };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
