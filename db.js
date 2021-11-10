@@ -316,6 +316,30 @@ function getCommentCountForItem(itemId) {
   return data["comments"].filter(i => i.item_id === itemId).length;
 }
 
+/*
+ * @description - Checks to see if a user profile exists, if not, then it creates a new one.
+ * @param user:Object - an object with all the user information.
+ */
+
+function saveUserProfile(user) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  const data = JSON.parse(rawData);
+  
+  const users = data["users"];
+  
+  console.log("What's the user");
+  if (typeof users[user.sub] === "undefined") {
+    users[user.sub] === user;
+  }
+  
+  try {
+    saveFile(data);
+    return true;
+  } catch {
+    return false; 
+  }
+}
+
 module.exports = {
   save: save,
   getItems: getItems,
@@ -341,6 +365,8 @@ module.exports = {
   findSubmission: findSubmission,
   validKeys: validKeys,
   uuid: uuid,
+  
+  saveUserProfile: saveUserProfile,
   
   backupData: backupData,
   backupSubmissions: backupSubmissions

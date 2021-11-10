@@ -9,9 +9,6 @@ const db = require("./db.js");
 const RSSFeed = require("./feed.js");
 const ejs = require("ejs");
 const path = require("path");
-
-const makeRequest = require("./make-request.js");
-
 const { auth, requiresAuth } = require("express-openid-connect");
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,25 +28,7 @@ const config = {
     ? "https://staging-teslatracker.derick.work"
     : "https://teslatracker.com",
   clientID: "nNRceuJ1eDslyoi1dJdGuxElPOx1oU2W",
-  issuerBaseURL: "https://auth.teslatracker.com",
-  afterCallback: async (request, response, session, decodedState) => {
-    
-    const userInfo = await makeRequest(config.issuerBaseURL + "/userinfo");
-    
-    console.log("What's the user info?", userInfo);
-    
-    // makeRequest("");
-    console.log("In the afterCallback session.");
-    console.log("response.oidc", response.oidc);
-    console.log("oidc.user", response.oidc.user);
-    
-    // db.saveUserProfile();
-    console.log("session", session);
-    
-    return {
-      ...session
-    }
-  }
+  issuerBaseURL: "https://auth.teslatracker.com"
 };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
@@ -57,7 +36,11 @@ app.use(auth(config));
 
 app.get("/", (request, response) => {
   
-  const userInfo = request.oidc.fetchUserInfo().then(userInfo => console.log("userInfo", userInfo)).catch(error => console.log("error from fetch user info", error));
+  if (request.oidc.isAuthenticated()) {
+    db.saveUserProfile(request.oidc.user);
+  }
+  
+  return false;
   
   if (
     typeof request.query.search !== "undefined" &&
