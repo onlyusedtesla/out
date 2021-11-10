@@ -40,11 +40,9 @@ const config = {
     
     // makeRequest("");
     console.log("In the afterCallback session.");
-    console.log("request.oidc", request.oidc);
-    console.log("config.issuerBaseURL", config.issuerBaseURL);
+    console.log("response.oidc", response.oidc);
+    console.log("oidc.user", response.oidc.user);
     
-    console.log("authenticated?", request.oidc.isAuthenticated());
-    console.log("username?", request.oidc.isAuthenticated() ? request.oidc.user.nickname : "not logged in");
     // db.saveUserProfile();
     console.log("session", session);
     
@@ -58,6 +56,9 @@ const config = {
 app.use(auth(config));
 
 app.get("/", (request, response) => {
+  
+  const userInfo = request.oidc.fetchUserInfo().then(userInfo => console.log("userInfo", userInfo)).catch(error => console.log("error from fetch user info", error));
+  
   if (
     typeof request.query.search !== "undefined" &&
     request.query.search.length >= 1
