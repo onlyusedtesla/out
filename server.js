@@ -10,6 +10,8 @@ const RSSFeed = require("./feed.js");
 const ejs = require("ejs");
 const path = require("path");
 
+const makeRequest = require("./make-request.js");
+
 const { auth, requiresAuth } = require("express-openid-connect");
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,10 +32,17 @@ const config = {
     : "https://teslatracker.com",
   clientID: "nNRceuJ1eDslyoi1dJdGuxElPOx1oU2W",
   issuerBaseURL: "https://auth.teslatracker.com",
-  afterCallback: (request, response, session, decodedState) => {
+  afterCallback: async (request, response, session, decodedState) => {
+    
+    const userInfo = await makeRequest(config.issuerBaseURL + "/userinfo");
+    
+    console.log("What's the user info?", userInfo);
+    
+    // makeRequest("");
     console.log("In the afterCallback session.");
     console.log("request.oidc", request.oidc);
-    console.log("");
+    console.log("config.issuerBaseURL", config.issuerBaseURL);
+    
     console.log("authenticated?", request.oidc.isAuthenticated());
     console.log("username?", request.oidc.isAuthenticated() ? request.oidc.user.nickname : "not logged in");
     // db.saveUserProfile();
