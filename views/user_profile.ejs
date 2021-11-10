@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="All your Tesla news in one spot. The easiest and fastest way to always know what's happening in the Tesla world.">
     
-    <title><%= userInfo.nickname %> | TeslaTracker </title>
+    <title><%= userInfo.nickname %> | TeslaTracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@
         </svg>
       </a>
       <div class="navigation">
-        <div class="searchbox js-searchbox"> <!-- The Search Bar -->
+        <div class="searchbox js-searchbox"><!-- The Search Bar -->
           <form method="get" action="">
             <% if (typeof searchQuery !== "undefined") { %>
               <input name="search" type="text" maxlength="50" placeholder="Search" class="searchbox-input js-searchbox-input" value="<%= searchQuery %>">
