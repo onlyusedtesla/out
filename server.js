@@ -37,7 +37,6 @@ app.use(auth(config));
 app.get("/", (request, response) => {
   
   if (request.oidc.isAuthenticated()) {
-    console.log("Gonna call the saveUserProfile thing.");
     db.saveUserProfile(request.oidc.user);
   }
   

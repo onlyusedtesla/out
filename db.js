@@ -1,36 +1,47 @@
-const fs = require('fs');
+const fs = require("fs");
 const dbFileName = process.env.STAGING ? "data-staging.json" : "data.json";
-const submissionsFileName = process.env.STAGING ? "submissions-staging.json" : "submissions.json";
+const submissionsFileName = process.env.STAGING
+  ? "submissions-staging.json"
+  : "submissions.json";
 
-const tables = ['favorites', 'upvotes'];
-const validKeys = ['title', 'description', 'url', 'item_id', 'tags', 'link_type', 'timestamp', 'item_date'];
+const tables = ["favorites", "upvotes"];
+const validKeys = [
+  "title",
+  "description",
+  "url",
+  "item_id",
+  "tags",
+  "link_type",
+  "timestamp",
+  "item_date"
+];
 
 // Check if the files exist and if they don't create them.
 
 if (!fs.existsSync(__dirname + "/" + dbFileName)) {
-  
   let data = {
-    "items": [],
-    "item_upvotes": {},
-    "user_favorites": {},
-    "user_upvotes": {},
-    "comments": [],
-    "users": {}
+    items: [],
+    item_upvotes: {},
+    user_favorites: {},
+    user_upvotes: {},
+    comments: [],
+    users: {}
   };
-  
+
   fs.writeFileSync(__dirname + "/" + dbFileName, JSON.stringify(data));
 }
 
 if (!fs.existsSync(__dirname + "/" + submissionsFileName)) {
   let data = {
-    "submissions": []
-  }
+    submissions: []
+  };
   fs.writeFileSync(__dirname + "/" + submissionsFileName, JSON.stringify(data));
 }
 
 function uuid() {
-  return 'xxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+  return "xxxxxxxx".replace(/[xy]/g, function(c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 }
@@ -49,33 +60,54 @@ function save(items) {
 function backupData() {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  fs.writeFileSync(__dirname + (process.env.staging ? "/backups/data-staging-backup-" : "/backups/data-backup") + (new Date()).getTime() + ".json", JSON.stringify(data));
+  fs.writeFileSync(
+    __dirname +
+      (process.env.staging
+        ? "/backups/data-staging-backup-"
+        : "/backups/data-backup") +
+      new Date().getTime() +
+      ".json",
+    JSON.stringify(data)
+  );
 }
 
 function backupSubmissions() {
-  let rawData = fs.readFileSync(__dirname + '/submissions.json');
+  let rawData = fs.readFileSync(__dirname + "/submissions.json");
   let data = JSON.parse(rawData);
-  fs.writeFileSync(__dirname + (process.env.staging ? "/backups/submissions-staging-backup-" : "/backups/submissions-backup-") + (new Date()).getTime() + ".json", JSON.stringify(data));
+  fs.writeFileSync(
+    __dirname +
+      (process.env.staging
+        ? "/backups/submissions-staging-backup-"
+        : "/backups/submissions-backup-") +
+      new Date().getTime() +
+      ".json",
+    JSON.stringify(data)
+  );
 }
 
 function findSubmission(submission) {
   const rawData = fs.readFileSync(__dirname + "/" + submissionsFileName),
-        data = JSON.parse(rawData),
-        allSubmissions = data["submissions"],
-        indexOfSubmission = allSubmissions.findIndex(i => i.title === submission.title && i.url === submission.url);
+    data = JSON.parse(rawData),
+    allSubmissions = data["submissions"],
+    indexOfSubmission = allSubmissions.findIndex(
+      i => i.title === submission.title && i.url === submission.url
+    );
   return allSubmissions[indexOfSubmission];
 }
 
 function saveSubmission(submission) {
   let rawData = fs.readFileSync(__dirname + "/" + submissionsFileName);
   let data = JSON.parse(rawData);
-  
+
   data.submissions = data.submissions || [];
   data.submissions.push(submission);
-  
+
   try {
     backupSubmissions();
-    fs.writeFileSync(__dirname + "/" + submissionsFileName, JSON.stringify(data));
+    fs.writeFileSync(
+      __dirname + "/" + submissionsFileName,
+      JSON.stringify(data)
+    );
     return "Submission Saved Successfully";
   } catch {
     return new Error("An error occured while saving the submission.");
@@ -100,7 +132,7 @@ function itemExists(itemId) {
 function getItems(page) {
   const items = getAllItems();
   page = page >= 0 ? page : 0;
-  return items.slice(page * 10, (page * 10) + 10);
+  return items.slice(page * 10, page * 10 + 10);
 }
 
 /*
@@ -118,17 +150,25 @@ function getItem(itemId) {
 
 function getItemsFromSearch(searchTerm) {
   const allItems = getAllItems();
-  
+
   let items = [];
-  
+
   for (let i = 0; i < allItems.length; i += 1) {
-    if (allItems[i].title.trim().toLowerCase().includes(searchTerm.toLowerCase()) || allItems[i].description.trim().toLowerCase().includes(searchTerm.toLowerCase())) {
+    if (
+      allItems[i].title
+        .trim()
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      allItems[i].description
+        .trim()
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+    ) {
       items.push(allItems[i]);
     }
   }
-  
+
   return items;
-  
 }
 
 /*
@@ -138,87 +178,88 @@ function getItemsFromSearch(searchTerm) {
 function addFavoriteOrUpvote(tableName, userId, itemId) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
-  if (typeof data['user_' + tableName][userId] === "undefined") {
-    data['user_' + tableName][userId] = [];
+
+  if (typeof data["user_" + tableName][userId] === "undefined") {
+    data["user_" + tableName][userId] = [];
   }
-  
-  if (!data['user_' + tableName][userId].some(function (el) {
-    return el.item_id === itemId
-  })) {
-    
+
+  if (
+    !data["user_" + tableName][userId].some(function(el) {
+      return el.item_id === itemId;
+    })
+  ) {
     console.log("I'm gonna push the thing up to the table");
     console.log("tableName", tableName);
     console.log("userId", userId);
-    
-    data['user_' + tableName][userId].push({
+
+    data["user_" + tableName][userId].push({
       item_id: itemId,
       action_date: Date.now()
     });
-    
+
     // Add upvotes to the table name to be able to render it later.
-    if (tableName === 'upvotes') {
-      if (typeof data['item_upvotes'][itemId] === "undefined") {
-        data['item_upvotes'][itemId] = {};
+    if (tableName === "upvotes") {
+      if (typeof data["item_upvotes"][itemId] === "undefined") {
+        data["item_upvotes"][itemId] = {};
       }
-      
-      data['item_upvotes'][itemId][userId] = true;
-      
+
+      data["item_upvotes"][itemId][userId] = true;
     }
-    
   }
-  
+
   saveFile(data);
-  
 }
 
 function removeFavoriteOrUpvote(tableName, userId, itemId) {
-  
   if (!tables.includes(tableName)) {
     return new Error("Please specify the correct table.");
   }
-  
+
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
-  if (typeof data['user_' + tableName][userId] === "undefined") {
+
+  if (typeof data["user_" + tableName][userId] === "undefined") {
     return false;
   }
-  
-  console.log("data['user_' + tableName][userId]", data['user_' + tableName][userId]);
-  
-  if (data['user_' + tableName][userId].some(function (el) {
-    return el.item_id === itemId
-  })) {
-    
+
+  console.log(
+    "data['user_' + tableName][userId]",
+    data["user_" + tableName][userId]
+  );
+
+  if (
+    data["user_" + tableName][userId].some(function(el) {
+      return el.item_id === itemId;
+    })
+  ) {
     console.log("About to delete the thing.");
     console.log("tableName", tableName);
-    
-    let index = data['user_' + tableName][userId].findIndex(i => i.item_id === itemId);
-    data['user_' + tableName][userId].splice(index, 1);
-    
+
+    let index = data["user_" + tableName][userId].findIndex(
+      i => i.item_id === itemId
+    );
+    data["user_" + tableName][userId].splice(index, 1);
+
     // Go ahead and remove the userkey frrom the item_upvotes too.
-    if (tableName === 'upvotes') {
-      delete data['item_upvotes'][itemId][userId];
+    if (tableName === "upvotes") {
+      delete data["item_upvotes"][itemId][userId];
     }
   } else {
     return false;
   }
 
-  
   saveFile(data);
-  
 }
 
 /*
  * @description - Gets all favorits for a specific user id.
  */
 function getFavorites(userId) {
-  return getFavoritesOrUpvotes('favorites', userId);
+  return getFavoritesOrUpvotes("favorites", userId);
 }
 
 function getUpvotes(userId) {
-  return getFavoritesOrUpvotes('upvotes', userId);
+  return getFavoritesOrUpvotes("upvotes", userId);
 }
 
 /*
@@ -228,45 +269,44 @@ function getUpvotes(userId) {
 function getUpvoteCountForItem(itemId) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   let result = undefined;
-  
+
   // All items by default have 1 vote by default when it's created.
-  if (typeof data['item_upvotes'][itemId] === "undefined") {
-    result = 1; 
+  if (typeof data["item_upvotes"][itemId] === "undefined") {
+    result = 1;
   } else {
-    result = Object.keys(data['item_upvotes'][itemId]).length + 1;
+    result = Object.keys(data["item_upvotes"][itemId]).length + 1;
   }
-  
+
   return result;
-  
 }
 
 function getFavoritesOrUpvotes(tableName, userId) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
-  if (typeof data['user_' + tableName][userId] !== "undefined") {
-    return data['user_' + tableName][userId];
+
+  if (typeof data["user_" + tableName][userId] !== "undefined") {
+    return data["user_" + tableName][userId];
   } else {
     return [];
   }
 }
 
 function removeFavorite(userId, itemId) {
-  return removeFavoriteOrUpvote('favorites', userId, itemId);
+  return removeFavoriteOrUpvote("favorites", userId, itemId);
 }
 
 function addFavorite(userId, itemId) {
-  return addFavoriteOrUpvote('favorites', userId, itemId);
+  return addFavoriteOrUpvote("favorites", userId, itemId);
 }
 
 function addUpvote(userId, itemId) {
-  return addFavoriteOrUpvote('upvotes', userId, itemId);
+  return addFavoriteOrUpvote("upvotes", userId, itemId);
 }
 
 function removeUpvote(userId, itemId) {
-  return removeFavoriteOrUpvote('upvotes', userId, itemId);
+  return removeFavoriteOrUpvote("upvotes", userId, itemId);
 }
 
 function getComments(itemId) {
@@ -274,16 +314,18 @@ function getComments(itemId) {
   let data = JSON.parse(rawData);
   let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
   let commentMap = {};
-  
-  allCommentsForItem.forEach(comment => commentMap[comment.comment_id] = comment);
-  
+
+  allCommentsForItem.forEach(
+    comment => (commentMap[comment.comment_id] = comment)
+  );
+
   allCommentsForItem.forEach(comment => {
     if (comment.parent_id !== null && comment.parent_id !== "null") {
       let parent = commentMap[comment.parent_id];
       (parent.replies = parent.replies || []).push(comment);
     }
   });
-  
+
   return allCommentsForItem.filter(comment => {
     return comment.parent_id === null || comment.parent_id === "null";
   });
@@ -292,19 +334,18 @@ function getComments(itemId) {
 function addComment(comment) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   let commentId = uuid();
   comment.comment_id = commentId;
-  
+
   data["comments"].push(comment);
-  
+
   try {
     saveFile(data);
     return commentId;
   } catch {
     return false;
   }
-  
 }
 
 /*
@@ -325,18 +366,18 @@ function getCommentCountForItem(itemId) {
 function saveUserProfile(user) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
-  if (typeof data["users"][user.sub] === "undefined") {
-    data["users"][user.sub] = user;
+
+  if (typeof data["users"][user.nickname] === "undefined") {
+    data["users"][user.nickname] = user;
     saveFile(data);
-    
+
     try {
       saveFile(data);
       return true;
     } catch {
       return false;
     }
-  }  
+  }
 }
 
 function findUser(userId) {
@@ -352,28 +393,28 @@ module.exports = {
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
   itemExists: itemExists,
-  
+
   addFavorite: addFavorite,
   getFavorites: getFavorites,
   removeFavorite: removeFavorite,
-  
+
   addUpvote: addUpvote,
   removeUpvote: removeUpvote,
   getUpvotes: getUpvotes,
   getUpvoteCountForItem: getUpvoteCountForItem,
-  
+
   getComments: getComments,
   addComment: addComment,
   getCommentCountForItem: getCommentCountForItem,
-  
+
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
   validKeys: validKeys,
   uuid: uuid,
-  
+
   saveUserProfile: saveUserProfile,
   findUser: findUser,
-  
+
   backupData: backupData,
   backupSubmissions: backupSubmissions
 };
