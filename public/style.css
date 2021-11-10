@@ -386,7 +386,10 @@ textarea {
 }
 
 .searchbox.searchbox--focused > form {
-  border-color: rgb(19 46 125 / 75%);
+  border-color: transparent;
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 3px;
 }
 
 /* Search Container */
@@ -475,7 +478,10 @@ header {
 }
 
 .form-input:focus {
-  border-color: rgb(19 46 125 / 75%);
+  border-color: transparent;
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 3px;
 }
 
 .form-input::placeholder {
