@@ -264,7 +264,7 @@
 
   </article>
       
-      <form class="form form--comments js-comment-form js-comment-form-primary">
+      <form class="form form--left js-comment-form js-comment-form-primary">
         <div class="form-element">
           <textarea required type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
         </div>
@@ -299,7 +299,7 @@
             <div class="comment-reply">
               <a href="#" class="grey-link js-comment-reply-button comment-reply-button">Reply</a>
               
-              <form class="form form--comments form--commentsInline js-comment-form hidden" <% if (typeof comments[i].parent_id !== "undefined" && comments[i].parent_id !== null) { %>data-comment-id="<%= comments[i].comment_id %>"<% } %>>
+              <form class="form form--left form--commentsInline js-comment-form hidden" <% if (typeof comments[i].parent_id !== "undefined" && comments[i].parent_id !== null) { %>data-comment-id="<%= comments[i].comment_id %>"<% } %>>
                 <div class="form-element">
                   <textarea required type="text" placeholder="Share your thoughts..." class="js-comment form-input form-textarea"></textarea>
                 </div>
