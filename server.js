@@ -157,6 +157,10 @@ app.get("/user/:userId", (request, response) => {
   
 });
 
+app.post("/updateUser", (request, response) => {
+  
+});
+
 app.post("/comment", function(request, response) {
   if (
     request.oidc.isAuthenticated() &&
