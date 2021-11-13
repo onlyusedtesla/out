@@ -10,8 +10,8 @@
     
     var responseBody = {
       author: author.value,
-      ownedTeslaModel: ownedTeslaModel,
-      about: about
+      ownedTeslaModel: ownedTeslaModel.options[ownedTeslaModel.selectedIndex].text,
+      about: about.value
     };
     
     fetch("/updateProfile", {

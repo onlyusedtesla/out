@@ -380,6 +380,14 @@ function saveUserProfile(user) {
   }
 }
 
+/*
+ * @description - Update an existing user's profile
+ * @param user:Object - An object with various params related to the user.
+ */
+function updateUserProfile(user) {
+  
+}
+
 function findUser(userId) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
@@ -413,6 +421,7 @@ module.exports = {
   uuid: uuid,
 
   saveUserProfile: saveUserProfile,
+  updateUserProfile: updateUserProfile,
   findUser: findUser,
 
   backupData: backupData,
