@@ -9,7 +9,7 @@
     event.preventDefault();
     
     var responseBody = {
-      author: author,
+      author: author.value,
       ownedTeslaModel: ownedTeslaModel,
       about: about
     };
