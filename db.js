@@ -385,6 +385,24 @@ function saveUserProfile(user) {
  * @param user:Object - An object with various params related to the user.
  */
 function updateUserProfile(user) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  
+  if (typeof data["users"][user.author] !== "undefined") {
+    data["users"][user.author].about = user.about;
+    data["users"][user.ownedTeslaModel] = user.ownedTeslaModel;
+    
+    if (data["users"][user.ownedTeslaModel]) {
+      
+    }
+    
+    try {
+      saveFile(data);
+      return true;
+    } catch {
+      return false;
+    }
+  }
   
 }
 
