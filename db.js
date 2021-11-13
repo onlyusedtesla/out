@@ -390,10 +390,10 @@ function updateUserProfile(user) {
   
   if (typeof data["users"][user.author] !== "undefined") {
     data["users"][user.author].about = user.about;
-    data["users"][user.ownedTeslaModel] = user.ownedTeslaModel;
+    data["users"][user.author].ownedTeslaModel = user.ownedTeslaModel;
     
-    if (data["users"][user.ownedTeslaModel]) {
-      
+    if (data["users"][user.author].ownedTeslaModel === "I don't own a Tesla, yet.") {
+      delete data["users"][user.author].ownedTeslaModel;
     }
     
     try {
