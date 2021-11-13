@@ -644,7 +644,7 @@ a.login-button:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 120%;
+  right: calc(100% + 1rem);
   width: 12.5em;
   padding: 0.625em;
   border-radius: 0.625em;
@@ -672,7 +672,7 @@ a.login-button:hover {
   content: "";
   position: absolute;
   right: 100%;
-  margin-right: -0.4em;
+  margin-right: -0.2rem;
   top: 50%;
   transform: translateY(-50%);
   border: 0.625em solid #000;
