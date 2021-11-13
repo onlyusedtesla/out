@@ -80,21 +80,19 @@ function update(done) {
           // Treat this one like a submission because it's coming from a user.
           if (item.author === "TeslaTracker Submissions") {
             
-            console.log("What's the item for this submission?");
-            console.log("item", item);
+            // console.log("What's the item for this submission?");
+            // console.log("item", item);
+            
             let submission = db.findSubmission({
               title: item.title,
               url: item.url
             });
             
+            // Checking to see if it's a question based on if it has "Ask TT:" in the title.
             if (typeof submission !== "undefined") {
               item.submitted_by = submission.author;
               item.description = submission.description;
-            }
-            
-            // Checking to see if it's a question based on if it has "Ask TT:" in the title.
-            if (submission.title.includes("Ask TT:")) {
-              item.is_question = true;
+              item.is_question = submission.title.includes("Ask TT:") ? true : false;
             }
             
           }

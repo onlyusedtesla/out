@@ -659,7 +659,7 @@ a.login-button:hover {
 
 .tooltip.tooltip--right:before {
   right: auto;
-  left: 1.25em;
+  left: 1.75rem;
 }
 
 .tooltip:after {
@@ -684,7 +684,7 @@ a.login-button:hover {
 
 .tooltip.tooltip--right.show:after {
   border-color: transparent black transparent transparent;
-  margin-right: -1.3125em;
+  margin-right: -1.75rem;
 }
 
 /* Footer */
