@@ -157,12 +157,13 @@ app.get("/user/:userId", (request, response) => {
   
 });
 
-app.post("/comment", function(request, response) {
+app.post("/updateProfile", function(request, response) {
   if (
     request.oidc.isAuthenticated() &&
     request.query.author &&
     request.query.author === request.oidc.user.nickname &&
-    request.query.item_id &&
+    request.query.about &&
+    request.query.about.length >= 1 &&
     db.itemExists(request.query.item_id) &&
     request.query.contents &&
     request.query.contents.length >= 1 &&
