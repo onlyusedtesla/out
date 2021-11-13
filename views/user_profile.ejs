@@ -110,11 +110,11 @@
             
             <div class="form-element">
               <select name="owned_tesla_model" id="owned_tesla_model" class="js-owned-tesla-model" required>
-                <option value="not_yet" <% if >I don't own a Tesla, yet.</option>
-                <option value="model_s">Model S</option>
-                <option value="model_3">Model 3</option>
-                <option value="model_x">Model X</option>
-                <option value="model_y">Model Y</option>
+                <option value="not_yet" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "I don't own a Tesla, yet.") { %>selected="selected"<% } %>>I don't own a Tesla, yet.</option>
+                <option value="model_s" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model S") { %>selected="selected"<% } %>>Model S</option>
+                <option value="model_3" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model 3") { %>selected="selected"<% } %>>Model 3</option>
+                <option value="model_x" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model X") { %>selected="selected"<% } %>>Model X</option>
+                <option value="model_y" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model Y") { %>selected="selected"<% } %>>Model Y</option>
               </select>
             </div>
             
