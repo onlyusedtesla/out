@@ -143,8 +143,9 @@ app.get("/item/:id", (request, response) => {
 
 app.get("/user/:userId", (request, response) => {
   const user = db.findUser(request.params.userId);
-  
   if (typeof user !== "undefined" && user) {
+    
+    const favorites = db.
     response.render(__dirname + "/views/user_profile", {
       userInfo: user,
       staging: process.env.STAGING || false,
