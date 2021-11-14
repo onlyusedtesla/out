@@ -99,7 +99,6 @@
         
         <% if (editable) { %>
           <form class="form form--left js-form">
-            
             <div class="form-element">
               <% if (userInfo && userInfo.about) { %>
               <textarea required name="about" id="about" type="text" placeholder="Enter Your About Description" class="js-about form-input form-textarea"><%= userInfo.about %></textarea>
@@ -123,10 +122,16 @@
             </div>
             
             <input type="hidden" class="js-author" value="<%= userInfo.nickname %>" />
-
-        </form>
+          </form>
         <% } %>
       </div>
+      
+      <div class="flex">
+        <div class="flex-item">
+          
+        </div>
+      </div>
+      
     </main>
 
     <footer>
