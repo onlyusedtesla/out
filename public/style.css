@@ -612,6 +612,10 @@ a.login-button:hover {
   justify-content: space-between;
 }
 
+.flex.flex--mtOneUp {
+  margin-top: 1.5rem;
+}
+
 .flex-item--stretch {
   flex: 1;
 }

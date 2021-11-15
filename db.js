@@ -335,18 +335,6 @@ function getComments(itemId) {
   });
 }
 
-/*
- * @description - This one is meant to be used in the user profile page to display the comments in a flat structure.
- * @param userId:String - The user id to get the comments for.
- */
-function getCommentsForProfile(userId) {
-  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
-  let data = JSON.parse(rawData);
-  
-  return data["comments"].filter(i => i.);
-  let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
-}
-
 function addComment(comment) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
@@ -394,6 +382,30 @@ function saveUserProfile(user) {
       return false;
     }
   }
+}
+
+/*
+ * @description - This one is meant to be used in the user profile page to display the comments in a flat structure.
+ * @param userId:String - The user id to get the comments for.
+ */
+function getCommentsForProfile(userId) {
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  return data["comments"].filter(i => i.author === userId);
+}
+
+/*
+ * @description - What this one does is gets the actual items that have been favorited by a specific user.
+ */
+function getFavoritesForProfile(userId) {
+  
+}
+
+/*
+ * @description - This one gets the items that have been favorited by a specific user.
+ */
+function getUpvotesForProfile(userId) {
+  
 }
 
 /*
@@ -446,6 +458,7 @@ module.exports = {
   getUpvoteCountForItem: getUpvoteCountForItem,
 
   getComments: getComments,
+  getCommentsForProfile: getCommentsForProfile,
   addComment: addComment,
   getCommentCountForItem: getCommentCountForItem,
   

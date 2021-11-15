@@ -164,6 +164,7 @@ app.get("/user/:userId", (request, response) => {
       comments: comments,
       editable: request.oidc.isAuthenticated() && request.oidc.user.nickname === request.params.userId
     });
+    
   } else {
     console.log("This user does not exist.");
     // Render a 404 route.
