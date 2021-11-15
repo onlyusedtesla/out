@@ -44,7 +44,6 @@
   </head>
   <body>
     <div class="container">
-      
       <header>
       <a href="/" class="logo-link">
         <svg class="logo" width="237" height="43" viewBox="0 0 237 43" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +84,7 @@
         </button>
         <p class="username">
           <% if (userInfo) { %>
-            <a href="/user/<%= userInfo %>" class="blue-link"><%= userInfo %></a> | <a href="/logout" class="blue-link">Sign Out</a>
+            <a href="/user/<%= userInfo.nickname %>" class="blue-link"><%= userInfo.nickname %></a> | <a href="/logout" class="blue-link">Sign Out</a>
           <% } else { %>
             <a href="/login" class="blue-link">
               Sign In
@@ -165,16 +164,16 @@
       
       <div class="flex flex--spaceOneDown flex--mtOneUp">
         <div class="flex-item">
-          <a href="#" data-link="submissions" class="blue-link js-profile-link user-profile-link-selected">Submissions</a>
+          <a href="#" data-link="submissions" class="blue-link js-profile-link user-profile-link-selected">Submissions <% if (typeof submissions !== "undefined" && submissions.length >= 1) { %>(<%= submissions.length %>)<% } else { %>(0)<% } %></a>
         </div>
         <div class="flex-item">
-          <a href="#" data-link="comments" class="blue-link js-profile-link">Comments</a>
+          <a href="#" data-link="comments" class="blue-link js-profile-link">Comments <% if (typeof comments !== "undefined" && comments.length >= 1) { %>(<%= comments.length %>)<% } else { %>(0)<% } %></a>
         </div>
         <div class="flex-item">
-          <a href="#" data-link="favorites" class="blue-link js-profile-link">Favorites</a>
+          <a href="#" data-link="favorites" class="blue-link js-profile-link">Favorites <% if (typeof favoriteItems !== "undefined" && favoriteItems.length >= 1) { %>(<%= favoriteItems.length %>)<% } else { %>(0)<% } %></a>
         </div>
         <div class="flex-item">
-          <a href="#" data-link="upvotes" class="blue-link js-profile-link">Upvotes</a>
+          <a href="#" data-link="upvotes" class="blue-link js-profile-link">Upvotes <% if (typeof upvoteItems !== "undefined" && upvoteItems.length >= 1) { %>(<%= upvoteItems.length %>)<% } else { %>(0)<% } %></a>
         </div>
       </div>
       
