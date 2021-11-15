@@ -504,6 +504,9 @@ function setInviteForUser(inviteCode, acceptedByUsername) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
+  console.log("What's the invite code?", inviteCode);
+  console.log("What's the acceptedByUsername?", acceptedByUsername);
+  
   if (typeof data["invite_codes"][inviteCode] !== "undefined" && data["invite_codes"][inviteCode].accepted_by == null) {
     data["invite_codes"][inviteCode].accepted_by = acceptedByUsername;
     
