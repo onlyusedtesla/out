@@ -398,7 +398,17 @@ function getCommentsForProfile(userId) {
  * @description - What this one does is gets the actual items that have been favorited by a specific user.
  */
 function getFavoritesForProfile(userId) {
+  let favorites = getFavorites(userId);
   
+  console.log("What are favorites?", favorites);
+  
+  const items = getAllItems().filter(function (item) {
+    return favorites.some(el => item.item_id === el.item_id);
+  });
+  
+  console.log("What's the items?", items);
+  
+  return items;
 }
 
 /*
@@ -458,7 +468,6 @@ module.exports = {
   getUpvoteCountForItem: getUpvoteCountForItem,
 
   getComments: getComments,
-  getCommentsForProfile: getCommentsForProfile,
   addComment: addComment,
   getCommentCountForItem: getCommentCountForItem,
   
@@ -471,7 +480,10 @@ module.exports = {
   saveUserProfile: saveUserProfile,
   updateUserProfile: updateUserProfile,
   findUser: findUser,
-
+  
+  getCommentsForProfile: getCommentsForProfile,
+  getFavoritesForProfile: getFavoritesForProfile,
+  
   backupData: backupData,
   backupSubmissions: backupSubmissions
 };
