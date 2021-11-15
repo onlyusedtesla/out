@@ -129,21 +129,21 @@
       
       <div class="flex flex--spaceOneDown flex--mtOneUp">
         <div class="flex-item">
-          <a href="#" class="blue-link js-submissions-link user-profile-link-selected">Submissions</a>
+          <a href="#" data-link="submissions" class="blue-link js-profile-link user-profile-link-selected">Submissions</a>
         </div>
         <div class="flex-item">
-          <a href="#" class="blue-link js-comments-link">Comments</a>
+          <a href="#" data-link="comments" class="blue-link js-profile-link">Comments</a>
         </div>
         <div class="flex-item">
-          <a href="#" class="blue-link js-favorites-link">Favorites</a>
+          <a href="#" data-link="favorites" class="blue-link js-profile-link">Favorites</a>
         </div>
         <div class="flex-item">
-          <a href="#" class="blue-link js-upvotes-link">Upvotes</a>
+          <a href="#" data-link="upvotes" class="blue-link js-profile-link">Upvotes</a>
         </div>
       </div>
       
       <% if (typeof submissions !== "undefined" && submissions.length >= 1) { %>
-        <div class="items-container js-submissions-container items-container--selected">
+        <div class="items-container js-items-container items-container--selected" data-link="submissions">
           <!-- Display the user's submissions. -->
           <%- include(articlePartialPath, { nextItems: submissions, favorites: favorites, upvotes: upvotes }) %>
         </div>
@@ -151,21 +151,21 @@
       
       <!-- Display the user's comments -->
       <% if (typeof comments !== "undefined" && comments.length >= 1) { %>
-        <div class="items-container js-comments-container">
+        <div class="items-container js-items-containrer" data-link="comments">
           <!-- Display the user's comments -->
           <%- include(commentPartialPath, { commentPartialPath: commentPartialPath, comments: comments }) %>
         </div>
       <% } %>
       
       <% if (typeof favorites !== "undefined" && favorites.length >= 1) { %>
-        <div class="items-container js-favorites-container">
+        <div class="items-container js-items-container" data-link="favorites">
           <!-- Display the user's favorites  -->
           <%- include(articlePartialPath, { nextItems: favoriteItems, favorites: favorites, upvotes: upvotes }) %>
         </div>
       <% } %>
       
       <% if (typeof upvotes !== "undefined" && upvotes.length >= 1) { %>
-        <div class="items-container js-upvotes-container">
+        <div class="items-container js-items-container" data-link="upvotes">
           <!-- Display the user's upvoted submissions -->
           <%- include(articlePartialPath, { nextItems: upvoteItems, favorites: favorites, upvotes: upvotes }) %>
         </div>
