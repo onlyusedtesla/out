@@ -467,9 +467,16 @@ function generateInviteCodes(n) {
   
   n = n || 1;
   
+  // Creating the key if it doesn't yet exist.
+  if (typeof data["invite_codes"] === "undefined") {
+    data["invite_codes"] = {}; 
+  }
+  
   for (let i = 0; i < n; i += 1) {
     data["invite_codes"][uuid() + "-" + uuid()] = null;
   }
+  
+  saveFile(data);
 }
 
 /*
