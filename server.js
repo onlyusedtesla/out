@@ -154,10 +154,21 @@ app.get("/user/:userId", (request, response) => {
     const favorites = db.getFavorites(user.sub);
     const upvotes = db.getUpvotes(user.sub);
     
-    console.log("favorites", favorites);
-    console.log("upvotes", upvotes);
-    console.log("submissions", submissions);
-    console.log("comments", comments);
+    // Getting the upvote count for each of the items.
+    for (let i = 0; i < favoriteItems.length; i += 1) {
+      favoriteItems[i]["upvoteCount"] = db.getUpvoteCountForItem(favoriteItems[i].item_id);
+      favoriteItems[i]["commentCount"] = db.getCommentCountForItem(favoriteItems[i].item_id);
+    }
+    
+    for (let i = 0; i < upvoteItems.length; i += 1) {
+      upvoteItems[i]["upvoteCount"] = db.getUpvoteCountForItem(upvoteItems[i].item_id);
+      upvoteItems[i]["commentCount"] = db.getCommentCountForItem(upvoteItems[i].item_id);
+    }
+    
+    for (let i = 0; i < submissions.length; i += 1) {
+      submissions[i]["upvoteCount"] = db.getUpvoteCountForItem(submissions[i].item_id);
+      submissions[i]["commentCount"] = db.getCommentCountForItem(submissions[i].item_id);
+    }
     
     response.render(__dirname + "/views/user_profile", {
       userInfo: user,
