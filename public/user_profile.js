@@ -31,22 +31,25 @@
   const profileLinks = document.querySelectorAll(".js-profile-link");
   
   function hideItemContainers() {
-    let itemContainers = document.querySelectorAll(".js-item-container");
+    let itemContainers = document.querySelectorAll(".js-items-container");
     
     Array.from(itemContainers).forEach(function (el) {
-      el.classList.remove("item-container--selected");
+      el.classList.remove("items-container--selected");
     });
   }
   
   Array.from(profileLinks).forEach(function (profileLink) {
     profileLink.addEventListener('click', function (event) {
       event.preventDefault();
+      
       let linkTo = profileLink.getAttribute("data-link");
-      console.log("What's the data-link attribute?", linkTo);
-      hideItemContainers();
-      let itemContainer = document.querySelector(".js-items-container[data-link=" + linkTo + "]");
-      console.log("What's the itemContainer?", itemContainer);
-      // classList.add("item-container--selected");
+      let itemContainer = document.querySelector(".js-items-container[data-item-container='" + linkTo + "']");
+      
+      if (itemContainer) {
+        hideItemContainers();
+        itemContainer.classList.add("items-container--selected");
+      }
+      
     });
   });
   

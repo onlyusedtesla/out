@@ -143,7 +143,7 @@
       </div>
       
       <% if (typeof submissions !== "undefined" && submissions.length >= 1) { %>
-        <div class="items-container js-items-container items-container--selected" data-link="submissions">
+        <div class="items-container js-items-container items-container--selected" data-item-container="submissions">
           <!-- Display the user's submissions. -->
           <%- include(articlePartialPath, { nextItems: submissions, favorites: favorites, upvotes: upvotes }) %>
         </div>
@@ -151,21 +151,21 @@
       
       <!-- Display the user's comments -->
       <% if (typeof comments !== "undefined" && comments.length >= 1) { %>
-        <div class="items-container js-items-containrer" data-link="comments">
+        <div class="items-container js-items-container" data-item-container="comments">
           <!-- Display the user's comments -->
           <%- include(commentPartialPath, { commentPartialPath: commentPartialPath, comments: comments }) %>
         </div>
       <% } %>
       
       <% if (typeof favorites !== "undefined" && favorites.length >= 1) { %>
-        <div class="items-container js-items-container" data-link="favorites">
+        <div class="items-container js-items-container" data-item-container="favorites">
           <!-- Display the user's favorites  -->
           <%- include(articlePartialPath, { nextItems: favoriteItems, favorites: favorites, upvotes: upvotes }) %>
         </div>
       <% } %>
       
       <% if (typeof upvotes !== "undefined" && upvotes.length >= 1) { %>
-        <div class="items-container js-items-container" data-link="upvotes">
+        <div class="items-container js-items-container" data-item-container="upvotes">
           <!-- Display the user's upvoted submissions -->
           <%- include(articlePartialPath, { nextItems: upvoteItems, favorites: favorites, upvotes: upvotes }) %>
         </div>
