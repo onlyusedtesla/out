@@ -153,7 +153,7 @@ app.get("/user/:userId", (request, response) => {
     console.log("favorites", favorites);
     // console.log("upvotes", upvotes);
     // console.log("submissions", submissions);
-    //console.log("comments", comments);
+    console.log("comments", comments);
     
     response.render(__dirname + "/views/user_profile", {
       userInfo: user,

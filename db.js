@@ -399,23 +399,27 @@ function getCommentsForProfile(userId) {
  */
 function getFavoritesForProfile(userId) {
   let favorites = getFavorites(userId);
+  let items = [];
   
-  console.log("What are favorites?", favorites);
+  for (let i = 0; i < favorites.length; i += 1) {
+    items.push(getItem(favorites[i].item_id));
+  }
   
-  const items = getAllItems().filter(function (item) {
-    return favorites.some(el => item.item_id === el.item_id);
-  });
-  
-  console.log("What's the items?", items);
-  
-  return items;
+  return items.filter(el => el !== null);
 }
 
 /*
  * @description - This one gets the items that have been favorited by a specific user.
  */
 function getUpvotesForProfile(userId) {
+  let favorites = getUpvotes(userId);
+  let items = [];
   
+  for (let i = 0; i < favorites.length; i += 1) {
+    items.push(getItem(favorites[i].item_id));
+  }
+  
+  return items.filter(el => el !== null);
 }
 
 /*
@@ -483,6 +487,7 @@ module.exports = {
   
   getCommentsForProfile: getCommentsForProfile,
   getFavoritesForProfile: getFavoritesForProfile,
+  getUpvotesForProfile: getUpvotesForProfile,
   
   backupData: backupData,
   backupSubmissions: backupSubmissions
