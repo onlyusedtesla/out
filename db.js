@@ -461,7 +461,7 @@ function findUser(userId) {
  * @description - Generates an N amount of invitation codes.
  * @n:Integer - A positive integer of the number of codes to generate.
  */
-function generateInviteCodes(n) {
+function generateInviteCodes(n, username) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
@@ -473,7 +473,10 @@ function generateInviteCodes(n) {
   }
   
   for (let i = 0; i < n; i += 1) {
-    data["invite_codes"][uuid() + "-" + uuid()] = null;
+    data["invite_codes"][uuid() + "-" + uuid()] = {
+      generated_by: username || null,
+      accepted_by: null
+    };
   }
   
   saveFile(data);
