@@ -172,6 +172,7 @@ app.get("/user/:userId", (request, response) => {
     
     response.render(__dirname + "/views/user_profile", {
       userInfo: user,
+      loggedInUserInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false, 
       staging: process.env.STAGING || false,
       favoriteItems: favoriteItems,
       upvoteItems: upvoteItems,

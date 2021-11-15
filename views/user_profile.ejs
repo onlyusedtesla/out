@@ -83,8 +83,8 @@
           </svg>
         </button>
         <p class="username">
-          <% if (userInfo) { %>
-            <a href="/user/<%= userInfo.nickname %>" class="blue-link"><%= userInfo.nickname %></a> | <a href="/logout" class="blue-link">Sign Out</a>
+          <% if (loggedInUserInfo) { %>
+            <a href="/user/<%= loggedInUserInfo %>" class="blue-link"><%= loggedInUserInfo %></a> | <a href="/logout" class="blue-link">Sign Out</a>
           <% } else { %>
             <a href="/login" class="blue-link">
               Sign In
