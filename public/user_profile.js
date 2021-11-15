@@ -12,7 +12,8 @@
     var responseBody = {
       author: author.value,
       ownedTeslaModel: ownedTeslaModel.options[ownedTeslaModel.selectedIndex].text,
-      about: about.value
+      about: about.value,
+      inviteCode: inviteCode.value
     };
     
     fetch("/updateProfile", {

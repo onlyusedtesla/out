@@ -441,6 +441,10 @@ function updateUserProfile(user) {
       delete data["users"][user.author].ownedTeslaModel;
     }
     
+    // Do some checks for the invite code here
+    // Set an invited_by property on the user and if it's exists then you will 
+    // 
+    
     try {
       saveFile(data);
       return true;
