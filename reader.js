@@ -129,7 +129,7 @@ function update(done) {
       });
     
       db.save(itemsToSave);
-
+      
       if (typeof done !== "undefined") {
         done();
       }
