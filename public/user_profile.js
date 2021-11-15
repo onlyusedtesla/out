@@ -3,9 +3,10 @@
       ownedTeslaModel = document.querySelector(".js-owned-tesla-model"),
       about = document.querySelector(".js-about"),
       author = document.querySelector(".js-author"),
+      inviteCode = document.querySelector(".js-invite-code"),
       successMessage = document.querySelector(".js-success-message");
   
-    form && form.addEventListener("submit", function(event) {
+  form && form.addEventListener("submit", function(event) {
     event.preventDefault();
     
     var responseBody = {

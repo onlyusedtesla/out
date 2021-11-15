@@ -473,7 +473,10 @@ function generateInviteCodes(n, username) {
   }
   
   for (let i = 0; i < n; i += 1) {
-    data["invite_codes"][uuid() + "-" + uuid()] = null;
+    data["invite_codes"][uuid() + "-" + uuid()] = {
+      generated_by: username || null,
+      accepted_by: null
+    }
   }
   
   saveFile(data);
@@ -486,7 +489,7 @@ function getInviteCodes() {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
-  return Object.keys(data["invite_codes"]).filter(el => data["invite_codes"][el] == null);
+  return Object.keys(data["invite_codes"]).filter(el => data["invite_codes"][el].accepted_by === null);
 }
 
 module.exports = {
