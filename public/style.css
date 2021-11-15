@@ -831,6 +831,21 @@ footer {
   top: 0;
 }
 
+/* User Profile Stuff */
+
+.items-container {
+  display: none;
+  margin-top: 1.5rem;
+}
+
+.items-container.items-container--selected {
+  display: block;
+}
+
+.user-profile-link-selected {
+  font-weight: bold;
+}
+
 /* Media Queries */
 
 @media only screen and (min-width: 73.125em) {

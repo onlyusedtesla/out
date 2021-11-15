@@ -169,6 +169,7 @@ app.get("/user/:userId", (request, response) => {
       submissions: submissions,
       comments: comments,
       commentPartialPath: __dirname + "/views/partials/comments.ejs",
+      articlePartialPath: __dirname + "/views/partials/article.ejs",
       editable: request.oidc.isAuthenticated() && request.oidc.user.nickname === request.params.userId
     });
     
