@@ -335,6 +335,18 @@ function getComments(itemId) {
   });
 }
 
+/*
+ * @description - This one is meant to be used in the user profile page to display the comments in a flat structure.
+ * @param userId:String - The user id to get the comments for.
+ */
+function getCommentsForProfile(userId) {
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  
+  return data["comments"].filter(i => i.);
+  let allCommentsForItem = data["comments"].filter(i => i.item_id === itemId);
+}
+
 function addComment(comment) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);

@@ -148,11 +148,20 @@ app.get("/user/:userId", (request, response) => {
     const favorites = db.getFavorites(user.sub);
     const upvotes = db.getUpvotes(user.sub);
     const submissions = db.getSubmissions(user.nickname);
-    const comments = db.get
+    const comments = db.getCommentsForProfile(user.sub);
+    
+    console.log("favorites", favorites);
+    console.log("upvotes", upvotes);
+    console.log("submissions", submissions);
+    console.log("comments", comments);
     
     response.render(__dirname + "/views/user_profile", {
       userInfo: user,
       staging: process.env.STAGING || false,
+      favorites: favorites,
+      upvotes: upvotes,
+      submissions: submissions,
+      comments: comments,
       editable: request.oidc.isAuthenticated() && request.oidc.user.nickname === request.params.userId
     });
   } else {
