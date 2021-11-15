@@ -473,10 +473,7 @@ function generateInviteCodes(n, username) {
   }
   
   for (let i = 0; i < n; i += 1) {
-    data["invite_codes"][uuid() + "-" + uuid()] = {
-      generated_by: username || null,
-      accepted_by: null
-    };
+    data["invite_codes"][uuid() + "-" + uuid()] = null;
   }
   
   saveFile(data);
