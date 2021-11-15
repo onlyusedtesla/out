@@ -128,7 +128,7 @@ function update(done) {
         }
       });
     
-      db.save(items);
+      db.save(itemsToSave);
 
       if (typeof done !== "undefined") {
         done();
