@@ -295,5 +295,7 @@
   window.APP.addTooltipListeners = addTooltipListeners;
   window.APP.addLoggedOutTooltipListeners = addLoggedOutTooltipListeners;
   
+  console.log("The item.js file is running..");
+  
 })();
 
