@@ -24,6 +24,7 @@ if (!fs.existsSync(__dirname + "/" + dbFileName)) {
     item_upvotes: {},
     user_favorites: {},
     user_upvotes: {},
+    invite_codes: {},
     comments: [],
     users: {}
   };
@@ -456,6 +457,31 @@ function findUser(userId) {
   return data["users"][userId];
 }
 
+/*
+ * @description - Generates an N amount of invitation codes.
+ * @n:Integer - A positive integer of the number of codes to generate.
+ */
+function generateInviteCodes(n) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  
+  n = n || 1;
+  
+  for (let i = 0; i < n; i += 1) {
+    data["invite_codes"][uuid() + "-" + uuid()] = null;
+  }
+}
+
+/*
+ * @description - Get all unused invitation codes.
+ */
+function getInviteCodes() {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  
+  return Object.keys(data["invite_codes"]).filter(el => data["invites_codes"][el] === null);
+}
+
 module.exports = {
   save: save,
   getItems: getItems,
@@ -490,6 +516,9 @@ module.exports = {
   getCommentsForProfile: getCommentsForProfile,
   getFavoritesForProfile: getFavoritesForProfile,
   getUpvotesForProfile: getUpvotesForProfile,
+  
+  generateInviteCodes: generateInviteCodes,
+  getInviteCodes: getInviteCodes,
   
   backupData: backupData,
   backupSubmissions: backupSubmissions
