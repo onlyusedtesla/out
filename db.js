@@ -486,7 +486,7 @@ function getInviteCodes() {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
-  return Object.keys(data["invite_codes"]).filter(el => data["invites_codes"][el] === null);
+  return Object.keys(data["invite_codes"]).filter(el => data["invite_codes"][el] == null);
 }
 
 module.exports = {
