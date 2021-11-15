@@ -146,13 +146,13 @@ app.get("/user/:userId", (request, response) => {
   if (typeof user !== "undefined" && user) {
     
     const favorites = db.getFavoritesForProfile(user.sub);
-    const upvotes = db.getUpvotes(user.sub);
+    const upvotes = db.getUpvotesForProfile(user.sub);
     const submissions = db.getSubmissions(user.nickname);
     const comments = db.getCommentsForProfile(user.sub);
     
     console.log("favorites", favorites);
-    // console.log("upvotes", upvotes);
-    // console.log("submissions", submissions);
+    console.log("upvotes", upvotes);
+    console.log("submissions", submissions);
     console.log("comments", comments);
     
     response.render(__dirname + "/views/user_profile", {

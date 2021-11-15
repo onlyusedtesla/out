@@ -412,11 +412,11 @@ function getFavoritesForProfile(userId) {
  * @description - This one gets the items that have been favorited by a specific user.
  */
 function getUpvotesForProfile(userId) {
-  let favorites = getUpvotes(userId);
+  let upvotes = getUpvotes(userId);
   let items = [];
   
-  for (let i = 0; i < favorites.length; i += 1) {
-    items.push(getItem(favorites[i].item_id));
+  for (let i = 0; i < upvotes.length; i += 1) {
+    items.push(getItem(upvotes[i].item_id));
   }
   
   return items.filter(el => el !== null);
