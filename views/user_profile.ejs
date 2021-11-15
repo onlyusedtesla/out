@@ -144,6 +144,10 @@
             </div>
             
             <div class="form-element">
+              <input id="invitation_code" name="title" type="text" maxlength="280" placeholder="Enter Title" class="js-title form-input">
+            </div>
+            
+            <div class="form-element">
               <select name="owned_tesla_model" id="owned_tesla_model" class="js-owned-tesla-model" required>
                 <option value="not_yet" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "I don't own a Tesla, yet.") { %>selected="selected"<% } %>>I don't own a Tesla, yet.</option>
                 <option value="model_s" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model S") { %>selected="selected"<% } %>>Model S</option>
