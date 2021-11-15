@@ -150,7 +150,7 @@ app.get("/user/:userId", (request, response) => {
     const favorites = db.getFavoritesForProfile(user.sub);
     const upvotes = db.getUpvotesForProfile(user.sub);
     const submissions = db.getSubmissions(user.nickname);
-    const comments = db.getCommentsForProfile(user.sub);
+    const comments = db.getCommentsForProfile(user.nickname);
     
     console.log("favorites", favorites);
     console.log("upvotes", upvotes);

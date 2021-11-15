@@ -391,6 +391,8 @@ function saveUserProfile(user) {
 function getCommentsForProfile(userId) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
+  console.log("What are the comments?");
+  console.log(data["comments"]);
   return data["comments"].filter(i => i.author === userId);
 }
 
