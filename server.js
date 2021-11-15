@@ -145,7 +145,11 @@ app.get("/user/:userId", (request, response) => {
   const user = db.findUser(request.params.userId);
   if (typeof user !== "undefined" && user) {
     
-    const favorites = db.
+    const favorites = db.getFavorites(user.sub);
+    const upvotes = db.getUpvotes(user.sub);
+    const submissions = db.getSubmissions(user.nickname);
+    const comments = db.get
+    
     response.render(__dirname + "/views/user_profile", {
       userInfo: user,
       staging: process.env.STAGING || false,

@@ -262,6 +262,10 @@ function getUpvotes(userId) {
   return getFavoritesOrUpvotes("upvotes", userId);
 }
 
+function getSubmissions(nickname) {
+  return getAllItems().filter(el => el.submitted_by === nickname);
+}
+
 /*
  * @description - Returns the number of upvotes for a specific item
  * @return Number
@@ -432,9 +436,10 @@ module.exports = {
   getComments: getComments,
   addComment: addComment,
   getCommentCountForItem: getCommentCountForItem,
-
+  
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
+  getSubmissions: getSubmissions,
   validKeys: validKeys,
   uuid: uuid,
 
