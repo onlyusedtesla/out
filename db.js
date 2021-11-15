@@ -443,7 +443,9 @@ function updateUserProfile(user) {
     
     // Do some checks for the invite code here
     // Set an invited_by property on the user and if it's exists then you will 
-    // 
+    if (user.inviteCode && user.inviteCode.length >= 1 && typeof data["users"][user.author].invited_by === "undefined") {
+      db.generated_by
+    }
     
     try {
       saveFile(data);
@@ -496,6 +498,18 @@ function getInviteCodes() {
   return Object.keys(data["invite_codes"]).filter(el => data["invite_codes"][el].accepted_by === null);
 }
 
+function setInviteForUser(inviteCode, acceptedByUsername) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  
+  if (typeof data["invite_codes"][inviteCode] !== "undefined" && data["invite_codes"][inviteCode].accepted_by === null) {
+    data["invite_codes"][inviteCode].accepted_by = acceptedByUsername;
+    return data["invite_codes"][inviteCode].generated_by;
+  } else {
+    return false;
+  }
+}
+
 module.exports = {
   save: save,
   getItems: getItems,
@@ -533,6 +547,7 @@ module.exports = {
   
   generateInviteCodes: generateInviteCodes,
   getInviteCodes: getInviteCodes,
+  setInviteForUser: setInviteForUser,
   
   backupData: backupData,
   backupSubmissions: backupSubmissions
