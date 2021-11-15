@@ -81,7 +81,9 @@ app.get("/", (request, response) => {
     });
   } else {
     const items = db.getItems();
-
+    
+    console.log("items?", items);
+    
     let firstTwoItems = [];
     let nextItems = items.slice(2);
 

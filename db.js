@@ -53,7 +53,7 @@ function saveFile(data) {
 function save(items) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  data["items"] = items;
+  data["items"] = data["items"].concat(items);
   saveFile(data);
 }
 
