@@ -147,10 +147,12 @@ app.get("/user/:userId", (request, response) => {
   const user = db.findUser(request.params.userId);
   if (typeof user !== "undefined" && user) {
     
-    const favorites = db.getFavoritesForProfile(user.sub);
-    const upvotes = db.getUpvotesForProfile(user.sub);
+    const favoriteItems = db.getFavoritesForProfile(user.sub);
+    const upvoteItems = db.getUpvotesForProfile(user.sub);
     const submissions = db.getSubmissions(user.nickname);
     const comments = db.getCommentsForProfile(user.nickname);
+    const favorites = db.getFavorites(user.sub);
+    const upvotes = db.getUpvotes(user.sub);
     
     console.log("favorites", favorites);
     console.log("upvotes", upvotes);
@@ -160,10 +162,13 @@ app.get("/user/:userId", (request, response) => {
     response.render(__dirname + "/views/user_profile", {
       userInfo: user,
       staging: process.env.STAGING || false,
+      favoriteItems: favoriteItems,
+      upvoteItems: upvoteItems,
       favorites: favorites,
       upvotes: upvotes,
       submissions: submissions,
       comments: comments,
+      commentPartialPath: __dirname + "/views/partials/comments.ejs",
       editable: request.oidc.isAuthenticated() && request.oidc.user.nickname === request.params.userId
     });
     

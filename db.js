@@ -393,7 +393,7 @@ function getCommentsForProfile(userId) {
   let data = JSON.parse(rawData);
   console.log("What are the comments?");
   console.log(data["comments"]);
-  return data["comments"].filter(i => i.author === userId);
+  return data["comments"].filter(i => i.author === userId && itemExists(i.item_id));
 }
 
 /*
