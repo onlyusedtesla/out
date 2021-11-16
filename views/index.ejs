@@ -92,9 +92,9 @@
       </div>
       
       <div class="mobile-menuToggle js-mobilemenutoggle flex flex--alignItemsCenter flex--spaceOneDown">
-        <% if (userInfo) { %>
+        <!-- <% if (userInfo) { %>
           <span class="flex-item"><%= userInfo %></span>
-        <% } %>
+        <% } %> -->
         <div class="flex-item mobile-menuToggle-graphic"></div>
         <span class="flex-item mobile-menuToggle-text">Menu</span>
       </div>
@@ -107,6 +107,10 @@
           <li><a href="/submit">Add Post</a></li>
           <li><a href="#" class="js-searchbutton-mobile">Search</a></li>
           <li><a href="/submit?type=question">Ask Question</a></li>
+          <li>
+            <a href="#">
+            </a>
+          </li>
           <li>
             <% if (userInfo) { %>
               <a href="/logout" class="login-button">Sign Out</a>
