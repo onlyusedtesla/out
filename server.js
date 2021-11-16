@@ -37,7 +37,7 @@ app.use(auth(config));
 const allViews = {
   commentPartialPath: __dirname + "/views/partials/comments.ejs",
   articalPartialPath: __dirname + "/views/partials/article.ejs",
-  headerPartialPath: __dirnam + "/views/partials/header.ejs"
+  headerPartialPath:  __dirname + "/views/partials/header.ejs"
 };
 
 app.get("/", (request, response) => {
@@ -71,6 +71,7 @@ app.get("/", (request, response) => {
     }
 
     response.render(__dirname + "/views/index", {
+      ...allViews,
       searchQuery: request.query.search,
       firstTwoItems: firstTwoItems,
       nextItems: nextItems,
@@ -103,6 +104,7 @@ app.get("/", (request, response) => {
     firstTwoItems.push(items[1]);
 
     response.render(__dirname + "/views/index", {
+      ...allViews,
       firstTwoItems: firstTwoItems,
       nextItems: nextItems,
       userInfo: request.oidc.isAuthenticated()
@@ -177,6 +179,7 @@ app.get("/user/:userId", (request, response) => {
     }
     
     response.render(__dirname + "/views/user_profile", {
+      ...allViews,
       userInfo: user,
       loggedInUserInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false, 
       staging: process.env.STAGING || false,
@@ -186,10 +189,6 @@ app.get("/user/:userId", (request, response) => {
       upvotes: upvotes,
       submissions: submissions,
       comments: comments,
-      commentPartialPath: commentPartialPath,
-      articalPartialPath: 
-      commentPartialPath: __dirname + "/views/partials/comments.ejs",
-      articlePartialPath: __dirname + "/views/partials/article.ejs",
       editable: request.oidc.isAuthenticated() && request.oidc.user.nickname === request.params.userId
     });
     
