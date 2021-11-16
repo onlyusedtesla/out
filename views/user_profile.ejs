@@ -94,15 +94,39 @@
       </div>
       
       <div class="mobile-menuToggle js-mobilemenutoggle flex flex--alignItemsCenter flex--spaceOneDown">
-        <% if (userInfo) { %>
+        <!-- <% if (userInfo) { %>
           <span class="flex-item"><%= userInfo.nickname %></span>
-        <% } %>
+        <% } %> -->
         <div class="flex-item mobile-menuToggle-graphic"></div>
         <span class="flex-item mobile-menuToggle-text">Menu</span>
       </div>
       
     </header>
     
+    <div class="mobile-navigation js-mobilenavigation">
+      <nav>
+        <ul>
+          <li><a href="/submit">Add Post</a></li>
+          <li><a href="#" class="js-searchbutton-mobile">Search</a></li>
+          <li><a href="/submit?type=question">Ask Question</a></li>
+          <% if (userInfo) { %>
+          <li>
+            <a href="/user/<%= userInfo %>">Profile</a>
+          </li>
+          <% } %>
+          <li>
+            <% if (userInfo) { %>
+              <a href="/logout" class="login-button">Sign Out</a>
+            <% } else { %>
+              <a href="/login" class="login-button">
+                Sign In
+              </a>
+            <% } %>
+          </li>
+        </ul>
+      </nav>
+    </div>
+      
     <div class="mobile-navigation js-mobilenavigation">
       <nav>
         <ul>
