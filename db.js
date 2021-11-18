@@ -506,6 +506,8 @@ function setInviteForUser(inviteCode, acceptedByUsername) {
   
   console.log("What's the invite code?", inviteCode);
   console.log("What's the acceptedByUsername?", acceptedByUsername);
+  console.log('data["invite_codes"][inviteCode].accepted_by', data["invite_codes"][inviteCode].accepted_by)
+  console.log('data["invite_codes"][inviteCode].accepted_by == null', data["invite_codes"][inviteCode].accepted_by == null);
   
   if (typeof data["invite_codes"][inviteCode] !== "undefined" && data["invite_codes"][inviteCode].accepted_by == null) {
     data["invite_codes"][inviteCode].accepted_by = acceptedByUsername;
