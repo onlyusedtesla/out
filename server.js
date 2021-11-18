@@ -36,7 +36,7 @@ app.use(auth(config));
 
 const allViews = {
   commentPartialPath: __dirname + "/views/partials/comments.ejs",
-  articalPartialPath: __dirname + "/views/partials/article.ejs",
+  articlePartialPath: __dirname + "/views/partials/article.ejs",
   headerPartialPath:  __dirname + "/views/partials/header.ejs"
 };
 
@@ -276,6 +276,7 @@ app.get("/submit", requiresAuth(), function(request, response) {
   // Render the question here...
   if (request.query.type && request.query.type === "question") {
     response.render(__dirname + "/views/submit", {
+      ...allViews,
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
@@ -284,6 +285,7 @@ app.get("/submit", requiresAuth(), function(request, response) {
     });
   } else { // Render the normal submit view here...
     response.render(__dirname + "/views/submit", {
+      ...allViews,
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
