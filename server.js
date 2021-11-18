@@ -180,7 +180,10 @@ app.get("/user/:userId", (request, response) => {
     
     response.render(__dirname + "/views/user_profile", {
       ...allViews,
-      userInfo: user,
+      user: user,
+      userInfo: request.oidc.isAuthenticated()
+        ? request.oidc.user.nickname
+        : false,
       loggedInUserInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false, 
       staging: process.env.STAGING || false,
       favoriteItems: favoriteItems,
@@ -200,6 +203,8 @@ app.get("/user/:userId", (request, response) => {
 });
 
 app.post("/updateProfile", function(request, response) {
+  
+  console.log("What's request.body?", request.body);
   
   if (
     request.oidc.isAuthenticated() &&

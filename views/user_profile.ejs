@@ -69,19 +69,19 @@
     <main>
       <div class="userProfile">
         <div class="userProfile--name">
-          @<%= userInfo.nickname %>
+          @<%= user.nickname %>
         </div>
         <div class="userProfile--about">
           Karma Points: 0&nbsp;
-          <% if (userInfo && userInfo.ownedTeslaModel) { %>· <%= userInfo.ownedTeslaModel %>&nbsp;<% }%>
-          <% if (userInfo && userInfo.about) { %>· <%= userInfo && userInfo.about %><% } %>
+          <% if (user && user.ownedTeslaModel) { %>· <%= user.ownedTeslaModel %>&nbsp;<% }%>
+          <% if (user && user.about) { %>· <%= user && user.about %><% } %>
         </div>
         
         <% if (editable) { %>
           <form class="form form--left js-form">
             <div class="form-element">
-              <% if (userInfo && userInfo.about) { %>
-              <textarea required name="about" id="about" type="text" placeholder="Enter Your About Description" class="js-about form-input form-textarea"><%= userInfo.about %></textarea>
+              <% if (user && user.about) { %>
+              <textarea required name="about" id="about" type="text" placeholder="Enter Your About Description" class="js-about form-input form-textarea"><%= user.about %></textarea>
               <% } else { %>
               <textarea required name="about" id="about" type="text" placeholder="Enter Your About Description" class="js-about form-input form-textarea"></textarea>
               <% } %>
@@ -93,11 +93,11 @@
             
             <div class="form-element">
               <select name="owned_tesla_model" id="owned_tesla_model" class="js-owned-tesla-model" required>
-                <option value="not_yet" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "I don't own a Tesla, yet.") { %>selected="selected"<% } %>>I don't own a Tesla, yet.</option>
-                <option value="model_s" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model S") { %>selected="selected"<% } %>>Model S</option>
-                <option value="model_3" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model 3") { %>selected="selected"<% } %>>Model 3</option>
-                <option value="model_x" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model X") { %>selected="selected"<% } %>>Model X</option>
-                <option value="model_y" <% if (userInfo && userInfo.ownedTeslaModel && userInfo.ownedTeslaModel === "Model Y") { %>selected="selected"<% } %>>Model Y</option>
+                <option value="not_yet" <% if (user && user.ownedTeslaModel && user.ownedTeslaModel === "I don't own a Tesla, yet.") { %>selected="selected"<% } %>>I don't own a Tesla, yet.</option>
+                <option value="model_s" <% if (user && user.ownedTeslaModel && user.ownedTeslaModel === "Model S") { %>selected="selected"<% } %>>Model S</option>
+                <option value="model_3" <% if (user && user.ownedTeslaModel && user.ownedTeslaModel === "Model 3") { %>selected="selected"<% } %>>Model 3</option>
+                <option value="model_x" <% if (user && user.ownedTeslaModel && user.ownedTeslaModel === "Model X") { %>selected="selected"<% } %>>Model X</option>
+                <option value="model_y" <% if (user && user.ownedTeslaModel && user.ownedTeslaModel === "Model Y") { %>selected="selected"<% } %>>Model Y</option>
               </select>
             </div>
             
@@ -105,7 +105,7 @@
               <input type="submit" value="Update Profile" data-original-value="Update Profile" class="form-button js-form-button" />
             </div>
             
-            <input type="hidden" class="js-author" value="<%= userInfo.nickname %>" />
+            <input type="hidden" class="js-author" value="<%= user.nickname %>" />
           </form>
         <% } %>
       </div>
