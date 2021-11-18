@@ -442,6 +442,7 @@ function updateUserProfile(user) {
     }
     
     console.log('user.inviteCode && user.inviteCode.length >= 1 && typeof data["users"][user.author].invited_by === "undefined"', user.inviteCode && user.inviteCode.length >= 1 && typeof data["users"][user.author].invited_by === "undefined");
+    console.log('setInviteForUser(user.inviteCode, user.author);', setInviteForUser(user.inviteCode, user.author));
     
     // Do some checks for the invite code here
     // Set an invited_by property on the user and if it's exists then you will 
