@@ -394,7 +394,9 @@ function getCommentsForProfile(userId) {
   let data = JSON.parse(rawData);
   console.log("What are the comments?");
   console.log(data["comments"]);
-  return data["comments"].filter(i => i.author === userId && itemExists(i.item_id));
+  return data["comments"].filter(
+    i => i.author === userId && itemExists(i.item_id)
+  );
 }
 
 /*
@@ -403,11 +405,11 @@ function getCommentsForProfile(userId) {
 function getFavoritesForProfile(userId) {
   let favorites = getFavorites(userId);
   let items = [];
-  
+
   for (let i = 0; i < favorites.length; i += 1) {
     items.push(getItem(favorites[i].item_id));
   }
-  
+
   return items.filter(el => el !== null);
 }
 
@@ -417,11 +419,11 @@ function getFavoritesForProfile(userId) {
 function getUpvotesForProfile(userId) {
   let upvotes = getUpvotes(userId);
   let items = [];
-  
+
   for (let i = 0; i < upvotes.length; i += 1) {
     items.push(getItem(upvotes[i].item_id));
   }
-  
+
   return items.filter(el => el !== null);
 }
 
@@ -432,24 +434,31 @@ function getUpvotesForProfile(userId) {
 function updateUserProfile(user) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   if (typeof data["users"][user.author] !== "undefined") {
     data["users"][user.author].about = user.about;
     data["users"][user.author].ownedTeslaModel = user.ownedTeslaModel;
-    
-    if (data["users"][user.author].ownedTeslaModel === "I don't own a Tesla, yet.") {
+
+    if (
+      data["users"][user.author].ownedTeslaModel === "I don't own a Tesla, yet."
+    ) {
       delete data["users"][user.author].ownedTeslaModel;
     }
-    
-    console.log('user.inviteCode && user.inviteCode.length >= 1 && typeof data["users"][user.author].invited_by === "undefined"', user.inviteCode && user.inviteCode.length >= 1 && typeof data["users"][user.author].invited_by === "undefined");
-    console.log('setInviteForUser(user.inviteCode, user.author);', setInviteForUser(user.inviteCode, user.author));
-    
+
     // Do some checks for the invite code here
-    // Set an invited_by property on the user and if it's exists then you will 
-    if (user.inviteCode && user.inviteCode.length >= 1 && typeof data["users"][user.author].invited_by === "undefined") {
-      data["users"][user.author].invited_by = setInviteForUser(user.inviteCode, user.author);
-    }
+    // Set an invited_by property on the user and if it's exists then you will
     
+    if (
+      user.inviteCode &&
+      user.inviteCode.length >= 1 &&
+      typeof data["users"][user.author].invited_by === "undefined" &&
+      typeof data["invite_codes"][user.inviteCode] !== "undefined" &&
+      data["invite_codes"][user.inviteCode].accepted_by == null
+    ) {
+      data["invite_codes"][user.inviteCode].accepted_by = user.author;
+      data["users"][user.author].invited_by = data["invite_codes"][user.inviteCode].generated_by;
+    }
+
     try {
       saveFile(data);
       return true;
@@ -457,7 +466,6 @@ function updateUserProfile(user) {
       return false;
     }
   }
-  
 }
 
 function findUser(userId) {
@@ -473,21 +481,21 @@ function findUser(userId) {
 function generateInviteCodes(n, username) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   n = n || 1;
-  
+
   // Creating the key if it doesn't yet exist.
   if (typeof data["invite_codes"] === "undefined") {
-    data["invite_codes"] = {}; 
+    data["invite_codes"] = {};
   }
-  
+
   for (let i = 0; i < n; i += 1) {
     data["invite_codes"][uuid() + "-" + uuid()] = {
       generated_by: username || null,
       accepted_by: null
-    }
+    };
   }
-  
+
   saveFile(data);
 }
 
@@ -497,32 +505,10 @@ function generateInviteCodes(n, username) {
 function getInviteCodes() {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
-  return Object.keys(data["invite_codes"]).filter(el => data["invite_codes"][el].accepted_by === null);
-}
 
-function setInviteForUser(inviteCode, acceptedByUsername) {
-  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
-  let data = JSON.parse(rawData);
-  
-  console.log("What's the invite code?", inviteCode);
-  console.log("What's the acceptedByUsername?", acceptedByUsername);
-  console.log('data["invite_codes"][inviteCode].accepted_by', data["invite_codes"][inviteCode].accepted_by)
-  console.log('data["invite_codes"][inviteCode].accepted_by == null', data["invite_codes"][inviteCode].accepted_by == null);
-  
-  if (typeof data["invite_codes"][inviteCode] !== "undefined" && data["invite_codes"][inviteCode].accepted_by == null) {
-    data["invite_codes"][inviteCode].accepted_by = acceptedByUsername;
-    
-    try {
-      saveFile(data);
-      return data["invite_codes"][inviteCode].generated_by;
-    } catch {
-      return false;
-    }
-    
-  } else {
-    return false;
-  }
+  return Object.keys(data["invite_codes"]).filter(
+    el => data["invite_codes"][el].accepted_by === null
+  );
 }
 
 module.exports = {
@@ -545,7 +531,7 @@ module.exports = {
   getComments: getComments,
   addComment: addComment,
   getCommentCountForItem: getCommentCountForItem,
-  
+
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
   getSubmissions: getSubmissions,
@@ -555,14 +541,13 @@ module.exports = {
   saveUserProfile: saveUserProfile,
   updateUserProfile: updateUserProfile,
   findUser: findUser,
-  
+
   getCommentsForProfile: getCommentsForProfile,
   getFavoritesForProfile: getFavoritesForProfile,
   getUpvotesForProfile: getUpvotesForProfile,
-  
+
   generateInviteCodes: generateInviteCodes,
   getInviteCodes: getInviteCodes,
-  setInviteForUser: setInviteForUser,
   
   backupData: backupData,
   backupSubmissions: backupSubmissions

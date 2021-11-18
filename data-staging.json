@@ -760,7 +760,8 @@
       "email_verified": true,
       "sub": "auth0|615cb90b861e13006987e6c1",
       "about": "This is my description. Hello world, how are you today? I'm good.",
-      "ownedTeslaModel": "Model 3"
+      "ownedTeslaModel": "Model 3",
+      "invited_by": null
     },
     "adamqureshi": {
       "nickname": "adamqureshi",
@@ -773,6 +774,9 @@
     }
   },
   "invite_codes": {
-    "3fd52947-4f01124b": { "generated_by": null, "accepted_by": null }
+    "3fd52947-4f01124b": {
+      "generated_by": null,
+      "accepted_by": "derick.realwebdev+teslatracker"
+    }
   }
 }
