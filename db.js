@@ -22,7 +22,7 @@ if (!fs.existsSync(__dirname + "/" + dbFileName)) {
   let data = {
     items: [],
     item_upvotes: {},
-    user_favorites: {},
+    user_favorite: {},
     user_upvotes: {},
     invite_codes: {},
     comments: [],
@@ -519,6 +519,7 @@ function getUserInviteCodes(username) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
+  // transform it into an array.
   return data["invite_codes"].filter(function (el) {
     return el.generated_by === username;
   });

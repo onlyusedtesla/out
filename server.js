@@ -179,7 +179,9 @@ app.get("/user/:userId", (request, response) => {
       submissions[i]["commentCount"] = db.getCommentCountForItem(submissions[i].item_id);
     }
     
-    console.log();
+    console.log("inviteCodes", inviteCodes);
+    
+    return false;
     
     response.render(__dirname + "/views/user_profile", {
       ...allViews,
