@@ -67,4 +67,16 @@
     });
   });
   
+  const inviteCodeButtons = document.querySelectorAll(".js-invitecode-button");
+  
+  Array.from(inviteCodeButtons).forEach(function (inviteCodeButton) {
+    inviteCodeButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      
+      const inviteCode = inviteCodeButton.closest(".js-invitecode").querySelector(".js-invitecode-code").value;
+      
+      
+    });
+  });
+  
 })();

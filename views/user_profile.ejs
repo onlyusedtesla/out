@@ -108,15 +108,15 @@
             <% if (typeof user.invited_by !== "undefined" && inviteCodes.length >= 1) { %>
               <div class="inviteCodes">
                 <% for (let i = 0; i < inviteCodes.length; i += 1) { %>
-                  <div class="flex flex--spaceOneDown flex--alignItemsCenter inviteCode">
+                  <div class="flex flex--spaceOneDown flex--alignItemsCenter inviteCode js-invitecode">
                     <div class="flex-item">
-                      <input id="invitation_code" name="invitation_code" type="text" value="<%= inviteCodes[i].invite_code %>" <% if (inviteCodes[i].invited_by != null) { %>disabled="disabled"<% } %> placeholder="Enter Invitation Code" class="js-invite-code form-input">
+                      <input id="invitation_code" name="invitation_code" type="text" value="<%= inviteCodes[i].invite_code %>" <% if (inviteCodes[i].invited_by != null) { %>disabled="disabled"<% } %> placeholder="Enter Invitation Code" class="js-invitecode-code form-input">
                     </div>
                     <div class="flex-item">
                       <% if (inviteCodes[i].accepted_by != null) { %>
                       <span>accepted by <a href="/user/<%= inviteCodes[i].accepted_by %>" class="blue-link"><%= inviteCodes[i].accepted_by %></a></span>
                       <% } else { %>
-                      <button class="form-button">
+                      <button class="form-button js-invitecode-button">
                         Copy Invite Code
                       </button>
                       <% } %>
