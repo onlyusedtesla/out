@@ -525,7 +525,7 @@ function getUserInviteCodes(username) {
     if (value.generated_by === username) {
       results.push({
         ...value,
-        inviteCode: key
+        invite_code: key
       })
     }
   }
