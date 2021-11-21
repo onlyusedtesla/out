@@ -845,6 +845,15 @@ footer {
 .user-profile-link-selected {
   font-weight: bold;
 }
+
+.inviteCode {
+  margin-top: 1rem;
+}
+
+.inviteCodes {
+  margin-bottom: 1rem;
+}
+
 /* Privacy Policy */
 
 .privacy > p {
