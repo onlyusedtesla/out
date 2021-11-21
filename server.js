@@ -37,7 +37,8 @@ app.use(auth(config));
 const allViews = {
   commentPartialPath: __dirname + "/views/partials/comments.ejs",
   articlePartialPath: __dirname + "/views/partials/article.ejs",
-  headerPartialPath:  __dirname + "/views/partials/header.ejs"
+  headerPartialPath:  __dirname + "/views/partials/header.ejs",
+  footerPartialPath: __dirname + "/views/partials/footer.ejs"
 };
 
 app.get("/", (request, response) => {
@@ -89,8 +90,6 @@ app.get("/", (request, response) => {
   } else {
     const items = db.getItems();
     
-    console.log("items?", items);
-    
     let firstTwoItems = [];
     let nextItems = items.slice(2);
 
@@ -132,6 +131,7 @@ app.get("/item/:id", (request, response) => {
     const comments = db.getComments(item.item_id);
 
     response.render(__dirname + "/views/comments", {
+      ...allViews,
       item: item,
       staging: process.env.STAGING || false,
       userInfo: request.oidc.isAuthenticated()
@@ -143,8 +143,7 @@ app.get("/item/:id", (request, response) => {
       upvotes: request.oidc.isAuthenticated()
         ? db.getUpvotes(request.oidc.user.sub)
         : [],
-      comments: comments,
-      commentPartialPath: commentPartialPath
+      comments: comments
     });
   } else {
     // Render the 404 page.
@@ -277,8 +276,15 @@ app.post("/comment", function(request, response) {
   }
 });
 
-app.get("/landing", function(request, response) {
-  response.render(__dirname + "/views/landing");
+// app.get("/landing", function(request, response) {
+//   response.render(__dirname + "/views/landing");
+// });
+
+app.get("/privacy", function (request, response) {
+  response.render(__dirname + "/views/privacy", {
+    ...allViews,
+    staging: process.env.STAGING || false
+  });
 });
 
 app.get("/submit", requiresAuth(), function(request, response) {
