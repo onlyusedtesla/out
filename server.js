@@ -180,8 +180,6 @@ app.get("/user/:userId", (request, response) => {
     
     console.log("inviteCodes", inviteCodes);
     
-    return false;
-    
     response.render(__dirname + "/views/user_profile", {
       ...allViews,
       user: user,

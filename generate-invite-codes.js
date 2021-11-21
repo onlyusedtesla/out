@@ -1,4 +1,5 @@
 const db = require("./db.js");
 
-// db.generateInviteCodes();
-console.log("db.getInviteCodes()", db.getInviteCodes());
+db.generateInviteCodes(5, "derick.realwebdev+teslatracker");
+
+// console.log("db.getInviteCodes()", db.getInviteCodes("derick.realwebdev+teslatracker"));

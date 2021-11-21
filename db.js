@@ -519,10 +519,19 @@ function getUserInviteCodes(username) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
-  // transform it into an array.
-  return data["invite_codes"].filter(function (el) {
-    return el.generated_by === username;
-  });
+  let results = [];
+  
+  for (const [key, value] of Object.entries(data["invite_codes"])) {
+    if (value.generated_by === username) {
+      results.push({
+        ...value,
+        inviteCode: key
+      })
+    }
+  }
+  
+  return results;
+  
 }
 
 module.exports = {
