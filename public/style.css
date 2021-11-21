@@ -845,6 +845,20 @@ footer {
 .user-profile-link-selected {
   font-weight: bold;
 }
+/* Privacy Policy */
+
+.privacy > p {
+  margin-top: 1rem;
+}
+
+.privacy > ul > li {
+  margin-top: 0.64rem;
+}
+
+.privacy a {
+  color: var(--blue);
+  text-decoration: underline;
+}
 
 /* Media Queries */
 
