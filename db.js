@@ -457,6 +457,7 @@ function updateUserProfile(user) {
     ) {
       data["invite_codes"][user.inviteCode].accepted_by = user.author;
       data["users"][user.author].invited_by = data["invite_codes"][user.inviteCode].generated_by;
+      generateInviteCodes(5, user.author);
     }
 
     try {
@@ -509,6 +510,12 @@ function getInviteCodes() {
   return Object.keys(data["invite_codes"]).filter(
     el => data["invite_codes"][el].accepted_by === null
   );
+}
+
+/*
+ * @description - 
+function getUserInviteCodes() {
+  
 }
 
 module.exports = {
