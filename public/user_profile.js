@@ -75,6 +75,11 @@
       
       const inviteCode = inviteCodeButton.closest(".js-invitecode").querySelector(".js-invitecode-code").value;
       
+      navigator.clipboard
+      .writeText(inviteCode)
+      .then(function() {}, function() {});
+      
+      inviteCodeButton.innerHTML = "Copied.";
       
     });
   });
