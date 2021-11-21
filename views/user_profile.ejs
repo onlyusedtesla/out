@@ -74,6 +74,7 @@
         <div class="userProfile--about">
           Karma Points: 0&nbsp;
           <% if (user && user.ownedTeslaModel) { %>· <%= user.ownedTeslaModel %>&nbsp;<% }%>
+          <% if (user && typeof user.invited_by !== "undefined") { %>· Invited<% if (user.invited_by !== null) { %> by <a href="/user/<%= user.invited_by%>" class="blue-link"><%= user.invited_by %></a><% }%>&nbsp;<% }%>
           <% if (user && user.about) { %>· <%= user && user.about %><% } %>
         </div>
         
@@ -87,9 +88,11 @@
               <% } %>
             </div>
             
+            <% if (typeof user.invited_by === "undefined") { %>
             <div class="form-element">
               <input id="invitation_code" name="invitation_code" type="text" maxlength="280" placeholder="Enter Invitation Code" class="js-invite-code form-input">
             </div>
+            <% } %>
             
             <div class="form-element">
               <select name="owned_tesla_model" id="owned_tesla_model" class="js-owned-tesla-model" required>
