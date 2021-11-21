@@ -283,7 +283,8 @@ app.post("/comment", function(request, response) {
 app.get("/privacy", function (request, response) {
   response.render(__dirname + "/views/privacy", {
     ...allViews,
-    staging: process.env.STAGING || false
+    staging: process.env.STAGING || false,
+    userInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false
   });
 });
 
