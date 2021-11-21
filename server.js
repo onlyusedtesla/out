@@ -155,6 +155,7 @@ app.get("/user/:userId", (request, response) => {
   const user = db.findUser(request.params.userId);
   if (typeof user !== "undefined" && user) {
     
+    const inviteCodes = db.getUserInviteCodes(user.nickname);
     const favoriteItems = db.getFavoritesForProfile(user.sub);
     const upvoteItems = db.getUpvotesForProfile(user.sub);
     const submissions = db.getSubmissions(user.nickname);
@@ -178,6 +179,8 @@ app.get("/user/:userId", (request, response) => {
       submissions[i]["commentCount"] = db.getCommentCountForItem(submissions[i].item_id);
     }
     
+    console.log();
+    
     response.render(__dirname + "/views/user_profile", {
       ...allViews,
       user: user,
@@ -192,6 +195,7 @@ app.get("/user/:userId", (request, response) => {
       upvotes: upvotes,
       submissions: submissions,
       comments: comments,
+      inviteCodes: inviteCodes,
       editable: request.oidc.isAuthenticated() && request.oidc.user.nickname === request.params.userId
     });
     

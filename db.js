@@ -513,9 +513,15 @@ function getInviteCodes() {
 }
 
 /*
- * @description - 
-function getUserInviteCodes() {
+ * @description - Gets all invitiation codes, accepted and not, for a specific user.
+ */
+function getUserInviteCodes(username) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
   
+  return data["invite_codes"].filter(function (el) {
+    return el.generated_by === username;
+  });
 }
 
 module.exports = {
@@ -554,6 +560,7 @@ module.exports = {
   getUpvotesForProfile: getUpvotesForProfile,
 
   generateInviteCodes: generateInviteCodes,
+  getUserInviteCodes: getUserInviteCodes,
   getInviteCodes: getInviteCodes,
   
   backupData: backupData,
