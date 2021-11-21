@@ -204,8 +204,6 @@ app.get("/user/:userId", (request, response) => {
 
 app.post("/updateProfile", function(request, response) {
   
-  console.log("What's request.body?", request.body);
-  
   if (
     request.oidc.isAuthenticated() &&
     request.body.author &&
