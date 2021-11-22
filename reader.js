@@ -128,6 +128,7 @@ function update(done) {
         }
       });
     
+      db.createNecessaryKeys();
       db.save(itemsToSave);
       
       if (typeof done !== "undefined") {

@@ -566,12 +566,14 @@ function getUserInviteCodes(username) {
 
 module.exports = {
   save: save,
+  createNecessaryKeys: createNecessaryKeys,
+  
   getItems: getItems,
   getItem: getItem,
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
   itemExists: itemExists,
-
+  
   addFavorite: addFavorite,
   getFavorites: getFavorites,
   removeFavorite: removeFavorite,
@@ -602,8 +604,6 @@ module.exports = {
   generateInviteCodes: generateInviteCodes,
   getUserInviteCodes: getUserInviteCodes,
   getInviteCodes: getInviteCodes,
-  
-  createNecessaryKeys: createNecessaryKeys,
   
   backupData: backupData,
   backupSubmissions: backupSubmissions
