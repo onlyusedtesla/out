@@ -5,7 +5,7 @@
     author = document.querySelector(".js-author"),
     question = document.querySelector(".js-question"),
     description = document.querySelector(".js-description"),
-    descriptionInfo = document.querySelector(".js-description-message "),
+    descriptionMessage = document.querySelector(".js-description-message "),
     successMessage = document.querySelector(".js-success-message");
 
   var isQuestion =
@@ -90,12 +90,18 @@
     fetch("/description?url=" + url.value, {
       method: "POST"
     }).then(res => {
-      console.log("What's the response?", res);
+      
+      description.classList.remove("hidden");
+      
       if (res.status === 200) {
+        
+        descriptionMessage.classList.add("hidden");
         
         res.text().then(function(text) {
           description.value = text;
         });
+      } else {
+        descriptionMessage.classList.remove("hidden");
       }
     });
   });
