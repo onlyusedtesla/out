@@ -1,36 +1,35 @@
 const request = require("request");
 const API_KEY = "EvI6NaktcmTo2E4IBmDJ";
+const base64Credentials = Buffer.from(
+  "derick.realwebdev+urlmeta@gmail.com:" + API_KEY
+).toString("base64");
 
-/*
- * @description - Converts a string into a base64 equivalent
- */
-function base64(dataString) {
-  return Buffer.from(dataString).toString('base64');
-}
-
-console.log("base64('derick.realwebdev+urlmeta@gmail.com:' + API_KEY)", base64('derick.realwebdev+urlmeta@gmail.com:' + API_KEY));
-
-function grabMeta(url) {
-  
-  console.log('grabMeta');
-  console.log('url', url);
-  
+module.exports = function(url, callback) {
   const options = {
-    host: 'api.urlmeta.org',
-    path: '/?url=' + url,
-    method: 'GET',
+    url: "https://api.urlmeta.org/?url=" + url,
     headers: {
-      'Authorization': 'Basic ' + base64('derick.realwebdev+urlmeta@gmail.com:' + API_KEY)
+      Authorization: "Basic " + base64Credentials
     }
   };
-  
-  https.request(options, function (res) {
-    res.setEncoding('utf8');
-    res.on('data', function (chunk) {
-        console.log('Response: ' + chunk);
-    });
-  });
-  
-}
 
-grabMeta('https://google.com/');
+  request(options, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      let data = JSON.parse(body);
+
+      if (data.result.status == "OK") {
+        if (
+          typeof data.meta.description !== "undefined" &&
+          data.meta.description
+        ) {
+          callback(data.meta.description);
+        } else {
+          callback(false);
+        }
+      } else {
+        callback(false);
+      }
+    } else {
+      callback(false);
+    }
+  });
+};
