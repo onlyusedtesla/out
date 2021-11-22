@@ -38,16 +38,15 @@ app.use(auth(config));
 const allViews = {
   commentPartialPath: __dirname + "/views/partials/comments.ejs",
   articlePartialPath: __dirname + "/views/partials/article.ejs",
-  headerPartialPath:  __dirname + "/views/partials/header.ejs",
+  headerPartialPath: __dirname + "/views/partials/header.ejs",
   footerPartialPath: __dirname + "/views/partials/footer.ejs"
 };
 
 app.get("/", (request, response) => {
-  
   if (request.oidc.isAuthenticated()) {
     db.saveUserProfile(request.oidc.user);
   }
-  
+
   if (
     typeof request.query.search !== "undefined" &&
     request.query.search.length >= 1
@@ -90,7 +89,7 @@ app.get("/", (request, response) => {
     });
   } else {
     const items = db.getItems();
-    
+
     let firstTwoItems = [];
     let nextItems = items.slice(2);
 
@@ -154,7 +153,6 @@ app.get("/item/:id", (request, response) => {
 app.get("/user/:userId", (request, response) => {
   const user = db.findUser(request.params.userId);
   if (typeof user !== "undefined" && user) {
-    
     const inviteCodes = db.getUserInviteCodes(user.nickname);
     const favoriteItems = db.getFavoritesForProfile(user.sub);
     const upvoteItems = db.getUpvotesForProfile(user.sub);
@@ -162,32 +160,46 @@ app.get("/user/:userId", (request, response) => {
     const comments = db.getCommentsForProfile(user.nickname);
     const favorites = db.getFavorites(user.sub);
     const upvotes = db.getUpvotes(user.sub);
-    
+
     // Getting the upvote count for each of the items.
     for (let i = 0; i < favoriteItems.length; i += 1) {
-      favoriteItems[i]["upvoteCount"] = db.getUpvoteCountForItem(favoriteItems[i].item_id);
-      favoriteItems[i]["commentCount"] = db.getCommentCountForItem(favoriteItems[i].item_id);
+      favoriteItems[i]["upvoteCount"] = db.getUpvoteCountForItem(
+        favoriteItems[i].item_id
+      );
+      favoriteItems[i]["commentCount"] = db.getCommentCountForItem(
+        favoriteItems[i].item_id
+      );
     }
-    
+
     for (let i = 0; i < upvoteItems.length; i += 1) {
-      upvoteItems[i]["upvoteCount"] = db.getUpvoteCountForItem(upvoteItems[i].item_id);
-      upvoteItems[i]["commentCount"] = db.getCommentCountForItem(upvoteItems[i].item_id);
+      upvoteItems[i]["upvoteCount"] = db.getUpvoteCountForItem(
+        upvoteItems[i].item_id
+      );
+      upvoteItems[i]["commentCount"] = db.getCommentCountForItem(
+        upvoteItems[i].item_id
+      );
     }
-    
+
     for (let i = 0; i < submissions.length; i += 1) {
-      submissions[i]["upvoteCount"] = db.getUpvoteCountForItem(submissions[i].item_id);
-      submissions[i]["commentCount"] = db.getCommentCountForItem(submissions[i].item_id);
+      submissions[i]["upvoteCount"] = db.getUpvoteCountForItem(
+        submissions[i].item_id
+      );
+      submissions[i]["commentCount"] = db.getCommentCountForItem(
+        submissions[i].item_id
+      );
     }
-    
+
     console.log("inviteCodes", inviteCodes);
-    
+
     response.render(__dirname + "/views/user_profile", {
       ...allViews,
       user: user,
       userInfo: request.oidc.isAuthenticated()
         ? request.oidc.user.nickname
         : false,
-      loggedInUserInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false, 
+      loggedInUserInfo: request.oidc.isAuthenticated()
+        ? request.oidc.user.nickname
+        : false,
       staging: process.env.STAGING || false,
       favoriteItems: favoriteItems,
       upvoteItems: upvoteItems,
@@ -196,18 +208,17 @@ app.get("/user/:userId", (request, response) => {
       submissions: submissions,
       comments: comments,
       inviteCodes: inviteCodes,
-      editable: request.oidc.isAuthenticated() && request.oidc.user.nickname === request.params.userId
+      editable:
+        request.oidc.isAuthenticated() &&
+        request.oidc.user.nickname === request.params.userId
     });
-    
   } else {
     console.log("This user does not exist.");
     // Render a 404 route.
   }
-  
 });
 
 app.post("/updateProfile", function(request, response) {
-  
   if (
     request.oidc.isAuthenticated() &&
     request.body.author &&
@@ -215,9 +226,8 @@ app.post("/updateProfile", function(request, response) {
     request.body.about &&
     request.body.about.length >= 1
   ) {
-    
     const result = db.updateUserProfile(request.body);
-    
+
     if (result) {
       response.status(200).send(result);
     } else {
@@ -275,32 +285,42 @@ app.post("/comment", function(request, response) {
   }
 });
 
-app.post("/description", function (request, response) {
-  
-  isURL = false;
-  
-    try {
-      url = new URL(string);
-    } catch {
-      isURL = 
-    }
-  
-   if (request.oidc.isAuthenticated() && request.query.url) {
-     
-   } else {
-     response.status(400).send("Please make sure you're logged in and properly using a url");
-   }
+app.post("/description", function(request, response) {
+  let isURL = false;
+
+  try {
+    let url = new URL(request.query.url);
+    isURL = true;
+  } catch {
+    isURL = false;
+  }
+
+  if (request.oidc.isAuthenticated() && request.query.url && isURL) {
+    grabber(request.query.url, function (data) {
+      if (!data) {
+        response.status(400).send("The website doesn't have a meta description");
+      } else {
+        response.status(200).send(data);
+      }
+    });
+  } else {
+    response
+      .status(400)
+      .send("Please make sure you're logged in and properly using a url");
+  }
 });
 
 // app.get("/landing", function(request, response) {
 //   response.render(__dirname + "/views/landing");
 // });
 
-app.get("/privacy", function (request, response) {
+app.get("/privacy", function(request, response) {
   response.render(__dirname + "/views/privacy", {
     ...allViews,
     staging: process.env.STAGING || false,
-    userInfo: request.oidc.isAuthenticated() ? request.oidc.user.nickname : false
+    userInfo: request.oidc.isAuthenticated()
+      ? request.oidc.user.nickname
+      : false
   });
 });
 
@@ -315,7 +335,8 @@ app.get("/submit", requiresAuth(), function(request, response) {
       staging: process.env.STAGING || false,
       isQuestion: true
     });
-  } else { // Render the normal submit view here...
+  } else {
+    // Render the normal submit view here...
     response.render(__dirname + "/views/submit", {
       ...allViews,
       userInfo: request.oidc.isAuthenticated()
@@ -373,7 +394,7 @@ app.post("/submit", function(request, response) {
   try {
     db.saveSubmission(request.body);
     response.status(200).send("Submission saved successfully");
-  } catch { 
+  } catch {
     response.status(400).send("An error occured while saving the submission.");
   }
 });

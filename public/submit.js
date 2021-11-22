@@ -84,4 +84,19 @@
       }
     });
   });
+  
+  url.addEventListener('input', function (event) {
+    fetch("/description?url=" + url.value, {
+      method: "POST"
+    }).then(res => {
+      console.log("What's the response?", res);
+      if (res.status === 200) {
+        console.log("The response status is 200.");
+        res.text().then(function(text) {
+          description.value = text;
+        });
+      }
+    });
+  });
+  
 })();
