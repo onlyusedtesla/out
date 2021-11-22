@@ -1,4 +1,4 @@
-const http = require("http");
+const request = require("request");
 const API_KEY = "EvI6NaktcmTo2E4IBmDJ";
 
 /*
@@ -17,15 +17,14 @@ function grabMeta(url) {
   
   const options = {
     host: 'api.urlmeta.org',
-    port: '80',
-    path: '/?url=' + encodeURIComponent(url),
+    path: '/?url=' + url,
     method: 'GET',
     headers: {
       'Authorization': 'Basic ' + base64('derick.realwebdev+urlmeta@gmail.com:' + API_KEY)
     }
   };
   
-  http.request(options, function (res) {
+  https.request(options, function (res) {
     res.setEncoding('utf8');
     res.on('data', function (chunk) {
         console.log('Response: ' + chunk);
