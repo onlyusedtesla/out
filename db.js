@@ -39,6 +39,32 @@ if (!fs.existsSync(__dirname + "/" + submissionsFileName)) {
   fs.writeFileSync(__dirname + "/" + submissionsFileName, JSON.stringify(data));
 }
 
+function createNecessaryKeys() {
+  let rawData = fs.readFileSync(__dirname + "/" + dbFileName),
+      data = JSON.parse(rawData);
+  
+  let requiredKeys = {
+    items: [],
+    item_upvotes: {},
+    user_favorite: {},
+    user_upvotes: {},
+    invite_codes: {},
+    comments: [],
+    users: {}
+  };
+  
+  for (const property in requiredKeys) {
+    if (requiredKeys.hasOwnProperty(property)) {
+      if (typeof data[property] === "undefined") {
+        data[property] = requiredKeys[property];
+      }
+    }
+  }
+  
+  saveFile(data);
+  
+}
+
 function uuid() {
   return "xxxxxxxx".replace(/[xy]/g, function(c) {
     var r = (Math.random() * 16) | 0,
@@ -576,6 +602,8 @@ module.exports = {
   generateInviteCodes: generateInviteCodes,
   getUserInviteCodes: getUserInviteCodes,
   getInviteCodes: getInviteCodes,
+  
+  createNecessaryKeys: createNecessaryKeys,
   
   backupData: backupData,
   backupSubmissions: backupSubmissions
