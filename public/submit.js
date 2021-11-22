@@ -5,6 +5,7 @@
     author = document.querySelector(".js-author"),
     question = document.querySelector(".js-question"),
     description = document.querySelector(".js-description"),
+    descriptionInfo = document.querySelector(".js-description-message "),
     successMessage = document.querySelector(".js-success-message");
 
   var isQuestion =
@@ -91,7 +92,7 @@
     }).then(res => {
       console.log("What's the response?", res);
       if (res.status === 200) {
-        console.log("The response status is 200.");
+        
         res.text().then(function(text) {
           description.value = text;
         });
