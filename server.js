@@ -9,6 +9,7 @@ const db = require("./db.js");
 const RSSFeed = require("./feed.js");
 const ejs = require("ejs");
 const path = require("path");
+const grabber = require("./description-grabber.js");
 const { auth, requiresAuth } = require("express-openid-connect");
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -272,6 +273,23 @@ app.post("/comment", function(request, response) {
         "Please make sure you're logged in and all the information is properly filled out."
       );
   }
+});
+
+app.post("/description", function (request, response) {
+  
+  isURL = false;
+  
+    try {
+      url = new URL(string);
+    } catch {
+      isURL = 
+    }
+  
+   if (request.oidc.isAuthenticated() && request.query.url) {
+     
+   } else {
+     response.status(400).send("Please make sure you're logged in and properly using a url");
+   }
 });
 
 // app.get("/landing", function(request, response) {

@@ -15,7 +15,9 @@ module.exports = function(url, callback) {
   request(options, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       let data = JSON.parse(body);
-
+      
+      console.log("data?", data);
+      
       if (data.result.status == "OK") {
         if (
           typeof data.meta.description !== "undefined" &&
