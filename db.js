@@ -458,6 +458,17 @@ function getUpvotesForProfile(userId) {
 }
 
 /*
+ * @description - Gets the karma points for a specific user. This is based on the total amount of upvotes on an article submitted by that user and also the total amount of upvotes their comments have.
+ */
+function getKarmaPointsForProfile(userId) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  
+  
+  
+}
+
+/*
  * @description - Update an existing user's profile
  * @param user:Object - An object with various params related to the user.
  */
@@ -600,7 +611,8 @@ module.exports = {
   getCommentsForProfile: getCommentsForProfile,
   getFavoritesForProfile: getFavoritesForProfile,
   getUpvotesForProfile: getUpvotesForProfile,
-
+  getKarmaPointsForProfile: getKarmaPointsForProfile,
+  
   generateInviteCodes: generateInviteCodes,
   getUserInviteCodes: getUserInviteCodes,
   getInviteCodes: getInviteCodes,
