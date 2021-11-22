@@ -1,11 +1,37 @@
-const https = require("https");
+const http = require("http");
 const API_KEY = "EvI6NaktcmTo2E4IBmDJ";
-const URL = "https://api.urlmeta.org/?url=";
+
 /*
  * @description - Converts a string into a base64 equivalent
  */
 function base64(dataString) {
-  return new Buffer(dataString).toString('base64');
+  return Buffer.from(dataString).toString('base64');
 }
 
-https.get();
+console.log("base64('derick.realwebdev+urlmeta@gmail.com:' + API_KEY)", base64('derick.realwebdev+urlmeta@gmail.com:' + API_KEY));
+
+function grabMeta(url) {
+  
+  console.log('grabMeta');
+  console.log('url', url);
+  
+  const options = {
+    host: 'api.urlmeta.org',
+    port: '80',
+    path: '/?url=' + encodeURIComponent(url),
+    method: 'GET',
+    headers: {
+      'Authorization': 'Basic ' + base64('derick.realwebdev+urlmeta@gmail.com:' + API_KEY)
+    }
+  };
+  
+  http.request(options, function (res) {
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+        console.log('Response: ' + chunk);
+    });
+  });
+  
+}
+
+grabMeta('https://google.com/');
