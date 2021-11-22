@@ -371,7 +371,11 @@ function getCommentCountForItem(itemId) {
 function saveUserProfile(user) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-
+  
+  if (typeof data["users"] === "undefined") {
+    data["users"] = {};
+  }
+  
   if (typeof data["users"][user.nickname] === "undefined") {
     data["users"][user.nickname] = user;
     saveFile(data);
