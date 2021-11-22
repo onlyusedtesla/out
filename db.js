@@ -464,8 +464,25 @@ function getKarmaPointsForProfile(userId) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
   
+  var userSubmissions = undefined;
+  var itemIds = [];
+  var upvotes = [];
   
+  if (typeof data["items"] !== "undefined") {
+    userSubmissions = data["items"].filter(function (item) {
+      if (typeof item.submitted_by !== "undefined") {
+        return item.submitted_by === userId;
+      } else {
+        return false;
+      }
+    })
+  }
   
+  if (userSubmissions && userSubmissions.length >= 1) {
+    itemIds = userSubmissions.map(function (el) {
+      return el.item_id;
+    });
+  }
 }
 
 /*
