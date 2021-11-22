@@ -480,7 +480,9 @@ app.get("/publish", function(request, response) {
 
 //The 404 Route
 app.get("*", function(request, response) {
-  response.render(__dirname + "/views/404");
+  response.render(__dirname + "/views/404", {
+    ...allViews
+  });
 });
 
 // listen for requests :)

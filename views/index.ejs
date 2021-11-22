@@ -167,7 +167,7 @@
                   <div class="flex-item">
                     <% if (typeof firstTwoItems[i].submitted_by !== "undefined") { %>
                     <span class="article-author">
-                        <span> by </span><a href="#" class="article-authorName"><%= firstTwoItems[i].submitted_by %></a><span> · </span>
+                        <span> by </span><a href="/user/<%= firstTwoItems[i].submitted_by %>" class="article-authorName"><%= firstTwoItems[i].submitted_by %></a><span> · </span>
                     </span>
                     <% } %>
 
@@ -275,7 +275,7 @@
                   
                   <% if (typeof nextItems[i].submitted_by !== "undefined") { %>
                     <p class="article-author">
-                      <span> by </span><a href="/u/<%= nextItems[i].submitted_by %>" class="article-authorName"><%= nextItems[i].submitted_by %></a><span> · </span>
+                      <span> by </span><a href="/user/<%= nextItems[i].submitted_by %>" class="article-authorName"><%= nextItems[i].submitted_by %></a><span> · </span>
                     </p>
                   <% } %>
                   
