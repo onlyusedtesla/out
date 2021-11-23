@@ -121,4 +121,6 @@
     });
   }
   
+  const commentUpvoteButtons = document.querySelectorAll();
+  
 }());
