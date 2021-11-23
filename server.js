@@ -476,12 +476,14 @@ app.post("/addCommentUpvote", function(request, response) {
   if (request.query.comment_id) {
     if (db.commentExists(request.query.comment_id)) {
       const result = db.addCommentUpvote(
-        request.oidc.user.sub,
-        request.query.item_id
+        request.oidc.user.nickname,
+        request.query.comment_id
       );
       response
         .status(200)
         .send("Successfully added comment upvote " + request.query.comment_id);
+    } else {
+      response.status(400).send("That comment doesn't exist.");
     }
   } else {
     response.status(400).send("Please specify the article_id parameter.");
@@ -496,13 +498,17 @@ app.post("/removeCommentUpvote", function(request, response) {
   }
 
   if (request.query.comment_id) {
+    if (db.commentExists(request.query.comment_id)) {
     const result = db.removeCommentUpvote(
-      request.oidc.user.sub,
+      request.oidc.user.nickname,
       request.query.comment_id
     );
     response
       .status(200)
       .send("Successfully unfavorited the item " + request.query.comment_id);
+    } else {
+      response.status(400).send("That comment doesn't exist.");
+    }
   } else {
     response.status(400).send("Please specify the comment_id parameter.");
   }

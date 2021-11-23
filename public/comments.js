@@ -144,7 +144,7 @@
         });
         
       } else {
-        pathEl.setAtttribute("fill", pathEl.getAttribute("data-fill-notupvoted"));
+        pathEl.setAttribute("fill", pathEl.getAttribute("data-fill-notupvoted"));
         
         removeCommentUpvote(commentId).then(function () {
           commentUpvoteButton.setAttribute('data-action', 'add');

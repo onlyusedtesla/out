@@ -449,7 +449,7 @@ function removeCommentUpvote(userId, commentId) {
   
   if (
     data["comments"].some(function(el) {
-      return el.item_id === commentId
+      return el.comment_id === commentId
     })
   ) {
     delete data["comment_upvotes"][commentId][userId];
@@ -576,7 +576,7 @@ function getKarmaPointsForProfile(userId) {
       itemPoints += Object.keys(data["item_upvotes"][itemIds[i]]).length;
     }
   }
-
+  
   return itemPoints;
 }
 
