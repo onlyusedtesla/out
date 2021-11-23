@@ -129,8 +129,6 @@ app.get("/item/:id", (request, response) => {
     item.upvoteCount = db.getUpvoteCountForItem(item.item_id);
 
     const comments = db.getComments(item.item_id);
-
-    console.log("What are the comment upvotes?", db.getCommentUpvotes(request.oidc.user.nickname));
     
     response.render(__dirname + "/views/comments", {
       ...allViews,
