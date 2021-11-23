@@ -396,18 +396,20 @@ function commentExists(commentId) {
  */
 function getCommentUpvotes(username) {
   // basically iterate through all the keys and if the userId exists then add that commentId to the array
-  
+
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   let results = [];
-  
+
   for (let commentId in data["comment_upvotes"]) {
     console.log("commentId", commentId);
     if (data["comment_upvotes"].hasOwnProperty(commentId)) {
       for (let userNameForComment in data["comment_upvotes"][commentId]) {
         console.log("userIdForComment", userNameForComment);
-        if (data["comment_upvotes"][commentId].hasOwnProperty(userNameForComment)) {
+        if (
+          data["comment_upvotes"][commentId].hasOwnProperty(userNameForComment)
+        ) {
           if (username === userNameForComment) {
             console.log("In here?");
             results.push(commentId);
@@ -416,9 +418,8 @@ function getCommentUpvotes(username) {
       }
     }
   }
-  
+
   return results;
-  
 }
 
 function addCommentUpvote(userId, commentId) {
@@ -446,10 +447,10 @@ function addCommentUpvote(userId, commentId) {
 function removeCommentUpvote(userId, commentId) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   if (
     data["comments"].some(function(el) {
-      return el.comment_id === commentId
+      return el.comment_id === commentId;
     })
   ) {
     delete data["comment_upvotes"][commentId][userId];
@@ -540,12 +541,16 @@ function getUpvotesForProfile(userId) {
 
 /*
  * @description - Gets the karma points for a specific user. This is based on the total amount of upvotes on an article submitted by that user and also the total amount of upvotes their comments have.
+ * @param userId:String - The user's nickname.
+ * @return karmaPoints:Integer
  */
 function getKarmaPointsForProfile(userId) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
 
   var userSubmissions = undefined;
+  var comments = undefined;
+  var commentIds = [];
   var itemIds = [];
   var itemPoints = 0;
 
@@ -559,14 +564,23 @@ function getKarmaPointsForProfile(userId) {
     });
   }
 
+  if (typeof data["comments"] !== "undefined") {
+    comments = data["comments"].filter(function(comment) {
+      return comment.author === userId;
+    });
+  }
+
   if (userSubmissions && userSubmissions.length >= 1) {
     itemIds = userSubmissions.map(function(el) {
       return el.item_id;
     });
   }
 
-  console.log("userSubmissions", userSubmissions);
-  console.log("itemIds", itemIds);
+  if (comments && comments.length >= 1) {
+    commentIds = comments.map(function(el) {
+      return el.comment_id;
+    });
+  }
 
   for (let i = 0; i < itemIds.length; i += 1) {
     if (
@@ -576,7 +590,16 @@ function getKarmaPointsForProfile(userId) {
       itemPoints += Object.keys(data["item_upvotes"][itemIds[i]]).length;
     }
   }
-  
+
+  for (let i = 0; i < commentIds.length; i += 1) {
+    if (
+      typeof data["comment_upvotes"] !== "undefined" &&
+      typeof data["comment_upvotes"][commentIds[i]] !== "undefined"
+    ) {
+      itemPoints += Object.keys(data["comment_upvotes"][commentIds[i]]).length;
+    }
+  }
+
   return itemPoints;
 }
 
@@ -709,12 +732,12 @@ module.exports = {
   getComments: getComments,
   addComment: addComment,
   getCommentCountForItem: getCommentCountForItem,
-  
+
   addCommentUpvote: addCommentUpvote,
   removeCommentUpvote: removeCommentUpvote,
   getCommentUpvotes: getCommentUpvotes,
   commentExists: commentExists,
-  
+
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
   getSubmissions: getSubmissions,

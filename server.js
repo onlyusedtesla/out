@@ -166,7 +166,7 @@ app.get("/user/:userId", (request, response) => {
     const favorites = db.getFavorites(user.sub);
     const upvotes = db.getUpvotes(user.sub);
     const karmaPoints = db.getKarmaPointsForProfile(user.nickname);
-
+    
     // Getting the upvote count for each of the items.
     for (let i = 0; i < favoriteItems.length; i += 1) {
       favoriteItems[i]["upvoteCount"] = db.getUpvoteCountForItem(
@@ -215,6 +215,9 @@ app.get("/user/:userId", (request, response) => {
       comments: comments,
       inviteCodes: inviteCodes,
       karmaPoints: karmaPoints,
+      commentUpvotes: request.oidc.isAuthenticated()
+        ? db.getCommentUpvotes(request.oidc.user.nickname)
+        : [],
       editable:
         request.oidc.isAuthenticated() &&
         request.oidc.user.nickname === request.params.userId
