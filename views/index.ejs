@@ -202,7 +202,7 @@
                     </svg>
                     <span class="article-detailsMobileShareText js-upvoteCount"><%= firstTwoItems[i].upvoteCount %></span>
                   </div>
-                  <div class="flex-item tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= firstTwoItems[i].url %>">
+                  <div class="flex-item tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="https://teslatracker.com/item/<%= firstTwoItems[i].item_id %>">
                     <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
                     </svg>
@@ -329,7 +329,7 @@
                   <div class="flex-item">
                     <% if (typeof nextItems[i].submitted_by !== "undefined") { %>
                     <span class="article-author">
-                        <span> by </span><a href="#" class="article-authorName"><%= nextItems[i].submitted_by %></a><span> · </span>
+                        <span> by </span><a href="/user/<%= nextItems[i].submitted_by %>" class="article-authorName"><%= nextItems[i].submitted_by %></a><span> · </span>
                     </span>
                     <% } %>
 
@@ -364,7 +364,7 @@
                     </svg>
                     <span class="article-detailsMobileShareText js-upvoteCount"><%= nextItems[i].upvoteCount %></span>
                   </div>
-                  <div class="flex-item tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="<%= nextItems[i].url %>">
+                  <div class="flex-item tooltip js-tooltip js-share" data-text="This article's link has been copied to your clipboard." data-link="https://teslatracker.com/item/<%= nextItems[i].item_id %>">
                     <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11.8064 3.51703L7.67531 0.124944C7.32323 -0.165169 6.7599 0.0803109 6.7599 0.548955V2.33427C2.98093 2.35658 0 3.09302 0 6.48511C0 7.84641 0.915403 9.20771 1.94817 9.92183C2.2533 10.145 2.72274 9.85489 2.60538 9.49782C1.54914 6.26195 3.09829 5.41393 6.7599 5.36929V7.31082C6.7599 7.77946 7.32323 8.02494 7.67531 7.73483L11.8064 4.34274C12.0645 4.11958 12.0645 3.7402 11.8064 3.51703Z" fill="black"/>
                     </svg>
