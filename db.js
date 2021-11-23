@@ -391,6 +391,10 @@ function commentExists(commentId) {
   });
 }
 
+function getCommentUpvotes(userId) {
+  
+}
+
 function addCommentUpvote(userId, commentId) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
