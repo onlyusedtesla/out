@@ -72,7 +72,7 @@
           @<%= user.nickname %>
         </div>
         <div class="userProfile--about">
-          Karma Points: 0&nbsp;
+          Karma Points: <%= karmaPoints %>&nbsp;
           <% if (user && user.ownedTeslaModel) { %>· <%= user.ownedTeslaModel %>&nbsp;<% }%>
           <% if (user && typeof user.invited_by !== "undefined") { %>· Invited<% if (user.invited_by !== null) { %> by <a href="/user/<%= user.invited_by%>" class="blue-link"><%= user.invited_by %></a><% }%>&nbsp;<% }%>
           <% if (user && user.about) { %>· <%= user && user.about %><% } %>

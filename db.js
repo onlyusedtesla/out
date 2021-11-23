@@ -41,8 +41,8 @@ if (!fs.existsSync(__dirname + "/" + submissionsFileName)) {
 
 function createNecessaryKeys() {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName),
-      data = JSON.parse(rawData);
-  
+    data = JSON.parse(rawData);
+
   let requiredKeys = {
     items: [],
     item_upvotes: {},
@@ -52,7 +52,7 @@ function createNecessaryKeys() {
     comments: [],
     users: {}
   };
-  
+
   for (const property in requiredKeys) {
     if (requiredKeys.hasOwnProperty(property)) {
       if (typeof data[property] === "undefined") {
@@ -60,9 +60,8 @@ function createNecessaryKeys() {
       }
     }
   }
-  
+
   saveFile(data);
-  
 }
 
 function uuid() {
@@ -80,13 +79,11 @@ function saveFile(data) {
 function save(items) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
-  if (items.length >= 1) {
-    for (let i = 0; i < items.length; i += 1) {
-      data[""]
-    }
-  }
-  data["items"] = data["items"].concat(items);
+  data["items"] = data["items"].concat(items).sort(function(a, b) {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.item_date) - new Date(a.item_date);
+  });
   saveFile(data);
 }
 
@@ -403,11 +400,11 @@ function getCommentCountForItem(itemId) {
 function saveUserProfile(user) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   if (typeof data["users"] === "undefined") {
     data["users"] = {};
   }
-  
+
   if (typeof data["users"][user.nickname] === "undefined") {
     data["users"][user.nickname] = user;
     saveFile(data);
@@ -469,38 +466,40 @@ function getUpvotesForProfile(userId) {
 function getKarmaPointsForProfile(userId) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   var userSubmissions = undefined;
   var itemIds = [];
   var itemPoints = 0;
-  
+
   if (typeof data["items"] !== "undefined") {
-    userSubmissions = data["items"].filter(function (item) {
+    userSubmissions = data["items"].filter(function(item) {
       if (typeof item.submitted_by !== "undefined") {
         return item.submitted_by === userId;
       } else {
         return false;
       }
-    })
+    });
   }
-  
+
   if (userSubmissions && userSubmissions.length >= 1) {
-    itemIds = userSubmissions.map(function (el) {
+    itemIds = userSubmissions.map(function(el) {
       return el.item_id;
     });
   }
-  
+
   console.log("userSubmissions", userSubmissions);
   console.log("itemIds", itemIds);
-  
+
   for (let i = 0; i < itemIds.length; i += 1) {
-    if (typeof data["item_upvotes"] !== "undefined" && typeof data["item_upvotes"][itemIds[i]] !== "undefined") {
+    if (
+      typeof data["item_upvotes"] !== "undefined" &&
+      typeof data["item_upvotes"][itemIds[i]] !== "undefined"
+    ) {
       itemPoints += Object.keys(data["item_upvotes"][itemIds[i]]).length;
     }
   }
-  
+
   return itemPoints;
-  
 }
 
 /*
@@ -523,7 +522,7 @@ function updateUserProfile(user) {
 
     // Do some checks for the invite code here
     // Set an invited_by property on the user and if it's exists then you will
-    
+
     if (
       user.inviteCode &&
       user.inviteCode.length >= 1 &&
@@ -532,7 +531,8 @@ function updateUserProfile(user) {
       data["invite_codes"][user.inviteCode].accepted_by == null
     ) {
       data["invite_codes"][user.inviteCode].accepted_by = user.author;
-      data["users"][user.author].invited_by = data["invite_codes"][user.inviteCode].generated_by;
+      data["users"][user.author].invited_by =
+        data["invite_codes"][user.inviteCode].generated_by;
       generateInviteCodes(5, user.author);
     }
 
@@ -594,32 +594,31 @@ function getInviteCodes() {
 function getUserInviteCodes(username) {
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
-  
+
   let results = [];
-  
+
   for (const [key, value] of Object.entries(data["invite_codes"])) {
     if (value.generated_by === username) {
       results.push({
         ...value,
         invite_code: key
-      })
+      });
     }
   }
-  
+
   return results;
-  
 }
 
 module.exports = {
   save: save,
   createNecessaryKeys: createNecessaryKeys,
-  
+
   getItems: getItems,
   getItem: getItem,
   getAllItems: getAllItems,
   getItemsFromSearch: getItemsFromSearch,
   itemExists: itemExists,
-  
+
   addFavorite: addFavorite,
   getFavorites: getFavorites,
   removeFavorite: removeFavorite,
@@ -647,11 +646,11 @@ module.exports = {
   getFavoritesForProfile: getFavoritesForProfile,
   getUpvotesForProfile: getUpvotesForProfile,
   getKarmaPointsForProfile: getKarmaPointsForProfile,
-  
+
   generateInviteCodes: generateInviteCodes,
   getUserInviteCodes: getUserInviteCodes,
   getInviteCodes: getInviteCodes,
-  
+
   backupData: backupData,
   backupSubmissions: backupSubmissions
 };
