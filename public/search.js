@@ -18,7 +18,7 @@
     var searchTerms = prompt("Enter search");
 
     if (searchTerms && searchTerms.length >= 1) {
-      var url = new URL(window.location.href);
+      var url = new URL("https://" + document.location.hostname + "/");
       url.searchParams.set("search", encodeURIComponent(searchTerms));
       window.location.href = url.href;
     }
