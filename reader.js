@@ -131,6 +131,8 @@ function update(done) {
       db.createNecessaryKeys();
       db.save(itemsToSave);
       
+      console.log("itemToSave", itemsToSave);
+    
       if (typeof done !== "undefined") {
         done();
       }

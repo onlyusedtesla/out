@@ -80,6 +80,12 @@ function saveFile(data) {
 function save(items) {
   let rawData = fs.readFileSync(__dirname + "/" + dbFileName);
   let data = JSON.parse(rawData);
+  
+  if (items.length >= 1) {
+    for (let i = 0; i < items.length; i += 1) {
+      data[""]
+    }
+  }
   data["items"] = data["items"].concat(items);
   saveFile(data);
 }
@@ -488,8 +494,7 @@ function getKarmaPointsForProfile(userId) {
   console.log("itemIds", itemIds);
   
   for (let i = 0; i < itemIds.length; i += 1) {
-    if (typeof data["item_upvotes"] !== "undefined" && data["item_upvotes"][itemIds[i]] !== "undefined") {
-      console.log('data["item_upvotes"][itemIds[i]]', data["item_upvotes"][itemIds[i]]);
+    if (typeof data["item_upvotes"] !== "undefined" && typeof data["item_upvotes"][itemIds[i]] !== "undefined") {
       itemPoints += Object.keys(data["item_upvotes"][itemIds[i]]).length;
     }
   }
