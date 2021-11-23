@@ -466,7 +466,7 @@ function getKarmaPointsForProfile(userId) {
   
   var userSubmissions = undefined;
   var itemIds = [];
-  var upvotes = [];
+  var itemPoints = 0;
   
   if (typeof data["items"] !== "undefined") {
     userSubmissions = data["items"].filter(function (item) {
@@ -483,6 +483,15 @@ function getKarmaPointsForProfile(userId) {
       return el.item_id;
     });
   }
+  
+  for (let i = 0; i < itemIds.length; i += 1) {
+    if (typeof data["item_upvotes"] !== "undefined" && data["item_upvotes"][itemIds[i]] !== "undefined") {
+      itemPoints += Object.keys(data["item_upvotes"][itemIds[i]]).length;
+    }
+  }
+  
+  return itemPoints;
+  
 }
 
 /*
