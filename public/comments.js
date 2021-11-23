@@ -101,8 +101,8 @@
     });
   }
 
-  function favoriteItem(commentId) {
-    console.log("Calling the favoriteItem function for " + itemId);
+  function addCommentUpvote(commentId) {
+    console.log("Calling the addCommentUpvote function for " + commentId);
 
     return new Promise(function(resolve, reject) {
       fetch("/addCommentUpvote?comment_id=" + commentId, {
@@ -121,6 +121,39 @@
     });
   }
   
-  const commentUpvoteButtons = document.querySelectorAll();
+  const commentUpvoteButtons = document.querySelectorAll(".js-commentupvote");
   
+  Array.from(commentUpvoteButtons).forEach(function (commentUpvoteButton) {
+    commentUpvoteButton.addEventListener('click', function (event) {
+      
+      event.preventDefault();
+      
+      const commentContainer = commentUpvoteButton.closest(".js-commentContainer");
+      const commentId = commentContainer.id;
+      const addOrRemove = commentUpvoteButton.getAttribute("data-action");
+      const pathEl = commentUpvoteButton.querySelector("path");
+      
+      if (addOrRemove === "add") {
+        
+        pathEl.setAttribute("fill", pathEl.getAttribute("data-fill-upvoted")); 
+        
+        addCommentUpvote(commentId).then(function () {
+          commentUpvoteButton.setAttribute('data-action', 'remove');
+        }).catch(function () {
+          pathEl.setAttribute("fill", pathEl.getAttribute("data-fill-notupvoted")); 
+        });
+        
+      } else {
+        pathEl.setAtttribute("fill", pathEl.getAttribute("data-fill-notupvoted"));
+        
+        removeCommentUpvote(commentId).then(function () {
+          commentUpvoteButton.setAttribute('data-action', 'add');
+        }).catch(function () {
+          pathEl.setAttribute("fill", pathEl.getAttribute("data-fill-upvoted")); 
+        });
+        
+      }
+    });
+    
+  });
 }());
