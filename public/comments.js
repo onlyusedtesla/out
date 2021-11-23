@@ -101,11 +101,11 @@
     });
   }
 
-  function favoriteItem(itemId) {
+  function favoriteItem(commentId) {
     console.log("Calling the favoriteItem function for " + itemId);
 
     return new Promise(function(resolve, reject) {
-      fetch("/addCommentUpvote?comment_id=" + itemId, {
+      fetch("/addCommentUpvote?comment_id=" + commentId, {
         method: "POST"
       }).then(res => {
         console.log("What's the response?", res);
