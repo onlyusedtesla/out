@@ -709,7 +709,8 @@ module.exports = {
   
   addCommentUpvote: addCommentUpvote,
   removeCommentUpvote: removeCommentUpvote,
-
+  getCommentUpvotes: getCommentUpvotes,
+  
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
   getSubmissions: getSubmissions,
