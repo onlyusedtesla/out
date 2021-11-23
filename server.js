@@ -451,6 +451,57 @@ app.post("/removeFavorite", function(request, response) {
   }
 });
 
+app.post("/addCommentUpvote", function(request, response) {
+  console.log("Calling the /addCommentUpvote post route");
+
+  if (!request.oidc.isAuthenticated()) {
+    response
+      .status(400)
+      .send("Please sign up / sign in before favoriting an article.");
+  }
+
+  // Something with wrong with auth. Either log the user out, and have them try again or something.
+  // TODO: Fix this issue with  sometimes the use being undefined
+  if (typeof request.oidc.user === "undefined") {
+    response.status(400).send("Please sign in again.");
+  }
+  
+  if (request.query.comment_id) {
+    
+    if (db.commentExists(request.query.comment_id)) {
+      const result = db.addCommentUpvote(
+        request.oidc.user.sub,
+        request.query.item_id
+      );
+      response
+        .status(200)
+        .send("Successfully added comment upvote " + request.query.comment_id);
+    }
+  } else {
+    response.status(400).send("Please specify the article_id parameter.");
+  }
+});
+
+app.post("/removeCommentUpvote", function(request, response) {
+  if (!request.oidc.isAuthenticated()) {
+    response
+      .status(400)
+      .send("Please sign up / sign in before favoriting an article.");
+  }
+
+  if (request.query.comment_id) {
+    const result = db.removeCommentUpvote(
+      request.oidc.user.sub,
+      request.query.comment_id
+    );
+    response
+      .status(200)
+      .send("Successfully unfavorited the item " + request.query.comment_id);
+  } else {
+    response.status(400).send("Please specify the comment_id parameter.");
+  }
+});
+
 app.post("/upvote", function(request, response) {
   console.log("Calling the /upvote post route");
 
