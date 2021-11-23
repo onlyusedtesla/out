@@ -382,8 +382,13 @@ function addComment(comment) {
   }
 }
 
-function commentExists() {
-  
+function commentExists(commentId) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+
+  return data["comments"].some(function(el) {
+    return el.comment_id === commentId;
+  });
 }
 
 function addCommentUpvote(userId, commentId) {
@@ -391,30 +396,35 @@ function addCommentUpvote(userId, commentId) {
   let data = JSON.parse(rawData);
 
   if (typeof data["comment_upvotes"] === "undefined") {
-    data["comment_upvotes"] = [];
+    data["comment_upvotes"] = {};
   }
 
-  if (data["comments"].some(function(el) {
-      return el.item_id === itemId;
+  if (
+    data["comments"].some(function(el) {
+      return el.comment_id === commentId;
     })
   ) {
-    console.log("I'm gonna push the thing up to the table");
-    console.log("tableName", tableName);
-    console.log("userId", userId);
-
-    data["user_" + tableName][userId].push({
-      item_id: itemId,
-      action_date: Date.now()
-    });
-
-    // Add upvotes to the table name to be able to render it later.
-    if (tableName === "upvotes") {
-      if (typeof data["item_upvotes"][itemId] === "undefined") {
-        data["item_upvotes"][itemId] = {};
-      }
-
-      data["item_upvotes"][itemId][userId] = true;
+    if (typeof data["comment_upvotes"][commentId] === "undefined") {
+      data["comment_upvotes"][commentId] = {};
+      data["comment_upvotes"][commentId][userId] = true;
     }
+  }
+
+  saveFile(data);
+}
+
+function removeCommentUpvote(userId, commentId) {
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  
+  if (
+    data["comments"].some(function(el) {
+      return el.item_id === commentId
+    })
+  ) {
+    delete data["comment_upvotes"][commentId][userId];
+  } else {
+    return false;
   }
 
   saveFile(data);
@@ -669,10 +679,10 @@ module.exports = {
   getComments: getComments,
   addComment: addComment,
   getCommentCountForItem: getCommentCountForItem,
-  
+
   addCommentUpvote: addCommentUpvote,
   removeCommentUpvote: removeCommentUpvote,
-  
+
   saveSubmission: saveSubmission,
   findSubmission: findSubmission,
   getSubmissions: getSubmissions,
