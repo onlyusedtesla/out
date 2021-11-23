@@ -130,6 +130,8 @@ app.get("/item/:id", (request, response) => {
 
     const comments = db.getComments(item.item_id);
 
+    console.log("What are the comment upvotes?", db.getCommentUpvotes(request.oidc.user.sub));
+    
     response.render(__dirname + "/views/comments", {
       ...allViews,
       item: item,
@@ -142,6 +144,9 @@ app.get("/item/:id", (request, response) => {
         : [],
       upvotes: request.oidc.isAuthenticated()
         ? db.getUpvotes(request.oidc.user.sub)
+        : [],
+      commentUpvotes: request.oidc.isAuthenticated()
+        ? db.getCommentUpvotes(request.oidc.user.sub)
         : [],
       comments: comments
     });
@@ -161,7 +166,7 @@ app.get("/user/:userId", (request, response) => {
     const favorites = db.getFavorites(user.sub);
     const upvotes = db.getUpvotes(user.sub);
     const karmaPoints = db.getKarmaPointsForProfile(user.nickname);
-    
+
     // Getting the upvote count for each of the items.
     for (let i = 0; i < favoriteItems.length; i += 1) {
       favoriteItems[i]["upvoteCount"] = db.getUpvoteCountForItem(
@@ -298,9 +303,11 @@ app.post("/description", function(request, response) {
   }
 
   if (request.oidc.isAuthenticated() && request.query.url && isURL) {
-    grabber(request.query.url, function (data) {
+    grabber(request.query.url, function(data) {
       if (!data) {
-        response.status(400).send("The website doesn't have a meta description");
+        response
+          .status(400)
+          .send("The website doesn't have a meta description");
       } else {
         response.status(200).send(data);
       }
@@ -465,9 +472,8 @@ app.post("/addCommentUpvote", function(request, response) {
   if (typeof request.oidc.user === "undefined") {
     response.status(400).send("Please sign in again.");
   }
-  
+
   if (request.query.comment_id) {
-    
     if (db.commentExists(request.query.comment_id)) {
       const result = db.addCommentUpvote(
         request.oidc.user.sub,

@@ -1380,6 +1380,12 @@
       { "item_id": "751834d9", "action_date": 1636995319016 }
     ]
   },
+  "comment_upvotes": {
+    "6123e429": {
+      "auth0|615dc89d861e1300698dc9d5": true
+    }
+  },
+  
   "comments": [ 
     {
       "item_id": "65088f4f",

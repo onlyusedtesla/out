@@ -394,7 +394,7 @@ function commentExists(commentId) {
 /*
  * @description - Grabs all the comment upvotes for a specific user.
  */
-function getCommentUpvotes(userId) {
+function getCommentUpvotes(username) {
   // basically iterate through all the keys and if the userId exists then add that commentId to the array
   
   const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
@@ -403,10 +403,12 @@ function getCommentUpvotes(userId) {
   let results = [];
   
   for (let commentId in data["comment_upvotes"]) {
+    console.log("commentId", commentId);
     if (data["comment_upvotes"].hasOwnProperty(commentId)) {
-      for (let userIdForComment in data["comment_upvotes"][commentId]) {
-        if (data["comment_upvotes"][commentId].hasOwnProperty(userId)) {
-          if (userId === userIdForComment) {
+      for (let userNameForComment in data["comment_upvotes"][commentId]) {
+        console.log("userIdForComment", userNameForComment);
+        if (data["comment_upvotes"][commentId].hasOwnProperty(userNameForComment)) {
+          if (username === userNameForComment) {
             results.push(commentId);
           }
         }
