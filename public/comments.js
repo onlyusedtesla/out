@@ -83,5 +83,42 @@
     });
   });
   
+  function removeCommentUpvote(commentId) {
+    return new Promise(function(resolve, reject) {
+      fetch("/removeCommentUpvote?comment_id=" + commentId, {
+        method: "POST"
+      }).then(res => {
+        console.log("What's the response?", res);
+
+        if (res.status === 200) {
+          res.text().then(function(html) {
+            resolve(html);
+          });
+        } else {
+          reject(res.body);
+        }
+      });
+    });
+  }
+
+  function favoriteItem(itemId) {
+    console.log("Calling the favoriteItem function for " + itemId);
+
+    return new Promise(function(resolve, reject) {
+      fetch("/addCommentUpvote?comment_id=" + itemId, {
+        method: "POST"
+      }).then(res => {
+        console.log("What's the response?", res);
+
+        if (res.status === 200) {
+          res.text().then(function(html) {
+            resolve(html);
+          });
+        } else {
+          reject(res.body);
+        }
+      });
+    });
+  }
   
 }());

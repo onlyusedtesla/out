@@ -130,7 +130,7 @@ app.get("/item/:id", (request, response) => {
 
     const comments = db.getComments(item.item_id);
 
-    console.log("What are the comment upvotes?", db.getCommentUpvotes(request.oidc.user.sub));
+    console.log("What are the comment upvotes?", db.getCommentUpvotes(request.oidc.user.nickname));
     
     response.render(__dirname + "/views/comments", {
       ...allViews,
@@ -146,7 +146,7 @@ app.get("/item/:id", (request, response) => {
         ? db.getUpvotes(request.oidc.user.sub)
         : [],
       commentUpvotes: request.oidc.isAuthenticated()
-        ? db.getCommentUpvotes(request.oidc.user.sub)
+        ? db.getCommentUpvotes(request.oidc.user.nickname)
         : [],
       comments: comments
     });

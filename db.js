@@ -409,6 +409,7 @@ function getCommentUpvotes(username) {
         console.log("userIdForComment", userNameForComment);
         if (data["comment_upvotes"][commentId].hasOwnProperty(userNameForComment)) {
           if (username === userNameForComment) {
+            console.log("In here?");
             results.push(commentId);
           }
         }
