@@ -484,8 +484,12 @@ function getKarmaPointsForProfile(userId) {
     });
   }
   
+  console.log("userSubmissions", userSubmissions);
+  console.log("itemIds", itemIds);
+  
   for (let i = 0; i < itemIds.length; i += 1) {
     if (typeof data["item_upvotes"] !== "undefined" && data["item_upvotes"][itemIds[i]] !== "undefined") {
+      console.log('data["item_upvotes"][itemIds[i]]', data["item_upvotes"][itemIds[i]]);
       itemPoints += Object.keys(data["item_upvotes"][itemIds[i]]).length;
     }
   }
