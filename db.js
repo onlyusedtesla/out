@@ -391,7 +391,30 @@ function commentExists(commentId) {
   });
 }
 
+/*
+ * @description - Grabs all the comment upvotes for a specific user.
+ */
 function getCommentUpvotes(userId) {
+  // basically iterate through all the keys and if the userId exists then add that commentId to the array
+  
+  const rawData = fs.readFileSync(__dirname + "/" + dbFileName);
+  let data = JSON.parse(rawData);
+  
+  let results = [];
+  
+  for (let commentId in data["comment_upvotes"]) {
+    if (data["comment_upvotes"].hasOwnProperty(commentId)) {
+      for (let userIdForComment in data["comment_upvotes"][commentId]) {
+        if (data["comment_upvotes"][commentId].hasOwnProperty(userId)) {
+          if (userId === userIdForComment) {
+            results.push(commentId);
+          }
+        }
+      }
+    }
+  }
+  
+  return results;
   
 }
 
@@ -683,7 +706,7 @@ module.exports = {
   getComments: getComments,
   addComment: addComment,
   getCommentCountForItem: getCommentCountForItem,
-
+  
   addCommentUpvote: addCommentUpvote,
   removeCommentUpvote: removeCommentUpvote,
 
