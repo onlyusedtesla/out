@@ -36,6 +36,7 @@ const config = {
 app.use(auth(config));
 
 const allViews = {
+  settings: require("./settings.json"),
   commentPartialPath: __dirname + "/views/partials/comments.ejs",
   articlePartialPath: __dirname + "/views/partials/article.ejs",
   headerPartialPath: __dirname + "/views/partials/header.ejs",

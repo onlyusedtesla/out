@@ -6,6 +6,7 @@
   --light-mustard: #FAE7D1;
   --light-blue: #E9F1F7;
   --light-grey: #EDF0F2;
+  --bg-color: #E8F4EA;
 }
 
 * {
@@ -24,7 +25,7 @@ html {
 body {
   margin: 0;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #E8F4EA;
+  background-color: var(--bg-color);
 }
 
 main {
