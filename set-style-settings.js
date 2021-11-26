@@ -10,7 +10,7 @@ let newFileText = original.replace(regex, function (match, p1, p2, p3, offset, s
 console.log("newFileText", newFileText);
 
 try {
-  fs.writeFileSync(__dirname + "/style-transformed.css", newFileText);
+  fs.writeFileSync(__dirname + "/public/style-transformed.css", newFileText);
   console.log("Successfully created the new file");
 } catch {
   console.log("An error while creating the new file.");
