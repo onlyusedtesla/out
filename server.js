@@ -87,7 +87,8 @@ app.get("/", (request, response) => {
         ? db.getUpvotes(request.oidc.user.sub)
         : [],
       staging: process.env.STAGING || false,
-      karmaPoints = db.getKarmaPointsForProfile(user.nickname);
+      karmaPoints: request.oidc.isAuthenticated()
+        ? db.getKarmaPointsForProfile(request.oidc.user.nickname) : null
     });
   } else {
     const items = db.getItems();
@@ -117,7 +118,9 @@ app.get("/", (request, response) => {
       upvotes: request.oidc.isAuthenticated()
         ? db.getUpvotes(request.oidc.user.sub)
         : [],
-      staging: process.env.STAGING || false
+      staging: process.env.STAGING || false,
+      karmaPoints: request.oidc.isAuthenticated()
+        ? db.getKarmaPointsForProfile(request.oidc.user.nickname) : null
     });
   }
 });
@@ -148,7 +151,9 @@ app.get("/item/:id", (request, response) => {
       commentUpvotes: request.oidc.isAuthenticated()
         ? db.getCommentUpvotes(request.oidc.user.nickname)
         : [],
-      comments: comments
+      comments: comments,
+      karmaPoints: request.oidc.isAuthenticated()
+        ? db.getKarmaPointsForProfile(request.oidc.user.nickname) : null
     });
   } else {
     // Render the 404 page.
@@ -345,7 +350,9 @@ app.get("/submit", requiresAuth(), function(request, response) {
         ? request.oidc.user.nickname
         : false,
       staging: process.env.STAGING || false,
-      isQuestion: true
+      isQuestion: true,
+      karmaPoints: request.oidc.isAuthenticated()
+        ? db.getKarmaPointsForProfile(request.oidc.user.nickname) : null
     });
   } else {
     // Render the normal submit view here...
@@ -355,7 +362,9 @@ app.get("/submit", requiresAuth(), function(request, response) {
         ? request.oidc.user.nickname
         : false,
       staging: process.env.STAGING || false,
-      isQuestion: false
+      isQuestion: false,
+      karmaPoints: request.oidc.isAuthenticated()
+        ? db.getKarmaPointsForProfile(request.oidc.user.nickname) : null
     });
   }
 });
