@@ -86,7 +86,8 @@ app.get("/", (request, response) => {
       upvotes: request.oidc.isAuthenticated()
         ? db.getUpvotes(request.oidc.user.sub)
         : [],
-      staging: process.env.STAGING || false
+      staging: process.env.STAGING || false,
+      karmaPoints = db.getKarmaPointsForProfile(user.nickname);
     });
   } else {
     const items = db.getItems();
